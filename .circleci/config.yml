@@ -15,7 +15,7 @@ jobs:
               name: lint
               command: |
                 mkdir -p /test-reports/eslint
-                npx eslint "src/**" . --format junit --output-file /test-reports/eslint/results.xml
+                npx eslint src/ . --format junit --output-file /test-reports/eslint/results.xml
             - store_test_results:
               path: /test-reports
 workflows:
