@@ -11,6 +11,13 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+            - run:
+              name: lint
+              command: |
+                mkdir -p /test-reports/eslint
+                npx eslint "src/**" . --format junit --output-file /test-reports/eslint/results.xml
+            - store_test_results:
+              path: /test-reports
 workflows:
     build-and-test:
       jobs:
