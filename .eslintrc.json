@@ -41,8 +41,16 @@
     }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/prop-types": 0,
+    "react/prop-types": "off",
     "@typescript-eslint/no-unused-vars": "error"
+  },
+  "globals": {
+    "jest": false,
+    "test": false,
+    "describe": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "expect": false
   },
   "settings": {
     "import/resolver": {
