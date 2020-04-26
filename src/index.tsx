@@ -6,7 +6,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
 import './index.scss';
-import App from './App';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 library.add(fab, fas, far);
