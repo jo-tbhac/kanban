@@ -11,6 +11,7 @@ const SignIn = () => {
       </div>
       <div className="signIn">
         <input
+          data-testid="emailTextField"
           type="text"
           placeholder="email"
           value={email}
@@ -18,6 +19,7 @@ const SignIn = () => {
           className="signIn__emailTextField"
         />
         <input
+          data-testid="passwordTextField"
           type="password"
           placeholder="password"
           value={password}
