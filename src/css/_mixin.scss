@@ -1,0 +1,22 @@
+@mixin text-field() {
+  border: solid 1px $border-color;
+  border-radius: 5px;
+  color: $font-color;
+  height: 30px;
+  padding-left: 3px;
+}
+
+@mixin button() {
+  border: solid 2px $border-color;
+  border-radius: 18px;
+  color: #666;
+  cursor: pointer;
+  font-weight: 500;
+  height: 36px;
+  letter-spacing: 0.1rem;
+  &:hover {
+    border-color: $pink;
+    color: $pink;
+    font-weight: 600;
+  }
+}
