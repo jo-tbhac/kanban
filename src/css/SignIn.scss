@@ -34,4 +34,13 @@
   &__button {
     @include button;
   }
+  &__linkToSignUp {
+    align-self: center;
+    color: $font-color;
+    font-size: 0.8rem;
+    margin-top: 30px;
+    &:hover {
+      color: $pink;
+    }
+  }
 }
