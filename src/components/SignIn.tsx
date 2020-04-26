@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -29,6 +30,8 @@ const SignIn = () => {
         <button type="button" className="signIn__button">
           Sign in
         </button>
+
+        <Link to="/signup" className="signIn__linkToSignUp">Create account</Link>
       </div>
     </div>
   );

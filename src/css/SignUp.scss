@@ -1,4 +1,4 @@
-.signInContainer {
+.signUpContainer {
   align-items: center;
   background-color: #eee;
   display: flex;
@@ -8,14 +8,14 @@
   width: 100%;
 }
 
-.signInLogo {
+.signUpLogo {
   color: $font-color;
   font-size: 2.0rem;
   letter-spacing: 0.3rem;
   margin-bottom: 30px;
 }
 
-.signIn {
+.signUp {
   background-color: #fff;
   box-shadow: $box-shadow;
   box-sizing: border-box;
@@ -23,18 +23,26 @@
   flex-direction: column;
   padding: 30px 50px;
   width: 350px;
+  &__usernameTextField {
+    @include text-field;
+    margin-bottom: 20px;
+  }
   &__emailTextField {
     @include text-field;
     margin-bottom: 20px;
   }
   &__passwordTextField {
     @include text-field;
+    margin-bottom: 20px;
+  }
+  &__passwordConfirmationTextField {
+    @include text-field;
     margin-bottom: 30px;
   }
   &__button {
     @include button;
   }
-  &__linkToSignUp {
+  &__linkToSignIn {
     align-self: center;
     color: $font-color;
     font-size: 0.8rem;
