@@ -1,0 +1,48 @@
+.boardIndexContainer {
+  box-sizing: border-box;
+  display: grid;
+  gap: 20px;
+  grid-auto-rows: 120px;
+  grid-template-columns: repeat(auto-fit, 230px);
+  height: calc(100vh - #{$header-height});
+  justify-content: center;
+  padding: 20px 20px 0;
+  width: 100%;
+}
+
+.boardIndexCard {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: $box-shadow;
+  color: $font-color;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  &:hover {
+    color: $pink;
+  }
+}
+
+.boardIndexCardTop {
+  flex: 1;
+  padding-top: 10px;
+  &__title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}
+
+.boardIndexCardBottom {
+  display: flex;
+  font-size: 0.8rem;
+  justify-content: space-between;
+  line-height: 1.4rem;
+  &__label {
+    &::after {
+      content: ':';
+    }
+  }
+}
