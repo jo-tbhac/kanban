@@ -1,0 +1,22 @@
+.header {
+  background-color: white;
+  box-sizing: border-box;
+  height: $header-height;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.headerIcon {
+  cursor: pointer;
+  color: $font-color;
+  height: 100%;
+  line-height: $header-height;
+  padding: 0 3px;
+  width: fit-content;
+  &:hover {
+    color: $pink;
+  }
+  &__icon {
+    font-size: 1.2rem;
+  }
+}
