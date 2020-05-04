@@ -1,0 +1,55 @@
+.listContainer {
+  background-color: $overlay;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  max-height: 100%;
+  padding: 10px;
+  min-width: $list-width;
+}
+
+.listHeader {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 5px 5px;
+  &__title {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  &__icon {
+    cursor: pointer;
+    padding: 0 3px;
+    &:hover {
+      color: $pink;
+    }
+  }
+}
+
+.cardIndexContainer {
+  flex: 1;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.addCardButton {
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.9rem;
+  padding: 5px;
+  &:hover {
+    background-color: $hover-overlay;
+  }
+  &__icon {
+    margin-right: 5px;
+  }
+}
