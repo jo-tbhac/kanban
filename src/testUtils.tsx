@@ -10,8 +10,7 @@ export const storeFactory = (initialState: any = {}) => (
   createStore(rootReducer, initialState, applyMiddleware(thunk))
 );
 
-const render = (ui: ReactElement, initialState?: any) => {
-  const store = storeFactory(initialState);
+const render = (ui: ReactElement, store: any) => {
   const Wrapper = ({ children }: any) => (
     <Provider store={store}>
       {children}
