@@ -5,7 +5,7 @@ import ToolBar from './ToolBar';
 import List from './List';
 
 const Board = () => (
-  <div className="boardContainer">
+  <div className="boardContainer" data-testid="boardComponent">
     <ToolBar />
 
     <div className="listIndexContainer">

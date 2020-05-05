@@ -20,7 +20,7 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Main = connector((props: PropsFromRedux) => {
+export const Main = connector((props: PropsFromRedux) => {
   const { isIndexVisible } = props;
 
   return (

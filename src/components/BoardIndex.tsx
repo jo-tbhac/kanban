@@ -16,7 +16,7 @@ const BoardIndex = (props: PropsFromRedux) => {
   const { showBoard } = props;
 
   return (
-    <div className="boardIndexContainer">
+    <div className="boardIndexContainer" data-testid="boardIndexComponent">
       {dataStore.map((data) => (
         <div
           className="boardIndexCard"
