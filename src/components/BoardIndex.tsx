@@ -25,6 +25,7 @@ const BoardIndex = (props: PropsFromRedux) => {
           onKeyPress={showBoard}
           role="button"
           tabIndex={0}
+          data-testid="boardIndexCard"
         >
           <div className="boardIndexCardTop">
             <div className="boardIndexCardTop__title">{data.title}</div>
