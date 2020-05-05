@@ -11,7 +11,7 @@ const BoardIndex = () => (
         </div>
         <div className="boardIndexCardBottom">
           <div className="boardIndexCardBottom__label">Updated at</div>
-          <div>{data.updated_at}</div>
+          <div>{data.updatedAt}</div>
         </div>
       </div>
     ))}
