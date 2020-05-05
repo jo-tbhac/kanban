@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 
 import boardReducer from './board/reducers';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   board: boardReducer,
 });
 
