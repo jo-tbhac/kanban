@@ -22,6 +22,7 @@ const Header = (props: PropsFromRedux) => {
           icon={['fas', 'home']}
           className="headerIcon__icon"
           onClick={showBoardIndex}
+          data-testid="homeIcon"
         />
       </div>
     </div>
