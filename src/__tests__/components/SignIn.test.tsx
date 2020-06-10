@@ -1,17 +1,25 @@
 import React, { ReactElement } from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
+import { storeFactory, render } from '../../testUtils';
+import { Store } from '../../store';
 import SignIn from '../../components/SignIn';
 
 describe('<SignIn />', () => {
+  let store: Store;
   const renderWithRouter = (component: ReactElement) => (
     render(
       <MemoryRouter>
         {component}
       </MemoryRouter>,
+      store,
     )
   );
+
+  beforeEach(() => {
+    store = storeFactory();
+  });
 
   test('update state of `email` if email text field upon changed', () => {
     const mockText = 'sample@sample.com';
