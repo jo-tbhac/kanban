@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, storeFactory } from '../../testUtils';
 
-import { Main } from '../../components/App';
+import App from '../../components/App';
 import { BoardState } from '../../store/board/types';
 
 describe('<Main />', () => {
@@ -20,14 +20,14 @@ describe('<Main />', () => {
 
   test('render <BoardIndex /> if state of `board.isIndexVisible` is true', () => {
     const store = storeFactory();
-    const { queryByTestId } = render(<Main />, store);
+    const { queryByTestId } = render(<App />, store);
     expect(queryByTestId('boardIndexComponent')).not.toBeNull();
     expect(queryByTestId('boardComponent')).toBeNull();
   });
 
   test('render <Board /> if state of `board.isIndexVisible` is false', () => {
     const store = storeFactory({ board: { ...initialState, isIndexVisible: false } });
-    const { queryByTestId } = render(<Main />, store);
+    const { queryByTestId } = render(<App />, store);
     expect(queryByTestId('boardIndexComponent')).toBeNull();
     expect(queryByTestId('boardComponent')).not.toBeNull();
   });
