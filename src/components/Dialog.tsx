@@ -69,7 +69,11 @@ const Dialog = (props: PropsFromRedux) => {
     <div className="dialogOverlay">
       <div className="dialogContainer">
         <div className="dialogRow">
-          <FontAwesomeIcon icon={iconDefinition} className={dialogProps.className} />
+          <FontAwesomeIcon
+            data-testid="dialogIcon"
+            icon={iconDefinition}
+            className={dialogProps.className}
+          />
         </div>
 
         <div className="dialogRow">
@@ -82,7 +86,12 @@ const Dialog = (props: PropsFromRedux) => {
 
         <div className="dialogButton">
           {type === dialogTypeAsk && (
-            <button type="button" onClick={closeDialog} className="dialogButton__cancel">
+            <button
+              data-testid="dialogCancelButton"
+              type="button"
+              onClick={closeDialog}
+              className="dialogButton__cancel"
+            >
               {cancelButtonText}
             </button>
           )}
