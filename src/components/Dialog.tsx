@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconLookup, IconDefinition, findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { connect, ConnectedProps } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 
 import { RootState } from '../store';
 import * as dialogActions from '../store/dialog/actions';
@@ -66,41 +67,43 @@ const Dialog = (props: PropsFromRedux) => {
   const iconDefinition: IconDefinition = findIconDefinition(dialogProps.iconLookup);
 
   return (
-    <div className="dialogOverlay">
-      <div className="dialogContainer">
-        <div className="dialogRow">
-          <FontAwesomeIcon
-            data-testid="dialogIcon"
-            icon={iconDefinition}
-            className={dialogProps.className}
-          />
-        </div>
+    <CSSTransition in classNames="dialogOverlay" appear timeout={200}>
+      <div className="dialogOverlay">
+        <div className="dialogContainer">
+          <div className="dialogRow">
+            <FontAwesomeIcon
+              data-testid="dialogIcon"
+              icon={iconDefinition}
+              className={dialogProps.className}
+            />
+          </div>
 
-        <div className="dialogRow">
-          <p className="dialogRow__title">{title}</p>
-        </div>
+          <div className="dialogRow">
+            <p className="dialogRow__title">{title}</p>
+          </div>
 
-        <div className="dialogRow">
-          <p className="dialogRow__description">{description}</p>
-        </div>
+          <div className="dialogRow">
+            <p className="dialogRow__description">{description}</p>
+          </div>
 
-        <div className="dialogButton">
-          {type === dialogTypeAsk && (
-            <button
-              data-testid="dialogCancelButton"
-              type="button"
-              onClick={closeDialog}
-              className="dialogButton__cancel"
-            >
-              {cancelButtonText}
+          <div className="dialogButton">
+            {type === dialogTypeAsk && (
+              <button
+                data-testid="dialogCancelButton"
+                type="button"
+                onClick={closeDialog}
+                className="dialogButton__cancel"
+              >
+                {cancelButtonText}
+              </button>
+            )}
+            <button type="button" onClick={onConfirm || closeDialog} className="dialogButton__confirm">
+              {confirmButtonText}
             </button>
-          )}
-          <button type="button" onClick={onConfirm || closeDialog} className="dialogButton__confirm">
-            {confirmButtonText}
-          </button>
+          </div>
         </div>
       </div>
-    </div>
+    </CSSTransition>
   );
 };
 

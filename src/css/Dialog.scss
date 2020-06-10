@@ -8,6 +8,13 @@
   bottom: 0;
   right: 0;
   left: 0;
+  &-appear {
+    opacity: 0;
+    &-active {
+      opacity: 1;
+      transition: opacity 200ms;
+    }
+  }
 }
 
 .dialogContainer {
