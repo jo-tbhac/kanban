@@ -1,0 +1,72 @@
+.dialogOverlay {
+  align-items: center;
+  background-color: $overlay;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.dialogContainer {
+  background-color: white;
+  box-shadow: $box-shadow;
+  box-sizing: border-box;
+  padding: 30px 40px;
+  width: 500px;
+}
+
+.dialogRow {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  &__icon--error {
+    color: $pink;
+    font-size: 3rem;
+  }
+  &__icon--success {
+    color: $teal;
+    font-size: 3rem;
+  }
+  &__icon--ask {
+    color: $indigo;
+    font-size: 3rem;
+  }
+  &__title {
+    color: $font-color;
+  }
+  &__description {
+    color: $font-color;
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    white-space: pre-wrap;
+  }
+}
+
+.dialogButton {
+  display: flex;
+  justify-content: flex-end;
+  &__confirm {
+    background-color: white;
+    border: solid 1px $border-color;
+    border-radius: 3px;
+    box-shadow: $box-shadow;
+    box-sizing: border-box;
+    color: $font-color;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px 10px;
+    width: 100px;
+    &:hover {
+      border-color: $pink;
+      color: $pink;
+    }
+  }
+  &__cancel {
+    @extend .dialogButton__confirm;
+    color: $pink;
+    font-weight: 500;
+  }
+}
