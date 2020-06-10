@@ -11,6 +11,11 @@ export interface SignUpParams {
   passwordConfirmation: string
 }
 
+export interface SignInParams {
+  email: string
+  password: string
+}
+
 interface SignInAction {
   type: typeof SIGN_IN
 }

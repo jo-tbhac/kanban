@@ -1,8 +1,9 @@
 import snakeCaseKeys from 'snakecase-keys';
 
 import { newAxios } from '../../configureAxios';
+import { joinErrors } from '../../utils/utils';
 import { AppDispatch } from '..';
-import { SignUpParams, SIGN_IN } from './types';
+import { SignUpParams, SignInParams, SIGN_IN } from './types';
 import {
   DialogTypes,
   OPEN_DIALOG,
@@ -10,12 +11,11 @@ import {
   dialogTypeError,
 } from '../dialog/types';
 
-import { failedSignUpTitle } from '../../utils/text';
+import { failedSignUpTitle, failedSignInTitle } from '../../utils/text';
 
 export const signUp = (params: SignUpParams) => async (dispatch: AppDispatch) => {
   const snakeCaseParams = snakeCaseKeys(params);
   const axios = newAxios();
-
   const response = await axios.post('/user', snakeCaseParams).catch((error) => error.response);
 
   if (response === undefined) {
@@ -24,21 +24,40 @@ export const signUp = (params: SignUpParams) => async (dispatch: AppDispatch) =>
   }
 
   if (response.status !== 201) {
-    const errors = response.data.errors.map((error: {text: string}) => error.text);
     const dialogProps = {
       type: dialogTypeError as DialogTypes,
       title: failedSignUpTitle,
-      description: errors.join('\n'),
+      description: joinErrors(response.data.errors),
     };
 
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
     return;
   }
 
-  sessionStorage.setItem('token', response.token);
+  sessionStorage.setItem('token', response.data.token);
   dispatch({ type: SIGN_IN });
 };
 
-export const signIn = () => () => {
+export const signIn = (params: SignInParams) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.post('/session', params).catch((error) => error.response);
 
+  if (response === undefined) {
+    dispatch({ type: OPEN_DIALOG, payload: dialogInternalServerError });
+    return;
+  }
+
+  if (response.status !== 200) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedSignInTitle,
+      description: joinErrors(response.data.errors),
+    };
+
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+    return;
+  }
+
+  sessionStorage.setItem('token', response.data.token);
+  dispatch({ type: SIGN_IN });
 };
