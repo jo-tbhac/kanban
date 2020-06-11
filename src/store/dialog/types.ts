@@ -1,4 +1,8 @@
-import { internalServerErrorTitle, internalServerErrorDescription } from '../../utils/text';
+import {
+  internalServerErrorTitle,
+  internalServerErrorDescription,
+  unAuthorizationTitle,
+} from '../../utils/text';
 
 export const OPEN_DIALOG = 'OPEN_DIALOG';
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
@@ -18,6 +22,10 @@ export const dialogInternalServerError = {
   description: internalServerErrorDescription,
 };
 
+export const dialogUnAuthorization = {
+  type: dialogTypeError as DialogTypes,
+  title: unAuthorizationTitle,
+};
 
 export interface DialogState {
   isDialogVisible: boolean
