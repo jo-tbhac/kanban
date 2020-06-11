@@ -11,9 +11,8 @@ import Board from './Board';
 import Dialog from './Dialog';
 
 const mapStateToProps = (state: RootState) => {
-  const { board, dialog } = state;
+  const { dialog } = state;
   return {
-    isIndexVisible: board.isIndexVisible,
     isDialogVisible: dialog.isDialogVisible,
   };
 };
@@ -23,17 +22,23 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const App = (props: PropsFromRedux) => {
-  const { isIndexVisible, isDialogVisible } = props;
+  const { isDialogVisible } = props;
   return (
     <>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path="/signin"><SignIn /></Route>
           <Route path="/signup"><SignUp /></Route>
+          <Route path="/board/:boardID">
+            <div className="mainContainer">
+              <Header />
+              <Board />
+            </div>
+          </Route>
           <Route exact path="/">
             <div className="mainContainer">
               <Header />
-              {isIndexVisible ? <BoardIndex /> : <Board />}
+              <BoardIndex />
             </div>
           </Route>
         </Switch>
