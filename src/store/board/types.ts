@@ -16,6 +16,7 @@ export interface Board {
 export interface List {
   id: number
   name: string
+  boardId: number
   cards: Card[]
 }
 
