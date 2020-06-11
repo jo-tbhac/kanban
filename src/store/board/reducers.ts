@@ -1,19 +1,21 @@
 import {
   SHOW_BOARD_INDEX,
   SHOW_BOARD,
+  FETCH_ALL_BOARDS,
   BoardState,
   BoardActionTypes,
 } from './types';
 
 const initialBoardProps = {
   id: 0,
-  title: '',
+  name: '',
   updatedAt: '',
   lists: [],
 };
 
 const initialState: BoardState = {
   isIndexVisible: true,
+  boards: [],
   selectedBoard: initialBoardProps,
 };
 
@@ -29,6 +31,11 @@ const boardReducer = (state = initialState, action: BoardActionTypes): BoardStat
         ...state,
         isIndexVisible: false,
         selectedBoard: action.payload,
+      };
+    case FETCH_ALL_BOARDS:
+      return {
+        ...state,
+        boards: action.payload,
       };
     default:
       return state;

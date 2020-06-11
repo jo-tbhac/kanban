@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
+import { RootState } from '../store';
 import * as boardActions from '../store/board/actions';
-import dataStore from '../tmp_dataStore';
+import { formatRFC3339DateString } from '../utils/utils';
+
+const mapStateToProps = (state: RootState) => {
+  const { board } = state;
+  return {
+    boards: board.boards,
+  };
+};
 
 const mapDispatchToProps = {
+  fetchAllBoards: boardActions.fetchAllBoards,
   showBoard: boardActions.showBoard,
 };
 
-const connector = connect(null, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const BoardIndex = (props: PropsFromRedux) => {
-  const { showBoard } = props;
+  const { boards, fetchAllBoards, showBoard } = props;
+
+  useEffect(() => {
+    fetchAllBoards();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="boardIndexContainer" data-testid="boardIndexComponent">
-      {dataStore.map((data) => (
+      {boards.map((board) => (
         <div
           className="boardIndexCard"
-          key={data.id}
+          key={board.id}
           onClick={showBoard}
           onKeyPress={showBoard}
           role="button"
@@ -28,11 +42,11 @@ const BoardIndex = (props: PropsFromRedux) => {
           data-testid="boardIndexCard"
         >
           <div className="boardIndexCardTop">
-            <div className="boardIndexCardTop__title">{data.title}</div>
+            <div className="boardIndexCardTop__title">{board.name}</div>
           </div>
           <div className="boardIndexCardBottom">
             <div className="boardIndexCardBottom__label">Updated at</div>
-            <div>{data.updatedAt}</div>
+            <div>{formatRFC3339DateString(board.updatedAt)}</div>
           </div>
         </div>
       ))}
