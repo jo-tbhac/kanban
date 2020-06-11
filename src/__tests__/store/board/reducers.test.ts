@@ -7,9 +7,10 @@ describe('board reducer', () => {
   beforeEach(() => {
     initialState = {
       isIndexVisible: true,
+      boards: [],
       selectedBoard: {
         id: 0,
-        title: '',
+        name: '',
         updatedAt: '',
         lists: [],
       },
