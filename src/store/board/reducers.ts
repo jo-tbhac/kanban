@@ -23,6 +23,7 @@ const boardReducer = (state = initialState, action: BoardActionTypes): BoardStat
       return {
         ...state,
         boards: action.payload,
+        selectedBoard: initialBoardProps,
       };
     case FETCH_BOARD:
       return {
