@@ -9,3 +9,6 @@ export const confirmButtonText = '確認';
 // Session
 export const failedSignUpTitle = 'サインアップに失敗しました';
 export const failedSignInTitle = 'サインインに失敗しました';
+
+// board
+export const failedFetchBoardData = 'ボードの情報を取得できませんでした';
