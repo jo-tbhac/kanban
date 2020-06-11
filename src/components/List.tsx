@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Card from './Card';
-import * as types from '../store/board/types';
+import * as types from '../store/list/types';
 
 type ListProps = {
   list: types.List

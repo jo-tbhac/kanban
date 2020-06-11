@@ -1,3 +1,5 @@
+import { List } from '../list/types';
+
 export const FETCH_ALL_BOARDS = 'FETCH_ALL_BOARDS';
 export const FETCH_BOARD = 'FETCH_BOARD';
 
@@ -11,19 +13,6 @@ export interface Board {
   name: string
   updatedAt: string
   lists: List[]
-}
-
-export interface List {
-  id: number
-  name: string
-  boardId: number
-  cards: Card[]
-}
-
-export interface Card {
-  id: number
-  title: string
-  description: string
 }
 
 interface FetchAllBoardsAction {
