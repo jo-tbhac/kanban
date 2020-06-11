@@ -36,7 +36,7 @@ const Board = (props: PropsFromRedux) => {
 
   return (
     <div className="boardContainer" data-testid="boardComponent">
-      <ToolBar />
+      <ToolBar boardName={selectedBoard.name} />
 
       <div className="listIndexContainer">
         {selectedBoard.lists.map((list) => <List key={list.id} />)}
