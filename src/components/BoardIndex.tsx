@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { RootState } from '../store';
 import * as boardActions from '../store/board/actions';
@@ -14,7 +15,6 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = {
   fetchAllBoards: boardActions.fetchAllBoards,
-  showBoard: boardActions.showBoard,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -22,7 +22,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const BoardIndex = (props: PropsFromRedux) => {
-  const { boards, fetchAllBoards, showBoard } = props;
+  const { boards, fetchAllBoards } = props;
 
   useEffect(() => {
     fetchAllBoards();
@@ -32,15 +32,7 @@ const BoardIndex = (props: PropsFromRedux) => {
   return (
     <div className="boardIndexContainer" data-testid="boardIndexComponent">
       {boards.map((board) => (
-        <div
-          className="boardIndexCard"
-          key={board.id}
-          onClick={showBoard}
-          onKeyPress={showBoard}
-          role="button"
-          tabIndex={0}
-          data-testid="boardIndexCard"
-        >
+        <Link to={`/board/${board.id}`} key={board.id} className="boardIndexCard" data-testid="boardIndexCard">
           <div className="boardIndexCardTop">
             <div className="boardIndexCardTop__title">{board.name}</div>
           </div>
@@ -48,7 +40,7 @@ const BoardIndex = (props: PropsFromRedux) => {
             <div className="boardIndexCardBottom__label">Updated at</div>
             <div>{formatRFC3339DateString(board.updatedAt)}</div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

@@ -8,7 +8,6 @@
 
 .headerIcon {
   cursor: pointer;
-  color: $font-color;
   height: 100%;
   line-height: $header-height;
   padding: 0 3px;
@@ -16,7 +15,8 @@
   &:hover {
     color: $pink;
   }
-  &__icon {
+  &__toIndex {
+    color: $font-color;
     font-size: 1.2rem;
   }
 }

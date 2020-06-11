@@ -1,15 +1,11 @@
-export const SHOW_BOARD_INDEX = 'SHOW_BOARD_INDEX';
-export const SHOW_BOARD = 'SHOW_BOARD';
+import { List } from '../list/types';
+
 export const FETCH_ALL_BOARDS = 'FETCH_ALL_BOARDS';
+export const FETCH_BOARD = 'FETCH_BOARD';
 
 export interface BoardState {
-  isIndexVisible: boolean
   boards: Board[]
   selectedBoard: Board
-}
-
-export interface ShowBoardParams {
-  boardID: number
 }
 
 export interface Board {
@@ -19,30 +15,14 @@ export interface Board {
   lists: List[]
 }
 
-export interface List {
-  id: number
-  name: string
-  cards: Card[]
-}
-
-export interface Card {
-  id: number
-  title: string
-  description: string
-}
-
-interface ShowBoardIndexAction {
-  type: typeof SHOW_BOARD_INDEX
-}
-
-interface ShowBoardAction {
-  type: typeof SHOW_BOARD
-  payload: Board
-}
-
-interface FetchAllBoards {
+interface FetchAllBoardsAction {
   type: typeof FETCH_ALL_BOARDS
   payload: Board[]
 }
 
-export type BoardActionTypes = ShowBoardIndexAction | ShowBoardAction | FetchAllBoards;
+interface FetchBoardAction {
+  type: typeof FETCH_BOARD
+  payload: Board
+}
+
+export type BoardActionTypes = FetchAllBoardsAction | FetchBoardAction;

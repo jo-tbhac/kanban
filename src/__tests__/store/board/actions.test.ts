@@ -1,11 +1,11 @@
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 
-import { SHOW_BOARD_INDEX } from '../../../store/board/types';
-import { showBoard, showBoardIndex, fetchAllBoards } from '../../../store/board/actions';
+import { fetchBoard, fetchAllBoards } from '../../../store/board/actions';
+import { dialogTypeError } from '../../../store/dialog/types';
 import { storeFactory } from '../../../testUtils';
-import dataStore from '../../../tmp_dataStore';
-import { mockBoards } from '../../../utils/mockData';
+import { mockBoards, mockBoard } from '../../../utils/mockData';
+import { failedFetchBoardData } from '../../../utils/text';
 
 describe('board actions', () => {
   let store: any;
@@ -16,28 +16,30 @@ describe('board actions', () => {
     mock = new MockAdapter(axios);
   });
 
-  test('returns an action with type `SHOW_BOARD_INDEX`', () => {
-    const action = showBoardIndex();
-    expect(action).toEqual({ type: SHOW_BOARD_INDEX });
+  test('returns state `selectedBoard` that recieved form server upon dispatch an action `fetchBoard` is successful', () => {
+    const responseData = { board: mockBoard };
+    const boardId = 1;
+    mock.onGet(`/board/${boardId}`).reply(200, responseData);
+
+    return store.dispatch(fetchBoard(boardId))
+      .then(() => {
+        const { board } = store.getState();
+        expect(board.selectedBoard).toEqual(mockBoard);
+      });
   });
 
-  test('returns an action with payload and type `SHOW_BOARD`', () => (
-    store.dispatch(showBoard())
-      .then(() => {
-        const { board } = store.getState();
-        expect(board.isIndexVisible).toBe(false);
-        expect(board.selectedBoard).toEqual(dataStore[0]);
-      })
-  ));
+  test('returns state of dialogProps upon dispatch an action `fetchBoard` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    const boardId = 1;
+    mock.onGet(`/board/${boardId}`).reply(400, responseData);
 
-  test('returns state `boards` that recieved form server upon dispatch an action `fetchAllBoards` is successful', () => {
-    const responseData = { boards: mockBoards };
-    mock.onGet('/boards').reply(200, responseData);
-
-    store.dispatch(fetchAllBoards())
+    return store.dispatch(fetchBoard(boardId))
       .then(() => {
-        const { board } = store.getState();
-        expect(board.boards).toEqual(mockBoards);
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedFetchBoardData);
+        expect(dialog.description).toBe('some error...');
       });
   });
 
