@@ -3,22 +3,18 @@ import camelCaseKeys from 'camelcase-keys';
 import { newAxios } from '../../configureAxios';
 import { AppDispatch } from '..';
 import {
-  SHOW_BOARD_INDEX,
-  SHOW_BOARD,
   FETCH_ALL_BOARDS,
-  // ShowBoardParams,
+  FETCH_BOARD,
 } from './types';
 
-import dataStore from '../../tmp_dataStore';
+export const fetchBoard = (boardID: number) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.get(`/board/${boardID}`);
 
-export const showBoardIndex = () => ({
-  type: SHOW_BOARD_INDEX,
-});
-
-export const showBoard = (/* params: ShowBoardParams */) => async (dispatch: AppDispatch) => {
-  const camelizedData = camelCaseKeys(dataStore[0]);
-
-  dispatch({ type: SHOW_BOARD, payload: camelizedData });
+  if (response?.status === 200) {
+    const camelizedData = camelCaseKeys(response.data.board, { deep: true });
+    dispatch({ type: FETCH_BOARD, payload: camelizedData });
+  }
 };
 
 export const fetchAllBoards = () => async (dispatch: AppDispatch) => {
