@@ -21,3 +21,19 @@
     font-weight: 600;
   }
 }
+
+@mixin small-button() {
+  background-color: white;
+  border: solid 1px $border-color;
+  border-radius: 3px;
+  box-shadow: $box-shadow;
+  box-sizing: border-box;
+  color: $font-color;
+  cursor: pointer;
+  padding: 5px 10px;
+  width: 100px;
+  &:hover {
+    border-color: $pink;
+    color: $pink;
+  }
+}
