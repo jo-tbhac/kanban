@@ -74,9 +74,10 @@ const BoardForm = (props: PropsFromRedux) => {
 
   return (
     isFormVisible ? (
-      <div className="boardFormCard">
+      <div data-testid="newBoardForm" className="boardFormCard">
         <div className="boardFormCardInput">
           <input
+            data-testid="boardNameTextField"
             type="text"
             value={boardName}
             onChange={(event) => setBoardName(event.target.value)}
@@ -89,6 +90,7 @@ const BoardForm = (props: PropsFromRedux) => {
             {cancelButtonText}
           </button>
           <button
+            data-testid="createBoardButton"
             type="button"
             onClick={onClickSubmit}
             className="boardFormCardButton__submit"
@@ -100,6 +102,7 @@ const BoardForm = (props: PropsFromRedux) => {
       </div>
     ) : (
       <div
+        data-testid="newBoardCard"
         role="button"
         tabIndex={0}
         onClick={() => setFormVisible(true)}
