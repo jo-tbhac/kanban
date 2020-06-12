@@ -2,6 +2,7 @@ import { List } from '../list/types';
 
 export const FETCH_ALL_BOARDS = 'FETCH_ALL_BOARDS';
 export const FETCH_BOARD = 'FETCH_BOARD';
+export const CREATE_BOARD = 'CREATE_BOARD';
 
 export interface BoardState {
   boards: Board[]
@@ -25,4 +26,9 @@ interface FetchBoardAction {
   payload: Board
 }
 
-export type BoardActionTypes = FetchAllBoardsAction | FetchBoardAction;
+interface CreateBoardAction {
+  type: typeof CREATE_BOARD
+  payload: Board
+}
+
+export type BoardActionTypes = FetchAllBoardsAction | FetchBoardAction | CreateBoardAction;
