@@ -39,7 +39,7 @@ const Board = (props: PropsFromRedux) => {
       <ToolBar boardName={selectedBoard.name} />
 
       <div className="listIndexContainer">
-        {selectedBoard.lists.map((list) => <List key={String(list.id)} list={list} />)}
+        {selectedBoard.lists?.map((list) => <List key={String(list.id)} list={list} />)}
 
         <div className="addListButton">
           <FontAwesomeIcon icon={['fas', 'plus']} className="addListButton__icon" />
