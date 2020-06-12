@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import BoardForm from './BoardForm';
 import { RootState } from '../store';
 import * as boardActions from '../store/board/actions';
 import { formatRFC3339DateString } from '../utils/utils';
@@ -42,6 +43,7 @@ const BoardIndex = (props: PropsFromRedux) => {
           </div>
         </Link>
       ))}
+      <BoardForm />
     </div>
   );
 };
