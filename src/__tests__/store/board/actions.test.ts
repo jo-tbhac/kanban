@@ -1,11 +1,11 @@
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 
-import { fetchBoard, fetchAllBoards } from '../../../store/board/actions';
+import { fetchBoard, fetchAllBoards, createBoard } from '../../../store/board/actions';
 import { dialogTypeError } from '../../../store/dialog/types';
 import { storeFactory } from '../../../testUtils';
 import { mockBoards, mockBoard } from '../../../utils/mockData';
-import { failedFetchBoardData } from '../../../utils/text';
+import { failedFetchBoardData, failedCreateBoard } from '../../../utils/text';
 
 describe('board actions', () => {
   let store: any;
@@ -47,10 +47,40 @@ describe('board actions', () => {
     const responseData = { boards: mockBoards };
     mock.onGet('/boards').reply(200, responseData);
 
-    store.dispatch(fetchAllBoards())
+    return store.dispatch(fetchAllBoards())
       .then(() => {
         const { board } = store.getState();
         expect(board.boards).toEqual(mockBoards);
+      });
+  });
+
+  test('returns state `boards` that added one record upon dispatch an action `createBoard` is successful', () => {
+    const params = { name: 'sample board' };
+    const responseData = { board: mockBoard };
+    mock.onPost('/board').reply(201, responseData);
+
+    const previousState = store.getState().board;
+
+    return store.dispatch(createBoard(params))
+      .then(() => {
+        const { board } = store.getState();
+        expect(board.boards.length).toBe(previousState.boards.length + 1);
+        expect(board.selectedBoard).toEqual(mockBoard);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `createBoard` and recieved status 400 from server', () => {
+    const params = { name: 'sample board' };
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onPost('/board').reply(400, responseData);
+
+    return store.dispatch(createBoard(params))
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedCreateBoard);
+        expect(dialog.description).toBe('some error...');
       });
   });
 });

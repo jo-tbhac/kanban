@@ -1,6 +1,7 @@
 import {
   FETCH_ALL_BOARDS,
   FETCH_BOARD,
+  CREATE_BOARD,
   BoardState,
   BoardActionTypes,
 } from './types';
@@ -28,6 +29,12 @@ const boardReducer = (state = initialState, action: BoardActionTypes): BoardStat
     case FETCH_BOARD:
       return {
         ...state,
+        selectedBoard: action.payload,
+      };
+    case CREATE_BOARD:
+      return {
+        ...state,
+        boards: [...state.boards, action.payload],
         selectedBoard: action.payload,
       };
     default:

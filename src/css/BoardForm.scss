@@ -1,0 +1,61 @@
+.boardFormNew {
+  @include board-card();
+  align-items: center;
+  background-color: $overlay;
+  box-shadow: none;
+  color: white;
+  flex-direction: row;
+  justify-content: center;
+  &__label {
+    margin-right: 5px;
+  }
+}
+
+.boardFormCard {
+  @include board-card();
+  cursor: default;
+}
+
+.boardFormCardInput {
+  flex: 1;
+  width: 100%;
+  &__title {
+    border: none;
+    border-bottom: solid 1px $font-color;
+    border-radius: 0;
+    box-sizing: border-box;
+    color: $font-color;
+    margin-top: 10px;
+    outline: none;
+    padding: 5px 0;
+    width: 100%;
+    &:focus {
+      border-color: $pink;
+      border-width: 2px;
+    }
+  }
+}
+
+.boardFormCardButton {
+  align-self: flex-end;
+  &__submit {
+    @include small-button();
+    background-color: $teal;
+    border: none;
+    color: white;
+    margin-left: 10px;
+    width: fit-content;
+    &:hover {
+      background-color: $teal-lighten;
+      color: white;
+    }
+    &:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+  }
+  &__cancel {
+    @include small-button();
+    width: fit-content;
+  }
+}

@@ -21,3 +21,35 @@
     font-weight: 600;
   }
 }
+
+@mixin small-button() {
+  background-color: white;
+  border: solid 1px $border-color;
+  border-radius: 3px;
+  box-shadow: $box-shadow;
+  box-sizing: border-box;
+  color: $font-color;
+  cursor: pointer;
+  padding: 5px 10px;
+  width: 100px;
+  &:hover {
+    border-color: $pink;
+    color: $pink;
+  }
+}
+
+@mixin board-card() {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: $box-shadow;
+  box-sizing: border-box;
+  color: $font-color;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  text-decoration: none;
+  &:hover {
+    color: $pink;
+  }
+}

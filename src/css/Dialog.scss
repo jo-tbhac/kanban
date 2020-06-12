@@ -56,20 +56,8 @@
   display: flex;
   justify-content: flex-end;
   &__confirm {
-    background-color: white;
-    border: solid 1px $border-color;
-    border-radius: 3px;
-    box-shadow: $box-shadow;
-    box-sizing: border-box;
-    color: $font-color;
-    cursor: pointer;
+    @include small-button();
     margin-left: 10px;
-    padding: 5px 10px;
-    width: 100px;
-    &:hover {
-      border-color: $pink;
-      color: $pink;
-    }
   }
   &__cancel {
     @extend .dialogButton__confirm;

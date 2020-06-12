@@ -10,19 +10,7 @@
 }
 
 .boardIndexCard {
-  background-color: white;
-  border-radius: 3px;
-  box-shadow: $box-shadow;
-  box-sizing: border-box;
-  color: $font-color;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  padding: 10px 20px;
-  text-decoration: none;
-  &:hover {
-    color: $pink;
-  }
+  @include board-card();
 }
 
 .boardIndexCardTop {
