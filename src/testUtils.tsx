@@ -21,9 +21,13 @@ const render = (ui: ReactElement, store: any) => {
   return rtlRender(ui, { wrapper: Wrapper });
 };
 
-export const renderWithRouter = (component: ReactElement, store: Store) => (
+export const renderWithRouter = (
+  component: ReactElement,
+  store: Store,
+  initialEntries?: string[],
+) => (
   render(
-    <MemoryRouter>{component}</MemoryRouter>,
+    <MemoryRouter initialEntries={initialEntries}>{component}</MemoryRouter>,
     store,
   )
 );
