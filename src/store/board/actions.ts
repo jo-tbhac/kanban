@@ -2,10 +2,15 @@ import camelCaseKeys from 'camelcase-keys';
 
 import { newAxios } from '../../configureAxios';
 import { AppDispatch } from '..';
-import { FETCH_ALL_BOARDS, FETCH_BOARD, CREATE_BOARD } from './types';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { joinErrors } from '../../utils/utils';
-import { failedFetchBoardData, failedCreateBoard } from '../../utils/text';
+import { failedFetchBoardData, failedCreateBoard, failedUpdateBoard } from '../../utils/text';
+import {
+  FETCH_ALL_BOARDS,
+  FETCH_BOARD,
+  CREATE_BOARD,
+  UPDATE_BOARD,
+} from './types';
 
 export const fetchBoard = (boardID: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
@@ -55,3 +60,25 @@ export const createBoard = (params: { name: string }) => async (dispatch: AppDis
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
   }
 };
+
+export const updateBoard = (params: { name: string }, boardID: number) => (
+  async (dispatch: AppDispatch) => {
+    const axios = newAxios();
+    const response = await axios.patch(`/board/${boardID}`, params);
+
+    if (response?.status === 200) {
+      const camelizedData = camelCaseKeys(response.data.board);
+      dispatch({ type: UPDATE_BOARD, payload: camelizedData });
+      return;
+    }
+
+    if (response?.status === 400) {
+      const dialogProps = {
+        type: dialogTypeError as DialogTypes,
+        title: failedUpdateBoard,
+        description: joinErrors(response.data.errors),
+      };
+      dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+    }
+  }
+);

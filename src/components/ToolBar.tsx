@@ -15,7 +15,7 @@ const ToolBar: FC<ToolBarProps> = (props) => {
   return (
     <div className="boardToolBar">
       {isFormVisible ? (
-        <BoardNameForm initialBoardName={boardName} setFormVisible={() => setFormVisible(false)} />
+        <BoardNameForm initialBoardName={boardName} setFormVisible={setFormVisible} />
       ) : (
         <div
           role="button"

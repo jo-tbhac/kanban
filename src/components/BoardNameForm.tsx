@@ -1,13 +1,46 @@
-import React, { FC, useState } from 'react';
+import React, {
+  FC,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from 'react';
 
-type BoardNameFormProps = {
-  setFormVisible: () => void
+import { connect, ConnectedProps } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import * as boardActions from '../store/board/actions';
+
+const mapDispatchToProps = {
+  updateBoard: boardActions.updateBoard,
+};
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type BoardNameFormProps = PropsFromRedux&{
+  setFormVisible: Dispatch<SetStateAction<boolean>>
   initialBoardName: string
 }
 
 const BoardNameForm: FC<BoardNameFormProps> = (props) => {
-  const { setFormVisible, initialBoardName } = props;
+  const { setFormVisible, initialBoardName, updateBoard } = props;
+
   const [boardName, setBoardName] = useState(initialBoardName);
+  const { boardID } = useParams();
+
+  const onBlur = () => {
+    if (boardName === '' || boardName === initialBoardName) {
+      setFormVisible(false);
+      return;
+    }
+
+    const castedBoardID = Number(boardID);
+    if (castedBoardID) {
+      updateBoard({ name: boardName }, castedBoardID);
+      setFormVisible(false);
+    }
+  };
 
   return (
     <input
@@ -16,10 +49,10 @@ const BoardNameForm: FC<BoardNameFormProps> = (props) => {
       type="text"
       value={boardName}
       onChange={(event) => setBoardName(event.target.value)}
-      onBlur={setFormVisible}
+      onBlur={onBlur}
       className="boardNameForm"
     />
   );
 };
 
-export default BoardNameForm;
+export default connector(BoardNameForm);
