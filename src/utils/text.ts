@@ -14,5 +14,6 @@ export const failedSignInTitle = 'サインインに失敗しました';
 // board
 export const failedFetchBoardData = 'ボードの情報を取得できませんでした';
 export const failedCreateBoard = 'ボードを作成できませんでした';
+export const failedUpdateBoard = 'ボードを更新できませんでした';
 export const newBoardFormTitle = 'ボードを新規作成';
 export const boardNameFormPlaceholder = 'ボードのタイトルを入力';

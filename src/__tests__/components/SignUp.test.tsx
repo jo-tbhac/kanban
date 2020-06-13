@@ -1,29 +1,19 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { fireEvent } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 
-import { storeFactory, render } from '../../testUtils';
+import { storeFactory, renderWithRouter } from '../../testUtils';
 import SignUp from '../../components/SignUp';
 import { Store } from '../../store';
 
 describe('<SignUp />', () => {
   let store: Store;
-  const renderWithRouter = (component: ReactElement) => (
-    render(
-      <MemoryRouter>
-        {component}
-      </MemoryRouter>,
-      store,
-    )
-  );
-
   beforeEach(() => {
     store = storeFactory();
   });
 
   test('update state of `email` if email text field upon changed', () => {
     const mockText = 'sample@sample.com';
-    const { getByTestId } = renderWithRouter(<SignUp />);
+    const { getByTestId } = renderWithRouter(<SignUp />, store);
     const emailTextField = getByTestId('emailTextField') as HTMLInputElement;
     expect(emailTextField.value).toBe('');
 
@@ -33,7 +23,7 @@ describe('<SignUp />', () => {
 
   test('update state of `password` if password text field upon changed', () => {
     const mockText = 'sample_password';
-    const { getByTestId } = renderWithRouter(<SignUp />);
+    const { getByTestId } = renderWithRouter(<SignUp />, store);
     const passwordTextField = getByTestId('passwordTextField') as HTMLInputElement;
     expect(passwordTextField.value).toBe('');
 
@@ -43,7 +33,7 @@ describe('<SignUp />', () => {
 
   test('update state of `username` if username text field upon changed', () => {
     const mockText = 'foo bar';
-    const { getByTestId } = renderWithRouter(<SignUp />);
+    const { getByTestId } = renderWithRouter(<SignUp />, store);
     const userNameTextField = getByTestId('userNameTextField') as HTMLInputElement;
     expect(userNameTextField.value).toBe('');
 
@@ -53,7 +43,7 @@ describe('<SignUp />', () => {
 
   test('update state of `passwordConfirmation` if passwordConfirmation text field upon changed', () => {
     const mockText = 'sample_password_confirmation';
-    const { getByTestId } = renderWithRouter(<SignUp />);
+    const { getByTestId } = renderWithRouter(<SignUp />, store);
     const passwordConfirmationTextField = getByTestId('passwordConfirmationTextField') as HTMLInputElement;
     expect(passwordConfirmationTextField.value).toBe('');
 

@@ -1,20 +1,9 @@
-import React, { ReactElement } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import React from 'react';
 
-import { render, fireEvent, storeFactory } from '../../testUtils';
+import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import BoardForm from '../../components/BoardForm';
-import { Store } from '../../store';
 
 describe('<BoardForm />', () => {
-  const renderWithRouter = (component: ReactElement, store: Store) => (
-    render(
-      <MemoryRouter>
-        {component}
-      </MemoryRouter>,
-      store,
-    )
-  );
-
   test('exists a newBoardCard and does not exist newBoardForm if state of `isFormVisible` is false', () => {
     const store = storeFactory();
     const { getByTestId, queryByTestId } = renderWithRouter(<BoardForm />, store);
