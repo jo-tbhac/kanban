@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import BoardNameForm from './BoardNameForm';
 
 type ToolBarProps = {
   boardName: string
@@ -8,9 +10,23 @@ type ToolBarProps = {
 const ToolBar: FC<ToolBarProps> = (props) => {
   const { boardName } = props;
 
+  const [isFormVisible, setFormVisible] = useState(false);
+
   return (
     <div className="boardToolBar">
-      <div className="boardToolBar__title">{boardName}</div>
+      {isFormVisible ? (
+        <BoardNameForm initialBoardName={boardName} setFormVisible={() => setFormVisible(false)} />
+      ) : (
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => setFormVisible(true)}
+          onKeyPress={() => setFormVisible(true)}
+          className="boardToolBar__title"
+        >
+          {boardName}
+        </div>
+      )}
       <div className="labelContainer">
         <div className="label">
           <div className="label__icon" />
