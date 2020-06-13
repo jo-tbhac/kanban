@@ -46,6 +46,7 @@ const BoardNameForm: FC<BoardNameFormProps> = (props) => {
     <input
       // eslint-disable-next-line jsx-a11y/no-autofocus
       autoFocus
+      data-testid="boardNameForm"
       type="text"
       value={boardName}
       onChange={(event) => setBoardName(event.target.value)}

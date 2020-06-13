@@ -18,6 +18,7 @@ const ToolBar: FC<ToolBarProps> = (props) => {
         <BoardNameForm initialBoardName={boardName} setFormVisible={setFormVisible} />
       ) : (
         <div
+          data-testid="boardName"
           role="button"
           tabIndex={0}
           onClick={() => setFormVisible(true)}
