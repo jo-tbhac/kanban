@@ -1,11 +1,16 @@
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 
-import { fetchBoard, fetchAllBoards, createBoard } from '../../../store/board/actions';
 import { dialogTypeError } from '../../../store/dialog/types';
 import { storeFactory } from '../../../testUtils';
 import { mockBoards, mockBoard } from '../../../utils/mockData';
-import { failedFetchBoardData, failedCreateBoard } from '../../../utils/text';
+import { failedFetchBoardData, failedCreateBoard, failedUpdateBoard } from '../../../utils/text';
+import {
+  fetchBoard,
+  fetchAllBoards,
+  createBoard,
+  updateBoard,
+} from '../../../store/board/actions';
 
 describe('board actions', () => {
   let store: any;
@@ -80,6 +85,33 @@ describe('board actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedCreateBoard);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state `selectedBoard` that updated name upon dispatch an action `updateBoard` is successful', () => {
+    const params = { name: 'sample board' };
+    const responseData = { board: params };
+    mock.onPatch(`/board/${mockBoard.id}`).reply(200, responseData);
+
+    return store.dispatch(updateBoard(params, mockBoard.id))
+      .then(() => {
+        const { board } = store.getState();
+        expect(board.selectedBoard.name).toBe(params.name);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `updateBoard` and recieved status 400 from server', () => {
+    const params = { name: 'sample board' };
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onPatch(`/board/${mockBoard.id}`).reply(400, responseData);
+
+    return store.dispatch(updateBoard(params, mockBoard.id))
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedUpdateBoard);
         expect(dialog.description).toBe('some error...');
       });
   });
