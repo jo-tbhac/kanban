@@ -1,5 +1,5 @@
 .header {
-  background-color: white;
+  background-color: #ccc;
   box-sizing: border-box;
   height: $header-height;
   padding: 0 20px;
@@ -12,11 +12,11 @@
   line-height: $header-height;
   padding: 0 3px;
   width: fit-content;
-  &:hover {
-    color: $pink;
-  }
   &__toIndex {
     color: $font-color;
     font-size: 1.2rem;
+    &:hover {
+      color: $pink;
+    }
   }
 }
