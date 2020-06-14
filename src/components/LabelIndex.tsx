@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { RootState } from '../store';
 import * as labelActions from '../store/label/actions';
 import Label from './Label';
+import LabelEdit from './LabelEdit';
 
 const mapStateToProps = (state: RootState) => {
   const { label } = state;
@@ -37,12 +38,13 @@ const LabelIndex = (props: PropsFromRedux) => {
   return (
     <>
       <div className="labelContainer">
-        {labels.map((label) => <Label label={label} />)}
+        {labels.map((label) => <Label key={label.id} label={label} />)}
       </div>
       <div className="addLabelButton">
         <FontAwesomeIcon icon={['fas', 'plus']} className="addLabelButton__icon" />
         <div className="addLabelButton__text">Add label</div>
       </div>
+      <LabelEdit />
     </>
   );
 };
