@@ -17,3 +17,8 @@ export const failedCreateBoard = 'ボードを作成できませんでした';
 export const failedUpdateBoard = 'ボードを更新できませんでした';
 export const newBoardFormTitle = 'ボードを新規作成';
 export const boardNameFormPlaceholder = 'ボードのタイトルを入力';
+
+// label
+export const editLabelButtonText = 'ラベルを編集する';
+export const editLabelHeaderText = 'ラベル一覧';
+export const newLabelButtonText = 'ラベルを新規作成';
