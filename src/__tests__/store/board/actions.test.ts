@@ -48,7 +48,7 @@ describe('board actions', () => {
       });
   });
 
-  test('returns state `boards` that recieved form server upon dispatch an action `fetchAllBoards` is successful', () => {
+  test('returns state `boards` that recieved from server upon dispatch an action `fetchAllBoards` is successful', () => {
     const responseData = { boards: mockBoards };
     mock.onGet('/boards').reply(200, responseData);
 
