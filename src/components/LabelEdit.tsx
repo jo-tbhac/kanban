@@ -5,6 +5,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import { RootState } from '../store';
 import LabelEditRow from './LabelEditRow';
+import LabelForm from './LabelForm';
 import { editLabelHeaderText, newLabelButtonText } from '../utils/text';
 
 const mapStateToProps = (state: RootState) => {
@@ -23,7 +24,9 @@ type LabelEditProps = PropsFromRedux&{
 
 const LabelEdit = (props: LabelEditProps) => {
   const { labels, setLabelEditVisible } = props;
+
   const [inProp, setInProp] = useState(true);
+  const [isLabelFormVisible, setLabelFormVisible] = useState(false);
 
   return (
     <CSSTransition
@@ -49,10 +52,18 @@ const LabelEdit = (props: LabelEditProps) => {
         <div className="labelEditIndexContainer">
           {labels.map((label) => <LabelEditRow key={label.id} label={label} />)}
         </div>
-        <div className="newLabelButton">
-          <FontAwesomeIcon icon={['fas', 'plus']} />
-          <p className="newLabelButton__text">{newLabelButtonText}</p>
-        </div>
+        {isLabelFormVisible ? <LabelForm setLabelFormVisible={setLabelFormVisible} /> : (
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => setLabelFormVisible(true)}
+            onKeyPress={() => setLabelFormVisible(true)}
+            className="newLabelButton"
+          >
+            <FontAwesomeIcon icon={['fas', 'plus']} />
+            <p className="newLabelButton__text">{newLabelButtonText}</p>
+          </div>
+        )}
       </div>
     </CSSTransition>
   );

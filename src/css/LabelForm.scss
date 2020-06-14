@@ -1,0 +1,46 @@
+.labelFormContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.labelForm {
+  display: flex;
+  margin-bottom: 10px;
+  &__icon {
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    margin-right: 10px;
+    width: 30px;
+  }
+  &__textIput {
+    @include text-field();
+    flex: 1;
+  }
+}
+
+.labelFormButton {
+  align-self: flex-end;
+  &__submit {
+    @include small-button();
+    background-color: $teal;
+    border: none;
+    color: white;
+    margin-left: 10px;
+    width: fit-content;
+    &:hover {
+      background-color: $teal-lighten;
+      color: white;
+    }
+    &:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+  }
+  &__cancel {
+    @include small-button();
+    width: fit-content;
+  }
+}
