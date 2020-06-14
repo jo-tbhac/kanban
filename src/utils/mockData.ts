@@ -35,3 +35,9 @@ export const mockLabels = [
     color: '#2196f3',
   },
 ];
+
+export const mockLabel = {
+  id: 1,
+  name: 'development',
+  color: '#f44336',
+};

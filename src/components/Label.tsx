@@ -14,12 +14,13 @@ const Label = (props: LabelProps) => {
   return (
     <div className="label">
       <div
+        data-testid="labelIcon"
         onMouseEnter={() => setNameVisible(true)}
         onMouseLeave={() => setNameVisible(false)}
         style={{ backgroundColor: label.color }}
         className="label__icon"
       >
-        {isNameVisible && <div className="label__name">{label.name}</div>}
+        {isNameVisible && <div data-testid="labelName" className="label__name">{label.name}</div>}
       </div>
     </div>
   );
