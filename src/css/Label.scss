@@ -1,0 +1,22 @@
+.label {
+  cursor: pointer;
+  margin-right: 10px;
+  position: relative;
+  &__icon {
+    border-radius: 50%;
+    height: 100%;
+    width: calc(#{$toolbar-height} * 0.7);
+  }
+  &__name {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 3px;
+    color: white;
+    font-size: 0.8rem;
+    padding: 2px 4px;
+    position: absolute;
+    top: calc(#{$toolbar-height} * 0.75);
+    left: calc(#{$toolbar-height} * -0.6);;
+    white-space: nowrap;
+    width: fit-content;
+  }
+}
