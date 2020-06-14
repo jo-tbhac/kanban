@@ -10,8 +10,19 @@
   top: 0;
   right: 0;
   width: 400px;
-  @media (max-width: 440px) {
-    width: 90%;
+  &-appear {
+    right: -400px;
+    &-active {
+      right: 0;
+      transition: all 300ms;
+    }
+  }
+  &-exit {
+    right: 0;
+    &-active {
+      right: -400px;
+      transition: all 300ms;
+    }
   }
 }
 
