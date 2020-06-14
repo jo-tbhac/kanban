@@ -23,3 +23,15 @@ export const mockBoard = {
   updatedAt: '2020-10-10T00:00:00',
   lists: [],
 };
+
+export const mockLabels = [
+  {
+    id: 1,
+    name: 'development',
+    color: '#f44336',
+  }, {
+    id: 2,
+    name: 'marketing',
+    color: '#2196f3',
+  },
+];
