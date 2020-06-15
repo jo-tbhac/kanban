@@ -11,6 +11,7 @@ const LabelForm = (props: LabelFormProps) => {
   const { setLabelFormVisible } = props;
 
   const [labelName, setLabelName] = useState('');
+  const [selectedColor, setColor] = useState('#e53935');
   const [isColorPickerVisible, setColorPickerVisible] = useState(false);
 
   return (
@@ -21,9 +22,16 @@ const LabelForm = (props: LabelFormProps) => {
           tabIndex={0}
           onClick={() => setColorPickerVisible(true)}
           onKeyPress={() => setColorPickerVisible(true)}
+          style={{ backgroundColor: selectedColor }}
           className="labelForm__icon"
         >
-          {isColorPickerVisible && <ColorPicker setColorPickerVisible={setColorPickerVisible} />}
+          {isColorPickerVisible && (
+            <ColorPicker
+              selectedColor={selectedColor}
+              setColor={setColor}
+              setColorPickerVisible={setColorPickerVisible}
+            />
+          )}
         </div>
         <input
           type="text"

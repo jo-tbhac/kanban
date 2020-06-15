@@ -1,7 +1,6 @@
 .colorPicker {
-  background-color: #eee;
+  background-color: white;
   border-radius: 3px;
-  box-shadow: $box-shadow;
   cursor: default;
   display: flex;
   overflow-x: scroll;
@@ -9,7 +8,7 @@
   position: absolute;
   top: -5px;
   left: -5px;
-  width: 350px;
+  width: 360px;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
@@ -22,14 +21,7 @@
   &-appear {
     width: 0;
     &-active {
-      width: 350px;
-      transition: all 200ms;
-    }
-  }
-  &-exit {
-    width: 0;
-    &-active {
-      width: 0;
+      width: 360px;
       transition: all 200ms;
     }
   }
@@ -39,5 +31,15 @@
     height: 30px;
     margin-right: 5px;
     min-width: 30px;
+    &--selected {
+      @extend .colorPicker__icon;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      &::after {
+        content: '✔︎';
+        color: white;
+      }
+    }
   }
 }

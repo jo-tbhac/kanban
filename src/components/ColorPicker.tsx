@@ -30,14 +30,21 @@ const colors = [
 
 type ColorPickerProps = {
   setColorPickerVisible: Dispatch<SetStateAction<boolean>>
+  setColor: Dispatch<SetStateAction<string>>
+  selectedColor: string
 }
 
 const ColorPicker = (props: ColorPickerProps) => {
-  const { setColorPickerVisible } = props;
+  const { setColorPickerVisible, setColor, selectedColor } = props;
 
   const onClickColorIcon = (event: MouseEvent&KeyboardEvent<HTMLInputElement>) => {
     event.stopPropagation();
-    setColorPickerVisible(false);
+    const pickedColor = event.currentTarget.dataset.color;
+
+    if (pickedColor) {
+      setColor(pickedColor);
+      setColorPickerVisible(false);
+    }
   };
 
   return (
@@ -45,13 +52,15 @@ const ColorPicker = (props: ColorPickerProps) => {
       <div className="colorPicker">
         {colors.map((color) => (
           <div
+            key={color}
             aria-label={color}
+            data-color={color}
             role="button"
             tabIndex={0}
             onClick={onClickColorIcon}
             onKeyPress={onClickColorIcon}
             style={{ backgroundColor: color }}
-            className="colorPicker__icon"
+            className={selectedColor === color ? 'colorPicker__icon--selected' : 'colorPicker__icon'}
           />
         ))}
       </div>
