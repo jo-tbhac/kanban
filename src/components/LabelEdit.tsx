@@ -59,9 +59,10 @@ const LabelEdit = (props: LabelEditProps) => {
       onExited={() => setLabelEditVisible(false)}
       classNames="labelEditContainer"
     >
-      <div className="labelEditContainer">
+      <div data-testid="labelEdit" className="labelEditContainer">
         <div className="labelEditHeader">
           <div
+            data-testid="labelEditCloseButton"
             role="button"
             tabIndex={0}
             onClick={() => setInProp(false)}
@@ -77,6 +78,7 @@ const LabelEdit = (props: LabelEditProps) => {
         </div>
         {isLabelFormVisible ? <LabelForm setLabelFormVisible={setLabelFormVisible} /> : (
           <div
+            data-testid="newLabelButton"
             role="button"
             tabIndex={0}
             onClick={() => setLabelFormVisible(true)}
