@@ -1,5 +1,6 @@
 import {
   FETCH_ALL_LABEL,
+  CREATE_LABEL,
   LabelState,
   LabelActionTypes,
 } from './types';
@@ -14,6 +15,11 @@ const labelReducer = (state = initialState, action: LabelActionTypes) => {
       return {
         ...state,
         labels: action.payload,
+      };
+    case CREATE_LABEL:
+      return {
+        ...state,
+        labels: [...state.labels, action.payload],
       };
     default:
       return state;
