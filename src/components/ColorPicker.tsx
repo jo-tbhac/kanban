@@ -49,9 +49,10 @@ const ColorPicker = (props: ColorPickerProps) => {
 
   return (
     <CSSTransition in appear timeout={300} classNames="colorPicker">
-      <div className="colorPicker">
-        {colors.map((color) => (
+      <div data-testid="colorPicker" className="colorPicker">
+        {colors.map((color, index) => (
           <div
+            data-testid={`colorPickerIcon-${index}`}
             key={color}
             aria-label={color}
             data-color={color}
