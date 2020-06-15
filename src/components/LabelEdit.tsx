@@ -1,4 +1,11 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+
 import { connect, ConnectedProps } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CSSTransition } from 'react-transition-group';
@@ -22,11 +29,27 @@ type LabelEditProps = PropsFromRedux&{
   setLabelEditVisible: Dispatch<SetStateAction<boolean>>
 }
 
+const usePreviousLabelCount = (count: number) => {
+  const ref: {current: number} = useRef(0);
+  useEffect(() => {
+    ref.current = count;
+  });
+  return ref.current;
+};
+
 const LabelEdit = (props: LabelEditProps) => {
   const { labels, setLabelEditVisible } = props;
 
   const [inProp, setInProp] = useState(true);
   const [isLabelFormVisible, setLabelFormVisible] = useState(false);
+  const prevLabelCount = usePreviousLabelCount(labels.length);
+
+  useEffect(() => {
+    if (labels.length > prevLabelCount) {
+      setLabelFormVisible(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [labels]);
 
   return (
     <CSSTransition
