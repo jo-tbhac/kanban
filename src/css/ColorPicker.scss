@@ -1,0 +1,43 @@
+.colorPicker {
+  background-color: #eee;
+  border-radius: 3px;
+  box-shadow: $box-shadow;
+  cursor: default;
+  display: flex;
+  overflow-x: scroll;
+  padding: 5px;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 350px;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &::after {
+    content: '';
+    height: 1px;
+    min-width: 5px;
+  }
+  &-appear {
+    width: 0;
+    &-active {
+      width: 350px;
+      transition: all 200ms;
+    }
+  }
+  &-exit {
+    width: 0;
+    &-active {
+      width: 0;
+      transition: all 200ms;
+    }
+  }
+  &__icon {
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    margin-right: 5px;
+    min-width: 30px;
+  }
+}

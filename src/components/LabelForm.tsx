@@ -1,5 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 
+import ColorPicker from './ColorPicker';
 import { labelNameFormPlaceholder, createButtonText, cancelButtonText } from '../utils/text';
 
 type LabelFormProps = {
@@ -8,12 +9,22 @@ type LabelFormProps = {
 
 const LabelForm = (props: LabelFormProps) => {
   const { setLabelFormVisible } = props;
+
   const [labelName, setLabelName] = useState('');
+  const [isColorPickerVisible, setColorPickerVisible] = useState(false);
 
   return (
     <div className="labelFormContainer">
       <div className="labelForm">
-        <div className="labelForm__icon" />
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => setColorPickerVisible(true)}
+          onKeyPress={() => setColorPickerVisible(true)}
+          className="labelForm__icon"
+        >
+          {isColorPickerVisible && <ColorPicker setColorPickerVisible={setColorPickerVisible} />}
+        </div>
         <input
           type="text"
           value={labelName}
