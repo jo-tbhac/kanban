@@ -35,9 +35,10 @@ const LabelForm = (props: LabelFormProps) => {
   };
 
   return (
-    <div className="labelFormContainer">
+    <div data-testid="labelForm" className="labelFormContainer">
       <div className="labelForm">
         <div
+          data-testid="labelFormColorIcon"
           role="button"
           tabIndex={0}
           onClick={() => setColorPickerVisible(true)}
@@ -54,6 +55,7 @@ const LabelForm = (props: LabelFormProps) => {
           )}
         </div>
         <input
+          data-testid="labelNameTextField"
           type="text"
           value={labelName}
           onChange={(event) => setLabelName(event.target.value)}
@@ -62,10 +64,16 @@ const LabelForm = (props: LabelFormProps) => {
         />
       </div>
       <div className="labelFormButton">
-        <button type="button" onClick={() => setLabelFormVisible(false)} className="labelFormButton__cancel">
+        <button
+          data-testid="labelFormCancelButton"
+          type="button"
+          onClick={() => setLabelFormVisible(false)}
+          className="labelFormButton__cancel"
+        >
           {cancelButtonText}
         </button>
         <button
+          data-testid="labelFormSubmitButton"
           type="button"
           onClick={onClickSubmit}
           disabled={labelName === ''}
