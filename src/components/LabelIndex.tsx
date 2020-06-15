@@ -44,6 +44,7 @@ const LabelIndex = (props: PropsFromRedux) => {
         {labels.map((label) => <Label key={label.id} label={label} />)}
       </div>
       <div
+        data-testid="addLabelButton"
         role="button"
         tabIndex={0}
         onClick={() => setLabelEditVisible(true)}
