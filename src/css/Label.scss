@@ -15,7 +15,10 @@
     padding: 2px 4px;
     position: absolute;
     top: calc(#{$toolbar-height} * 0.75);
-    left: calc(#{$toolbar-height} * -0.6);;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
     white-space: nowrap;
     width: fit-content;
   }
