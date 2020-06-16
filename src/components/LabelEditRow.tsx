@@ -5,10 +5,14 @@ import { connect, ConnectedProps } from 'react-redux';
 import ColorPicker from './ColorPicker';
 import { Label } from '../store/label/types';
 import * as labelActions from '../store/label/actions';
-import { labelNameFormPlaceholder } from '../utils/text';
+import * as dialogActions from '../store/dialog/actions';
+import { dialogTypeAsk } from '../store/dialog/types';
+import { labelNameFormPlaceholder, askDeleteDialog } from '../utils/text';
 
 const mapDispatchToProps = {
   updateLabel: labelActions.updateLabel,
+  deleteLabel: labelActions.deleteLabel,
+  openDialog: dialogActions.openDialog,
 };
 
 const connector = connect(null, mapDispatchToProps);
@@ -20,13 +24,27 @@ type LabelEditRowProps = PropsFromRedux&{
 }
 
 const LabelEditRow = (props: LabelEditRowProps) => {
-  const { label, updateLabel } = props;
+  const {
+    label,
+    updateLabel,
+    deleteLabel,
+    openDialog,
+  } = props;
 
   const [isEditFormVisible, setEditFormVisible] = useState(false);
   const [isColorPickerVisible, setColorPickerVisible] = useState(false);
   const [selectedColor, setColor] = useState(label.color);
   const [labelNameFormValue, setLabelNameFormValue] = useState(label.name);
   const isFirst = useRef(true);
+
+  const onClickDelete = () => {
+    openDialog({
+      type: dialogTypeAsk,
+      title: label.name,
+      description: askDeleteDialog,
+      onConfirm: () => deleteLabel(label.id),
+    });
+  };
 
   const submit = () => {
     const params = { name: labelNameFormValue, color: selectedColor };
@@ -98,7 +116,13 @@ const LabelEditRow = (props: LabelEditRowProps) => {
         </div>
       )}
       {!isEditFormVisible && (
-        <div className="labelEditRow__delete">
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={onClickDelete}
+          onKeyPress={onClickDelete}
+          className="labelEditRow__delete"
+        >
           <FontAwesomeIcon icon={['fas', 'trash-alt']} />
         </div>
       )}

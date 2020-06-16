@@ -1,8 +1,12 @@
 import axios from 'axios';
 
 import store from './store';
-import { openDialog } from './store/dialog/actions';
-import { dialogInternalServerError, dialogUnAuthorization } from './store/dialog/types';
+import {
+  OPEN_DIALOG,
+  CLOSE_DIALOG,
+  dialogInternalServerError,
+  dialogUnAuthorization,
+} from './store/dialog/types';
 
 export const baseURL = 'http://localhost:8080';
 
@@ -16,14 +20,19 @@ export const newAxios = () => {
   // eslint-disable-next-line dot-notation
   instance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
 
-  instance.interceptors.response.use((response) => response, (error) => {
+  instance.interceptors.response.use((response) => {
+    if (response.config.method === 'delete') {
+      store.dispatch({ type: CLOSE_DIALOG });
+    }
+    return response;
+  }, (error) => {
     if (error.response === undefined) {
-      store.dispatch(openDialog(dialogInternalServerError) as any);
+      store.dispatch({ type: OPEN_DIALOG, payload: dialogInternalServerError });
       return error;
     }
 
     if (error.response.status === 401) {
-      store.dispatch(openDialog(dialogUnAuthorization) as any);
+      store.dispatch({ type: OPEN_DIALOG, payload: dialogUnAuthorization });
       return error.response;
     }
 

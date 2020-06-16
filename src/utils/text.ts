@@ -4,7 +4,7 @@ export const internalServerErrorDescription = 'サーバーが応答を停止し
 export const badRequestDescription = 'リクエストが不正です';
 export const unAuthorizationTitle = '認証に失敗しました';
 export const cancelButtonText = 'キャンセル';
-export const confirmButtonText = '確認';
+export const confirmButtonText = 'OK';
 export const createButtonText = '作成';
 
 // Session
@@ -25,3 +25,5 @@ export const newLabelButtonText = 'ラベルを新規作成';
 export const labelNameFormPlaceholder = 'ラベル名を入力';
 export const failedCreateLabel = 'ラベルを作成できませんでした';
 export const failedUpdateLabel = 'ラベルを更新できませんでした';
+export const failedDeleteLabel = 'ラベルを削除できませんでした';
+export const askDeleteDialog = 'このラベルを削除してよろしいですか？';

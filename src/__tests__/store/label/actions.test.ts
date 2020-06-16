@@ -5,8 +5,13 @@ import { storeFactory } from '../../../testUtils';
 import { mockLabels, mockLabel } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { fetchAllLabel, createLabel, updateLabel } from '../../../store/label/actions';
-import { failedCreateLabel, failedUpdateLabel } from '../../../utils/text';
+import { failedCreateLabel, failedUpdateLabel, failedDeleteLabel } from '../../../utils/text';
+import {
+  fetchAllLabel,
+  createLabel,
+  updateLabel,
+  deleteLabel,
+} from '../../../store/label/actions';
 
 describe('label actions', () => {
   let store: Store;
@@ -88,6 +93,35 @@ describe('label actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedUpdateLabel);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state of `labels` that removed one record upon dispatch an action `deleteLabel` is successful', () => {
+    store = storeFactory({ label: { labels: mockLabels } });
+    const labelID = 1;
+    mock.onDelete(`/label/${labelID}`).reply(200);
+
+    const previousState = store.getState().label;
+
+    return store.dispatch(deleteLabel(labelID) as any)
+      .then(() => {
+        const { label } = store.getState();
+        expect(label.labels.length).toBe(previousState.labels.length - 1);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `deleteLabel` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    const labelID = 1;
+    mock.onDelete(`/label/${labelID}`).reply(400, responseData);
+
+    return store.dispatch(deleteLabel(labelID) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedDeleteLabel);
         expect(dialog.description).toBe('some error...');
       });
   });
