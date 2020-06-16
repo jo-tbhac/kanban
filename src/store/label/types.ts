@@ -1,5 +1,6 @@
 export const FETCH_ALL_LABEL = 'FETCH_ALL_LABEL';
 export const CREATE_LABEL = 'CREATE_LABEL';
+export const UPDATE_LABEL = 'UPDATE_LABEL';
 
 export interface Label {
   id: number
@@ -21,4 +22,12 @@ type CreateLabelAction = {
   payload: Label
 }
 
-export type LabelActionTypes = FetchAllLabelAction | CreateLabelAction;
+type UpdateLabelAction = {
+  type: typeof UPDATE_LABEL
+  payload: Label
+}
+
+export type LabelActionTypes =
+  FetchAllLabelAction
+  | CreateLabelAction
+  | UpdateLabelAction;

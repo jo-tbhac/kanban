@@ -55,6 +55,10 @@
 .labelEditIndexContainer {
   max-height: 100%;
   overflow-x: scroll;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .newLabelButton {
