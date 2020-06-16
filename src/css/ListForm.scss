@@ -1,0 +1,41 @@
+.listFormContainer {
+  background-color: $overlay;
+  border-radius: 3px;
+  box-sizing: border-box;
+  min-width: $list-width;
+  padding: 10px;
+}
+
+.listForm {
+  margin-bottom: 10px;
+  &__textField {
+    @include text-field();
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+.listFormButton {
+  display: flex;
+  justify-content: flex-end;
+  &__submit {
+    @include small-button();
+    background-color: $teal;
+    border: none;
+    color: white;
+    margin-left: 10px;
+    width: fit-content;
+    &:hover {
+      background-color: $teal-lighten;
+      color: white;
+    }
+    &:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+  }
+  &__cancel {
+    @include small-button();
+    width: fit-content;
+  }
+}

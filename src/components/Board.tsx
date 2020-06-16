@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 
 import ToolBar from './ToolBar';
 import List from './List';
+import ListForm from './ListForm';
 import { RootState } from '../store';
 import * as boardActions from '../store/board/actions';
 import { newListButtonText } from '../utils/text';
@@ -26,7 +27,9 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 const Board = (props: PropsFromRedux) => {
   const { selectedBoard, fetchBoard } = props;
+
   const { boardID } = useParams();
+  const [isListFormVisible, setListFormVisible] = useState(false);
 
   useEffect(() => {
     if (boardID && Number(boardID)) {
@@ -42,10 +45,20 @@ const Board = (props: PropsFromRedux) => {
       <div className="listIndexContainer">
         {selectedBoard.lists?.map((list) => <List key={String(list.id)} list={list} />)}
 
-        <div className="addListButton">
-          <FontAwesomeIcon icon={['fas', 'plus']} className="addListButton__icon" />
-          <div className="addListButton__text">{newListButtonText}</div>
-        </div>
+        {isListFormVisible ? (
+          <ListForm setListFormVisible={setListFormVisible} />
+        ) : (
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => setListFormVisible(true)}
+            onKeyPress={() => setListFormVisible(true)}
+            className="addListButton"
+          >
+            <FontAwesomeIcon icon={['fas', 'plus']} className="addListButton__icon" />
+            <div className="addListButton__text">{newListButtonText}</div>
+          </div>
+        )}
       </div>
     </div>
   );
