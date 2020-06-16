@@ -24,3 +24,4 @@ export const editLabelHeaderText = 'ラベル一覧';
 export const newLabelButtonText = 'ラベルを新規作成';
 export const labelNameFormPlaceholder = 'ラベル名を入力';
 export const failedCreateLabel = 'ラベルを作成できませんでした';
+export const failedUpdateLabel = 'ラベルを更新できませんでした';
