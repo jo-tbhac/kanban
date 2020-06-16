@@ -55,6 +55,7 @@ const LabelEditRow = (props: LabelEditRowProps) => {
   return (
     <div className="labelEditRow">
       <div
+        data-testid="labelEditRowIcon"
         role="button"
         tabIndex={0}
         onClick={() => setColorPickerVisible(true)}
@@ -74,6 +75,7 @@ const LabelEditRow = (props: LabelEditRowProps) => {
         <input
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
+          data-testid="labelEditTextField"
           type="text"
           value={labelNameFormValue}
           onChange={(event) => setLabelNameFormValue(event.target.value)}
@@ -84,6 +86,7 @@ const LabelEditRow = (props: LabelEditRowProps) => {
       ) : (
         <div className="labelEditNameContainer">
           <div
+            data-testid="labelEditName"
             role="button"
             tabIndex={0}
             onClick={() => setEditFormVisible(true)}
