@@ -1,6 +1,7 @@
 export const FETCH_ALL_LABEL = 'FETCH_ALL_LABEL';
 export const CREATE_LABEL = 'CREATE_LABEL';
 export const UPDATE_LABEL = 'UPDATE_LABEL';
+export const DELETE_LABEL = 'DELETE_LABEL';
 
 export interface Label {
   id: number
@@ -27,7 +28,13 @@ type UpdateLabelAction = {
   payload: Label
 }
 
+type DeleteLabelAction = {
+  type: typeof DELETE_LABEL
+  payload: number
+}
+
 export type LabelActionTypes =
   FetchAllLabelAction
   | CreateLabelAction
-  | UpdateLabelAction;
+  | UpdateLabelAction
+  | DeleteLabelAction;

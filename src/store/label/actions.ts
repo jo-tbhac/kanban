@@ -1,9 +1,14 @@
 import { newAxios } from '../../configureAxios';
 import { AppDispatch } from '..';
-import { FETCH_ALL_LABEL, CREATE_LABEL, UPDATE_LABEL } from './types';
-import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { joinErrors } from '../../utils/utils';
-import { failedCreateLabel, failedUpdateLabel } from '../../utils/text';
+import { failedCreateLabel, failedUpdateLabel, failedDeleteLabel } from '../../utils/text';
+import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
+import {
+  FETCH_ALL_LABEL,
+  CREATE_LABEL,
+  UPDATE_LABEL,
+  DELETE_LABEL,
+} from './types';
 
 export const fetchAllLabel = (boardID: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
@@ -55,3 +60,22 @@ export const updateLabel = (labelID: number, params: { name: string, color: stri
     }
   }
 );
+
+export const deleteLabel = (labelID: number) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.delete(`/label/${labelID}`);
+
+  if (response?.status === 200) {
+    dispatch({ type: DELETE_LABEL, payload: labelID });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedDeleteLabel,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+  }
+};
