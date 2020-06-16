@@ -7,6 +7,9 @@ import {
   BoardActionTypes,
 } from './types';
 
+import { CREATE_LIST, ListActionTypes } from '../list/types';
+import listReducer from '../list/reducers';
+
 const initialBoardProps = {
   id: 0,
   name: '',
@@ -19,7 +22,10 @@ const initialState: BoardState = {
   selectedBoard: initialBoardProps,
 };
 
-const boardReducer = (state = initialState, action: BoardActionTypes): BoardState => {
+const boardReducer = (
+  state = initialState,
+  action: BoardActionTypes | ListActionTypes,
+): BoardState => {
   switch (action.type) {
     case FETCH_ALL_BOARDS:
       return {
@@ -43,6 +49,13 @@ const boardReducer = (state = initialState, action: BoardActionTypes): BoardStat
       return {
         ...state,
         selectedBoard: newSelectedBoard,
+      };
+    }
+    case CREATE_LIST: {
+      const { lists } = listReducer(state.selectedBoard.lists, action);
+      return {
+        ...state,
+        selectedBoard: { ...state.selectedBoard, lists },
       };
     }
     default:
