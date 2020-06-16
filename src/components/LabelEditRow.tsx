@@ -14,9 +14,6 @@ const LabelEditRow = (props: LabelEditRowProps) => {
     <div className="labelEditRow">
       <div className="labelEditRow__icon" style={{ backgroundColor: label.color }} />
       <div className="labelEditRow__name">{label.name}</div>
-      <div className="labelEditRow__edit">
-        <FontAwesomeIcon icon={['fas', 'pen']} />
-      </div>
       <div className="labelEditRow__delete">
         <FontAwesomeIcon icon={['fas', 'trash-alt']} />
       </div>
