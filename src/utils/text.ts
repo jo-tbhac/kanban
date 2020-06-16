@@ -27,3 +27,8 @@ export const failedCreateLabel = 'ラベルを作成できませんでした';
 export const failedUpdateLabel = 'ラベルを更新できませんでした';
 export const failedDeleteLabel = 'ラベルを削除できませんでした';
 export const askDeleteDialog = 'このラベルを削除してよろしいですか？';
+
+// list
+export const listNameFormPlaceholder = 'リスト名を入力';
+export const newListButtonText = 'リストを追加';
+export const failedCreateList = 'リストを作成できませんでした';
