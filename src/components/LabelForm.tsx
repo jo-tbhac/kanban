@@ -60,7 +60,7 @@ const LabelForm = (props: LabelFormProps) => {
           value={labelName}
           onChange={(event) => setLabelName(event.target.value)}
           placeholder={labelNameFormPlaceholder}
-          className="labelForm__textIput"
+          className="labelForm__textField"
         />
       </div>
       <div className="labelFormButton">

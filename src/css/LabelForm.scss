@@ -16,7 +16,7 @@
     position: relative;
     width: 30px;
   }
-  &__textIput {
+  &__textField {
     @include text-field();
     flex: 1;
   }
