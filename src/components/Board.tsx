@@ -7,6 +7,7 @@ import ToolBar from './ToolBar';
 import List from './List';
 import { RootState } from '../store';
 import * as boardActions from '../store/board/actions';
+import { newListButtonText } from '../utils/text';
 
 const mapStateToProps = (state: RootState) => {
   const { board } = state;
@@ -43,7 +44,7 @@ const Board = (props: PropsFromRedux) => {
 
         <div className="addListButton">
           <FontAwesomeIcon icon={['fas', 'plus']} className="addListButton__icon" />
-          <div className="addListButton__text">Add list</div>
+          <div className="addListButton__text">{newListButtonText}</div>
         </div>
       </div>
     </div>
