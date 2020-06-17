@@ -17,7 +17,7 @@ type ListNameFormProps = PropsFromRedux&{
   setListFormVisible: Dispatch<SetStateAction<boolean>>
 }
 
-const ListNameForm = (props: ListNameFormProps) => {
+export const ListNameForm = (props: ListNameFormProps) => {
   const {
     listID,
     initialListName,
@@ -40,6 +40,7 @@ const ListNameForm = (props: ListNameFormProps) => {
     <input
       // eslint-disable-next-line jsx-a11y/no-autofocus
       autoFocus
+      data-testid="listNameForm"
       type="text"
       maxLength={50}
       value={listName}

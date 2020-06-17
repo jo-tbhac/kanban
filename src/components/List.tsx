@@ -25,6 +25,7 @@ const List = (props: ListProps) => {
           />
         ) : (
           <div
+            data-testid="listName"
             role="button"
             tabIndex={0}
             onClick={() => setListFormVisible(true)}
