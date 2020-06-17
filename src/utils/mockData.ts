@@ -41,3 +41,29 @@ export const mockLabel = {
   name: 'development',
   color: '#f44336',
 };
+
+export const mockLists = [
+  {
+    id: 1,
+    name: 'list-a',
+    boardId: 1,
+    cards: [],
+  }, {
+    id: 2,
+    name: 'list-b',
+    boardId: 1,
+    cards: [],
+  }, {
+    id: 3,
+    name: 'list-c',
+    boardId: 1,
+    cards: [],
+  },
+];
+
+export const mockList = {
+  id: 1,
+  name: 'list-a',
+  boardId: 1,
+  cards: [],
+};

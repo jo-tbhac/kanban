@@ -1,29 +1,23 @@
-.labelFormContainer {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+.listFormContainer {
+  background-color: $overlay;
+  border-radius: 3px;
+  box-sizing: border-box;
+  min-width: $list-width;
+  padding: 10px;
 }
 
-.labelForm {
-  display: flex;
+.listForm {
   margin-bottom: 10px;
-  &__icon {
-    background-color: red;
-    border-radius: 50%;
-    cursor: pointer;
-    height: 30px;
-    margin-right: 10px;
-    position: relative;
-    width: 30px;
-  }
   &__textField {
     @include text-field();
-    flex: 1;
+    box-sizing: border-box;
+    width: 100%;
   }
 }
 
-.labelFormButton {
-  align-self: flex-end;
+.listFormButton {
+  display: flex;
+  justify-content: flex-end;
   &__submit {
     @include small-button();
     background-color: $teal;

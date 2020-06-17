@@ -19,7 +19,7 @@ const List: FC<ListProps> = (props) => {
       </div>
 
       <div className="cardIndexContainer">
-        {list.cards.map((card) => <Card key={String(card.id)} card={card} />)}
+        {list.cards?.map((card) => <Card key={String(card.id)} card={card} />)}
       </div>
 
       <div className="addCardButton">
