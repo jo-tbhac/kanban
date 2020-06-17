@@ -32,9 +32,10 @@ const ListForm = (props: ListFormProps) => {
   };
 
   return (
-    <div className="listFormContainer">
+    <div data-testid="listForm" className="listFormContainer">
       <div className="listForm">
         <input
+          data-testid="listNameTextField"
           type="text"
           value={listName}
           onChange={(event) => setListName(event.target.value)}
@@ -44,6 +45,7 @@ const ListForm = (props: ListFormProps) => {
       </div>
       <div className="listFormButton">
         <button
+          data-testid="listFormCancelButton"
           type="button"
           onClick={() => setListFormVisible(false)}
           className="listFormButton__cancel"
