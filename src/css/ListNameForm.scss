@@ -1,0 +1,7 @@
+.listNameForm {
+  @include text-field();
+  flex: 1;
+  font-weight: bold;
+  height: 26px;
+  margin-right: 10px;
+}
