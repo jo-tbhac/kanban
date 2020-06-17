@@ -7,7 +7,7 @@ import {
   BoardActionTypes,
 } from './types';
 
-import { CREATE_LIST, ListActionTypes } from '../list/types';
+import { CREATE_LIST, UPDATE_LIST, ListActionTypes } from '../list/types';
 import listReducer from '../list/reducers';
 
 const initialBoardProps = {
@@ -51,7 +51,8 @@ const boardReducer = (
         selectedBoard: newSelectedBoard,
       };
     }
-    case CREATE_LIST: {
+    case CREATE_LIST:
+    case UPDATE_LIST: {
       const { lists } = listReducer(state.selectedBoard.lists, action);
       return {
         ...state,
