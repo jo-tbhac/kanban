@@ -1,20 +1,40 @@
-import React, { FC } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Card from './Card';
+import ListNameForm from './ListNameForm';
 import * as types from '../store/list/types';
 
 type ListProps = {
   list: types.List
 }
 
-const List: FC<ListProps> = (props) => {
+const List = (props: ListProps) => {
   const { list } = props;
+
+  const [isListFormVisible, setListFormVisible] = useState(false);
 
   return (
     <div className="listContainer">
       <div className="listHeader">
-        <div className="listHeader__title">{list.name}</div>
+        {isListFormVisible ? (
+          <ListNameForm
+            initialListName={list.name}
+            listID={list.id}
+            setListFormVisible={setListFormVisible}
+          />
+        ) : (
+          <div
+            data-testid="listName"
+            role="button"
+            tabIndex={0}
+            onClick={() => setListFormVisible(true)}
+            onKeyPress={() => setListFormVisible(true)}
+            className="listHeader__title"
+          >
+            {list.name}
+          </div>
+        )}
         <FontAwesomeIcon icon={['fas', 'ellipsis-h']} className="listHeader__icon" />
       </div>
 
