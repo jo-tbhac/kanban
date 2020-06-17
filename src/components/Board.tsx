@@ -49,6 +49,7 @@ const Board = (props: PropsFromRedux) => {
           <ListForm setListFormVisible={setListFormVisible} />
         ) : (
           <div
+            data-testid="addListButton"
             role="button"
             tabIndex={0}
             onClick={() => setListFormVisible(true)}
