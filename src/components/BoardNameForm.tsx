@@ -1,9 +1,4 @@
-import React, {
-  FC,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
 import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -23,7 +18,7 @@ type BoardNameFormProps = PropsFromRedux&{
   initialBoardName: string
 }
 
-const BoardNameForm: FC<BoardNameFormProps> = (props) => {
+export const BoardNameForm = (props: BoardNameFormProps) => {
   const { setFormVisible, initialBoardName, updateBoard } = props;
 
   const [boardName, setBoardName] = useState(initialBoardName);
