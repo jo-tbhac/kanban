@@ -18,7 +18,7 @@ type LabelFormProps = PropsFromRedux&{
   setLabelFormVisible: Dispatch<SetStateAction<boolean>>
 }
 
-const LabelForm = (props: LabelFormProps) => {
+export const LabelForm = (props: LabelFormProps) => {
   const { setLabelFormVisible, createLabel } = props;
 
   const [labelName, setLabelName] = useState('');

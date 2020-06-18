@@ -54,7 +54,7 @@ const dialogType = (type: DialogTypes) => {
   }
 };
 
-const Dialog = (props: PropsFromRedux) => {
+export const Dialog = (props: PropsFromRedux) => {
   const {
     type,
     title,
@@ -97,7 +97,12 @@ const Dialog = (props: PropsFromRedux) => {
                 {cancelButtonText}
               </button>
             )}
-            <button type="button" onClick={onConfirm || closeDialog} className="dialogButton__confirm">
+            <button
+              data-testid="dialogConfirmButton"
+              type="button"
+              onClick={onConfirm || closeDialog}
+              className="dialogButton__confirm"
+            >
               {confirmButtonText}
             </button>
           </div>

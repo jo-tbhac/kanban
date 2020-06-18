@@ -35,7 +35,7 @@ const usePreviousBoardCount = (count: number) => {
   return ref.current;
 };
 
-const BoardForm = (props: PropsFromRedux) => {
+export const BoardForm = (props: PropsFromRedux) => {
   const { createBoard, boards } = props;
   const prevBoardsCount = usePreviousBoardCount(boards.length);
 

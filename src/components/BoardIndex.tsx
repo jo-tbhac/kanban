@@ -22,7 +22,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const BoardIndex = (props: PropsFromRedux) => {
+export const BoardIndex = (props: PropsFromRedux) => {
   const { boards, fetchAllBoards } = props;
 
   useEffect(() => {

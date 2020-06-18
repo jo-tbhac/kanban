@@ -23,7 +23,7 @@ type LabelEditRowProps = PropsFromRedux&{
   label: Label
 }
 
-const LabelEditRow = (props: LabelEditRowProps) => {
+export const LabelEditRow = (props: LabelEditRowProps) => {
   const {
     label,
     updateLabel,
@@ -117,6 +117,7 @@ const LabelEditRow = (props: LabelEditRowProps) => {
       )}
       {!isEditFormVisible && (
         <div
+          data-testid="labelEditDeleteButton"
           role="button"
           tabIndex={0}
           onClick={onClickDelete}

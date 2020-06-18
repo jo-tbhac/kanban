@@ -25,7 +25,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Board = (props: PropsFromRedux) => {
+export const Board = (props: PropsFromRedux) => {
   const { selectedBoard, fetchBoard } = props;
 
   const { boardID } = useParams();
