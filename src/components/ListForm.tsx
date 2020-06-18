@@ -17,7 +17,7 @@ type ListFormProps = PropsFromRedux&{
   setListFormVisible: Dispatch<SetStateAction<boolean>>
 }
 
-const ListForm = (props: ListFormProps) => {
+export const ListForm = (props: ListFormProps) => {
   const { setListFormVisible, createList } = props;
 
   const [listName, setListName] = useState('');
@@ -53,6 +53,7 @@ const ListForm = (props: ListFormProps) => {
           {cancelButtonText}
         </button>
         <button
+          data-testid="listFormSubmitButton"
           type="button"
           onClick={onClickSubmit}
           disabled={listName === ''}
