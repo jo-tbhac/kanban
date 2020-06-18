@@ -24,7 +24,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const LabelIndex = (props: PropsFromRedux) => {
+export const LabelIndex = (props: PropsFromRedux) => {
   const { labels, fetchAllLabel } = props;
 
   const [isLabelEditVisible, setLabelEditVisible] = useState(false);
