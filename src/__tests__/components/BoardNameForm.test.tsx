@@ -27,7 +27,7 @@ describe('<BoardNameForm>', () => {
     expect(boardNameForm.value).toBe(inputBoardName);
   });
 
-  test('have not been called updateBoard when board name text field on blur if state `boardName` is blank', () => {
+  test('should not call updateBoard if state of `boardName` is blank when focus out from a board name text field', () => {
     const setFormVisible = jest.fn();
     const initialBoardName = 'sample';
 
@@ -44,7 +44,7 @@ describe('<BoardNameForm>', () => {
     expect(setFormVisible).toHaveBeenCalledWith(false);
   });
 
-  test('have not been called updateBoard when board name text field on blur if state `boardName` is not changed', () => {
+  test('should not call `updateBoard` if state of `boardName` has not changed when forcus out from a board name text field', () => {
     const setFormVisible = jest.fn();
     const initialBoardName = 'sample';
 
