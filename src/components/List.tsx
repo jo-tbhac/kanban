@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Card from './Card';
 import ListNameForm from './ListNameForm';
+import ListMenu from './ListMenu';
 import * as types from '../store/list/types';
 
 type ListProps = {
@@ -13,6 +14,7 @@ const List = (props: ListProps) => {
   const { list } = props;
 
   const [isListFormVisible, setListFormVisible] = useState(false);
+  const [isListMenuVisible, setListMenuVisible] = useState(false);
 
   return (
     <div className="listContainer">
@@ -35,7 +37,16 @@ const List = (props: ListProps) => {
             {list.name}
           </div>
         )}
-        <FontAwesomeIcon icon={['fas', 'ellipsis-h']} className="listHeader__icon" />
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => setListMenuVisible(true)}
+          onKeyPress={() => setListMenuVisible(true)}
+          className="listHeader__icon"
+        >
+          <FontAwesomeIcon icon={['fas', 'ellipsis-h']} />
+        </div>
+        {isListMenuVisible && <ListMenu listID={list.id} setListMenuVisible={setListMenuVisible} />}
       </div>
 
       <div className="cardIndexContainer">
