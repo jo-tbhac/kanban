@@ -13,7 +13,7 @@ const Card: FC<CardProps> = (props) => {
   return (
     <div className="card">
       <div className="cardLabelContainer">
-        {card.labels.map((label) => (
+        {card.labels?.map((label) => (
           <div
             key={`${card.id}-${label.id}`}
             style={{ backgroundColor: label.color }}
