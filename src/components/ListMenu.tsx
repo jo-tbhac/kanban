@@ -27,7 +27,7 @@ type ListMenuProps = PropsFromRedux&{
   setListMenuVisible: Dispatch<SetStateAction<boolean>>
 }
 
-const ListMenu = (props: ListMenuProps) => {
+export const ListMenu = (props: ListMenuProps) => {
   const {
     listID,
     setListMenuVisible,
@@ -64,6 +64,7 @@ const ListMenu = (props: ListMenuProps) => {
       <div className="listMenuHeader">
         <div className="listMenuHeader__title">{listMenuTitle}</div>
         <div
+          data-testid="listMenuCloseButton"
           role="button"
           tabIndex={0}
           onClick={() => setListMenuVisible(false)}
@@ -74,6 +75,7 @@ const ListMenu = (props: ListMenuProps) => {
         </div>
       </div>
       <div
+        data-testid="listMenuRowDelete"
         role="button"
         tabIndex={0}
         onClick={onClickDelete}
