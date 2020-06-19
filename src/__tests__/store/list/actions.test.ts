@@ -5,8 +5,8 @@ import { storeFactory } from '../../../testUtils';
 import { mockList, mockLists } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedCreateList, failedUpdateList } from '../../../utils/text';
-import { createList, updateList } from '../../../store/list/actions';
+import { failedCreateList, failedUpdateList, failedDeleteList } from '../../../utils/text';
+import { createList, updateList, deleteList } from '../../../store/list/actions';
 
 describe('list actions', () => {
   let store: Store;
@@ -74,6 +74,35 @@ describe('list actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedUpdateList);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state of `selectedBoard.lists` that deleted onerecord upon dispatch an action `deleteList` is successful', () => {
+    store = storeFactory({ board: { selectedBoard: { lists: mockLists } } });
+    const listID = 1;
+    mock.onDelete(`/list/${listID}`).reply(200);
+
+    const previousState = store.getState().board;
+
+    return store.dispatch(deleteList(listID) as any)
+      .then(() => {
+        const { board } = store.getState();
+        expect(board.selectedBoard.lists.length).toBe(previousState.selectedBoard.lists.length - 1);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `deleteList` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    const listID = 1;
+    mock.onDelete(`/list/${listID}`).reply(400, responseData);
+
+    return store.dispatch(deleteList(listID) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedDeleteList);
         expect(dialog.description).toBe('some error...');
       });
   });
