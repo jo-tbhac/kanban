@@ -40,3 +40,5 @@ export const askListDeleteDialog = 'このリストを削除してよろしい�
 
 // card
 export const newCardButtonText = 'カードを追加';
+export const cardNameFormPlaceholder = 'カード名を入力';
+export const failedCreateCard = 'カードを作成できませんでした';
