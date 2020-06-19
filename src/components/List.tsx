@@ -38,6 +38,7 @@ const List = (props: ListProps) => {
           </div>
         )}
         <div
+          data-testid="listMenuButton"
           role="button"
           tabIndex={0}
           onClick={() => setListMenuVisible(true)}

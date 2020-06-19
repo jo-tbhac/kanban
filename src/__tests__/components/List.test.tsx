@@ -25,4 +25,16 @@ describe('<List>', () => {
     expect(queryByTestId('listNameForm')).toBeNull();
     expect(getByTestId('listName')).toBeVisible();
   });
+
+  test('should show `ListMenu` when state of `isListMenuVisible` is true', () => {
+    const { getByTestId } = render(<List list={mockList} />, store);
+    fireEvent.click(getByTestId('listMenuButton'));
+
+    expect(getByTestId('listMenu')).toBeVisible();
+  });
+
+  test('should hide `ListMenu` when state of `isListMenuVisible` is false', () => {
+    const { queryByTestId } = render(<List list={mockList} />, store);
+    expect(queryByTestId('listMenu')).toBeNull();
+  });
 });

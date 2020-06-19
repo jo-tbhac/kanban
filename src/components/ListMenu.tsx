@@ -60,7 +60,7 @@ const ListMenu = (props: ListMenuProps) => {
   };
 
   return (
-    <div className="listMenu">
+    <div data-testid="listMenu" className="listMenu">
       <div className="listMenuHeader">
         <div className="listMenuHeader__title">{listMenuTitle}</div>
         <div
