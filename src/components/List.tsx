@@ -5,6 +5,7 @@ import Card from './Card';
 import ListNameForm from './ListNameForm';
 import ListMenu from './ListMenu';
 import * as types from '../store/list/types';
+import { newCardButtonText } from '../utils/text';
 
 type ListProps = {
   list: types.List
@@ -56,7 +57,7 @@ const List = (props: ListProps) => {
 
       <div className="addCardButton">
         <FontAwesomeIcon icon={['fas', 'plus']} className="addCardButton__icon" />
-        <div className="addCardButton__text">Add card</div>
+        <div className="addCardButton__text">{newCardButtonText}</div>
       </div>
     </div>
   );
