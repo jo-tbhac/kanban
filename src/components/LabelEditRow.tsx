@@ -7,7 +7,7 @@ import { Label } from '../store/label/types';
 import * as labelActions from '../store/label/actions';
 import * as dialogActions from '../store/dialog/actions';
 import { dialogTypeAsk } from '../store/dialog/types';
-import { labelNameFormPlaceholder, askDeleteDialog } from '../utils/text';
+import { labelNameFormPlaceholder, askLabelDeleteDialog } from '../utils/text';
 
 const mapDispatchToProps = {
   updateLabel: labelActions.updateLabel,
@@ -41,7 +41,7 @@ export const LabelEditRow = (props: LabelEditRowProps) => {
     openDialog({
       type: dialogTypeAsk,
       title: label.name,
-      description: askDeleteDialog,
+      description: askLabelDeleteDialog,
       onConfirm: () => deleteLabel(label.id),
     });
   };
