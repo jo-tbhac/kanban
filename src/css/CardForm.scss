@@ -1,0 +1,40 @@
+.cardForm {
+  &__textField {
+    background-color: white;
+    border: none;
+    border-radius: 3px;
+    box-shadow: $box-shadow;
+    box-sizing: border-box;
+    color: $font-color;
+    outline: none;
+    padding: 5px 10px;
+    resize: none;
+    width: 100%;
+  }
+}
+
+.cardFormButton {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+  &__submit {
+    @include small-button();
+    background-color: $teal;
+    border: none;
+    color: white;
+    margin-left: 10px;
+    width: fit-content;
+    &:hover {
+      background-color: $teal-lighten;
+      color: white;
+    }
+    &:disabled {
+      background-color: #bbb;
+      cursor: not-allowed;
+    }
+  }
+  &__cancel {
+    @include small-button();
+    width: fit-content;
+  }
+}

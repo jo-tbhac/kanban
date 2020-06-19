@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Card from './Card';
+import CardForm from './CardForm';
 import ListNameForm from './ListNameForm';
 import ListMenu from './ListMenu';
 import * as types from '../store/list/types';
@@ -16,6 +17,7 @@ const List = (props: ListProps) => {
 
   const [isListFormVisible, setListFormVisible] = useState(false);
   const [isListMenuVisible, setListMenuVisible] = useState(false);
+  const [isCardFormVisible, setCardFormVisible] = useState(false);
 
   return (
     <div className="listContainer">
@@ -53,9 +55,16 @@ const List = (props: ListProps) => {
 
       <div className="cardIndexContainer">
         {list.cards?.map((card) => <Card key={String(card.id)} card={card} />)}
+        {isCardFormVisible && <CardForm listID={list.id} setCardFormVisible={setCardFormVisible} />}
       </div>
 
-      <div className="addCardButton">
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={() => setCardFormVisible(true)}
+        onKeyPress={() => setCardFormVisible(true)}
+        className="addCardButton"
+      >
         <FontAwesomeIcon icon={['fas', 'plus']} className="addCardButton__icon" />
         <div className="addCardButton__text">{newCardButtonText}</div>
       </div>
