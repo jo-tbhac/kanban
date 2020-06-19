@@ -6,11 +6,18 @@ import {
   ListActionTypes,
 } from './types';
 
-const listReducer = (lists: List[], action: ListActionTypes) => {
+import {
+  CREATE_CARD,
+  CardActionTypes,
+} from '../card/types';
+
+import cardReducer from '../card/reducers';
+
+const listReducer = (lists: List[] = [], action: ListActionTypes | CardActionTypes) => {
   switch (action.type) {
     case CREATE_LIST:
       return {
-        lists: [...lists, action.payload],
+        lists: [...lists, { ...action.payload, cards: [] }],
       };
     case UPDATE_LIST: {
       const updatedList = action.payload;
@@ -25,6 +32,19 @@ const listReducer = (lists: List[], action: ListActionTypes) => {
       return {
         lists: lists.filter((list) => list.id !== action.payload),
       };
+    case CREATE_CARD: {
+      const targetList = lists.find((list) => list.id === action.payload.listId);
+      if (targetList === undefined) {
+        return { lists };
+      }
+
+      const { cards } = cardReducer(targetList.cards, action);
+      return {
+        lists: lists.map((list) => (
+          list.id === targetList.id ? { ...targetList, cards } : list
+        )),
+      };
+    }
     default:
       return {
         lists,
