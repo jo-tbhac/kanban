@@ -14,7 +14,9 @@ const listReducer = (lists: List[], action: ListActionTypes) => {
       };
     case UPDATE_LIST: {
       const updatedList = action.payload;
-      const newLists = lists.map((list) => (list.id === updatedList.id ? updatedList : list));
+      const newLists = lists.map((list) => (
+        list.id === updatedList.id ? { ...list, name: updatedList.name } : list
+      ));
       return {
         lists: newLists,
       };
