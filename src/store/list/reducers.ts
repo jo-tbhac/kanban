@@ -1,6 +1,7 @@
 import {
   CREATE_LIST,
   UPDATE_LIST,
+  DELETE_LIST,
   List,
   ListActionTypes,
 } from './types';
@@ -18,6 +19,10 @@ const listReducer = (lists: List[], action: ListActionTypes) => {
         lists: newLists,
       };
     }
+    case DELETE_LIST:
+      return {
+        lists: lists.filter((list) => list.id !== action.payload),
+      };
     default:
       return {
         lists,
