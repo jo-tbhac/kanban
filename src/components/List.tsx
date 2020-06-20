@@ -59,6 +59,7 @@ const List = (props: ListProps) => {
       </div>
 
       <div
+        data-testid="addCardButton"
         role="button"
         tabIndex={0}
         onClick={() => setCardFormVisible(true)}
