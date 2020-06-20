@@ -37,4 +37,15 @@ describe('<List>', () => {
     const { queryByTestId } = render(<List list={mockList} />, store);
     expect(queryByTestId('listMenu')).toBeNull();
   });
+
+  test('should show `CardForm` when state of `isCardFormVisible` is true', () => {
+    const { getByTestId } = render(<List list={mockList} />, store);
+    fireEvent.click(getByTestId('addCardButton'));
+    expect(getByTestId('cardForm')).toBeVisible();
+  });
+
+  test('should hide `CardForm` when state of `isCardFormVisible` is false', () => {
+    const { queryByTestId } = render(<List list={mockList} />, store);
+    expect(queryByTestId('cardForm')).toBeNull();
+  });
 });

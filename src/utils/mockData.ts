@@ -67,3 +67,33 @@ export const mockList = {
   boardId: 1,
   cards: [],
 };
+
+export const mockCards = [
+  {
+    id: 1,
+    title: 'card-1',
+    description: 'description-1',
+    listId: 1,
+    labels: [],
+  }, {
+    id: 2,
+    title: 'card-2',
+    description: 'description-2',
+    listId: 1,
+    labels: [],
+  }, {
+    id: 3,
+    title: 'card-3',
+    description: 'description-3',
+    listId: 1,
+    labels: [],
+  },
+];
+
+export const mockCard = {
+  id: 1,
+  title: 'card-1',
+  description: 'description-1',
+  listId: 1,
+  labels: [],
+};

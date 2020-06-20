@@ -37,3 +37,8 @@ export const failedDeleteList = 'リストを削除できませんでした';
 export const listMenuTitle = 'リストを操作';
 export const listMenuDelete = 'このリストを削除';
 export const askListDeleteDialog = 'このリストを削除してよろしいですか？';
+
+// card
+export const newCardButtonText = 'カードを追加';
+export const cardNameFormPlaceholder = 'カード名を入力';
+export const failedCreateCard = 'カードを作成できませんでした';
