@@ -37,7 +37,7 @@ const CardDetail = (props: CardDetailProps) => {
     <div className="cardDetailOverlay">
       <div className="cardDetailContainer">
         <div className="cardDetailHeader">
-          <CardTitle initialTitle={card.title} />
+          <CardTitle initialCardTitle={card.title} cardID={card.id} />
           <div
             role="button"
             tabIndex={0}

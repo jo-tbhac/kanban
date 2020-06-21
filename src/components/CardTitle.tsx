@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 
-type CardTitleProps = {
-  initialTitle: string
+import * as cardActions from '../store/card/actions';
+
+const mapDispatchToProps = {
+  updateCard: cardActions.updateCard,
+};
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type CardTitleProps = PropsFromRedux & {
+  initialCardTitle: string
+  cardID: number
 }
 
 const CardTitle = (props: CardTitleProps) => {
-  const { initialTitle } = props;
+  const { initialCardTitle, cardID, updateCard } = props;
 
-  const [cardTitle, setCardTitle] = useState(initialTitle);
+  const [cardTitle, setCardTitle] = useState(initialCardTitle);
   const [isCardTitleFormVisible, setCardTitleFormVisible] = useState(false);
 
   const onBlur = () => {
-    if (cardTitle === '' || cardTitle === initialTitle) {
+    if (cardTitle === '' || cardTitle === initialCardTitle) {
+      setCardTitle(initialCardTitle);
       setCardTitleFormVisible(false);
       return;
     }
+    updateCard(cardID, { title: cardTitle });
     setCardTitleFormVisible(false);
   };
 
@@ -38,10 +52,10 @@ const CardTitle = (props: CardTitleProps) => {
         onKeyPress={() => setCardTitleFormVisible(true)}
         className="cardTitle__text"
       >
-        {initialTitle}
+        {initialCardTitle}
       </div>
     )
   );
 };
 
-export default CardTitle;
+export default connector(CardTitle);

@@ -8,6 +8,7 @@ import {
 
 import {
   CREATE_CARD,
+  UPDATE_CARD,
   CardActionTypes,
 } from '../card/types';
 
@@ -32,7 +33,8 @@ const listReducer = (lists: List[] = [], action: ListActionTypes | CardActionTyp
       return {
         lists: lists.filter((list) => list.id !== action.payload),
       };
-    case CREATE_CARD: {
+    case CREATE_CARD:
+    case UPDATE_CARD: {
       const targetList = lists.find((list) => list.id === action.payload.listId);
       if (targetList === undefined) {
         return { lists };
