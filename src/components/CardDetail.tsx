@@ -8,6 +8,7 @@ import React, {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Card } from '../store/card/types';
+import CardTitle from './CardTitle';
 
 type CardDetailProps = {
   card: Card
@@ -36,8 +37,14 @@ const CardDetail = (props: CardDetailProps) => {
     <div className="cardDetailOverlay">
       <div className="cardDetailContainer">
         <div className="cardDetailHeader">
-          <div className="cardDetailHeader__title">{card.title}</div>
-          <div className="cardDetailHeader__icon">
+          <CardTitle initialTitle={card.title} />
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => setCardDetailVisible(false)}
+            onKeyPress={() => setCardDetailVisible(false)}
+            className="cardDetailHeader__icon"
+          >
             <FontAwesomeIcon icon={['fas', 'times']} />
           </div>
         </div>
