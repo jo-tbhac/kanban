@@ -34,11 +34,12 @@ const CardDetail = (props: CardDetailProps) => {
   }, [onClickOverlayEvent]);
 
   return (
-    <div className="cardDetailOverlay">
+    <div data-testid="cardDetail" className="cardDetailOverlay">
       <div className="cardDetailContainer">
         <div className="cardDetailHeader">
           <CardTitle initialCardTitle={card.title} cardID={card.id} />
           <div
+            data-testid="cardDetailCloseButton"
             role="button"
             tabIndex={0}
             onClick={() => setCardDetailVisible(false)}
