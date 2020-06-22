@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Card } from '../store/card/types';
 import CardTitle from './CardTitle';
+import CardDescription from './CardDescription';
 
 type CardDetailProps = {
   card: Card
@@ -60,10 +61,8 @@ const CardDetail = (props: CardDetailProps) => {
                 </div>
               </div>
             </div>
-            <div className="cardDetailRow">
-              <div className="cardDetailRow__label">説明</div>
-              <div className="cardDetailRow__description">sf mxjmehxniehxnw</div>
-            </div>
+
+            <CardDescription cardDescription={card.description} cardID={card.id} />
           </div>
           <div className="cardDetailSideBar">
             <div className="cardDetailSideBarRow">
