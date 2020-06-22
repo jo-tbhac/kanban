@@ -18,7 +18,13 @@ const CardDescription = (props: CardDescriptionProps) => {
     <div className="cardDescription">
       <div className="cardDescriptionHeader">
         <div className="cardDescriptionHeader__label">説明</div>
-        <div className="cardDescriptionHeader__icon">
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => setCardDescriptionFormVisible(true)}
+          onKeyPress={() => setCardDescriptionFormVisible(true)}
+          className="cardDescriptionHeader__icon"
+        >
           <FontAwesomeIcon icon={['fas', 'pen']} />
         </div>
       </div>

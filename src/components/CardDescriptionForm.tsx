@@ -1,18 +1,40 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 
 import FlexTextArea from './FlexTextArea';
+import * as cardActions from '../store/card/actions';
 import { createButtonText, cancelButtonText } from '../utils/text';
 
-type CardDescriptionFormProps = {
+const mapDispatchToProps = {
+  updateCard: cardActions.updateCard,
+};
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type CardDescriptionFormProps = PropsFromRedux & {
   cardID: number
   initialCardDescription: string
   setCardDescriptionFormVisible: Dispatch<SetStateAction<boolean>>
 }
 
 const CardDescriptionForm = (props: CardDescriptionFormProps) => {
-  const { cardID, initialCardDescription, setCardDescriptionFormVisible } = props;
+  const {
+    cardID,
+    initialCardDescription,
+    setCardDescriptionFormVisible,
+    updateCard,
+  } = props;
 
   const [cardDescription, setCardDescription] = useState(initialCardDescription);
+
+  const onClickSubmit = () => {
+    if (cardDescription !== initialCardDescription) {
+      updateCard(cardID, { description: cardDescription });
+    }
+    setCardDescriptionFormVisible(false);
+  };
 
   return (
     <div className="cardDescriptionForm">
@@ -28,7 +50,12 @@ const CardDescriptionForm = (props: CardDescriptionFormProps) => {
         >
           {cancelButtonText}
         </button>
-        <button type="button" className="cardDescriptionFormButton__submit">
+        <button
+          type="button"
+          onClick={onClickSubmit}
+          disabled={cardDescription === ''}
+          className="cardDescriptionFormButton__submit"
+        >
           {createButtonText}
         </button>
       </div>
@@ -36,4 +63,4 @@ const CardDescriptionForm = (props: CardDescriptionFormProps) => {
   );
 };
 
-export default CardDescriptionForm;
+export default connector(CardDescriptionForm);
