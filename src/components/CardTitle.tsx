@@ -16,7 +16,7 @@ type CardTitleProps = PropsFromRedux & {
   cardID: number
 }
 
-const CardTitle = (props: CardTitleProps) => {
+export const CardTitle = (props: CardTitleProps) => {
   const { initialCardTitle, cardID, updateCard } = props;
 
   const [cardTitle, setCardTitle] = useState(initialCardTitle);
@@ -37,6 +37,7 @@ const CardTitle = (props: CardTitleProps) => {
       <input
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus
+        data-testid="cardTitleTextField"
         type="text"
         maxLength={50}
         value={cardTitle}
@@ -46,6 +47,7 @@ const CardTitle = (props: CardTitleProps) => {
       />
     ) : (
       <div
+        data-testid="cardTitleText"
         role="button"
         tabIndex={0}
         onClick={() => setCardTitleFormVisible(true)}
