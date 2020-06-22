@@ -16,6 +16,7 @@ const Card = (props: CardProps) => {
   return (
     <>
       <div
+        data-testid="card"
         role="button"
         tabIndex={0}
         onClick={() => setCardDetailVisible(true)}
