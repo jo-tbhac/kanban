@@ -1,0 +1,14 @@
+.cardTitle__text {
+  flex: 1;
+  font-size: 1.2rem;
+  font-weight: bold;
+  word-wrap: break-word;
+  width: 0;
+}
+
+.cardTitleTextField {
+  @include text-field();
+  flex: 1;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
