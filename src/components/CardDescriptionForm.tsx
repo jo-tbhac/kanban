@@ -19,7 +19,7 @@ type CardDescriptionFormProps = PropsFromRedux & {
   setCardDescriptionFormVisible: Dispatch<SetStateAction<boolean>>
 }
 
-const CardDescriptionForm = (props: CardDescriptionFormProps) => {
+export const CardDescriptionForm = (props: CardDescriptionFormProps) => {
   const {
     cardID,
     initialCardDescription,
@@ -44,6 +44,7 @@ const CardDescriptionForm = (props: CardDescriptionFormProps) => {
       />
       <div className="cardDescriptionFormButton">
         <button
+          data-testid="cardDescriptionFormCancelButton"
           type="button"
           onClick={() => setCardDescriptionFormVisible(false)}
           className="cardDescriptionFormButton__cancel"
@@ -51,9 +52,9 @@ const CardDescriptionForm = (props: CardDescriptionFormProps) => {
           {cancelButtonText}
         </button>
         <button
+          data-testid="cardDescriptionFormSubmitButton"
           type="button"
           onClick={onClickSubmit}
-          disabled={cardDescription === ''}
           className="cardDescriptionFormButton__submit"
         >
           {createButtonText}
