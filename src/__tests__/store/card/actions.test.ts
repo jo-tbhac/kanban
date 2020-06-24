@@ -91,4 +91,38 @@ describe('card actions', () => {
         expect(dialog.description).toBe('some error...');
       });
   });
+
+  test('returns state of `selectedBoard.lists.cards` that updated one record`s description upon dispatch an action `updateCard` is successful', () => {
+    const cardID = 1;
+    const params = { description: 'update card' };
+    const responseData = { card: { ...mockCard, ...params } };
+    mock.onPatch(`/card/${cardID}/description`).reply(200, responseData);
+
+    return store.dispatch(updateCard(cardID, params) as any)
+      .then(() => {
+        const { board } = store.getState();
+        const targetList = board.selectedBoard.lists.find((list) => list.id === mockCard.listId);
+        if (targetList === undefined) {
+          expect(targetList).not.toBeUndefined();
+        } else {
+          const targetCard = targetList.cards.find((card) => card.id === cardID);
+          expect(targetCard?.description).toBe(params.description);
+        }
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `updateCard` and recieved status 400 from server', () => {
+    const cardID = 1;
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onPatch(`/card/${cardID}/description`).reply(400, responseData);
+
+    return store.dispatch(updateCard(cardID, { description: mockCard.description }) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedUpdateCard);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
 });
