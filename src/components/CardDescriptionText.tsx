@@ -13,6 +13,7 @@ const CardDescriptionText = (props: CardDescriptionTextProps) => {
   return (
     cardDescription === '' ? (
       <div
+        data-testid="cardDescriptionTextPlaceholer"
         role="button"
         tabIndex={0}
         onClick={() => setCardDescriptionFormVisible(true)}
@@ -23,6 +24,7 @@ const CardDescriptionText = (props: CardDescriptionTextProps) => {
       </div>
     ) : (
       <div
+        data-testid="cardDescriptionText"
         role="button"
         tabIndex={0}
         onClick={() => setCardDescriptionFormVisible(true)}
