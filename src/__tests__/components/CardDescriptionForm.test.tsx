@@ -6,14 +6,14 @@ import { CardDescriptionForm } from '../../components/CardDescriptionForm';
 
 describe('CardDescriptionForm component', () => {
   let store: Store;
-  let setCardDescriptionFormVisible: jest.Mock;
+  let closeCardDescriptionForm: jest.Mock;
   let updateCard: jest.Mock;
   const cardID = 1;
   const initialCardDescription = 'description';
 
   beforeEach(() => {
     store = storeFactory();
-    setCardDescriptionFormVisible = jest.fn();
+    closeCardDescriptionForm = jest.fn();
     updateCard = jest.fn();
   });
 
@@ -22,7 +22,7 @@ describe('CardDescriptionForm component', () => {
       <CardDescriptionForm
         cardID={cardID}
         initialCardDescription={initialCardDescription}
-        setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+        closeCardDescriptionForm={closeCardDescriptionForm}
         updateCard={updateCard}
       />,
       store,
@@ -35,19 +35,19 @@ describe('CardDescriptionForm component', () => {
     expect(textarea.value).toBe(mockText);
   });
 
-  test('should call `setCardDescriptionFormVisible` with `false` when clicked a cancel button', () => {
+  test('should call `closeCardDescriptionForm` when clicked a cancel button', () => {
     const { getByTestId } = render(
       <CardDescriptionForm
         cardID={cardID}
         initialCardDescription={initialCardDescription}
-        setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+        closeCardDescriptionForm={closeCardDescriptionForm}
         updateCard={updateCard}
       />,
       store,
     );
 
     fireEvent.click(getByTestId('cardDescriptionFormCancelButton'));
-    expect(setCardDescriptionFormVisible).toHaveBeenCalledWith(false);
+    expect(closeCardDescriptionForm).toHaveBeenCalled();
   });
 
   test('should call `updateCard` when clicked a submit button', () => {
@@ -55,7 +55,7 @@ describe('CardDescriptionForm component', () => {
       <CardDescriptionForm
         cardID={cardID}
         initialCardDescription={initialCardDescription}
-        setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+        closeCardDescriptionForm={closeCardDescriptionForm}
         updateCard={updateCard}
       />,
       store,
@@ -67,7 +67,7 @@ describe('CardDescriptionForm component', () => {
     fireEvent.click(getByTestId('cardDescriptionFormSubmitButton'));
 
     expect(updateCard).toHaveBeenCalledWith(cardID, { description: mockText });
-    expect(setCardDescriptionFormVisible).toHaveBeenCalledWith(false);
+    expect(closeCardDescriptionForm).toHaveBeenCalled();
   });
 
   test('should not call `updateCard` if state of `cardDescription` has not changed when clicked a submit button', () => {
@@ -75,7 +75,7 @@ describe('CardDescriptionForm component', () => {
       <CardDescriptionForm
         cardID={cardID}
         initialCardDescription={initialCardDescription}
-        setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+        closeCardDescriptionForm={closeCardDescriptionForm}
         updateCard={updateCard}
       />,
       store,
@@ -84,6 +84,6 @@ describe('CardDescriptionForm component', () => {
     fireEvent.click(getByTestId('cardDescriptionFormSubmitButton'));
 
     expect(updateCard).toHaveBeenCalledTimes(0);
-    expect(setCardDescriptionFormVisible).toHaveBeenCalledWith(false);
+    expect(closeCardDescriptionForm).toHaveBeenCalled();
   });
 });

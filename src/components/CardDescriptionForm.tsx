@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import FlexTextArea from './FlexTextArea';
@@ -16,14 +16,14 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type CardDescriptionFormProps = PropsFromRedux & {
   cardID: number
   initialCardDescription: string
-  setCardDescriptionFormVisible: Dispatch<SetStateAction<boolean>>
+  closeCardDescriptionForm: () => void
 }
 
 export const CardDescriptionForm = (props: CardDescriptionFormProps) => {
   const {
     cardID,
     initialCardDescription,
-    setCardDescriptionFormVisible,
+    closeCardDescriptionForm,
     updateCard,
   } = props;
 
@@ -33,7 +33,7 @@ export const CardDescriptionForm = (props: CardDescriptionFormProps) => {
     if (cardDescription !== initialCardDescription) {
       updateCard(cardID, { description: cardDescription });
     }
-    setCardDescriptionFormVisible(false);
+    closeCardDescriptionForm();
   };
 
   return (
@@ -46,7 +46,7 @@ export const CardDescriptionForm = (props: CardDescriptionFormProps) => {
         <button
           data-testid="cardDescriptionFormCancelButton"
           type="button"
-          onClick={() => setCardDescriptionFormVisible(false)}
+          onClick={closeCardDescriptionForm}
           className="cardDescriptionFormButton__cancel"
         >
           {cancelButtonText}

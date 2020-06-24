@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CardDescriptionForm from './CardDescriptionForm';
@@ -13,6 +13,10 @@ const CardDescription = (props: CardDescriptionProps) => {
   const { cardDescription, cardID } = props;
 
   const [isCardDescriptionFormVisible, setCardDescriptionFormVisible] = useState(false);
+
+  const closeCardDescriptionForm = useCallback(() => {
+    setCardDescriptionFormVisible(false);
+  }, []);
 
   return (
     <div className="cardDescription">
@@ -32,7 +36,7 @@ const CardDescription = (props: CardDescriptionProps) => {
         <CardDescriptionForm
           cardID={cardID}
           initialCardDescription={cardDescription}
-          setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+          closeCardDescriptionForm={closeCardDescriptionForm}
         />
       ) : (
         <CardDescriptionText
