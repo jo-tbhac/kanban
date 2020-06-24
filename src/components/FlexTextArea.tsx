@@ -10,7 +10,7 @@ const FlexTextArea = (props: FlexTextAreaProps) => {
 
   return (
     <div className="flexTextArea">
-      <div className="flexTextArea__dummy">{value}</div>
+      <div data-testid="dummyTextarea" className="flexTextArea__dummy">{value}</div>
       <textarea
         value={value}
         onChange={onChange}
