@@ -18,6 +18,10 @@ const CardDescription = (props: CardDescriptionProps) => {
     setCardDescriptionFormVisible(false);
   }, []);
 
+  const openCardDescriptionForm = useCallback(() => {
+    setCardDescriptionFormVisible(true);
+  }, []);
+
   return (
     <div className="cardDescription">
       <div className="cardDescriptionHeader">
@@ -25,8 +29,8 @@ const CardDescription = (props: CardDescriptionProps) => {
         <div
           role="button"
           tabIndex={0}
-          onClick={() => setCardDescriptionFormVisible(true)}
-          onKeyPress={() => setCardDescriptionFormVisible(true)}
+          onClick={openCardDescriptionForm}
+          onKeyPress={openCardDescriptionForm}
           className="cardDescriptionHeader__icon"
         >
           <FontAwesomeIcon icon={['fas', 'pen']} />
@@ -41,7 +45,7 @@ const CardDescription = (props: CardDescriptionProps) => {
       ) : (
         <CardDescriptionText
           cardDescription={cardDescription}
-          setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+          openCardDescriptionForm={openCardDescriptionForm}
         />
       )}
     </div>

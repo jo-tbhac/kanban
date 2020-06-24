@@ -7,19 +7,19 @@ import CardDescriptionText from '../../components/CardDescriptionText';
 describe('CardDescriptionText component', () => {
   let store: Store;
   let cardDescription: string;
-  let setCardDescriptionFormVisible: jest.Mock;
+  let openCardDescriptionForm: jest.Mock;
 
   beforeEach(() => {
     store = storeFactory();
     cardDescription = '';
-    setCardDescriptionFormVisible = jest.fn();
+    openCardDescriptionForm = jest.fn();
   });
 
   test('should show the card description placeholder component if props of `cardDescription` is blank', () => {
     const { getByTestId, queryByTestId } = render(
       <CardDescriptionText
         cardDescription={cardDescription}
-        setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+        openCardDescriptionForm={openCardDescriptionForm}
       />,
       store,
     );
@@ -33,7 +33,7 @@ describe('CardDescriptionText component', () => {
     const { getByTestId, queryByTestId } = render(
       <CardDescriptionText
         cardDescription={cardDescription}
-        setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+        openCardDescriptionForm={openCardDescriptionForm}
       />,
       store,
     );
@@ -42,30 +42,30 @@ describe('CardDescriptionText component', () => {
     expect(queryByTestId('cardDescriptionTextPlaceholer')).toBeNull();
   });
 
-  test('should call `setCardDescriptionFormVisible` with `true` when clicked the card description placeholder component', () => {
+  test('should call `setCardDescriptionFormVisible` when clicked the card description placeholder component', () => {
     const { getByTestId } = render(
       <CardDescriptionText
         cardDescription={cardDescription}
-        setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+        openCardDescriptionForm={openCardDescriptionForm}
       />,
       store,
     );
 
     fireEvent.click(getByTestId('cardDescriptionTextPlaceholer'));
-    expect(setCardDescriptionFormVisible).toHaveBeenCalledWith(true);
+    expect(openCardDescriptionForm).toHaveBeenCalled();
   });
 
-  test('should call `setCardDescriptionFormVisible` with `true` when clicked the card description text component', () => {
+  test('should call `openCardDescriptionForm` when clicked the card description text component', () => {
     cardDescription = 'description';
     const { getByTestId } = render(
       <CardDescriptionText
         cardDescription={cardDescription}
-        setCardDescriptionFormVisible={setCardDescriptionFormVisible}
+        openCardDescriptionForm={openCardDescriptionForm}
       />,
       store,
     );
 
     fireEvent.click(getByTestId('cardDescriptionText'));
-    expect(setCardDescriptionFormVisible).toHaveBeenCalledWith(true);
+    expect(openCardDescriptionForm).toHaveBeenCalled();
   });
 });

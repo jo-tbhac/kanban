@@ -1,14 +1,14 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 
 import { cardDescriptionPlaceholder } from '../utils/text';
 
 type CardDescriptionTextProps = {
   cardDescription: string
-  setCardDescriptionFormVisible: Dispatch<SetStateAction<boolean>>
+  openCardDescriptionForm: () => void
 }
 
 const CardDescriptionText = (props: CardDescriptionTextProps) => {
-  const { cardDescription, setCardDescriptionFormVisible } = props;
+  const { cardDescription, openCardDescriptionForm } = props;
 
   return (
     cardDescription === '' ? (
@@ -16,8 +16,8 @@ const CardDescriptionText = (props: CardDescriptionTextProps) => {
         data-testid="cardDescriptionTextPlaceholer"
         role="button"
         tabIndex={0}
-        onClick={() => setCardDescriptionFormVisible(true)}
-        onKeyPress={() => setCardDescriptionFormVisible(true)}
+        onClick={openCardDescriptionForm}
+        onKeyPress={openCardDescriptionForm}
         className="cardDescriptionText__placeholder"
       >
         {cardDescriptionPlaceholder}
@@ -27,8 +27,8 @@ const CardDescriptionText = (props: CardDescriptionTextProps) => {
         data-testid="cardDescriptionText"
         role="button"
         tabIndex={0}
-        onClick={() => setCardDescriptionFormVisible(true)}
-        onKeyPress={() => setCardDescriptionFormVisible(true)}
+        onClick={openCardDescriptionForm}
+        onKeyPress={openCardDescriptionForm}
         className="cardDescriptionText__text"
       >
         {cardDescription}
