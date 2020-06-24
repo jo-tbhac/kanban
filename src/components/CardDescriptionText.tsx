@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import { cardDescriptionPlaceholder } from '../utils/text';
 
@@ -31,7 +32,21 @@ const CardDescriptionText = (props: CardDescriptionTextProps) => {
         onKeyPress={openCardDescriptionForm}
         className="cardDescriptionText__text"
       >
-        {cardDescription}
+        <ReactMarkdown
+          source={cardDescription}
+          renderers={{
+            link: (linkProps) => (
+              <a
+                href={linkProps.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(event) => event.stopPropagation()}
+              >
+                {linkProps.children}
+              </a>
+            ),
+          }}
+        />
       </div>
     )
   );
