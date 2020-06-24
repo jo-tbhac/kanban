@@ -1,0 +1,20 @@
+.cardDescription {
+  margin-bottom: 15px;
+}
+
+.cardDescriptionHeader {
+  align-items: center;
+  display: flex;
+  margin-bottom: 5px;
+  &__label {
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  &__icon {
+    cursor: pointer;
+    font-size: 0.9rem;
+    &:hover {
+      color: $pink;
+    }
+  }
+}

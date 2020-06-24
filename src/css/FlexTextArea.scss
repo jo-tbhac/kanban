@@ -1,0 +1,33 @@
+.flexTextArea {
+  display: flex;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  position: relative;
+  &__dummy {
+    border: 1px solid;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font: inherit;
+    line-height: 1.3rem;
+    min-height: 100px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    padding: 5px;
+    visibility: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  &__textarea {
+    @include text-field();
+    box-sizing: border-box;
+    font: inherit;
+    height: 100%;
+    line-height: 1.3rem;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    resize: none;
+    width: 100%;
+  }
+}
