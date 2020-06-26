@@ -17,7 +17,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export const CardSideBarRowDelete = (props: PropsFromRedux) => {
+export const CardSideBarDeleteButton = (props: PropsFromRedux) => {
   const { openDialog, deleteCard } = props;
 
   const card = useContext(CardContext);
@@ -36,17 +36,17 @@ export const CardSideBarRowDelete = (props: PropsFromRedux) => {
 
   return (
     <div
-      data-testid="cardSideBarDeleteCard"
+      data-testid="cardSideBarDeleteButton"
       role="button"
       tabIndex={0}
       onClick={onClickDelete}
       onKeyPress={onClickDelete}
-      className="cardSideBarRowDelete"
+      className="cardSideBarDeleteButton"
     >
-      <FontAwesomeIcon icon={['fas', 'trash-alt']} className="cardSideBarRowDelete__icon" />
-      <div className="cardSideBarRowDelete__label">{deleteCardButtonText}</div>
+      <FontAwesomeIcon icon={['fas', 'trash-alt']} className="cardSideBarDeleteButton__icon" />
+      <div className="cardSideBarDeleteButton__label">{deleteCardButtonText}</div>
     </div>
   );
 };
 
-export default connector(CardSideBarRowDelete);
+export default connector(CardSideBarDeleteButton);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import CardSideBarRowDelete from './CardSideBarRowDelete';
+import CardSideBarDeleteButton from './CardSideBarDeleteButton';
 
 const CardDetailSideBar = () => (
   <div className="cardSideBar">
@@ -13,7 +13,7 @@ const CardDetailSideBar = () => (
       <FontAwesomeIcon icon={['fas', 'arrow-right']} className="cardSideBarRow__icon" />
       <div className="cardSideBarRow__label">移動</div>
     </div>
-    <CardSideBarRowDelete />
+    <CardSideBarDeleteButton />
   </div>
 );
 
