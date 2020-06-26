@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 
 import BoardNameForm from './BoardNameForm';
 import LabelIndex from './LabelIndex';
@@ -7,7 +7,7 @@ type ToolBarProps = {
   boardName: string
 }
 
-const ToolBar: FC<ToolBarProps> = (props) => {
+const ToolBar = (props: ToolBarProps) => {
   const { boardName } = props;
 
   const [isFormVisible, setFormVisible] = useState(false);
