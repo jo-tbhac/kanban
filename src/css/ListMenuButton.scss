@@ -1,0 +1,7 @@
+.listMenuButton {
+  cursor: pointer;
+  padding: 0 3px;
+  &:hover {
+    color: $pink;
+  }
+}

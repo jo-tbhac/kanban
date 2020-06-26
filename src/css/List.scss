@@ -20,13 +20,6 @@
   margin-bottom: 5px;
   padding: 5px 5px;
   position: relative;
-  &__icon {
-    cursor: pointer;
-    padding: 0 3px;
-    &:hover {
-      color: $pink;
-    }
-  }
 }
 
 .cardIndexContainer {
