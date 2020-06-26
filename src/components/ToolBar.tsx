@@ -7,7 +7,7 @@ type ToolBarProps = {
   boardName: string
 }
 
-const ToolBar = (props: ToolBarProps) => {
+const ToolBar = React.memo((props: ToolBarProps) => {
   const { boardName } = props;
 
   const [isFormVisible, setFormVisible] = useState(false);
@@ -31,6 +31,6 @@ const ToolBar = (props: ToolBarProps) => {
       <LabelIndex />
     </div>
   );
-};
+});
 
 export default ToolBar;
