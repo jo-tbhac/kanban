@@ -6,7 +6,10 @@ import CardForm from './CardForm';
 import ListNameForm from './ListNameForm';
 import ListMenu from './ListMenu';
 import * as types from '../store/list/types';
+import * as cardTypes from '../store/card/types';
 import { newCardButtonText } from '../utils/text';
+
+export const CardContext = React.createContext<cardTypes.Card | null>(null);
 
 type ListProps = {
   list: types.List
@@ -54,7 +57,11 @@ const List = (props: ListProps) => {
       </div>
 
       <div className="cardIndexContainer">
-        {list.cards?.map((card) => <Card key={String(card.id)} card={card} />)}
+        {list.cards?.map((card) => (
+          <CardContext.Provider key={String(card.id)} value={card}>
+            <Card card={card} />
+          </CardContext.Provider>
+        ))}
         {isCardFormVisible && <CardForm listID={list.id} setCardFormVisible={setCardFormVisible} />}
       </div>
 
