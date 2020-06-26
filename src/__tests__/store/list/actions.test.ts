@@ -18,13 +18,13 @@ describe('list actions', () => {
   });
 
   test('returns state of `selectedBoard.lists` that added one record upon dispatch an action `createList` is successful', () => {
-    const boardID = 1;
+    const boardId = 1;
     const responseData = { list: mockList };
-    mock.onPost(`/board/${boardID}/list`).reply(201, responseData);
+    mock.onPost(`/board/${boardId}/list`).reply(201, responseData);
 
     const previousState = store.getState().board;
 
-    return store.dispatch(createList(boardID, { name: mockList.name }) as any)
+    return store.dispatch(createList(boardId, { name: mockList.name }) as any)
       .then(() => {
         const { board } = store.getState();
         const listsLength = board.selectedBoard.lists.length;
@@ -35,10 +35,10 @@ describe('list actions', () => {
 
   test('returns state of dialogProps upon dispatch an action `createList` and recieved status 400 from server', () => {
     const responseData = { errors: [{ text: 'some error...' }] };
-    const boardID = 1;
-    mock.onPost(`/board/${boardID}/list`).reply(400, responseData);
+    const boardId = 1;
+    mock.onPost(`/board/${boardId}/list`).reply(400, responseData);
 
-    return store.dispatch(createList(boardID, { name: mockList.name }) as any)
+    return store.dispatch(createList(boardId, { name: mockList.name }) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();
@@ -50,25 +50,25 @@ describe('list actions', () => {
 
   test('returns state of `selectedBoard.lists` that updated one record upon dispatch an action `updateList` is successful', () => {
     store = storeFactory({ board: { selectedBoard: { lists: mockLists } } });
-    const listID = 1;
+    const listId = 1;
     const params = { name: 'updated list' };
     const responseData = { list: { ...mockList, ...params } };
-    mock.onPatch(`/list/${listID}`).reply(200, responseData);
+    mock.onPatch(`/list/${listId}`).reply(200, responseData);
 
-    return store.dispatch(updateList(listID, params) as any)
+    return store.dispatch(updateList(listId, params) as any)
       .then(() => {
         const { board } = store.getState();
-        const updatedList = board.selectedBoard.lists.find((list) => list.id === listID);
+        const updatedList = board.selectedBoard.lists.find((list) => list.id === listId);
         expect(updatedList).toEqual({ ...mockList, ...params });
       });
   });
 
   test('returns state of dialogProps upon dispatch an action `updateList` and recieved status 400 from server', () => {
     const responseData = { errors: [{ text: 'some error...' }] };
-    const listID = 1;
-    mock.onPatch(`/list/${listID}`).reply(400, responseData);
+    const listId = 1;
+    mock.onPatch(`/list/${listId}`).reply(400, responseData);
 
-    return store.dispatch(updateList(listID, { name: 'updated list' }) as any)
+    return store.dispatch(updateList(listId, { name: 'updated list' }) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();
@@ -80,12 +80,12 @@ describe('list actions', () => {
 
   test('returns state of `selectedBoard.lists` that deleted onerecord upon dispatch an action `deleteList` is successful', () => {
     store = storeFactory({ board: { selectedBoard: { lists: mockLists } } });
-    const listID = 1;
-    mock.onDelete(`/list/${listID}`).reply(200);
+    const listId = 1;
+    mock.onDelete(`/list/${listId}`).reply(200);
 
     const previousState = store.getState().board;
 
-    return store.dispatch(deleteList(listID) as any)
+    return store.dispatch(deleteList(listId) as any)
       .then(() => {
         const { board } = store.getState();
         expect(board.selectedBoard.lists.length).toBe(previousState.selectedBoard.lists.length - 1);
@@ -94,10 +94,10 @@ describe('list actions', () => {
 
   test('returns state of dialogProps upon dispatch an action `deleteList` and recieved status 400 from server', () => {
     const responseData = { errors: [{ text: 'some error...' }] };
-    const listID = 1;
-    mock.onDelete(`/list/${listID}`).reply(400, responseData);
+    const listId = 1;
+    mock.onDelete(`/list/${listId}`).reply(400, responseData);
 
-    return store.dispatch(deleteList(listID) as any)
+    return store.dispatch(deleteList(listId) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();

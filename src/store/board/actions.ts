@@ -12,9 +12,9 @@ import {
   UPDATE_BOARD,
 } from './types';
 
-export const fetchBoard = (boardID: number) => async (dispatch: AppDispatch) => {
+export const fetchBoard = (boardId: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
-  const response = await axios.get(`/board/${boardID}`);
+  const response = await axios.get(`/board/${boardId}`);
 
   if (response?.status === 200) {
     const camelizedData = camelCaseKeys(response.data.board, { deep: true });
@@ -61,10 +61,10 @@ export const createBoard = (params: { name: string }) => async (dispatch: AppDis
   }
 };
 
-export const updateBoard = (params: { name: string }, boardID: number) => (
+export const updateBoard = (params: { name: string }, boardId: number) => (
   async (dispatch: AppDispatch) => {
     const axios = newAxios();
-    const response = await axios.patch(`/board/${boardID}`, params);
+    const response = await axios.patch(`/board/${boardId}`, params);
 
     if (response?.status === 200) {
       const camelizedData = camelCaseKeys(response.data.board);

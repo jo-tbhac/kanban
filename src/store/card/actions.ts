@@ -7,10 +7,10 @@ import { joinErrors } from '../../utils/utils';
 import { failedCreateCard, failedUpdateCard, failedDeleteCard } from '../../utils/text';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 
-export const createCard = (listID: number, params: { title: string }) => (
+export const createCard = (listId: number, params: { title: string }) => (
   async (dispatch: AppDispatch) => {
     const axios = newAxios();
-    const response = await axios.post(`/list/${listID}/card`, params);
+    const response = await axios.post(`/list/${listId}/card`, params);
 
     if (response?.status === 201) {
       const camelizedData = camelCaseKeys(response.data.card);
@@ -30,12 +30,12 @@ export const createCard = (listID: number, params: { title: string }) => (
 );
 
 export const updateCard = (
-  cardID: number,
+  cardId: number,
   params: ({ title: string } | { description: string }),
 ) => async (dispatch: AppDispatch) => {
   const key = Object.keys(params)[0];
   const axios = newAxios();
-  const response = await axios.patch(`/card/${cardID}/${key}`, params);
+  const response = await axios.patch(`/card/${cardId}/${key}`, params);
 
   if (response?.status === 200) {
     const camelizedData = camelCaseKeys(response.data.card);

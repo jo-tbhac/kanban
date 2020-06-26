@@ -24,13 +24,13 @@ export const LabelForm = (props: LabelFormProps) => {
   const [labelName, setLabelName] = useState('');
   const [selectedColor, setColor] = useState('#e53935');
   const [isColorPickerVisible, setColorPickerVisible] = useState(false);
-  const { boardID } = useParams();
+  const { boardId } = useParams();
 
   const onClickSubmit = () => {
-    const castedBoardID = Number(boardID);
-    if (castedBoardID) {
+    const castedBoardId = Number(boardId);
+    if (castedBoardId) {
       const params = { name: labelName, color: selectedColor };
-      createLabel(castedBoardID, params);
+      createLabel(castedBoardId, params);
     }
   };
 

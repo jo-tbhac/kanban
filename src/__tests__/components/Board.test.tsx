@@ -37,7 +37,7 @@ describe('<Board>', () => {
 
   test('should call `fetchBoard` when component did mount', () => {
     renderWithRouter(
-      <Route path="/board/:boardID">
+      <Route path="/board/:boardId">
         <Board selectedBoard={mockBoard} fetchBoard={fetchBoard} />
       </Route>,
       store,
@@ -46,9 +46,9 @@ describe('<Board>', () => {
     expect(fetchBoard).toHaveBeenCalled();
   });
 
-  test('should not call `fetchBoard` if url params `boardID` is not a number when component did mount', () => {
+  test('should not call `fetchBoard` if url params `boardId` is not a number when component did mount', () => {
     renderWithRouter(
-      <Route path="/board/:boardID">
+      <Route path="/board/:boardId">
         <Board selectedBoard={mockBoard} fetchBoard={fetchBoard} />
       </Route>,
       store,

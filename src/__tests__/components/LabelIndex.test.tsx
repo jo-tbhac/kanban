@@ -36,7 +36,7 @@ describe('<LabelIndex>', () => {
   test('should call `fetchAllLabel` when component did mount', () => {
     renderWithRouter(
       <Route
-        path="/board/:boardID"
+        path="/board/:boardId"
         render={() => <LabelIndex fetchAllLabel={fetchAllLabel} labels={mockLabels} />}
       />,
       store,
@@ -49,7 +49,7 @@ describe('<LabelIndex>', () => {
   test('should not call `fetchAllLabel` if url params is invalid when component did mount', () => {
     renderWithRouter(
       <Route
-        path="/board/:boardID"
+        path="/board/:boardId"
         render={() => <LabelIndex fetchAllLabel={fetchAllLabel} labels={mockLabels} />}
       />,
       store,

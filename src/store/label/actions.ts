@@ -10,19 +10,19 @@ import {
   DELETE_LABEL,
 } from './types';
 
-export const fetchAllLabel = (boardID: number) => async (dispatch: AppDispatch) => {
+export const fetchAllLabel = (boardId: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
-  const response = await axios.get(`/board/${boardID}/labels`);
+  const response = await axios.get(`/board/${boardId}/labels`);
 
   if (response?.status === 200) {
     dispatch({ type: FETCH_ALL_LABEL, payload: response.data.labels });
   }
 };
 
-export const createLabel = (boardID: number, params: { name: string, color: string }) => (
+export const createLabel = (boardId: number, params: { name: string, color: string }) => (
   async (dispatch: AppDispatch) => {
     const axios = newAxios();
-    const response = await axios.post(`/board/${boardID}/label`, params);
+    const response = await axios.post(`/board/${boardId}/label`, params);
 
     if (response?.status === 201) {
       dispatch({ type: CREATE_LABEL, payload: response.data.label });
@@ -40,10 +40,10 @@ export const createLabel = (boardID: number, params: { name: string, color: stri
   }
 );
 
-export const updateLabel = (labelID: number, params: { name: string, color: string }) => (
+export const updateLabel = (labelId: number, params: { name: string, color: string }) => (
   async (dispatch: AppDispatch) => {
     const axios = newAxios();
-    const response = await axios.patch(`/label/${labelID}`, params);
+    const response = await axios.patch(`/label/${labelId}`, params);
 
     if (response?.status === 200) {
       dispatch({ type: UPDATE_LABEL, payload: response.data.label });
@@ -61,12 +61,12 @@ export const updateLabel = (labelID: number, params: { name: string, color: stri
   }
 );
 
-export const deleteLabel = (labelID: number) => async (dispatch: AppDispatch) => {
+export const deleteLabel = (labelId: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
-  const response = await axios.delete(`/label/${labelID}`);
+  const response = await axios.delete(`/label/${labelId}`);
 
   if (response?.status === 200) {
-    dispatch({ type: DELETE_LABEL, payload: labelID });
+    dispatch({ type: DELETE_LABEL, payload: labelId });
     return;
   }
 

@@ -22,7 +22,7 @@ export const BoardNameForm = (props: BoardNameFormProps) => {
   const { setFormVisible, initialBoardName, updateBoard } = props;
 
   const [boardName, setBoardName] = useState(initialBoardName);
-  const { boardID } = useParams();
+  const { boardId } = useParams();
 
   const onBlur = () => {
     if (boardName === '' || boardName === initialBoardName) {
@@ -30,9 +30,9 @@ export const BoardNameForm = (props: BoardNameFormProps) => {
       return;
     }
 
-    const castedBoardID = Number(boardID);
-    if (castedBoardID) {
-      updateBoard({ name: boardName }, castedBoardID);
+    const castedBoardId = Number(boardId);
+    if (castedBoardId) {
+      updateBoard({ name: boardName }, castedBoardId);
       setFormVisible(false);
     }
   };

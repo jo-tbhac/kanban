@@ -24,10 +24,10 @@ describe('label actions', () => {
 
   test('returns state `labels` that recieved from server upon dispatch an action `fetchAllLabel` is successful', () => {
     const responseData = { labels: mockLabels };
-    const boardID = 1;
-    mock.onGet(`/board/${boardID}/labels`).reply(200, responseData);
+    const boardId = 1;
+    mock.onGet(`/board/${boardId}/labels`).reply(200, responseData);
 
-    return store.dispatch(fetchAllLabel(boardID) as any)
+    return store.dispatch(fetchAllLabel(boardId) as any)
       .then(() => {
         const { label } = store.getState();
         expect(label.labels).toEqual(mockLabels);
@@ -37,12 +37,12 @@ describe('label actions', () => {
   test('returns state `labels` that added one record upon dispatch an action `createLabel` is successful', () => {
     const params = { name: 'label', color: '#fff' };
     const responseData = { label: mockLabel };
-    const boardID = 1;
-    mock.onPost(`/board/${boardID}/label`).reply(201, responseData);
+    const boardId = 1;
+    mock.onPost(`/board/${boardId}/label`).reply(201, responseData);
 
     const previousState = store.getState().label;
 
-    return store.dispatch(createLabel(boardID, params) as any)
+    return store.dispatch(createLabel(boardId, params) as any)
       .then(() => {
         const { label } = store.getState();
         expect(label.labels.length).toBe(previousState.labels.length + 1);
@@ -52,10 +52,10 @@ describe('label actions', () => {
   test('returns state of dialogProps upon dispatch an action `createLabel` and recieved status 400 from server', () => {
     const params = { name: 'label', color: '#fff' };
     const responseData = { errors: [{ text: 'some error...' }] };
-    const boardID = 1;
-    mock.onPost(`/board/${boardID}/label`).reply(400, responseData);
+    const boardId = 1;
+    mock.onPost(`/board/${boardId}/label`).reply(400, responseData);
 
-    return store.dispatch(createLabel(boardID, params) as any)
+    return store.dispatch(createLabel(boardId, params) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();
@@ -69,10 +69,10 @@ describe('label actions', () => {
     store = storeFactory({ label: { labels: mockLabels } });
     const params = { name: 'updated', color: '#222' };
     const responseData = { label: { id: 1, ...params } };
-    const labelID = 1;
-    mock.onPatch(`/label/${labelID}`).reply(200, responseData);
+    const labelId = 1;
+    mock.onPatch(`/label/${labelId}`).reply(200, responseData);
 
-    return store.dispatch(updateLabel(labelID, params) as any)
+    return store.dispatch(updateLabel(labelId, params) as any)
       .then(() => {
         const { label } = store.getState();
         const updatedLabel = label.labels.find((l) => l.id === responseData.label.id);
@@ -84,10 +84,10 @@ describe('label actions', () => {
   test('returns state of dialogProps upon dispatch an action `updateLabel` and recieved status 400 from server', () => {
     const params = { name: 'label', color: '#fff' };
     const responseData = { errors: [{ text: 'some error...' }] };
-    const labelID = 1;
-    mock.onPatch(`/label/${labelID}`).reply(400, responseData);
+    const labelId = 1;
+    mock.onPatch(`/label/${labelId}`).reply(400, responseData);
 
-    return store.dispatch(updateLabel(labelID, params) as any)
+    return store.dispatch(updateLabel(labelId, params) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();
@@ -99,12 +99,12 @@ describe('label actions', () => {
 
   test('returns state of `labels` that removed one record upon dispatch an action `deleteLabel` is successful', () => {
     store = storeFactory({ label: { labels: mockLabels } });
-    const labelID = 1;
-    mock.onDelete(`/label/${labelID}`).reply(200);
+    const labelId = 1;
+    mock.onDelete(`/label/${labelId}`).reply(200);
 
     const previousState = store.getState().label;
 
-    return store.dispatch(deleteLabel(labelID) as any)
+    return store.dispatch(deleteLabel(labelId) as any)
       .then(() => {
         const { label } = store.getState();
         expect(label.labels.length).toBe(previousState.labels.length - 1);
@@ -113,10 +113,10 @@ describe('label actions', () => {
 
   test('returns state of dialogProps upon dispatch an action `deleteLabel` and recieved status 400 from server', () => {
     const responseData = { errors: [{ text: 'some error...' }] };
-    const labelID = 1;
-    mock.onDelete(`/label/${labelID}`).reply(400, responseData);
+    const labelId = 1;
+    mock.onDelete(`/label/${labelId}`).reply(400, responseData);
 
-    return store.dispatch(deleteLabel(labelID) as any)
+    return store.dispatch(deleteLabel(labelId) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();

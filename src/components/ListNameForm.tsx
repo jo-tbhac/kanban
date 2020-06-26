@@ -12,14 +12,14 @@ const connector = connect(null, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 type ListNameFormProps = PropsFromRedux&{
-  listID: number
+  listId: number
   initialListName: string
   setListFormVisible: Dispatch<SetStateAction<boolean>>
 }
 
 export const ListNameForm = (props: ListNameFormProps) => {
   const {
-    listID,
+    listId,
     initialListName,
     setListFormVisible,
     updateList,
@@ -32,7 +32,7 @@ export const ListNameForm = (props: ListNameFormProps) => {
       setListFormVisible(false);
       return;
     }
-    updateList(listID, { name: listName });
+    updateList(listId, { name: listName });
     setListFormVisible(false);
   };
 
