@@ -59,7 +59,7 @@ const List = (props: ListProps) => {
       <div className="cardIndexContainer">
         {list.cards?.map((card) => (
           <CardContext.Provider key={String(card.id)} value={card}>
-            <Card card={card} />
+            <Card />
           </CardContext.Provider>
         ))}
         {isCardFormVisible && <CardForm listID={list.id} setCardFormVisible={setCardFormVisible} />}

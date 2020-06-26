@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { CardContext } from './List';
 import CardDetail from './CardDetail';
-import * as types from '../store/card/types';
 
-type CardProps = {
-  card: types.Card
-}
-
-const Card = (props: CardProps) => {
-  const { card } = props;
+const Card = () => {
+  const card = useContext(CardContext);
 
   const [isCardDetailVisible, setCardDetailVisible] = useState(false);
 
@@ -24,7 +20,7 @@ const Card = (props: CardProps) => {
         className="card"
       >
         <div className="cardLabelContainer">
-          {card.labels?.map((label) => (
+          {card?.labels?.map((label) => (
             <div
               key={`${card.id}-${label.id}`}
               style={{ backgroundColor: label.color }}
@@ -33,7 +29,7 @@ const Card = (props: CardProps) => {
           ))}
         </div>
 
-        <div className="card__title">{card.title}</div>
+        <div className="card__title">{card?.title}</div>
 
         <div className="cardStatusContainer">
           <div className="cardStatus">
@@ -43,7 +39,7 @@ const Card = (props: CardProps) => {
         </div>
       </div>
       {isCardDetailVisible
-        && <CardDetail card={card} setCardDetailVisible={setCardDetailVisible} />}
+        && <CardDetail setCardDetailVisible={setCardDetailVisible} />}
     </>
   );
 };

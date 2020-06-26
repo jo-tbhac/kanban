@@ -2,25 +2,24 @@ import React from 'react';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
+import { mockCard } from '../../utils/mockData';
 import CardDescriptionText from '../../components/CardDescriptionText';
+import { CardContext } from '../../components/List';
 
 describe('CardDescriptionText component', () => {
   let store: Store;
-  let cardDescription: string;
   let openCardDescriptionForm: jest.Mock;
 
   beforeEach(() => {
     store = storeFactory();
-    cardDescription = '';
     openCardDescriptionForm = jest.fn();
   });
 
-  test('should show the card description placeholder component if props of `cardDescription` is blank', () => {
+  test('should show the card description placeholder component if the card description is blank', () => {
     const { getByTestId, queryByTestId } = render(
-      <CardDescriptionText
-        cardDescription={cardDescription}
-        openCardDescriptionForm={openCardDescriptionForm}
-      />,
+      <CardContext.Provider value={{ ...mockCard, description: '' }}>
+        <CardDescriptionText openCardDescriptionForm={openCardDescriptionForm} />
+      </CardContext.Provider>,
       store,
     );
 
@@ -28,13 +27,11 @@ describe('CardDescriptionText component', () => {
     expect(queryByTestId('cardDescriptionText')).toBeNull();
   });
 
-  test('should show the card description text component if props of `cardDescription` is not blank', () => {
-    cardDescription = 'description';
+  test('should show the card description text component if the card description is not blank', () => {
     const { getByTestId, queryByTestId } = render(
-      <CardDescriptionText
-        cardDescription={cardDescription}
-        openCardDescriptionForm={openCardDescriptionForm}
-      />,
+      <CardContext.Provider value={{ ...mockCard, description: 'description' }}>
+        <CardDescriptionText openCardDescriptionForm={openCardDescriptionForm} />
+      </CardContext.Provider>,
       store,
     );
 
@@ -44,10 +41,9 @@ describe('CardDescriptionText component', () => {
 
   test('should call `setCardDescriptionFormVisible` when clicked the card description placeholder component', () => {
     const { getByTestId } = render(
-      <CardDescriptionText
-        cardDescription={cardDescription}
-        openCardDescriptionForm={openCardDescriptionForm}
-      />,
+      <CardContext.Provider value={{ ...mockCard, description: '' }}>
+        <CardDescriptionText openCardDescriptionForm={openCardDescriptionForm} />
+      </CardContext.Provider>,
       store,
     );
 
@@ -56,12 +52,10 @@ describe('CardDescriptionText component', () => {
   });
 
   test('should call `openCardDescriptionForm` when clicked the card description text component', () => {
-    cardDescription = 'description';
     const { getByTestId } = render(
-      <CardDescriptionText
-        cardDescription={cardDescription}
-        openCardDescriptionForm={openCardDescriptionForm}
-      />,
+      <CardContext.Provider value={{ ...mockCard, description: 'description' }}>
+        <CardDescriptionText openCardDescriptionForm={openCardDescriptionForm} />
+      </CardContext.Provider>,
       store,
     );
 
