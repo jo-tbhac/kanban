@@ -2,9 +2,9 @@ import camelCaseKeys from 'camelcase-keys';
 
 import { newAxios } from '../../configureAxios';
 import { AppDispatch } from '..';
-import { CREATE_CARD, UPDATE_CARD } from './types';
+import { CREATE_CARD, UPDATE_CARD, DELETE_CARD } from './types';
 import { joinErrors } from '../../utils/utils';
-import { failedCreateCard, failedUpdateCard } from '../../utils/text';
+import { failedCreateCard, failedUpdateCard, failedDeleteCard } from '../../utils/text';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 
 export const createCard = (listID: number, params: { title: string }) => (
@@ -47,6 +47,25 @@ export const updateCard = (
     const dialogProps = {
       type: dialogTypeError as DialogTypes,
       title: failedUpdateCard,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+  }
+};
+
+export const deleteCard = (cardId: number, listId: number) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.delete(`/card/${cardId}`);
+
+  if (response?.status === 200) {
+    dispatch({ type: DELETE_CARD, payload: { cardId, listId } });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedDeleteCard,
       description: joinErrors(response.data.errors),
     };
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
