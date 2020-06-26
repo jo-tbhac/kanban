@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card } from '../store/card/types';
 import CardTitle from './CardTitle';
 import CardDescription from './CardDescription';
+import CardSideBar from './CardSideBar';
 
 type CardDetailProps = {
   card: Card
@@ -64,20 +65,7 @@ const CardDetail = (props: CardDetailProps) => {
 
             <CardDescription cardDescription={card.description} cardID={card.id} />
           </div>
-          <div className="cardDetailSideBar">
-            <div className="cardDetailSideBarRow">
-              <FontAwesomeIcon icon={['fas', 'paperclip']} className="cardDetailSideBarRow__icon" />
-              <div className="cardDetailSideBarRow__label">添付ファイルを追加</div>
-            </div>
-            <div className="cardDetailSideBarRow">
-              <FontAwesomeIcon icon={['fas', 'arrow-right']} className="cardDetailSideBarRow__icon" />
-              <div className="cardDetailSideBarRow__label">移動</div>
-            </div>
-            <div className="cardDetailSideBarRow">
-              <FontAwesomeIcon icon={['fas', 'trash-alt']} className="cardDetailSideBarRow__icon" />
-              <div className="cardDetailSideBarRow__label">カードを削除</div>
-            </div>
-          </div>
+          <CardSideBar />
         </div>
       </div>
     </div>
