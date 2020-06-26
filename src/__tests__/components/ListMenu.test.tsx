@@ -9,7 +9,7 @@ describe('<ListMenu>', () => {
   let setListMenuVisible: jest.Mock;
   let openDialog: jest.Mock;
   let deleteList: jest.Mock;
-  const listID = 1;
+  const listId = 1;
 
   beforeEach(() => {
     store = storeFactory();
@@ -24,7 +24,7 @@ describe('<ListMenu>', () => {
         setListMenuVisible={setListMenuVisible}
         openDialog={openDialog}
         deleteList={deleteList}
-        listID={listID}
+        listId={listId}
       />,
       store,
     );
@@ -39,7 +39,7 @@ describe('<ListMenu>', () => {
         setListMenuVisible={setListMenuVisible}
         openDialog={openDialog}
         deleteList={deleteList}
-        listID={listID}
+        listId={listId}
       />,
       store,
     );

@@ -28,12 +28,12 @@ export const LabelIndex = (props: PropsFromRedux) => {
   const { labels, fetchAllLabel } = props;
 
   const [isLabelEditVisible, setLabelEditVisible] = useState(false);
-  const { boardID } = useParams();
+  const { boardId } = useParams();
 
   useEffect(() => {
-    const castedBoardID = Number(boardID);
-    if (castedBoardID) {
-      fetchAllLabel(castedBoardID);
+    const castedBoardId = Number(boardId);
+    if (castedBoardId) {
+      fetchAllLabel(castedBoardId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

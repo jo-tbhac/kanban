@@ -21,12 +21,12 @@ export const ListForm = (props: ListFormProps) => {
   const { setListFormVisible, createList } = props;
 
   const [listName, setListName] = useState('');
-  const { boardID } = useParams();
+  const { boardId } = useParams();
 
   const onClickSubmit = () => {
-    const castedBoardID = Number(boardID);
-    if (boardID && castedBoardID) {
-      createList(castedBoardID, { name: listName });
+    const castedBoardId = Number(boardId);
+    if (boardId && castedBoardId) {
+      createList(castedBoardId, { name: listName });
     }
     setListFormVisible(false);
   };

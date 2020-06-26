@@ -56,7 +56,7 @@ describe('<BoardNameForm>', () => {
   test('should not call `updateBoard` if state of `boardName` has not changed when forcus out from a board name text field', () => {
     const { getByTestId } = renderWithRouter(
       <Route
-        path="/board/:boardID"
+        path="/board/:boardId"
         render={() => (
           <BoardNameForm
             updateBoard={updateBoard}
@@ -79,10 +79,10 @@ describe('<BoardNameForm>', () => {
   });
 
   test('should call `updateBoard` with params of input name and board id when focus out from a board name text field', () => {
-    const boardID = 1;
+    const boardId = 1;
     const { getByTestId } = renderWithRouter(
       <Route
-        path="/board/:boardID"
+        path="/board/:boardId"
         render={() => (
           <BoardNameForm
             updateBoard={updateBoard}
@@ -92,7 +92,7 @@ describe('<BoardNameForm>', () => {
         )}
       />,
       store,
-      [`/board/${boardID}`],
+      [`/board/${boardId}`],
     );
 
     const boardNameForm = getByTestId('boardNameForm') as HTMLInputElement;
@@ -101,6 +101,6 @@ describe('<BoardNameForm>', () => {
     fireEvent.blur(boardNameForm);
 
     expect(setFormVisible).toHaveBeenCalledWith(false);
-    expect(updateBoard).toHaveBeenCalledWith({ name: inputBoardName }, boardID);
+    expect(updateBoard).toHaveBeenCalledWith({ name: inputBoardName }, boardId);
   });
 });

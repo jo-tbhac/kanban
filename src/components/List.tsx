@@ -28,7 +28,7 @@ const List = (props: ListProps) => {
         {isListFormVisible ? (
           <ListNameForm
             initialListName={list.name}
-            listID={list.id}
+            listId={list.id}
             setListFormVisible={setListFormVisible}
           />
         ) : (
@@ -53,7 +53,7 @@ const List = (props: ListProps) => {
         >
           <FontAwesomeIcon icon={['fas', 'ellipsis-h']} />
         </div>
-        {isListMenuVisible && <ListMenu listID={list.id} setListMenuVisible={setListMenuVisible} />}
+        {isListMenuVisible && <ListMenu listId={list.id} setListMenuVisible={setListMenuVisible} />}
       </div>
 
       <div className="cardIndexContainer">
@@ -62,7 +62,7 @@ const List = (props: ListProps) => {
             <Card />
           </CardContext.Provider>
         ))}
-        {isCardFormVisible && <CardForm listID={list.id} setCardFormVisible={setCardFormVisible} />}
+        {isCardFormVisible && <CardForm listId={list.id} setCardFormVisible={setCardFormVisible} />}
       </div>
 
       <div

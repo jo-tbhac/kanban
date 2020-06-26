@@ -5,10 +5,10 @@ import { joinErrors } from '../../utils/utils';
 import { failedCreateList, failedUpdateList, failedDeleteList } from '../../utils/text';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 
-export const createList = (boardID: number, params: { name: string }) => (
+export const createList = (boardId: number, params: { name: string }) => (
   async (dispatch: AppDispatch) => {
     const axios = newAxios();
-    const response = await axios.post(`/board/${boardID}/list`, params);
+    const response = await axios.post(`/board/${boardId}/list`, params);
 
     if (response?.status === 201) {
       dispatch({ type: CREATE_LIST, payload: response.data.list });
@@ -26,10 +26,10 @@ export const createList = (boardID: number, params: { name: string }) => (
   }
 );
 
-export const updateList = (listID: number, params: { name: string }) => (
+export const updateList = (listId: number, params: { name: string }) => (
   async (dispatch: AppDispatch) => {
     const axios = newAxios();
-    const response = await axios.patch(`list/${listID}`, params);
+    const response = await axios.patch(`list/${listId}`, params);
 
     if (response?.status === 200) {
       dispatch({ type: UPDATE_LIST, payload: response.data.list });
@@ -47,12 +47,12 @@ export const updateList = (listID: number, params: { name: string }) => (
   }
 );
 
-export const deleteList = (listID: number) => async (dispatch: AppDispatch) => {
+export const deleteList = (listId: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
-  const response = await axios.delete(`/list/${listID}`);
+  const response = await axios.delete(`/list/${listId}`);
 
   if (response?.status === 200) {
-    dispatch({ type: DELETE_LIST, payload: listID });
+    dispatch({ type: DELETE_LIST, payload: listId });
     return;
   }
 

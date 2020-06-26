@@ -77,16 +77,16 @@ describe('<LabelForm>', () => {
   });
 
   test('should call `createLabel` with params of `name` and `color` when click a submit button', () => {
-    const boardID = 1;
+    const boardId = 1;
     const { getByTestId } = renderWithRouter(
       <Route
-        path="/board/:boardID"
+        path="/board/:boardId"
         render={() => (
           <LabelForm setLabelFormVisible={setLabelFormVisible} createLabel={createLabel} />
         )}
       />,
       store,
-      [`/board/${boardID}`],
+      [`/board/${boardId}`],
     );
 
     const labelNameTextField = getByTestId('labelNameTextField') as HTMLInputElement;
@@ -94,20 +94,20 @@ describe('<LabelForm>', () => {
     fireEvent.change(labelNameTextField, { target: { value: mockText } });
     fireEvent.click(getByTestId('labelFormSubmitButton'));
 
-    expect(createLabel).toHaveBeenCalledWith(boardID, { name: mockText, color: '#e53935' });
+    expect(createLabel).toHaveBeenCalledWith(boardId, { name: mockText, color: '#e53935' });
   });
 
   test('should not call `createLabel` if url params is invalid when click a submit button', () => {
-    const boardID = 'indfsdjes';
+    const boardId = 'indfsdjes';
     const { getByTestId } = renderWithRouter(
       <Route
-        path="/board/:boardID"
+        path="/board/:boardId"
         render={() => (
           <LabelForm setLabelFormVisible={setLabelFormVisible} createLabel={createLabel} />
         )}
       />,
       store,
-      [`/board/${boardID}`],
+      [`/board/${boardId}`],
     );
 
     const labelNameTextField = getByTestId('labelNameTextField') as HTMLInputElement;

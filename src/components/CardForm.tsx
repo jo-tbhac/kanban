@@ -20,19 +20,19 @@ const connector = connect(null, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 type CardFormProps = PropsFromRedux&{
-  listID: number
+  listId: number
   setCardFormVisible: Dispatch<SetStateAction<boolean>>
 }
 
 export const CardForm = (props: CardFormProps) => {
-  const { listID, setCardFormVisible, createCard } = props;
+  const { listId, setCardFormVisible, createCard } = props;
 
   const [isComposition, setComposition] = useState(false);
   const [cardTitle, setCardTitle] = useState('');
 
   const submit = () => {
     if (cardTitle !== '') {
-      createCard(listID, { title: cardTitle });
+      createCard(listId, { title: cardTitle });
     }
     setCardFormVisible(false);
   };

@@ -8,7 +8,7 @@ describe('CardForm component', () => {
   let store: Store;
   let createCard: jest.Mock;
   let setCardFormVisible: jest.Mock;
-  const listID = 1;
+  const listId = 1;
 
   beforeEach(() => {
     store = storeFactory();
@@ -18,7 +18,7 @@ describe('CardForm component', () => {
 
   test('update state of `cardTitle` when the card title textarea value changed', () => {
     const { getByTestId } = render(
-      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listID={listID} />,
+      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
     const mockText = 'sample card';
@@ -30,7 +30,7 @@ describe('CardForm component', () => {
 
   test('should call `setCardFormVisible` with `false` when the cancel button clicked', () => {
     const { getByTestId } = render(
-      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listID={listID} />,
+      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
     fireEvent.click(getByTestId('cardFormCancelButton'));
@@ -40,7 +40,7 @@ describe('CardForm component', () => {
 
   test('disabled the submit button if state of `cardTitle` is blank', () => {
     const { getByTestId } = render(
-      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listID={listID} />,
+      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
     expect(getByTestId('cardFormSubmitButton')).toBeDisabled();
@@ -48,7 +48,7 @@ describe('CardForm component', () => {
 
   test('enabled the submit button if state of `cardTitle` is not blank', () => {
     const { getByTestId } = render(
-      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listID={listID} />,
+      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
     const mockText = 'sample card';
@@ -60,7 +60,7 @@ describe('CardForm component', () => {
 
   test('should not call `createCard` and `setCardFormVisible` if state of `cardTitle` is blank when clicked the submit button', () => {
     const { getByTestId } = render(
-      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listID={listID} />,
+      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
     fireEvent.click(getByTestId('cardFormSubmitButton'));
@@ -71,7 +71,7 @@ describe('CardForm component', () => {
 
   test('should not call `createCard` and `setCardFormVisible` if state of `cardTitle` is blank when press the enter key', () => {
     const { getByTestId } = render(
-      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listID={listID} />,
+      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
     fireEvent.keyPress(getByTestId('cardForm'), { key: 'Enter' });
@@ -82,7 +82,7 @@ describe('CardForm component', () => {
 
   test('should call `createCard` and `setCardFormVisible` when clicked the submit button', () => {
     const { getByTestId } = render(
-      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listID={listID} />,
+      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
     const mockText = 'sample card';
@@ -90,13 +90,13 @@ describe('CardForm component', () => {
     fireEvent.change(cardFormTextArea, { target: { value: mockText } });
     fireEvent.click(getByTestId('cardFormSubmitButton'));
 
-    expect(createCard).toHaveBeenCalledWith(listID, { title: mockText });
+    expect(createCard).toHaveBeenCalledWith(listId, { title: mockText });
     expect(setCardFormVisible).toHaveBeenCalledWith(false);
   });
 
   test('should call `createCard` and `setCardFormVisible` when press the enter key', () => {
     const { getByTestId } = render(
-      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listID={listID} />,
+      <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
     const mockText = 'sample card';
@@ -105,6 +105,6 @@ describe('CardForm component', () => {
     fireEvent.keyPress(cardFormTextArea, { key: 'Enter' });
 
     expect(setCardFormVisible).toHaveBeenCalledWith(false);
-    expect(createCard).toHaveBeenCalledWith(listID, { title: mockText });
+    expect(createCard).toHaveBeenCalledWith(listId, { title: mockText });
   });
 });

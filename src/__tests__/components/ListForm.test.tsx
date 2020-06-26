@@ -72,37 +72,37 @@ describe('<ListForm>', () => {
   });
 
   test('should call `createList` when click a submit button', () => {
-    const boardID = 1;
+    const boardId = 1;
     const { getByTestId } = renderWithRouter(
       <Route
-        path="/board/:boardID"
+        path="/board/:boardId"
         render={() => (
           <ListForm setListFormVisible={setListFormVisible} createList={createList} />
         )}
       />,
       store,
-      [`/board/${boardID}`],
+      [`/board/${boardId}`],
     );
     const mockText = 'sample list';
     const listNameTextField = getByTestId('listNameTextField') as HTMLInputElement;
     fireEvent.change(listNameTextField, { target: { value: mockText } });
     fireEvent.click(getByTestId('listFormSubmitButton'));
 
-    expect(createList).toHaveBeenCalledWith(boardID, { name: mockText });
+    expect(createList).toHaveBeenCalledWith(boardId, { name: mockText });
     expect(setListFormVisible).toHaveBeenCalledWith(false);
   });
 
   test('should not call `createList` if url params is invalid when click a submit button', () => {
-    const boardID = 'smfinchisdds';
+    const boardId = 'smfinchisdds';
     const { getByTestId } = renderWithRouter(
       <Route
-        path="/board/:boardID"
+        path="/board/:boardId"
         render={() => (
           <ListForm setListFormVisible={setListFormVisible} createList={createList} />
         )}
       />,
       store,
-      [`/board/${boardID}`],
+      [`/board/${boardId}`],
     );
     const mockText = 'sample list';
     const listNameTextField = getByTestId('listNameTextField') as HTMLInputElement;

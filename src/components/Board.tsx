@@ -28,12 +28,12 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export const Board = (props: PropsFromRedux) => {
   const { selectedBoard, fetchBoard } = props;
 
-  const { boardID } = useParams();
+  const { boardId } = useParams();
   const [isListFormVisible, setListFormVisible] = useState(false);
 
   useEffect(() => {
-    if (boardID && Number(boardID)) {
-      fetchBoard(Number(boardID));
+    if (boardId && Number(boardId)) {
+      fetchBoard(Number(boardId));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

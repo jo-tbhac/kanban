@@ -5,7 +5,7 @@ import { Store } from '../../store';
 import { ListNameForm } from '../../components/ListNameForm';
 
 describe('<ListNameForm>', () => {
-  const listID = 1;
+  const listId = 1;
   const initialListName = 'initial list';
   let store: Store;
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('<ListNameForm>', () => {
     const updateList = jest.fn();
     const { getByTestId } = render(
       <ListNameForm
-        listID={listID}
+        listId={listId}
         initialListName={initialListName}
         setListFormVisible={setListFormVisible}
         updateList={updateList}
@@ -37,7 +37,7 @@ describe('<ListNameForm>', () => {
     const updateList = jest.fn();
     const { getByTestId } = render(
       <ListNameForm
-        listID={listID}
+        listId={listId}
         initialListName={initialListName}
         setListFormVisible={setListFormVisible}
         updateList={updateList}
@@ -59,7 +59,7 @@ describe('<ListNameForm>', () => {
     const updateList = jest.fn();
     const { getByTestId } = render(
       <ListNameForm
-        listID={listID}
+        listId={listId}
         initialListName={initialListName}
         setListFormVisible={setListFormVisible}
         updateList={updateList}
@@ -81,7 +81,7 @@ describe('<ListNameForm>', () => {
     const updateList = jest.fn();
     const { getByTestId } = render(
       <ListNameForm
-        listID={listID}
+        listId={listId}
         initialListName={initialListName}
         setListFormVisible={setListFormVisible}
         updateList={updateList}

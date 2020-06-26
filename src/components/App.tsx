@@ -29,7 +29,7 @@ const App = (props: PropsFromRedux) => {
         <Switch>
           <Route path="/signin"><SignIn /></Route>
           <Route path="/signup"><SignUp /></Route>
-          <Route path="/board/:boardID">
+          <Route path="/board/:boardId">
             <div className="mainContainer">
               <Header />
               <Board />

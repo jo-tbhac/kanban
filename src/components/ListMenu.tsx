@@ -23,13 +23,13 @@ const connector = connect(null, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 type ListMenuProps = PropsFromRedux&{
-  listID: number
+  listId: number
   setListMenuVisible: Dispatch<SetStateAction<boolean>>
 }
 
 export const ListMenu = (props: ListMenuProps) => {
   const {
-    listID,
+    listId,
     setListMenuVisible,
     openDialog,
     deleteList,
@@ -55,7 +55,7 @@ export const ListMenu = (props: ListMenuProps) => {
     openDialog({
       type: dialogTypeAsk,
       title: askListDeleteDialog,
-      onConfirm: () => deleteList(listID),
+      onConfirm: () => deleteList(listId),
     });
   };
 
