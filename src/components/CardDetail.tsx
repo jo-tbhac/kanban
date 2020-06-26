@@ -7,18 +7,16 @@ import React, {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Card } from '../store/card/types';
 import CardTitle from './CardTitle';
 import CardDescription from './CardDescription';
 import CardSideBar from './CardSideBar';
 
 type CardDetailProps = {
-  card: Card
   setCardDetailVisible: Dispatch<SetStateAction<boolean>>
 }
 
 const CardDetail = (props: CardDetailProps) => {
-  const { card, setCardDetailVisible } = props;
+  const { setCardDetailVisible } = props;
 
   const onClickOverlayEvent = useCallback((event: MouseEvent) => {
     const element = event.target as HTMLElement;
@@ -39,7 +37,7 @@ const CardDetail = (props: CardDetailProps) => {
     <div data-testid="cardDetail" className="cardDetailOverlay">
       <div className="cardDetailContainer">
         <div className="cardDetailHeader">
-          <CardTitle initialCardTitle={card.title} cardID={card.id} />
+          <CardTitle />
           <div
             data-testid="cardDetailCloseButton"
             role="button"
@@ -63,7 +61,7 @@ const CardDetail = (props: CardDetailProps) => {
               </div>
             </div>
 
-            <CardDescription cardDescription={card.description} cardID={card.id} />
+            <CardDescription />
           </div>
           <CardSideBar />
         </div>

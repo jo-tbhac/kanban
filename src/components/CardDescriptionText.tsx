@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactMarkdown from 'react-markdown';
 
+import { CardContext } from './List';
 import { cardDescriptionPlaceholder } from '../utils/text';
 
 type CardDescriptionTextProps = {
-  cardDescription: string
   openCardDescriptionForm: () => void
 }
 
 const CardDescriptionText = (props: CardDescriptionTextProps) => {
-  const { cardDescription, openCardDescriptionForm } = props;
+  const { openCardDescriptionForm } = props;
+
+  const card = useContext(CardContext);
 
   return (
-    cardDescription === '' ? (
+    card?.description === '' ? (
       <div
         data-testid="cardDescriptionTextPlaceholer"
         role="button"
@@ -33,7 +35,7 @@ const CardDescriptionText = (props: CardDescriptionTextProps) => {
         className="cardDescriptionText__text"
       >
         <ReactMarkdown
-          source={cardDescription}
+          source={card?.description}
           renderers={{
             link: (linkProps) => (
               <a

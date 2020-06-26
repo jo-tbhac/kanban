@@ -2,14 +2,14 @@ import React from 'react';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
+import { mockCard } from '../../utils/mockData';
 import { CardDescriptionForm } from '../../components/CardDescriptionForm';
+import { CardContext } from '../../components/List';
 
 describe('CardDescriptionForm component', () => {
   let store: Store;
   let closeCardDescriptionForm: jest.Mock;
   let updateCard: jest.Mock;
-  const cardID = 1;
-  const initialCardDescription = 'description';
 
   beforeEach(() => {
     store = storeFactory();
@@ -19,12 +19,12 @@ describe('CardDescriptionForm component', () => {
 
   test('update state `cardDescription` when the card description textarea value changed', () => {
     const { getByRole } = render(
-      <CardDescriptionForm
-        cardID={cardID}
-        initialCardDescription={initialCardDescription}
-        closeCardDescriptionForm={closeCardDescriptionForm}
-        updateCard={updateCard}
-      />,
+      <CardContext.Provider value={mockCard}>
+        <CardDescriptionForm
+          closeCardDescriptionForm={closeCardDescriptionForm}
+          updateCard={updateCard}
+        />
+      </CardContext.Provider>,
       store,
     );
 
@@ -37,12 +37,12 @@ describe('CardDescriptionForm component', () => {
 
   test('should call `closeCardDescriptionForm` when clicked a cancel button', () => {
     const { getByTestId } = render(
-      <CardDescriptionForm
-        cardID={cardID}
-        initialCardDescription={initialCardDescription}
-        closeCardDescriptionForm={closeCardDescriptionForm}
-        updateCard={updateCard}
-      />,
+      <CardContext.Provider value={mockCard}>
+        <CardDescriptionForm
+          closeCardDescriptionForm={closeCardDescriptionForm}
+          updateCard={updateCard}
+        />
+      </CardContext.Provider>,
       store,
     );
 
@@ -52,12 +52,12 @@ describe('CardDescriptionForm component', () => {
 
   test('should call `updateCard` when clicked a submit button', () => {
     const { getByTestId, getByRole } = render(
-      <CardDescriptionForm
-        cardID={cardID}
-        initialCardDescription={initialCardDescription}
-        closeCardDescriptionForm={closeCardDescriptionForm}
-        updateCard={updateCard}
-      />,
+      <CardContext.Provider value={mockCard}>
+        <CardDescriptionForm
+          closeCardDescriptionForm={closeCardDescriptionForm}
+          updateCard={updateCard}
+        />
+      </CardContext.Provider>,
       store,
     );
 
@@ -66,18 +66,18 @@ describe('CardDescriptionForm component', () => {
     fireEvent.change(textarea, { target: { value: mockText } });
     fireEvent.click(getByTestId('cardDescriptionFormSubmitButton'));
 
-    expect(updateCard).toHaveBeenCalledWith(cardID, { description: mockText });
+    expect(updateCard).toHaveBeenCalledWith(mockCard.id, { description: mockText });
     expect(closeCardDescriptionForm).toHaveBeenCalled();
   });
 
   test('should not call `updateCard` if state of `cardDescription` has not changed when clicked a submit button', () => {
     const { getByTestId } = render(
-      <CardDescriptionForm
-        cardID={cardID}
-        initialCardDescription={initialCardDescription}
-        closeCardDescriptionForm={closeCardDescriptionForm}
-        updateCard={updateCard}
-      />,
+      <CardContext.Provider value={mockCard}>
+        <CardDescriptionForm
+          closeCardDescriptionForm={closeCardDescriptionForm}
+          updateCard={updateCard}
+        />
+      </CardContext.Provider>,
       store,
     );
 

@@ -4,14 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CardDescriptionForm from './CardDescriptionForm';
 import CardDescriptionText from './CardDescriptionText';
 
-type CardDescriptionProps = {
-  cardDescription: string
-  cardID: number
-}
-
-const CardDescription = (props: CardDescriptionProps) => {
-  const { cardDescription, cardID } = props;
-
+const CardDescription = () => {
   const [isCardDescriptionFormVisible, setCardDescriptionFormVisible] = useState(false);
 
   const closeCardDescriptionForm = useCallback(() => {
@@ -37,16 +30,9 @@ const CardDescription = (props: CardDescriptionProps) => {
         </div>
       </div>
       {isCardDescriptionFormVisible ? (
-        <CardDescriptionForm
-          cardID={cardID}
-          initialCardDescription={cardDescription}
-          closeCardDescriptionForm={closeCardDescriptionForm}
-        />
+        <CardDescriptionForm closeCardDescriptionForm={closeCardDescriptionForm} />
       ) : (
-        <CardDescriptionText
-          cardDescription={cardDescription}
-          openCardDescriptionForm={openCardDescriptionForm}
-        />
+        <CardDescriptionText openCardDescriptionForm={openCardDescriptionForm} />
       )}
     </div>
   );

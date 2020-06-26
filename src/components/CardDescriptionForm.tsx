@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
+import { CardContext } from './List';
 import FlexTextArea from './FlexTextArea';
 import * as cardActions from '../store/card/actions';
 import { createButtonText, cancelButtonText } from '../utils/text';
@@ -14,25 +15,22 @@ const connector = connect(null, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 type CardDescriptionFormProps = PropsFromRedux & {
-  cardID: number
-  initialCardDescription: string
   closeCardDescriptionForm: () => void
 }
 
 export const CardDescriptionForm = (props: CardDescriptionFormProps) => {
-  const {
-    cardID,
-    initialCardDescription,
-    closeCardDescriptionForm,
-    updateCard,
-  } = props;
+  const { closeCardDescriptionForm, updateCard } = props;
 
-  const [cardDescription, setCardDescription] = useState(initialCardDescription);
+  const card = useContext(CardContext);
+
+  const [cardDescription, setCardDescription] = useState(card ? card.description : '');
 
   const onClickSubmit = () => {
-    if (cardDescription !== initialCardDescription) {
-      updateCard(cardID, { description: cardDescription });
+    if (card === null || cardDescription === card.description) {
+      closeCardDescriptionForm();
+      return;
     }
+    updateCard(card.id, { description: cardDescription });
     closeCardDescriptionForm();
   };
 

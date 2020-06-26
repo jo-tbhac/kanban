@@ -2,13 +2,13 @@ import React from 'react';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
+import { mockCard } from '../../utils/mockData';
 import { CardTitle } from '../../components/CardTitle';
+import { CardContext } from '../../components/List';
 
 describe('CardTitle component', () => {
   let store: Store;
   let updateCard: jest.Mock;
-  const cardID = 1;
-  const initialCardTitle = 'initial card';
 
   beforeEach(() => {
     store = storeFactory();
@@ -17,7 +17,9 @@ describe('CardTitle component', () => {
 
   test('should show the card title text field if state of `isCardTitleFormVisible` is true', () => {
     const { getByTestId, queryByTestId } = render(
-      <CardTitle cardID={cardID} updateCard={updateCard} initialCardTitle={initialCardTitle} />,
+      <CardContext.Provider value={mockCard}>
+        <CardTitle updateCard={updateCard} />
+      </CardContext.Provider>,
       store,
     );
     fireEvent.click(getByTestId('cardTitleText'));
@@ -28,7 +30,9 @@ describe('CardTitle component', () => {
 
   test('should hide the card title text field if state of `isCardTitleFormVisible` is false', () => {
     const { getByTestId, queryByTestId } = render(
-      <CardTitle cardID={cardID} updateCard={updateCard} initialCardTitle={initialCardTitle} />,
+      <CardContext.Provider value={mockCard}>
+        <CardTitle updateCard={updateCard} />
+      </CardContext.Provider>,
       store,
     );
 
@@ -38,7 +42,9 @@ describe('CardTitle component', () => {
 
   test('update state of `cardTitle` upon the card title text field value changed', () => {
     const { getByTestId } = render(
-      <CardTitle cardID={cardID} updateCard={updateCard} initialCardTitle={initialCardTitle} />,
+      <CardContext.Provider value={mockCard}>
+        <CardTitle updateCard={updateCard} />
+      </CardContext.Provider>,
       store,
     );
     fireEvent.click(getByTestId('cardTitleText'));
@@ -52,7 +58,9 @@ describe('CardTitle component', () => {
 
   test('should call `updateCard` when focus out from the card title text field', () => {
     const { getByTestId } = render(
-      <CardTitle cardID={cardID} updateCard={updateCard} initialCardTitle={initialCardTitle} />,
+      <CardContext.Provider value={mockCard}>
+        <CardTitle updateCard={updateCard} />
+      </CardContext.Provider>,
       store,
     );
     fireEvent.click(getByTestId('cardTitleText'));
@@ -62,12 +70,14 @@ describe('CardTitle component', () => {
     fireEvent.change(cardTitleTextField, { target: { value: mockText } });
     fireEvent.blur(cardTitleTextField);
 
-    expect(updateCard).toHaveBeenCalledWith(cardID, { title: mockText });
+    expect(updateCard).toHaveBeenCalledWith(mockCard.id, { title: mockText });
   });
 
   test('should not call `updateCard` if state of `cardTitle` is blank when focus out from the card title text field', () => {
     const { getByTestId } = render(
-      <CardTitle cardID={cardID} updateCard={updateCard} initialCardTitle={initialCardTitle} />,
+      <CardContext.Provider value={mockCard}>
+        <CardTitle updateCard={updateCard} />
+      </CardContext.Provider>,
       store,
     );
     fireEvent.click(getByTestId('cardTitleText'));
@@ -80,16 +90,17 @@ describe('CardTitle component', () => {
     expect(updateCard).toHaveBeenCalledTimes(0);
   });
 
-  test('should not call `updateCard` if state of `cardTitle` is equal `initialCardTitle` when focus out from the card title text field', () => {
+  test('should not call `updateCard` if state of `cardTitle` is equal the initial card title when focus out from the card title text field', () => {
     const { getByTestId } = render(
-      <CardTitle cardID={cardID} updateCard={updateCard} initialCardTitle={initialCardTitle} />,
+      <CardContext.Provider value={mockCard}>
+        <CardTitle updateCard={updateCard} />
+      </CardContext.Provider>,
       store,
     );
     fireEvent.click(getByTestId('cardTitleText'));
 
-    const mockText = initialCardTitle;
     const cardTitleTextField = getByTestId('cardTitleTextField') as HTMLInputElement;
-    fireEvent.change(cardTitleTextField, { target: { value: mockText } });
+    fireEvent.change(cardTitleTextField, { target: { value: mockCard.title } });
     fireEvent.blur(cardTitleTextField);
 
     expect(updateCard).toHaveBeenCalledTimes(0);
