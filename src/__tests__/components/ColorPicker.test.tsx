@@ -4,7 +4,7 @@ import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import ColorPicker from '../../components/ColorPicker';
 
-describe('<ColorPicker>', () => {
+describe('ColorPicker component', () => {
   let store: Store;
   beforeEach(() => {
     store = storeFactory();

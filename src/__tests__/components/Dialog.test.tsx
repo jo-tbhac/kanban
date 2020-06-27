@@ -5,7 +5,7 @@ import { Store } from '../../store';
 import { Dialog } from '../../components/Dialog';
 import { dialogTypeSuccess, dialogTypeError, dialogTypeAsk } from '../../store/dialog/types';
 
-describe('<Dialog />', () => {
+describe('Dialog component', () => {
   let closeDialog: jest.Mock;
   let store: Store;
 
@@ -14,7 +14,7 @@ describe('<Dialog />', () => {
     store = storeFactory({ dialog: { isDialogVisible: true } });
   });
 
-  test('exist a success icon if update state `dialog: type` to `dialogTypeSuccess`', () => {
+  test('exist a success icon if props of `type` is `dialogTypeSuccess`', () => {
     const { getByTestId } = render(
       <Dialog
         type={dialogTypeSuccess}
@@ -28,7 +28,7 @@ describe('<Dialog />', () => {
     expect(getByTestId('dialogIcon')).toHaveClass('fa-check-circle');
   });
 
-  test('exist a error icon if update state `dialog: type` to `dialogTypeError`', () => {
+  test('exist a error icon if props of `type` is `dialogTypeError`', () => {
     const { getByTestId } = render(
       <Dialog
         type={dialogTypeError}
@@ -42,7 +42,7 @@ describe('<Dialog />', () => {
     expect(getByTestId('dialogIcon')).toHaveClass('fa-exclamation-circle');
   });
 
-  test('exist a question icon if update state `dialog: type` to `dialogTypeAsk`', () => {
+  test('exist a question icon if props of `type` is `dialogTypeAsk`', () => {
     const { getByTestId } = render(
       <Dialog
         type={dialogTypeAsk}
@@ -56,7 +56,7 @@ describe('<Dialog />', () => {
     expect(getByTestId('dialogIcon')).toHaveClass('fa-question-circle');
   });
 
-  test('exist a cancel button if update state `dialog: type` to `dialogTypeAsk`', () => {
+  test('exist a cancel button if props of `type` is `dialogTypeAsk`', () => {
     const { getByTestId } = render(
       <Dialog
         type={dialogTypeAsk}
@@ -70,7 +70,7 @@ describe('<Dialog />', () => {
     expect(getByTestId('dialogCancelButton')).toBeVisible();
   });
 
-  test('does not exist a cancel button if update state `dialog: type` to `dialogTypeSuccess`', () => {
+  test('does not exist a cancel button if props of `type` is `dialogTypeSuccess`', () => {
     const { queryByTestId } = render(
       <Dialog
         type={dialogTypeSuccess}
@@ -84,7 +84,7 @@ describe('<Dialog />', () => {
     expect(queryByTestId('dialogCancelButton')).toBeNull();
   });
 
-  test('does not exist a cancel button if update state `dialog: type` to `dialogTypeError`', () => {
+  test('does not exist a cancel button if props of `type` is `dialogTypeError`', () => {
     const { queryByTestId } = render(
       <Dialog
         type={dialogTypeError}

@@ -5,7 +5,7 @@ import { render, fireEvent, storeFactory } from '../../testUtils';
 import Header from '../../components/Header';
 import { Store } from '../../store';
 
-describe('<Header />', () => {
+describe('Header component', () => {
   let mockLocation: {pathname: string};
   const renderWithRouter = (component: ReactElement, store: Store) => (
     render(

@@ -5,7 +5,7 @@ import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { LabelForm } from '../../components/LabelForm';
 
-describe('<LabelForm>', () => {
+describe('LabelForm component', () => {
   let store: Store;
   let setLabelFormVisible: jest.Mock;
   let createLabel: jest.Mock;

@@ -6,7 +6,7 @@ import { Store } from '../../store';
 import { mockBoard } from '../../utils/mockData';
 import { Board } from '../../components/Board';
 
-describe('<Board>', () => {
+describe('Board component', () => {
   let fetchBoard: jest.Mock;
   let store: Store;
   beforeEach(() => {

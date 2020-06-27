@@ -6,7 +6,7 @@ import { mockCard } from '../../utils/mockData';
 import Card from '../../components/Card';
 import { CardContext } from '../../components/List';
 
-describe('card component', () => {
+describe('Card component', () => {
   let store: Store;
 
   beforeEach(() => {

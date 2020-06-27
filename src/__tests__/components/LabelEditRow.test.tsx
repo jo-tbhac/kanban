@@ -5,7 +5,7 @@ import { Store } from '../../store';
 import { mockLabel } from '../../utils/mockData';
 import { LabelEditRow } from '../../components/LabelEditRow';
 
-describe('<LabelEditRow>', () => {
+describe('LabelEditRow component', () => {
   let store: Store;
   let updateLabel: jest.Mock;
   let deleteLabel: jest.Mock;

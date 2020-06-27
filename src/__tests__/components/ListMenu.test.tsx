@@ -4,7 +4,7 @@ import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { ListMenu } from '../../components/ListMenu';
 
-describe('<ListMenu>', () => {
+describe('ListMenu component', () => {
   let store: Store;
   let setListMenuVisible: jest.Mock;
   let openDialog: jest.Mock;

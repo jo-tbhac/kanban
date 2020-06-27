@@ -6,7 +6,7 @@ import { Store } from '../../store';
 import { mockLabels } from '../../utils/mockData';
 import { LabelIndex } from '../../components/LabelIndex';
 
-describe('<LabelIndex>', () => {
+describe('LabelIndex component', () => {
   let store: Store;
   let fetchAllLabel: jest.Mock;
 
@@ -15,7 +15,7 @@ describe('<LabelIndex>', () => {
     fetchAllLabel = jest.fn();
   });
 
-  test('should show `LabelEdit` when state of `isLabelEditVisible` is true', () => {
+  test('should show `LabelEdit` if state of `isLabelEditVisible` is true', () => {
     const { getByTestId } = renderWithRouter(
       <LabelIndex fetchAllLabel={fetchAllLabel} labels={mockLabels} />,
       store,
@@ -25,7 +25,7 @@ describe('<LabelIndex>', () => {
     expect(getByTestId('labelEdit')).toBeVisible();
   });
 
-  test('should hide `LabelEdit` when state of `isLabelEditVisible` is false', () => {
+  test('should hide `LabelEdit` if state of `isLabelEditVisible` is false', () => {
     const { queryByTestId } = renderWithRouter(
       <LabelIndex fetchAllLabel={fetchAllLabel} labels={mockLabels} />,
       store,

@@ -5,7 +5,7 @@ import { mockBoards } from '../../utils/mockData';
 import { Store } from '../../store';
 import { BoardForm } from '../../components/BoardForm';
 
-describe('<BoardForm />', () => {
+describe('BoardForm component', () => {
   let createBoard: jest.Mock;
   let store: Store;
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('<BoardForm />', () => {
     createBoard = jest.fn();
   });
 
-  test('exists a newBoardCard and does not exist newBoardForm if state of `isFormVisible` is false', () => {
+  test('should show the new board button if state of `isFormVisible` is false', () => {
     const { getByTestId, queryByTestId } = renderWithRouter(
       <BoardForm boards={mockBoards} createBoard={createBoard} />,
       store,
@@ -23,7 +23,7 @@ describe('<BoardForm />', () => {
     expect(queryByTestId('newBoardForm')).toBeNull();
   });
 
-  test('exists a newBoardForm and does not exist newBoardCard if state of `isFormVisible` is true', () => {
+  test('should show the new board form if state of `isFormVisible` is true', () => {
     const { getByTestId, queryByTestId } = renderWithRouter(
       <BoardForm boards={mockBoards} createBoard={createBoard} />,
       store,
@@ -33,7 +33,7 @@ describe('<BoardForm />', () => {
     expect(queryByTestId('newBoardCard')).toBeNull();
   });
 
-  test('update state of `boardName` if boardName text field upon changed', () => {
+  test('update state of `boardName` when the board name text field changed', () => {
     const { getByTestId } = renderWithRouter(
       <BoardForm boards={mockBoards} createBoard={createBoard} />,
       store,

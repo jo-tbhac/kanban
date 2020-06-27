@@ -4,7 +4,7 @@ import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import ToolBar from '../../components/ToolBar';
 
-describe('<ToolBar>', () => {
+describe('ToolBar component', () => {
   let store: Store;
   beforeEach(() => {
     store = storeFactory();
