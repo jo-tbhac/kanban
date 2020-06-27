@@ -6,6 +6,7 @@ export const unAuthorizationTitle = '認証に失敗しました';
 export const cancelButtonText = 'キャンセル';
 export const confirmButtonText = 'OK';
 export const createButtonText = '作成';
+export const saveButtonText = '保存';
 
 // Session
 export const failedSignUpTitle = 'サインアップに失敗しました';
