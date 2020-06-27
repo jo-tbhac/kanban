@@ -17,24 +17,4 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 5px;
-  &__submit {
-    @include small-button();
-    background-color: $teal;
-    border: none;
-    color: white;
-    margin-left: 10px;
-    width: fit-content;
-    &:hover {
-      background-color: $teal-lighten;
-      color: white;
-    }
-    &:disabled {
-      background-color: #bbb;
-      cursor: not-allowed;
-    }
-  }
-  &__cancel {
-    @include small-button();
-    width: fit-content;
-  }
 }

@@ -2,8 +2,10 @@ import React, { useState, Dispatch, SetStateAction } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import ButtonSubmit from './ButtonSubmit';
+import ButtonCancel from './ButtonCancel';
 import * as listActions from '../store/list/actions';
-import { createButtonText, cancelButtonText, listNameFormPlaceholder } from '../utils/text';
+import { createButtonText, listNameFormPlaceholder } from '../utils/text';
 
 const mapDispatchToProps = {
   createList: listActions.createList,
@@ -44,23 +46,12 @@ export const ListForm = (props: ListFormProps) => {
         />
       </div>
       <div className="listFormButton">
-        <button
-          data-testid="listFormCancelButton"
-          type="button"
-          onClick={() => setListFormVisible(false)}
-          className="listFormButton__cancel"
-        >
-          {cancelButtonText}
-        </button>
-        <button
-          data-testid="listFormSubmitButton"
-          type="button"
+        <ButtonCancel onClick={() => setListFormVisible(false)} />
+        <ButtonSubmit
           onClick={onClickSubmit}
           disabled={listName === ''}
-          className="listFormButton__submit"
-        >
-          {createButtonText}
-        </button>
+          buttonText={createButtonText}
+        />
       </div>
     </div>
   );

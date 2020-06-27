@@ -46,7 +46,7 @@ describe('CardDescriptionForm component', () => {
       store,
     );
 
-    fireEvent.click(getByTestId('cardDescriptionFormCancelButton'));
+    fireEvent.click(getByTestId('buttonCancel'));
     expect(closeCardDescriptionForm).toHaveBeenCalled();
   });
 
@@ -64,7 +64,7 @@ describe('CardDescriptionForm component', () => {
     const textarea = getByRole('textbox') as HTMLTextAreaElement;
     const mockText = 'update description';
     fireEvent.change(textarea, { target: { value: mockText } });
-    fireEvent.click(getByTestId('cardDescriptionFormSubmitButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(updateCard).toHaveBeenCalledWith(mockCard.id, { description: mockText });
     expect(closeCardDescriptionForm).toHaveBeenCalled();
@@ -81,7 +81,7 @@ describe('CardDescriptionForm component', () => {
       store,
     );
 
-    fireEvent.click(getByTestId('cardDescriptionFormSubmitButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(updateCard).toHaveBeenCalledTimes(0);
     expect(closeCardDescriptionForm).toHaveBeenCalled();

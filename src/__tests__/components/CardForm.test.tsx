@@ -33,7 +33,7 @@ describe('CardForm component', () => {
       <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
-    fireEvent.click(getByTestId('cardFormCancelButton'));
+    fireEvent.click(getByTestId('buttonCancel'));
 
     expect(setCardFormVisible).toHaveBeenCalledWith(false);
   });
@@ -43,7 +43,7 @@ describe('CardForm component', () => {
       <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
-    expect(getByTestId('cardFormSubmitButton')).toBeDisabled();
+    expect(getByTestId('buttonSubmit')).toBeDisabled();
   });
 
   test('enabled the submit button if state of `cardTitle` is not blank', () => {
@@ -55,7 +55,7 @@ describe('CardForm component', () => {
     const cardFormTextArea = getByTestId('cardFormTextArea') as HTMLTextAreaElement;
     fireEvent.change(cardFormTextArea, { target: { value: mockText } });
 
-    expect(getByTestId('cardFormSubmitButton')).toBeEnabled();
+    expect(getByTestId('buttonSubmit')).toBeEnabled();
   });
 
   test('should not call `createCard` and `setCardFormVisible` if state of `cardTitle` is blank when clicked the submit button', () => {
@@ -63,7 +63,7 @@ describe('CardForm component', () => {
       <CardForm setCardFormVisible={setCardFormVisible} createCard={createCard} listId={listId} />,
       store,
     );
-    fireEvent.click(getByTestId('cardFormSubmitButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(createCard).toHaveBeenCalledTimes(0);
     expect(setCardFormVisible).toHaveBeenCalledTimes(0);
@@ -88,7 +88,7 @@ describe('CardForm component', () => {
     const mockText = 'sample card';
     const cardFormTextArea = getByTestId('cardFormTextArea') as HTMLTextAreaElement;
     fireEvent.change(cardFormTextArea, { target: { value: mockText } });
-    fireEvent.click(getByTestId('cardFormSubmitButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(createCard).toHaveBeenCalledWith(listId, { title: mockText });
     expect(setCardFormVisible).toHaveBeenCalledWith(false);

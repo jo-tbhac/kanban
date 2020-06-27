@@ -36,7 +36,7 @@ describe('<LabelForm>', () => {
       store,
     );
 
-    fireEvent.click(getByTestId('labelFormCancelButton'));
+    fireEvent.click(getByTestId('buttonCancel'));
     expect(setLabelFormVisible).toHaveBeenCalledWith(false);
   });
 
@@ -56,7 +56,7 @@ describe('<LabelForm>', () => {
       store,
     );
 
-    const createLabelButton = getByTestId('labelFormSubmitButton') as HTMLButtonElement;
+    const createLabelButton = getByTestId('buttonSubmit') as HTMLButtonElement;
     expect(createLabelButton.disabled).toBeTruthy();
   });
 
@@ -72,7 +72,7 @@ describe('<LabelForm>', () => {
     fireEvent.change(labelNameTextField, { target: { value: mockText } });
     expect(labelNameTextField.value).toBe(mockText);
 
-    const createLabelButton = getByTestId('labelFormSubmitButton') as HTMLButtonElement;
+    const createLabelButton = getByTestId('buttonSubmit') as HTMLButtonElement;
     expect(createLabelButton.disabled).toBeFalsy();
   });
 
@@ -92,7 +92,7 @@ describe('<LabelForm>', () => {
     const labelNameTextField = getByTestId('labelNameTextField') as HTMLInputElement;
     const mockText = 'label';
     fireEvent.change(labelNameTextField, { target: { value: mockText } });
-    fireEvent.click(getByTestId('labelFormSubmitButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(createLabel).toHaveBeenCalledWith(boardId, { name: mockText, color: '#e53935' });
   });
@@ -113,7 +113,7 @@ describe('<LabelForm>', () => {
     const labelNameTextField = getByTestId('labelNameTextField') as HTMLInputElement;
     const mockText = 'label';
     fireEvent.change(labelNameTextField, { target: { value: mockText } });
-    fireEvent.click(getByTestId('labelFormSubmitButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(createLabel).not.toHaveBeenCalled();
   });

@@ -41,7 +41,7 @@ describe('<BoardForm />', () => {
     fireEvent.click(getByTestId('newBoardCard'));
 
     const boardNameTextField = getByTestId('boardNameTextField') as HTMLInputElement;
-    const createBoardButton = getByTestId('createBoardButton') as HTMLButtonElement;
+    const createBoardButton = getByTestId('buttonSubmit') as HTMLButtonElement;
 
     expect(boardNameTextField.value).toBe('');
 
@@ -58,7 +58,7 @@ describe('<BoardForm />', () => {
     );
     fireEvent.click(getByTestId('newBoardCard'));
 
-    const createBoardButton = getByTestId('createBoardButton') as HTMLButtonElement;
+    const createBoardButton = getByTestId('buttonSubmit') as HTMLButtonElement;
     expect(createBoardButton.disabled).toBeTruthy();
   });
 
@@ -72,7 +72,7 @@ describe('<BoardForm />', () => {
     const mockText = 'new board';
     const boardNameTextField = getByTestId('boardNameTextField') as HTMLInputElement;
     fireEvent.change(boardNameTextField, { target: { value: mockText } });
-    fireEvent.click(getByTestId('createBoardButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(createBoard).toHaveBeenCalledWith({ name: mockText });
   });

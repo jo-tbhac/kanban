@@ -8,8 +8,10 @@ import React, {
 
 import { connect, ConnectedProps } from 'react-redux';
 
+import ButtonSubmit from './ButtonSubmit';
+import ButtonCancel from './ButtonCancel';
 import * as cardActions from '../store/card/actions';
-import { cardNameFormPlaceholder, createButtonText, cancelButtonText } from '../utils/text';
+import { cardNameFormPlaceholder, createButtonText } from '../utils/text';
 
 const mapDispatchToProps = {
   createCard: cardActions.createCard,
@@ -65,23 +67,8 @@ export const CardForm = (props: CardFormProps) => {
         className="cardForm__textField"
       />
       <div className="cardFormButton">
-        <button
-          data-testid="cardFormCancelButton"
-          type="button"
-          onClick={() => setCardFormVisible(false)}
-          className="cardFormButton__cancel"
-        >
-          {cancelButtonText}
-        </button>
-        <button
-          data-testid="cardFormSubmitButton"
-          type="button"
-          onClick={submit}
-          disabled={cardTitle === ''}
-          className="cardFormButton__submit"
-        >
-          {createButtonText}
-        </button>
+        <ButtonCancel onClick={() => setCardFormVisible(false)} />
+        <ButtonSubmit onClick={submit} disabled={cardTitle === ''} buttonText={createButtonText} />
       </div>
     </div>
   );
