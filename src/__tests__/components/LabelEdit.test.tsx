@@ -4,7 +4,7 @@ import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import LabelEdit from '../../components/LabelEdit';
 
-describe('<LabelEdit>', () => {
+describe('LabelEdit component', () => {
   let store: Store;
   beforeEach(() => {
     store = storeFactory();

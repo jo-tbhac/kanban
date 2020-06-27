@@ -5,7 +5,7 @@ import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { BoardNameForm } from '../../components/BoardNameForm';
 
-describe('<BoardNameForm>', () => {
+describe('BoardNameForm component', () => {
   let store: Store;
   let setFormVisible: jest.Mock;
   let updateBoard: jest.Mock;
@@ -17,7 +17,7 @@ describe('<BoardNameForm>', () => {
     updateBoard = jest.fn();
   });
 
-  test('update state `boardName` upon changed board name text field', () => {
+  test('update state of `boardName` when the board name text field changed', () => {
     const { getByTestId } = renderWithRouter(
       <BoardNameForm
         updateBoard={updateBoard}
@@ -34,7 +34,7 @@ describe('<BoardNameForm>', () => {
     expect(boardNameForm.value).toBe(inputBoardName);
   });
 
-  test('should not call updateBoard if state of `boardName` is blank when focus out from a board name text field', () => {
+  test('should not call `updateBoard` if state of `boardName` is blank when focus out from a board name text field', () => {
     const { getByTestId } = renderWithRouter(
       <BoardNameForm
         updateBoard={updateBoard}

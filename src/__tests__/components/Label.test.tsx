@@ -5,7 +5,7 @@ import { mockLabel } from '../../utils/mockData';
 import { Store } from '../../store';
 import Label from '../../components/Label';
 
-describe('<Label>', () => {
+describe('Label component', () => {
   let store: Store;
 
   beforeEach(() => {

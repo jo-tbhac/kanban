@@ -6,7 +6,7 @@ import { BoardIndex } from '../../components/BoardIndex';
 import { mockBoards } from '../../utils/mockData';
 import { Store } from '../../store';
 
-describe('<BoardIndex />', () => {
+describe('BoardIndex component', () => {
   let store: Store;
   let fetchAllBoards: jest.Mock;
   let mockLocation: {pathname: string};

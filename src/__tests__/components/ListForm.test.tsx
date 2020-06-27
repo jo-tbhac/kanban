@@ -5,7 +5,7 @@ import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { ListForm } from '../../components/ListForm';
 
-describe('<ListForm>', () => {
+describe('ListForm component', () => {
   let store: Store;
   let createList: jest.Mock;
   let setListFormVisible: jest.Mock;
@@ -16,7 +16,7 @@ describe('<ListForm>', () => {
     setListFormVisible = jest.fn();
   });
 
-  test('update state of `listName` upon list name text field changed', () => {
+  test('update state of `listName` when a list name text field changed', () => {
     const { getByTestId } = renderWithRouter(
       <ListForm setListFormVisible={setListFormVisible} createList={createList} />,
       store,

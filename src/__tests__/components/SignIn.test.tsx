@@ -5,7 +5,7 @@ import { storeFactory, renderWithRouter } from '../../testUtils';
 import { Store } from '../../store';
 import SignIn from '../../components/SignIn';
 
-describe('<SignIn />', () => {
+describe('SignIn component', () => {
   let store: Store;
   beforeEach(() => {
     store = storeFactory();
