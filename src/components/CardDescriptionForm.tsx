@@ -2,9 +2,11 @@ import React, { useState, useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { CardContext } from './List';
+import ButtonSubmit from './ButtonSubmit';
+import ButtonCancel from './ButtonCancel';
 import FlexTextArea from './FlexTextArea';
 import * as cardActions from '../store/card/actions';
-import { createButtonText, cancelButtonText } from '../utils/text';
+import { saveButtonText } from '../utils/text';
 
 const mapDispatchToProps = {
   updateCard: cardActions.updateCard,
@@ -41,22 +43,8 @@ export const CardDescriptionForm = (props: CardDescriptionFormProps) => {
         onChange={(event) => setCardDescription(event.target.value)}
       />
       <div className="cardDescriptionFormButton">
-        <button
-          data-testid="cardDescriptionFormCancelButton"
-          type="button"
-          onClick={closeCardDescriptionForm}
-          className="cardDescriptionFormButton__cancel"
-        >
-          {cancelButtonText}
-        </button>
-        <button
-          data-testid="cardDescriptionFormSubmitButton"
-          type="button"
-          onClick={onClickSubmit}
-          className="cardDescriptionFormButton__submit"
-        >
-          {createButtonText}
-        </button>
+        <ButtonCancel onClick={closeCardDescriptionForm} />
+        <ButtonSubmit onClick={onClickSubmit} buttonText={saveButtonText} />
       </div>
     </div>
   );

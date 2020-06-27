@@ -1,0 +1,4 @@
+.buttonCancel {
+  @include small-button();
+  width: fit-content;
+}

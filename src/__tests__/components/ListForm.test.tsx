@@ -34,7 +34,7 @@ describe('<ListForm>', () => {
       store,
     );
 
-    fireEvent.click(getByTestId('listFormCancelButton'));
+    fireEvent.click(getByTestId('buttonCancel'));
     expect(setListFormVisible).toHaveBeenCalledWith(false);
   });
 
@@ -44,7 +44,7 @@ describe('<ListForm>', () => {
       store,
     );
 
-    const listFormSubmitButton = getByTestId('listFormSubmitButton') as HTMLButtonElement;
+    const listFormSubmitButton = getByTestId('buttonSubmit') as HTMLButtonElement;
     expect(listFormSubmitButton.disabled).toBeTruthy();
   });
 
@@ -54,7 +54,7 @@ describe('<ListForm>', () => {
       store,
     );
 
-    const listFormSubmitButton = getByTestId('listFormSubmitButton') as HTMLButtonElement;
+    const listFormSubmitButton = getByTestId('buttonSubmit') as HTMLButtonElement;
     expect(listFormSubmitButton.disabled).toBeTruthy();
   });
 
@@ -67,7 +67,7 @@ describe('<ListForm>', () => {
     const listNameTextField = getByTestId('listNameTextField') as HTMLInputElement;
     fireEvent.change(listNameTextField, { target: { value: mockText } });
 
-    const listFormSubmitButton = getByTestId('listFormSubmitButton') as HTMLButtonElement;
+    const listFormSubmitButton = getByTestId('buttonSubmit') as HTMLButtonElement;
     expect(listFormSubmitButton.disabled).toBeFalsy();
   });
 
@@ -86,7 +86,7 @@ describe('<ListForm>', () => {
     const mockText = 'sample list';
     const listNameTextField = getByTestId('listNameTextField') as HTMLInputElement;
     fireEvent.change(listNameTextField, { target: { value: mockText } });
-    fireEvent.click(getByTestId('listFormSubmitButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(createList).toHaveBeenCalledWith(boardId, { name: mockText });
     expect(setListFormVisible).toHaveBeenCalledWith(false);
@@ -107,7 +107,7 @@ describe('<ListForm>', () => {
     const mockText = 'sample list';
     const listNameTextField = getByTestId('listNameTextField') as HTMLInputElement;
     fireEvent.change(listNameTextField, { target: { value: mockText } });
-    fireEvent.click(getByTestId('listFormSubmitButton'));
+    fireEvent.click(getByTestId('buttonSubmit'));
 
     expect(createList).not.toHaveBeenCalled();
     expect(setListFormVisible).toHaveBeenCalledWith(false);

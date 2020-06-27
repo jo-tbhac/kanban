@@ -4,13 +4,10 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { RootState } from '../store';
+import ButtonSubmit from './ButtonSubmit';
+import ButtonCancel from './ButtonCancel';
 import * as boardActions from '../store/board/actions';
-import {
-  newBoardFormTitle,
-  boardNameFormPlaceholder,
-  createButtonText,
-  cancelButtonText,
-} from '../utils/text';
+import { newBoardFormTitle, boardNameFormPlaceholder, createButtonText } from '../utils/text';
 
 const mapStateToProps = (state: RootState) => {
   const { board } = state;
@@ -86,18 +83,12 @@ export const BoardForm = (props: PropsFromRedux) => {
           />
         </div>
         <div className="boardFormCardButton">
-          <button type="button" onClick={onCancel} className="boardFormCardButton__cancel">
-            {cancelButtonText}
-          </button>
-          <button
-            data-testid="createBoardButton"
-            type="button"
+          <ButtonCancel onClick={onCancel} />
+          <ButtonSubmit
             onClick={onClickSubmit}
-            className="boardFormCardButton__submit"
             disabled={boardName === ''}
-          >
-            {createButtonText}
-          </button>
+            buttonText={createButtonText}
+          />
         </div>
       </div>
     ) : (

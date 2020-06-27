@@ -3,8 +3,10 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import ColorPicker from './ColorPicker';
+import ButtonSubmit from './ButtonSubmit';
+import ButtonCancel from './ButtonCancel';
 import * as labelActions from '../store/label/actions';
-import { labelNameFormPlaceholder, createButtonText, cancelButtonText } from '../utils/text';
+import { labelNameFormPlaceholder, createButtonText } from '../utils/text';
 
 const mapDispatchToProps = {
   createLabel: labelActions.createLabel,
@@ -64,23 +66,12 @@ export const LabelForm = (props: LabelFormProps) => {
         />
       </div>
       <div className="labelFormButton">
-        <button
-          data-testid="labelFormCancelButton"
-          type="button"
-          onClick={() => setLabelFormVisible(false)}
-          className="labelFormButton__cancel"
-        >
-          {cancelButtonText}
-        </button>
-        <button
-          data-testid="labelFormSubmitButton"
-          type="button"
+        <ButtonCancel onClick={() => setLabelFormVisible(false)} />
+        <ButtonSubmit
           onClick={onClickSubmit}
           disabled={labelName === ''}
-          className="labelFormButton__submit"
-        >
-          {createButtonText}
-        </button>
+          buttonText={createButtonText}
+        />
       </div>
     </div>
   );

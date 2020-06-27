@@ -1,0 +1,16 @@
+.buttonSubmit {
+  @include small-button();
+  background-color: $teal;
+  border: none;
+  color: white;
+  margin-left: 10px;
+  width: fit-content;
+  &:hover {
+    background-color: $teal-lighten;
+    color: white;
+  }
+  &:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+  }
+}
