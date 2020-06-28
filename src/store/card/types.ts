@@ -1,15 +1,20 @@
-import { Label } from '../label/types';
-
 export const CREATE_CARD = 'CREATE_CARD';
 export const UPDATE_CARD = 'UPDATE_CARD';
 export const DELETE_CARD = 'DELETE_CARD';
+export const ATTACH_LABEL = 'ATTACH_LABEL';
 
 export interface Card {
   id: number
   title: string
   description: string
   listId: number
-  labels: Label[]
+  labels: { id: number }[]
+}
+
+export interface CardLabelPayload {
+  listId: number
+  cardId: number
+  labelId: number
 }
 
 type CreateCardAction = {
@@ -27,4 +32,13 @@ type DeleteCardAction = {
   payload: { cardId: number, listId: number }
 }
 
-export type CardActionTypes = CreateCardAction | UpdateCardAction | DeleteCardAction;
+type AttachLabelAction = {
+  type: typeof ATTACH_LABEL
+  payload: CardLabelPayload
+}
+
+export type CardActionTypes =
+  CreateCardAction
+  | UpdateCardAction
+  | DeleteCardAction
+  | AttachLabelAction;
