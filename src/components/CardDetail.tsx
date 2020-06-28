@@ -8,6 +8,7 @@ import React, {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import CardTitle from './CardTitle';
+import CardLabelContainer from './CardLabelContainer';
 import CardDescription from './CardDescription';
 import CardSideBar from './CardSideBar';
 
@@ -51,16 +52,7 @@ const CardDetail = (props: CardDetailProps) => {
         </div>
         <div className="cardDetail">
           <div className="cardDetailMain">
-            <div className="cardDetailRow">
-              <div className="cardDetailRow__label">ラベル</div>
-              <div className="cardDetailLabel">
-                <div className="cardDetailLabel__text">Development</div>
-                <div className="cardDetailLabel__icon">
-                  <FontAwesomeIcon icon={['fas', 'plus']} />
-                </div>
-              </div>
-            </div>
-
+            <CardLabelContainer />
             <CardDescription />
           </div>
           <CardSideBar />
