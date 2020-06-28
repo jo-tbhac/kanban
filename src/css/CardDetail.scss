@@ -48,37 +48,7 @@
 }
 
 .cardDetailMain {
-  cursor: pointer;
   flex: 1;
+  min-width: 0;
   padding: 0 10px;
-}
-
-.cardDetailRow {
-  margin-bottom: 15px;
-  &__label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-}
-
-.cardDetailLabel {
-  display: flex;
-  font-size: 0.9rem;
-  &__text {
-    background-color: red;
-    border-radius: 3px;
-    color: white;
-    cursor: pointer;
-    margin-right: 5px;
-    padding: 5px;
-  }
-  &__icon {
-    background-color: $card-element-background;
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 5px 8px;
-    &:hover {
-      background-color: $card-element-hover-background;
-    }
-  }
 }

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { CardContext } from './List';
 import CardDetail from './CardDetail';
+import CardLabelSmall from './CardLabelSmall';
 
 const Card = () => {
   const card = useContext(CardContext);
@@ -19,13 +20,9 @@ const Card = () => {
         onKeyPress={() => setCardDetailVisible(true)}
         className="card"
       >
-        <div className="cardLabelContainer">
+        <div className="cardLabelWrapper">
           {card?.labels?.map((label) => (
-            <div
-              key={`${card.id}-${label.id}`}
-              style={{ backgroundColor: label.color }}
-              className="cardLabel"
-            />
+            <CardLabelSmall key={`${card.id}-${label.id}`} label={label} />
           ))}
         </div>
 
