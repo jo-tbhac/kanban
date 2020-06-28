@@ -1,0 +1,21 @@
+.cardLabelFormRow {
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  font-weight: 500;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  &__name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &--attached {
+    @extend .cardLabelFormRow;
+    &::after {
+      content: '✔︎';
+    }
+  }
+}
