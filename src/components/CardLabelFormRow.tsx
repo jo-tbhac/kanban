@@ -17,7 +17,7 @@ type CardLabelFormRowProps = PropsFromRedux & {
   label: Label
 }
 
-const CardLabelFormRow = (props: CardLabelFormRowProps) => {
+export const CardLabelFormRow = (props: CardLabelFormRowProps) => {
   const { label, attachLabel } = props;
 
   const card = useContext(CardContext);
@@ -40,6 +40,7 @@ const CardLabelFormRow = (props: CardLabelFormRowProps) => {
 
   return (
     <div
+      data-testid={`cardLabelFormRow-${label.id}`}
       role="button"
       tabIndex={0}
       onClick={onClickLabel}
