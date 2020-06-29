@@ -9,6 +9,7 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   ATTACH_LABEL,
+  DETACH_LABEL,
   CardLabelPayload,
 } from './types';
 
@@ -17,6 +18,7 @@ import {
   failedUpdateCard,
   failedDeleteCard,
   failedAttachLabel,
+  failedDetachLabel,
 } from '../../utils/text';
 
 export const createCard = (listId: number, params: { title: string }) => (
@@ -98,6 +100,25 @@ export const attachLabel = (payload: CardLabelPayload) => async (dispatch: AppDi
     const dialogProps = {
       type: dialogTypeError as DialogTypes,
       title: failedAttachLabel,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+  }
+};
+
+export const detachLabel = (payload: CardLabelPayload) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.delete(`/card/${payload.cardId}/card_label/${payload.labelId}`);
+
+  if (response?.status === 200) {
+    dispatch({ type: DETACH_LABEL, payload });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedDetachLabel,
       description: joinErrors(response.data.errors),
     };
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });

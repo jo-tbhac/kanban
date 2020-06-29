@@ -7,6 +7,7 @@ import { CardContext } from './List';
 
 const mapDispatchToProps = {
   attachLabel: cardActions.attachLabel,
+  detachLabel: cardActions.detachLabel,
 };
 
 const connector = connect(null, mapDispatchToProps);
@@ -18,7 +19,7 @@ type CardLabelFormRowProps = PropsFromRedux & {
 }
 
 export const CardLabelFormRow = (props: CardLabelFormRowProps) => {
-  const { label, attachLabel } = props;
+  const { label, attachLabel, detachLabel } = props;
 
   const card = useContext(CardContext);
 
@@ -33,8 +34,13 @@ export const CardLabelFormRow = (props: CardLabelFormRowProps) => {
     if (card === null) {
       return;
     }
+
     const payload = { cardId: card.id, listId: card.listId, labelId: label.id };
-    attachLabel(payload);
+    if (isAttached) {
+      detachLabel(payload);
+    } else {
+      attachLabel(payload);
+    }
     setIsAttached(!isAttached);
   };
 

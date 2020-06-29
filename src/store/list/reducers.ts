@@ -11,6 +11,7 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   ATTACH_LABEL,
+  DETACH_LABEL,
   CardActionTypes,
 } from '../card/types';
 
@@ -38,7 +39,8 @@ const listReducer = (lists: List[] = [], action: ListActionTypes | CardActionTyp
     case CREATE_CARD:
     case UPDATE_CARD:
     case DELETE_CARD:
-    case ATTACH_LABEL: {
+    case ATTACH_LABEL:
+    case DETACH_LABEL: {
       const targetList = lists.find((list) => list.id === action.payload.listId);
       if (targetList === undefined) {
         return { lists };

@@ -49,4 +49,5 @@ export const failedCreateCard = 'カードを作成できませんでした';
 export const failedUpdateCard = 'カードを更新できませんでした';
 export const failedDeleteCard = 'カードを削除できませんでした';
 export const failedAttachLabel = 'ラベルを追加できませんでした';
+export const failedDetachLabel = 'ラベルを削除できませんでした';
 export const askCardDeleteDialog = 'このカードを削除してよろしいですか？';
