@@ -5,8 +5,19 @@ import { storeFactory } from '../../../testUtils';
 import { mockCard, mockListsWithCard } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedCreateCard, failedUpdateCard, failedDeleteCard } from '../../../utils/text';
-import { createCard, updateCard, deleteCard } from '../../../store/card/actions';
+import {
+  failedCreateCard,
+  failedUpdateCard,
+  failedDeleteCard,
+  failedAttachLabel,
+} from '../../../utils/text';
+
+import {
+  createCard,
+  updateCard,
+  deleteCard,
+  attachLabel,
+} from '../../../store/card/actions';
 
 describe('card actions', () => {
   let store: Store;
@@ -163,6 +174,52 @@ describe('card actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedDeleteCard);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state of `selectedBoard` that attached a label to card upon dispatch an action `attachLabel` is successful', () => {
+    const payload = { cardId: 1, labelId: 1, listId: 1 };
+    const responseData = { label: { id: payload.labelId } };
+    mock.onPost(`/card/${payload.cardId}/card_label`).reply(201, responseData);
+
+    const previousState = store.getState().board;
+    const previousList = previousState.selectedBoard.lists.find((list) => (
+      list.id === payload.listId
+    ));
+
+    const previousCard = previousList?.cards.find((card) => card.id === payload.cardId);
+
+    if (previousCard === undefined) {
+      return expect(previousList).not.toBeUndefined();
+    }
+    const previousLabelLength = previousCard.labels.length;
+
+    return store.dispatch(attachLabel(payload) as any)
+      .then(() => {
+        const { board } = store.getState();
+        const targetList = board.selectedBoard.lists.find((list) => list.id === payload.listId);
+        if (targetList === undefined) {
+          expect(targetList).not.toBeUndefined();
+        } else {
+          const targetCard = targetList.cards.find((card) => card.id === payload.cardId);
+          expect(targetCard?.labels).toContainEqual({ id: payload.labelId });
+          expect(targetCard?.labels.length).toBe(previousLabelLength + 1);
+        }
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `attachLabel` and recieved status 400 from server', () => {
+    const payload = { cardId: 1, labelId: 1, listId: 1 };
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onPost(`/card/${payload.cardId}/card_label`).reply(400, responseData);
+
+    return store.dispatch(attachLabel(payload) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedAttachLabel);
         expect(dialog.description).toBe('some error...');
       });
   });
