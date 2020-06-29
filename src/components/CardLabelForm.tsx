@@ -21,14 +21,15 @@ type CardLabelFormProps = PropsFromRedux & {
   closeCardLabelForm: () => void
 }
 
-const CardLabelForm = (props: CardLabelFormProps) => {
+export const CardLabelForm = (props: CardLabelFormProps) => {
   const { labels, closeCardLabelForm } = props;
 
   return (
-    <div className="cardLabelForm">
+    <div data-testid="cardLabelForm" className="cardLabelForm">
       <div className="cardLabelFormHeader">
         <div className="cardLabelFormHeader__text">{addLabelText}</div>
         <div
+          data-testid="cardLabelFormCloseButton"
           role="button"
           tabIndex={0}
           onClick={closeCardLabelForm}
