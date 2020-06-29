@@ -3,6 +3,7 @@ import {
   UPDATE_CARD,
   DELETE_CARD,
   ATTACH_LABEL,
+  DETACH_LABEL,
   Card,
   CardActionTypes,
 } from './types';
@@ -29,6 +30,17 @@ const cardReducer = (cards: Card[], action: CardActionTypes) => {
 
       const previousLabels = targetCard.labels ? targetCard.labels : [];
       targetCard.labels = [...previousLabels, { id: action.payload.labelId }];
+      return {
+        cards: cards.map((card) => (card.id === targetCard.id ? targetCard : card)),
+      };
+    }
+    case DETACH_LABEL: {
+      const targetCard = cards.find((card) => card.id === action.payload.cardId);
+      if (targetCard === undefined) {
+        return { cards };
+      }
+      targetCard.labels = targetCard.labels.filter((label) => label.id !== action.payload.labelId);
+
       return {
         cards: cards.map((card) => (card.id === targetCard.id ? targetCard : card)),
       };

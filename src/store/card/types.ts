@@ -2,6 +2,7 @@ export const CREATE_CARD = 'CREATE_CARD';
 export const UPDATE_CARD = 'UPDATE_CARD';
 export const DELETE_CARD = 'DELETE_CARD';
 export const ATTACH_LABEL = 'ATTACH_LABEL';
+export const DETACH_LABEL = 'DETACH_LABEL';
 
 export interface Card {
   id: number
@@ -37,8 +38,14 @@ type AttachLabelAction = {
   payload: CardLabelPayload
 }
 
+type DetachLabelAction = {
+  type: typeof DETACH_LABEL
+  payload: CardLabelPayload
+}
+
 export type CardActionTypes =
   CreateCardAction
   | UpdateCardAction
   | DeleteCardAction
-  | AttachLabelAction;
+  | AttachLabelAction
+  | DetachLabelAction;

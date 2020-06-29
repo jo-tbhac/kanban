@@ -2,7 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 
 import { storeFactory } from '../../../testUtils';
-import { mockCard, mockListsWithCard } from '../../../utils/mockData';
+import { mockCard, mockListsWithCard, mockListsWithCardLabel } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
 import {
@@ -10,6 +10,7 @@ import {
   failedUpdateCard,
   failedDeleteCard,
   failedAttachLabel,
+  failedDetachLabel,
 } from '../../../utils/text';
 
 import {
@@ -17,6 +18,7 @@ import {
   updateCard,
   deleteCard,
   attachLabel,
+  detachLabel,
 } from '../../../store/card/actions';
 
 describe('card actions', () => {
@@ -220,6 +222,52 @@ describe('card actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedAttachLabel);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state of `selectedBoard` that detached a label from card upon dispatch an action `detachLabel` is successful', () => {
+    store = storeFactory({ board: { selectedBoard: { lists: mockListsWithCardLabel } } });
+
+    const payload = { cardId: 1, labelId: 1, listId: 1 };
+    mock.onDelete(`/card/${payload.cardId}/card_label/${payload.labelId}`).reply(200);
+
+    const previousState = store.getState().board;
+    const previousList = previousState.selectedBoard.lists.find((list) => (
+      list.id === payload.listId
+    ));
+
+    const previousCard = previousList?.cards.find((card) => card.id === payload.cardId);
+
+    if (previousCard === undefined) {
+      return expect(previousList).not.toBeUndefined();
+    }
+    const previousLabelLength = previousCard.labels.length;
+
+    return store.dispatch(detachLabel(payload) as any)
+      .then(() => {
+        const { board } = store.getState();
+        const targetList = board.selectedBoard.lists.find((list) => list.id === payload.listId);
+        if (targetList === undefined) {
+          expect(targetList).not.toBeUndefined();
+        } else {
+          const targetCard = targetList.cards.find((card) => card.id === payload.cardId);
+          expect(targetCard?.labels.length).toBe(previousLabelLength - 1);
+        }
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `detachLabel` and recieved status 400 from server', () => {
+    const payload = { cardId: 1, labelId: 1, listId: 1 };
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onDelete(`/card/${payload.cardId}/card_label/${payload.labelId}`).reply(400, responseData);
+
+    return store.dispatch(detachLabel(payload) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedDetachLabel);
         expect(dialog.description).toBe('some error...');
       });
   });

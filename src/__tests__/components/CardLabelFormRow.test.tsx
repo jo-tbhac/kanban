@@ -9,17 +9,19 @@ import { CardContext } from '../../components/List';
 describe('CardLabelFormRow component', () => {
   let store: Store;
   let attachLabel: jest.Mock;
+  let detachLabel: jest.Mock;
 
   beforeEach(() => {
     store = storeFactory();
     attachLabel = jest.fn();
+    detachLabel = jest.fn();
   });
 
   test('should class name contain modifire of `--attached` if `card.labels` includes props of `label`', () => {
     const mockLabel = mockLabels[0];
     const { getByTestId } = render(
       <CardContext.Provider value={{ ...mockCard, labels: mockLabels }}>
-        <CardLabelFormRow label={mockLabel} attachLabel={attachLabel} />
+        <CardLabelFormRow label={mockLabel} attachLabel={attachLabel} detachLabel={detachLabel} />
       </CardContext.Provider>,
       store,
     );
@@ -32,7 +34,7 @@ describe('CardLabelFormRow component', () => {
     const filteredMockLabels = mockLabels.filter((_, index) => index !== 0);
     const { getByTestId } = render(
       <CardContext.Provider value={{ ...mockCard, labels: filteredMockLabels }}>
-        <CardLabelFormRow label={mockLabel} attachLabel={attachLabel} />
+        <CardLabelFormRow label={mockLabel} attachLabel={attachLabel} detachLabel={detachLabel} />
       </CardContext.Provider>,
       store,
     );
@@ -41,11 +43,12 @@ describe('CardLabelFormRow component', () => {
     expect(getByTestId(`cardLabelFormRow-${mockLabel.id}`)).toHaveClass('cardLabelFormRow');
   });
 
-  test('should call `attachLabel` when clicked an `cardLabelFormRow`', () => {
+  test('should call `attachLabel` if state of `isAttached` is false when clicked an `cardLabelFormRow`', () => {
     const mockLabel = mockLabels[0];
+    const filteredMockLabels = mockLabels.filter((_, index) => index !== 0);
     const { getByTestId } = render(
-      <CardContext.Provider value={{ ...mockCard, labels: mockLabels }}>
-        <CardLabelFormRow label={mockLabel} attachLabel={attachLabel} />
+      <CardContext.Provider value={{ ...mockCard, labels: filteredMockLabels }}>
+        <CardLabelFormRow label={mockLabel} attachLabel={attachLabel} detachLabel={detachLabel} />
       </CardContext.Provider>,
       store,
     );
@@ -53,5 +56,21 @@ describe('CardLabelFormRow component', () => {
     fireEvent.click(getByTestId(`cardLabelFormRow-${mockLabel.id}`));
     const payload = { cardId: mockCard.id, listId: mockCard.listId, labelId: mockLabel.id };
     expect(attachLabel).toHaveBeenCalledWith(payload);
+    expect(detachLabel).toHaveBeenCalledTimes(0);
+  });
+
+  test('should call `detachLabel` if state of `isAttached` is true when clicked an `cardLabelFormRow`', () => {
+    const mockLabel = mockLabels[0];
+    const { getByTestId } = render(
+      <CardContext.Provider value={{ ...mockCard, labels: mockLabels }}>
+        <CardLabelFormRow label={mockLabel} attachLabel={attachLabel} detachLabel={detachLabel} />
+      </CardContext.Provider>,
+      store,
+    );
+
+    fireEvent.click(getByTestId(`cardLabelFormRow-${mockLabel.id}`));
+    const payload = { cardId: mockCard.id, listId: mockCard.listId, labelId: mockLabel.id };
+    expect(detachLabel).toHaveBeenCalledWith(payload);
+    expect(attachLabel).toHaveBeenCalledTimes(0);
   });
 });
