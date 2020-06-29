@@ -17,16 +17,11 @@
   }
 }
 
-.cardLabelContainer {
+.cardLabelWrapper {
   display: grid;
   gap: 6px;
   grid-template-columns: repeat(auto-fit, 40px);
   margin-bottom: 5px;
-}
-
-.cardLabel {
-  border-radius: 10px;
-  height: 7px;
 }
 
 .cardStatusContainer {

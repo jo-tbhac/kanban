@@ -1,11 +1,23 @@
 import camelCaseKeys from 'camelcase-keys';
 
 import { newAxios } from '../../configureAxios';
-import { AppDispatch } from '..';
-import { CREATE_CARD, UPDATE_CARD, DELETE_CARD } from './types';
 import { joinErrors } from '../../utils/utils';
-import { failedCreateCard, failedUpdateCard, failedDeleteCard } from '../../utils/text';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
+import { AppDispatch } from '..';
+import {
+  CREATE_CARD,
+  UPDATE_CARD,
+  DELETE_CARD,
+  ATTACH_LABEL,
+  CardLabelPayload,
+} from './types';
+
+import {
+  failedCreateCard,
+  failedUpdateCard,
+  failedDeleteCard,
+  failedAttachLabel,
+} from '../../utils/text';
 
 export const createCard = (listId: number, params: { title: string }) => (
   async (dispatch: AppDispatch) => {
@@ -66,6 +78,26 @@ export const deleteCard = (cardId: number, listId: number) => async (dispatch: A
     const dialogProps = {
       type: dialogTypeError as DialogTypes,
       title: failedDeleteCard,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+  }
+};
+
+export const attachLabel = (payload: CardLabelPayload) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const params = { label_id: payload.labelId };
+  const response = await axios.post(`/card/${payload.cardId}/card_label`, params);
+
+  if (response?.status === 201) {
+    dispatch({ type: ATTACH_LABEL, payload });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedAttachLabel,
       description: joinErrors(response.data.errors),
     };
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });

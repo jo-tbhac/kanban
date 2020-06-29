@@ -1,0 +1,13 @@
+.cardLabelContainer {
+  margin-bottom: 15px;
+  &__label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}
+
+.cardLabelIndex {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}

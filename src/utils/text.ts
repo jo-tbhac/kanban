@@ -21,6 +21,7 @@ export const boardNameFormPlaceholder = 'ボードのタイトルを入力';
 
 // label
 export const editLabelButtonText = 'ラベルを編集する';
+export const addLabelText = 'ラベルを追加';
 export const editLabelHeaderText = 'ラベル一覧';
 export const newLabelButtonText = 'ラベルを新規作成';
 export const labelNameFormPlaceholder = 'ラベル名を入力';
@@ -47,4 +48,5 @@ export const cardDescriptionPlaceholder = 'カードの説明を追加';
 export const failedCreateCard = 'カードを作成できませんでした';
 export const failedUpdateCard = 'カードを更新できませんでした';
 export const failedDeleteCard = 'カードを削除できませんでした';
+export const failedAttachLabel = 'ラベルを追加できませんでした';
 export const askCardDeleteDialog = 'このカードを削除してよろしいですか？';
