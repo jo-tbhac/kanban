@@ -13,6 +13,7 @@ const CardLabelFormButton = () => {
   return (
     <div className="cardLabelFormButtonWrapper">
       <div
+        data-testid="cardLabelFormButton"
         role="button"
         tabIndex={0}
         onClick={() => setCardLabelFormVisible(true)}
