@@ -7,3 +7,8 @@ export const formatRFC3339DateString = (dateString: string) => {
   const splitDateString = dateString.split('T');
   return splitDateString[0].replace(/-/g, '/');
 };
+
+export const dndItemType = {
+  LIST: 'List',
+  CARD: 'Card',
+};
