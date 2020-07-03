@@ -39,7 +39,7 @@ type DndListType = {
   index: number
 }
 
-const List = (props: ListProps) => {
+export const List = (props: ListProps) => {
   const { list, moveList, updateListIndex } = props;
 
   const [isCardFormVisible, setCardFormVisible] = useState(false);
@@ -90,7 +90,7 @@ const List = (props: ListProps) => {
   drop(ref);
 
   return (
-    <div ref={ref} style={{ opacity }} className="listContainer">
+    <div data-testid={`list-${list.id}`} ref={ref} style={{ opacity }} className="listContainer">
       <div className="listHeader">
         <ListName initialListName={list.name} listId={list.id} />
         <ListMenuButton listId={list.id} />
