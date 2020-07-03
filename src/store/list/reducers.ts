@@ -2,6 +2,7 @@ import {
   CREATE_LIST,
   UPDATE_LIST,
   DELETE_LIST,
+  MOVE_LIST,
   List,
   ListActionTypes,
 } from './types';
@@ -36,6 +37,31 @@ const listReducer = (lists: List[] = [], action: ListActionTypes | CardActionTyp
       return {
         lists: lists.filter((list) => list.id !== action.payload),
       };
+    case MOVE_LIST: {
+      const { dragId, dropId } = action.payload;
+      const dropIndex = lists.findIndex((list) => list.id === dropId);
+      const dragIndex = lists.findIndex((list) => list.id === dragId);
+
+      const sortedLists = lists.map((list, index) => {
+        if (dropIndex === index) {
+          return { ...lists[dragIndex], index };
+        }
+
+        if (dropIndex < index && index <= dragIndex) {
+          return { ...lists[index - 1], index };
+        }
+
+        if (dragIndex <= index && index < dropIndex) {
+          return { ...lists[index + 1], index };
+        }
+
+        return { ...list, index };
+      });
+
+      return {
+        lists: sortedLists,
+      };
+    }
     case CREATE_CARD:
     case UPDATE_CARD:
     case DELETE_CARD:
