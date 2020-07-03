@@ -48,16 +48,19 @@ export const mockLists = [
     name: 'list-a',
     boardId: 1,
     cards: [],
+    index: 0,
   }, {
     id: 2,
     name: 'list-b',
     boardId: 1,
     cards: [],
+    index: 1,
   }, {
     id: 3,
     name: 'list-c',
     boardId: 1,
     cards: [],
+    index: 2,
   },
 ];
 
@@ -66,6 +69,7 @@ export const mockList = {
   name: 'list-a',
   boardId: 1,
   cards: [],
+  index: 0,
 };
 
 export const mockCards = [
@@ -104,16 +108,19 @@ export const mockListsWithCard = [
     name: 'list-a',
     boardId: 1,
     cards: mockCards,
+    index: 0,
   }, {
     id: 2,
     name: 'list-b',
     boardId: 1,
     cards: [],
+    index: 1,
   }, {
     id: 3,
     name: 'list-c',
     boardId: 1,
     cards: [],
+    index: 2,
   },
 ];
 
@@ -123,15 +130,18 @@ export const mockListsWithCardLabel = [
     name: 'list-a',
     boardId: 1,
     cards: [{ ...mockCard, labels: [mockLabel] }],
+    index: 0,
   }, {
     id: 2,
     name: 'list-b',
     boardId: 1,
     cards: [],
+    index: 1,
   }, {
     id: 3,
     name: 'list-c',
     boardId: 1,
     cards: [],
+    index: 2,
   },
 ];

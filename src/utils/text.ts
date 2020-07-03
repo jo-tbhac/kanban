@@ -35,6 +35,7 @@ export const listNameFormPlaceholder = 'リスト名を入力';
 export const newListButtonText = 'リストを追加';
 export const failedCreateList = 'リストを作成できませんでした';
 export const failedUpdateList = 'リストを更新できませんでした';
+export const failedUpdateListIndex = 'リストを移動できませんでした';
 export const failedDeleteList = 'リストを削除できませんでした';
 export const listMenuTitle = 'リストを操作';
 export const listMenuDelete = 'このリストを削除';

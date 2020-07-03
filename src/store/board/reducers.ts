@@ -11,6 +11,7 @@ import {
   CREATE_LIST,
   UPDATE_LIST,
   DELETE_LIST,
+  MOVE_LIST,
   ListActionTypes,
 } from '../list/types';
 
@@ -74,6 +75,13 @@ const boardReducer = (
     case DELETE_CARD:
     case ATTACH_LABEL:
     case DETACH_LABEL: {
+      const { lists } = listReducer(state.selectedBoard.lists, action);
+      return {
+        ...state,
+        selectedBoard: { ...state.selectedBoard, lists },
+      };
+    }
+    case MOVE_LIST: {
       const { lists } = listReducer(state.selectedBoard.lists, action);
       return {
         ...state,

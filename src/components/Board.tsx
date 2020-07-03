@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import ToolBar from './ToolBar';
 import List from './List';
@@ -39,29 +41,31 @@ export const Board = (props: PropsFromRedux) => {
   }, []);
 
   return (
-    <div className="boardContainer" data-testid="boardComponent">
-      <ToolBar boardName={selectedBoard.name} />
+    <DndProvider backend={HTML5Backend}>
+      <div className="boardContainer" data-testid="boardComponent">
+        <ToolBar boardName={selectedBoard.name} />
 
-      <div className="listIndexContainer">
-        {selectedBoard.lists?.map((list) => <List key={String(list.id)} list={list} />)}
+        <div className="listIndexContainer">
+          {selectedBoard.lists?.map((list) => <List key={list.id} list={list} />)}
 
-        {isListFormVisible ? (
-          <ListForm setListFormVisible={setListFormVisible} />
-        ) : (
-          <div
-            data-testid="addListButton"
-            role="button"
-            tabIndex={0}
-            onClick={() => setListFormVisible(true)}
-            onKeyPress={() => setListFormVisible(true)}
-            className="addListButton"
-          >
-            <FontAwesomeIcon icon={['fas', 'plus']} className="addListButton__icon" />
-            <div className="addListButton__text">{newListButtonText}</div>
-          </div>
-        )}
+          {isListFormVisible ? (
+            <ListForm setListFormVisible={setListFormVisible} />
+          ) : (
+            <div
+              data-testid="addListButton"
+              role="button"
+              tabIndex={0}
+              onClick={() => setListFormVisible(true)}
+              onKeyPress={() => setListFormVisible(true)}
+              className="addListButton"
+            >
+              <FontAwesomeIcon icon={['fas', 'plus']} className="addListButton__icon" />
+              <div className="addListButton__text">{newListButtonText}</div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </DndProvider>
   );
 };
 

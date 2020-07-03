@@ -5,8 +5,21 @@ import { storeFactory } from '../../../testUtils';
 import { mockList, mockLists } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedCreateList, failedUpdateList, failedDeleteList } from '../../../utils/text';
-import { createList, updateList, deleteList } from '../../../store/list/actions';
+import { MOVE_LIST } from '../../../store/list/types';
+import {
+  failedCreateList,
+  failedUpdateList,
+  failedDeleteList,
+  failedUpdateListIndex,
+} from '../../../utils/text';
+
+import {
+  createList,
+  updateList,
+  deleteList,
+  moveList,
+  updateListIndex,
+} from '../../../store/list/actions';
 
 describe('list actions', () => {
   let store: Store;
@@ -103,6 +116,26 @@ describe('list actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedDeleteList);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns action with payload and type `MOVE_LIST`', () => {
+    const payload = { dragId: 1, dropId: 2 };
+    const action = moveList(payload);
+    expect(action).toEqual({ type: MOVE_LIST, payload });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `updateListIndex` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onPatch('/lists/index').reply(400, responseData);
+
+    return store.dispatch(updateListIndex() as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedUpdateListIndex);
         expect(dialog.description).toBe('some error...');
       });
   });

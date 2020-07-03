@@ -1,9 +1,21 @@
 import { newAxios } from '../../configureAxios';
-import { AppDispatch } from '..';
-import { CREATE_LIST, UPDATE_LIST, DELETE_LIST } from './types';
+import { AppDispatch, RootState } from '..';
 import { joinErrors } from '../../utils/utils';
-import { failedCreateList, failedUpdateList, failedDeleteList } from '../../utils/text';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
+import {
+  CREATE_LIST,
+  UPDATE_LIST,
+  DELETE_LIST,
+  MOVE_LIST,
+} from './types';
+
+import {
+  failedCreateList,
+  failedUpdateList,
+  failedDeleteList,
+  failedUpdateListIndex,
+} from '../../utils/text';
+
 
 export const createList = (boardId: number, params: { name: string }) => (
   async (dispatch: AppDispatch) => {
@@ -65,3 +77,28 @@ export const deleteList = (listId: number) => async (dispatch: AppDispatch) => {
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
   }
 };
+
+export const moveList = (params: { dropId: number, dragId: number }) => ({
+  type: MOVE_LIST,
+  payload: params,
+});
+
+export const updateListIndex = () => (
+  async (dispatch: AppDispatch, getState: () => RootState) => {
+    const params = getState().board.selectedBoard.lists.map((list) => ({
+      id: list.id,
+      index: list.index,
+    }));
+    const axios = newAxios();
+    const response = await axios.patch('/lists/index', params);
+
+    if (response?.status === 400) {
+      const dialogProps = {
+        type: dialogTypeError as DialogTypes,
+        title: failedUpdateListIndex,
+        description: joinErrors(response.data.errors),
+      };
+      dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+    }
+  }
+);
