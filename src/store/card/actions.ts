@@ -1,9 +1,10 @@
 import camelCaseKeys from 'camelcase-keys';
+import snakeCaseKeys from 'snakecase-keys';
 
 import { newAxios } from '../../configureAxios';
 import { joinErrors } from '../../utils/utils';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
-import { AppDispatch } from '..';
+import { AppDispatch, RootState } from '..';
 import {
   CREATE_CARD,
   UPDATE_CARD,
@@ -23,6 +24,7 @@ import {
   failedCreateCard,
   failedUpdateCard,
   failedDeleteCard,
+  failedUpdateCardIndex,
   failedAttachLabel,
   failedDetachLabel,
 } from '../../utils/text';
@@ -106,6 +108,39 @@ export const moveCardToEmptyList = (payload: MoveCardToEmptyListPayload) => ({
   type: MOVE_CARD_TO_EMPTY_LIST,
   payload,
 });
+
+export const updateCardIndex = (payload: { dropListId: number, dragListId: number }) => (
+  async (dispatch: AppDispatch, getState: () => RootState) => {
+    const { lists } = getState().board.selectedBoard;
+    const dropList = lists.find((list) => list.id === payload.dropListId);
+    const dragList = lists.find((list) => list.id === payload.dragListId);
+    if (!dropList || !dragList) {
+      return;
+    }
+
+    const cards = payload.dropListId === payload.dragListId
+      ? dropList.cards
+      : [...dropList.cards, ...dragList.cards];
+
+    const params = cards.map((card) => ({
+      id: card.id,
+      listId: card.listId,
+      index: card.index,
+    }));
+    const snakeCaseParams = snakeCaseKeys(params);
+    const axios = newAxios();
+    const response = await axios.patch('/cards/index', snakeCaseParams);
+
+    if (response?.status === 400) {
+      const dialogProps = {
+        type: dialogTypeError as DialogTypes,
+        title: failedUpdateCardIndex,
+        description: joinErrors(response.data.errors),
+      };
+      dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+    }
+  }
+);
 
 export const attachLabel = (payload: CardLabelPayload) => async (dispatch: AppDispatch) => {
   const axios = newAxios();

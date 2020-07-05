@@ -13,6 +13,7 @@ import { dndItemType } from '../utils/utils';
 const mapDisaptchToProps = {
   moveCard: cardActions.moveCard,
   moveCardAcrossList: cardActions.moveCardAcrossList,
+  updateCardIndex: cardActions.updateCardIndex,
 };
 
 const connector = connect(null, mapDisaptchToProps);
@@ -20,7 +21,7 @@ const connector = connect(null, mapDisaptchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const Card = (props: PropsFromRedux) => {
-  const { moveCard, moveCardAcrossList } = props;
+  const { moveCard, moveCardAcrossList, updateCardIndex } = props;
 
   const card = useContext(CardContext);
 
@@ -28,7 +29,7 @@ const Card = (props: PropsFromRedux) => {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const [obj, drop] = useDrop({
+  const [dndItem, drop] = useDrop({
     accept: dndItemType.CARD,
     collect: (monitor) => monitor.getItem(),
     canDrop: () => false,
@@ -41,7 +42,7 @@ const Card = (props: PropsFromRedux) => {
       const dragListId = item.listId;
       const dropListId = card.listId;
 
-      if (dragIndex === dropIndex) {
+      if (dragIndex === dropIndex && dragListId === dropListId) {
         return;
       }
 
@@ -77,9 +78,17 @@ const Card = (props: PropsFromRedux) => {
       listId: card?.listId,
     },
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
+    end: (item) => {
+      const dragListId = card?.listId;
+      const dropListId = item?.listId;
+      if (!dragListId || !dropListId) {
+        return;
+      }
+      updateCardIndex({ dragListId, dropListId });
+    },
   });
 
-  const opacity = card?.id === obj?.id && obj.type === dndItemType.CARD ? 0.2 : 1;
+  const opacity = card?.id === dndItem?.id && dndItem.type === dndItemType.CARD ? 0.2 : 1;
   drag(ref);
   drop(ref);
 
