@@ -8,9 +8,15 @@ import {
   CREATE_CARD,
   UPDATE_CARD,
   DELETE_CARD,
+  MOVE_CARD,
+  MOVE_CARD_ACROSS_LIST,
+  MOVE_CARD_TO_EMPTY_LIST,
   ATTACH_LABEL,
   DETACH_LABEL,
   CardLabelPayload,
+  MoveCardPayload,
+  MoveCardAcrossListPayload,
+  MoveCardToEmptyListPayload,
 } from './types';
 
 import {
@@ -85,6 +91,21 @@ export const deleteCard = (cardId: number, listId: number) => async (dispatch: A
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
   }
 };
+
+export const moveCard = (payload: MoveCardPayload) => ({
+  type: MOVE_CARD,
+  payload,
+});
+
+export const moveCardAcrossList = (payload: MoveCardAcrossListPayload) => ({
+  type: MOVE_CARD_ACROSS_LIST,
+  payload,
+});
+
+export const moveCardToEmptyList = (payload: MoveCardToEmptyListPayload) => ({
+  type: MOVE_CARD_TO_EMPTY_LIST,
+  payload,
+});
 
 export const attachLabel = (payload: CardLabelPayload) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
