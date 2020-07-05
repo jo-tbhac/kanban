@@ -1,0 +1,10 @@
+.cardIndexContainer {
+  flex: 1;
+  margin-bottom: 10px;
+  min-height: 10px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

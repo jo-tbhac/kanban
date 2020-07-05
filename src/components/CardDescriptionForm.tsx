@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { CardContext } from './List';
+import { CardContext } from './CardIndexContainer';
 import ButtonSubmit from './ButtonSubmit';
 import ButtonCancel from './ButtonCancel';
 import FlexTextArea from './FlexTextArea';
