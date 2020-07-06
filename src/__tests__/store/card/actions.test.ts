@@ -11,14 +11,20 @@ import {
   failedDeleteCard,
   failedAttachLabel,
   failedDetachLabel,
+  failedUpdateCardIndex,
 } from '../../../utils/text';
 
+import { MOVE_CARD, MOVE_CARD_ACROSS_LIST, MOVE_CARD_TO_EMPTY_LIST } from '../../../store/card/types';
 import {
   createCard,
   updateCard,
   deleteCard,
   attachLabel,
   detachLabel,
+  moveCard,
+  moveCardAcrossList,
+  moveCardToEmptyList,
+  updateCardIndex,
 } from '../../../store/card/actions';
 
 describe('card actions', () => {
@@ -176,6 +182,47 @@ describe('card actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedDeleteCard);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns an action with payload and type `MOVE_CARD`', () => {
+    const payload = { dropId: 1, dragId: 2, listId: 1 };
+    const action = moveCard(payload);
+    expect(action).toEqual({ type: MOVE_CARD, payload });
+  });
+
+  test('returns an action with payload and type `MOVE_CARD_ACROSS_LIST`', () => {
+    const payload = {
+      dropId: 1,
+      dragId: 2,
+      dropListId: 2,
+      dragListId: 1,
+    };
+    const action = moveCardAcrossList(payload);
+    expect(action).toEqual({ type: MOVE_CARD_ACROSS_LIST, payload });
+  });
+
+  test('returns an action with payload and type `MOVE_CARD_TO_EMPTY_LIST`', () => {
+    const payload = {
+      dragId: 1,
+      dropListId: 2,
+      dragListId: 1,
+    };
+    const action = moveCardToEmptyList(payload);
+    expect(action).toEqual({ type: MOVE_CARD_TO_EMPTY_LIST, payload });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `updateCardIndex` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onPatch('/cards/index').reply(400, responseData);
+
+    return store.dispatch(updateCardIndex({ dragListId: 1, dropListId: 2 }) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedUpdateCardIndex);
         expect(dialog.description).toBe('some error...');
       });
   });

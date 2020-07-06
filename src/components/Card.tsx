@@ -20,7 +20,7 @@ const connector = connect(null, mapDisaptchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Card = (props: PropsFromRedux) => {
+export const Card = (props: PropsFromRedux) => {
   const { moveCard, moveCardAcrossList, updateCardIndex } = props;
 
   const card = useContext(CardContext);
@@ -95,7 +95,7 @@ const Card = (props: PropsFromRedux) => {
   return (
     <>
       <div
-        data-testid="card"
+        data-testid={`card-${card?.id}`}
         ref={ref}
         role="button"
         tabIndex={0}
