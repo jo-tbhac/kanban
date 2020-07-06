@@ -51,7 +51,7 @@ export const LabelIndex = (props: PropsFromRedux) => {
         onKeyPress={() => setLabelEditVisible(true)}
         className="addLabelButton"
       >
-        <FontAwesomeIcon icon={['fas', 'plus']} className="addLabelButton__icon" />
+        <FontAwesomeIcon icon={['fas', 'pen']} className="addLabelButton__icon" />
         <div className="addLabelButton__text">{editLabelButtonText}</div>
       </div>
       {isLabelEditVisible && <LabelEdit setLabelEditVisible={setLabelEditVisible} />}

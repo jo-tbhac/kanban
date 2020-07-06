@@ -17,6 +17,9 @@
   &:hover {
     background-color: $hover-overlay;
   }
+  &__text {
+    font-size: 0.9rem;
+  }
   &__icon {
     margin-right: 5px;
   }
