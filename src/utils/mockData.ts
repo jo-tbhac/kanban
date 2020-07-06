@@ -79,18 +79,21 @@ export const mockCards = [
     description: 'description-1',
     listId: 1,
     labels: [],
+    index: 0,
   }, {
     id: 2,
     title: 'card-2',
     description: 'description-2',
     listId: 1,
     labels: [],
+    index: 1,
   }, {
     id: 3,
     title: 'card-3',
     description: 'description-3',
     listId: 1,
     labels: [],
+    index: 2,
   },
 ];
 
@@ -100,6 +103,7 @@ export const mockCard = {
   description: 'description-1',
   listId: 1,
   labels: [],
+  index: 0,
 };
 
 export const mockListsWithCard = [

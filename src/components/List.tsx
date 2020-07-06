@@ -1,24 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
-import {
-  useDrag,
-  useDrop,
-  DropTargetMonitor,
-  XYCoord,
-} from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 
-import Card from './Card';
-import CardForm from './CardForm';
+import CardIndexContainer from './CardIndexContainer';
+
 import ListName from './ListName';
 import ListMenuButton from './ListMenuButton';
 import * as types from '../store/list/types';
-import * as cardTypes from '../store/card/types';
 import * as listActions from '../store/list/actions';
 import { newCardButtonText } from '../utils/text';
 import { dndItemType } from '../utils/utils';
-
-export const CardContext = React.createContext<cardTypes.Card | null>(null);
 
 const mapDispatchToProps = {
   moveList: listActions.moveList,
@@ -48,7 +40,7 @@ export const List = (props: ListProps) => {
 
   const [, drop] = useDrop({
     accept: dndItemType.LIST,
-    hover: (item: DndListType, monitor: DropTargetMonitor) => {
+    hover: (item: DndListType) => {
       if (!ref.current) {
         return;
       }
@@ -56,19 +48,6 @@ export const List = (props: ListProps) => {
       const dropIndex = list.index;
 
       if (dragIndex === dropIndex) {
-        return;
-      }
-
-      const hoverBoundingRect = ref.current.getBoundingClientRect();
-      const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
-      const clientOffset = monitor.getClientOffset();
-      const hoverClientX = (clientOffset as XYCoord).x - hoverBoundingRect.left;
-
-      if (dragIndex < dropIndex && hoverClientX < hoverMiddleX) {
-        return;
-      }
-
-      if (dragIndex > dropIndex && hoverClientX > hoverMiddleX) {
         return;
       }
 
@@ -96,14 +75,12 @@ export const List = (props: ListProps) => {
         <ListMenuButton listId={list.id} />
       </div>
 
-      <div className="cardIndexContainer">
-        {list.cards?.map((card) => (
-          <CardContext.Provider key={String(card.id)} value={card}>
-            <Card />
-          </CardContext.Provider>
-        ))}
-        {isCardFormVisible && <CardForm listId={list.id} setCardFormVisible={setCardFormVisible} />}
-      </div>
+      <CardIndexContainer
+        cards={list.cards ? list.cards : []}
+        listId={list.id}
+        isCardFormVisible={isCardFormVisible}
+        setCardFormVisible={setCardFormVisible}
+      />
 
       <div
         data-testid="addCardButton"

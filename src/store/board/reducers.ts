@@ -19,6 +19,9 @@ import {
   CREATE_CARD,
   UPDATE_CARD,
   DELETE_CARD,
+  MOVE_CARD,
+  MOVE_CARD_ACROSS_LIST,
+  MOVE_CARD_TO_EMPTY_LIST,
   ATTACH_LABEL,
   DETACH_LABEL,
   CardActionTypes,
@@ -73,6 +76,9 @@ const boardReducer = (
     case CREATE_CARD:
     case UPDATE_CARD:
     case DELETE_CARD:
+    case MOVE_CARD:
+    case MOVE_CARD_ACROSS_LIST:
+    case MOVE_CARD_TO_EMPTY_LIST:
     case ATTACH_LABEL:
     case DETACH_LABEL: {
       const { lists } = listReducer(state.selectedBoard.lists, action);

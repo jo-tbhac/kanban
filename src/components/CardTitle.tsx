@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { CardContext } from './List';
+import { CardContext } from './CardIndexContainer';
 import * as cardActions from '../store/card/actions';
 
 const mapDispatchToProps = {

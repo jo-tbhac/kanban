@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { CardContext } from './List';
+import { CardContext } from './CardIndexContainer';
 import { dialogTypeAsk } from '../store/dialog/types';
 import * as dialogAction from '../store/dialog/actions';
 import * as cardAction from '../store/card/actions';

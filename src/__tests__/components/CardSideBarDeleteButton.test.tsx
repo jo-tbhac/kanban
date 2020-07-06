@@ -4,7 +4,7 @@ import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { mockCard } from '../../utils/mockData';
 import { CardSideBarDeleteButton } from '../../components/CardSideBarDeleteButton';
-import { CardContext } from '../../components/List';
+import { CardContext } from '../../components/CardIndexContainer';
 
 describe('CardSideBarDeleteButton component', () => {
   let store: Store;

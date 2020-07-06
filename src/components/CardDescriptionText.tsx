@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-import { CardContext } from './List';
+import { CardContext } from './CardIndexContainer';
 import { cardDescriptionPlaceholder } from '../utils/text';
 
 type CardDescriptionTextProps = {
