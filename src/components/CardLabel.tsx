@@ -24,7 +24,7 @@ type CardLabelProps = PropsFromRedux & {
   label: { id: number }
 }
 
-const CardLabel = (props: CardLabelProps) => {
+export const CardLabel = (props: CardLabelProps) => {
   const { label, labels, detachLabel } = props;
 
   const card = useContext(CardContext);
@@ -39,6 +39,7 @@ const CardLabel = (props: CardLabelProps) => {
 
   return (
     <div
+      data-testid="cardLabel"
       role="button"
       tabIndex={0}
       onClick={onClickLabel}
