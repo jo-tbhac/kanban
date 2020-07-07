@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../store';
+import * as cardActions from '../store/card/actions';
+import { CardContext } from './CardIndexContainer';
 
 const mapStateToProps = (state: RootState) => {
   const { label } = state;
@@ -10,7 +12,11 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const connector = connect(mapStateToProps);
+const mapDispatchToProps = {
+  detachLabel: cardActions.detachLabel,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
@@ -19,12 +25,27 @@ type CardLabelProps = PropsFromRedux & {
 }
 
 const CardLabel = (props: CardLabelProps) => {
-  const { label, labels } = props;
+  const { label, labels, detachLabel } = props;
+
+  const card = useContext(CardContext);
 
   const targetLabel = labels.find((l) => l.id === label.id);
 
+  const onClickLabel = () => {
+    if (card) {
+      detachLabel({ cardId: card.id, listId: card.listId, labelId: label.id });
+    }
+  };
+
   return (
-    <div style={{ backgroundColor: targetLabel?.color }} className="cardLabel">
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onClickLabel}
+      onKeyPress={onClickLabel}
+      style={{ backgroundColor: targetLabel?.color }}
+      className="cardLabel"
+    >
       {targetLabel?.name}
     </div>
   );
