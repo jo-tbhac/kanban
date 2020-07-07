@@ -15,7 +15,7 @@ describe('FlexTextArea component', () => {
     onChange = jest.fn();
   });
 
-  test('should call `onChnage` when user input text', () => {
+  test('should call `onChange` when user input text', () => {
     const { getByRole } = render(<FlexTextArea value={value} onChange={onChange} />, store);
     const textarea = getByRole('textbox') as HTMLTextAreaElement;
     const mockText = 'some text';
