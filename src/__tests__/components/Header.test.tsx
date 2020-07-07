@@ -7,7 +7,12 @@ import { Store } from '../../store';
 
 describe('Header component', () => {
   let mockLocation: {pathname: string};
-  const renderWithRouter = (component: ReactElement, store: Store) => (
+  let store: Store;
+  beforeEach(() => {
+    store = storeFactory();
+  });
+
+  const renderWithRouter = (component: ReactElement) => (
     render(
       <MemoryRouter>
         {component}
@@ -24,11 +29,22 @@ describe('Header component', () => {
   );
 
   test('navigate to `/` when click a home icon', () => {
-    const store = storeFactory();
-    const { getByTestId } = renderWithRouter(<Header />, store);
+    const { getByTestId } = renderWithRouter(<Header />);
 
     fireEvent.click(getByTestId('homeIcon'));
 
     expect(mockLocation.pathname).toBe('/');
+  });
+
+  test('should show `LabelEdit` if state of `isLabelEditVisible` is true', () => {
+    const { getByTestId } = renderWithRouter(<Header />);
+    fireEvent.click(getByTestId('openLabelEditButton'));
+
+    expect(getByTestId('labelEdit')).toBeVisible();
+  });
+
+  test('should hide `LabelEdit` if state of `isLabelEditVisible` is false', () => {
+    const { queryByTestId } = renderWithRouter(<Header />);
+    expect(queryByTestId('labelEdit')).toBeNull();
   });
 });

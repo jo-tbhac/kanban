@@ -1,7 +1,7 @@
 .labelEditRow {
   align-items: center;
   display: flex;
-  height: 45px;
+  padding: 5px 0;
   &__icon {
     border-radius: 50%;
     cursor: pointer;
@@ -12,6 +12,7 @@
   }
   &__textField {
     @include text-field();
+    box-sizing: border-box;
     flex: 1;
   }
   &__delete {
