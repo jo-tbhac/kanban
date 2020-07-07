@@ -54,9 +54,12 @@ const cardReducer = (cards: Card[], action: CardActionTypes) => {
       }
 
       const previousLabels = targetCard.labels ? targetCard.labels : [];
-      targetCard.labels = [...previousLabels, { id: action.payload.labelId }];
+      const newCard = {
+        ...targetCard,
+        labels: [...previousLabels, { id: action.payload.labelId }],
+      };
       return {
-        cards: cards.map((card) => (card.id === targetCard.id ? targetCard : card)),
+        cards: cards.map((card) => (card.id === newCard.id ? newCard : card)),
       };
     }
     case DETACH_LABEL: {
@@ -64,10 +67,13 @@ const cardReducer = (cards: Card[], action: CardActionTypes) => {
       if (targetCard === undefined) {
         return { cards };
       }
-      targetCard.labels = targetCard.labels.filter((label) => label.id !== action.payload.labelId);
+      const newCard = {
+        ...targetCard,
+        labels: targetCard.labels.filter((label) => label.id !== action.payload.labelId),
+      };
 
       return {
-        cards: cards.map((card) => (card.id === targetCard.id ? targetCard : card)),
+        cards: cards.map((card) => (card.id === newCard.id ? newCard : card)),
       };
     }
     default:
