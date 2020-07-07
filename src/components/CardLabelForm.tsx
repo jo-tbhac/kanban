@@ -1,4 +1,10 @@
-import React from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
 
@@ -19,13 +25,38 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 type CardLabelFormProps = PropsFromRedux & {
   closeCardLabelForm: () => void
+  position: { top: number, left: number }
 }
 
 export const CardLabelForm = (props: CardLabelFormProps) => {
-  const { labels, closeCardLabelForm } = props;
+  const { labels, closeCardLabelForm, position } = props;
+
+  const [elementHeight, setElementHeight] = useState({});
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onResizeEnd = useCallback(() => {
+    if (!ref || !ref.current) {
+      return;
+    }
+    const { clientHeight } = ref.current;
+    const overflowElementY = window.innerHeight - (clientHeight + position.top);
+    setElementHeight({ maxHeight: clientHeight + overflowElementY });
+  }, [position.top]);
+
+  useEffect(() => {
+    window.addEventListener('resize', onResizeEnd);
+    return () => window.removeEventListener('resize', onResizeEnd);
+  }, [onResizeEnd]);
 
   return (
-    <div data-testid="cardLabelForm" className="cardLabelForm">
+    <div
+      id="cardLabelForm"
+      ref={ref}
+      data-testid="cardLabelForm"
+      style={{ ...position, ...elementHeight }}
+      className="cardLabelForm"
+    >
       <div className="cardLabelFormHeader">
         <div className="cardLabelFormHeader__text">{addLabelText}</div>
         <div
