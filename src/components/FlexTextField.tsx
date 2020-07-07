@@ -19,6 +19,7 @@ const FlexTextField = (props: FlexTextFieldProps) => {
     <div className="flexTextField">
       <div data-testid="dummyTextField" className="flexTextField__dummy">{value}</div>
       <input
+        data-testid="flexTextField"
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={autoFocus}
         type="text"
