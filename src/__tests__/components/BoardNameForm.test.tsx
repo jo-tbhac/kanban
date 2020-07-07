@@ -27,7 +27,7 @@ describe('BoardNameForm component', () => {
       store,
     );
 
-    const boardNameForm = getByTestId('boardNameForm') as HTMLInputElement;
+    const boardNameForm = getByTestId('flexTextField') as HTMLInputElement;
     const inputBoardName = 'update';
     fireEvent.change(boardNameForm, { target: { value: inputBoardName } });
 
@@ -44,7 +44,7 @@ describe('BoardNameForm component', () => {
       store,
     );
 
-    const boardNameForm = getByTestId('boardNameForm') as HTMLInputElement;
+    const boardNameForm = getByTestId('flexTextField') as HTMLInputElement;
     const inputBoardName = '';
     fireEvent.change(boardNameForm, { target: { value: inputBoardName } });
     fireEvent.blur(boardNameForm);
@@ -69,7 +69,7 @@ describe('BoardNameForm component', () => {
       ['/board/1'],
     );
 
-    const boardNameForm = getByTestId('boardNameForm') as HTMLInputElement;
+    const boardNameForm = getByTestId('flexTextField') as HTMLInputElement;
     const inputBoardName = 'sample';
     fireEvent.change(boardNameForm, { target: { value: inputBoardName } });
     fireEvent.blur(boardNameForm);
@@ -95,7 +95,7 @@ describe('BoardNameForm component', () => {
       [`/board/${boardId}`],
     );
 
-    const boardNameForm = getByTestId('boardNameForm') as HTMLInputElement;
+    const boardNameForm = getByTestId('flexTextField') as HTMLInputElement;
     const inputBoardName = 'updated board';
     fireEvent.change(boardNameForm, { target: { value: inputBoardName } });
     fireEvent.blur(boardNameForm);

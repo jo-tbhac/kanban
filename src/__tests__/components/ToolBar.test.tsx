@@ -22,7 +22,7 @@ describe('ToolBar component', () => {
     const { getByTestId } = renderWithRouter(<ToolBar boardName={boardName} />, store);
 
     fireEvent.click(getByTestId('boardName'));
-    const boardNameForm = getByTestId('boardNameForm') as HTMLInputElement;
+    const boardNameForm = getByTestId('flexTextField') as HTMLInputElement;
 
     expect(boardNameForm.value).toBe(boardName);
   });
