@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import * as boardActions from '../store/board/actions';
+import FlexTextField from './FlexTextField';
 
 const mapDispatchToProps = {
   updateBoard: boardActions.updateBoard,
@@ -38,15 +39,11 @@ export const BoardNameForm = (props: BoardNameFormProps) => {
   };
 
   return (
-    <input
-      // eslint-disable-next-line jsx-a11y/no-autofocus
+    <FlexTextField
       autoFocus
-      data-testid="boardNameForm"
-      type="text"
       value={boardName}
       onChange={(event) => setBoardName(event.target.value)}
       onBlur={onBlur}
-      className="boardNameForm"
     />
   );
 };
