@@ -16,6 +16,7 @@ const Header = () => {
         </Link>
       </div>
       <div
+        data-testid="openLabelEditButton"
         role="button"
         tabIndex={0}
         onClick={() => setLabelEditVisible(true)}

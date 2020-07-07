@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
+import { renderWithRouter, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { mockLabels } from '../../utils/mockData';
 import { LabelIndex } from '../../components/LabelIndex';
@@ -13,24 +13,6 @@ describe('LabelIndex component', () => {
   beforeEach(() => {
     store = storeFactory();
     fetchAllLabel = jest.fn();
-  });
-
-  test('should show `LabelEdit` if state of `isLabelEditVisible` is true', () => {
-    const { getByTestId } = renderWithRouter(
-      <LabelIndex fetchAllLabel={fetchAllLabel} labels={mockLabels} />,
-      store,
-    );
-    fireEvent.click(getByTestId('addLabelButton'));
-
-    expect(getByTestId('labelEdit')).toBeVisible();
-  });
-
-  test('should hide `LabelEdit` if state of `isLabelEditVisible` is false', () => {
-    const { queryByTestId } = renderWithRouter(
-      <LabelIndex fetchAllLabel={fetchAllLabel} labels={mockLabels} />,
-      store,
-    );
-    expect(queryByTestId('labelEdit')).toBeNull();
   });
 
   test('should call `fetchAllLabel` when component did mount', () => {
