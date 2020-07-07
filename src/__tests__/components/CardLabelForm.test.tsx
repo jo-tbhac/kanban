@@ -6,6 +6,7 @@ import { Store } from '../../store';
 import CardLabelForm from '../../components/CardLabelForm';
 
 describe('CardLabelForm component', () => {
+  const position = { top: 0, left: 0 };
   let store: Store;
   let closeCardLabelForm: jest.Mock;
 
@@ -16,7 +17,7 @@ describe('CardLabelForm component', () => {
 
   test('should call `closeCardLabelForm` when clicked a close button', () => {
     const { getByTestId } = render(
-      <CardLabelForm closeCardLabelForm={closeCardLabelForm} />,
+      <CardLabelForm closeCardLabelForm={closeCardLabelForm} position={position} />,
       store,
     );
 
