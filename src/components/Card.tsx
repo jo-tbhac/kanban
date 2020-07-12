@@ -1,14 +1,23 @@
 import React, { useState, useContext, useRef } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
 import { DndLCard } from '../store/card/types';
+import { RootState } from '../store';
 import * as cardActions from '../store/card/actions';
 import { CardContext } from './CardIndexContainer';
 import CardDetail from './CardDetail';
 import CardLabelSmall from './CardLabelSmall';
 import { dndItemType } from '../utils/utils';
+
+const mapStateToProps = (state: RootState) => {
+  const { label } = state;
+  return {
+    selectedLabelIds: label.selectedLabelIds,
+  };
+};
 
 const mapDisaptchToProps = {
   moveCard: cardActions.moveCard,
@@ -16,12 +25,17 @@ const mapDisaptchToProps = {
   updateCardIndex: cardActions.updateCardIndex,
 };
 
-const connector = connect(null, mapDisaptchToProps);
+const connector = connect(mapStateToProps, mapDisaptchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 export const Card = (props: PropsFromRedux) => {
-  const { moveCard, moveCardAcrossList, updateCardIndex } = props;
+  const {
+    selectedLabelIds,
+    moveCard,
+    moveCardAcrossList,
+    updateCardIndex,
+  } = props;
 
   const card = useContext(CardContext);
 
@@ -88,9 +102,25 @@ export const Card = (props: PropsFromRedux) => {
     },
   });
 
-  const opacity = card?.id === dndItem?.id && dndItem.type === dndItemType.CARD ? 0.2 : 1;
+  // const opacity = card?.id === dndItem?.id && dndItem.type === dndItemType.CARD ? 0.2 : 1;
   drag(ref);
   drop(ref);
+
+  const opacity = (() => {
+    if (card?.id === dndItem?.id && dndItem.type === dndItemType.CARD) {
+      return 0.2;
+    }
+
+    if (selectedLabelIds.length === 0) {
+      return 1;
+    }
+
+    const targetLabel = card?.labels.find((label) => selectedLabelIds.includes(label.id));
+    if (targetLabel) {
+      return 1;
+    }
+    return 0.4;
+  })();
 
   return (
     <>

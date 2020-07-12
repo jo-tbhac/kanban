@@ -8,6 +8,8 @@ import {
   CREATE_LABEL,
   UPDATE_LABEL,
   DELETE_LABEL,
+  CHECK_LABEL,
+  UNCHECK_LABEL,
 } from './types';
 
 export const fetchAllLabel = (boardId: number) => async (dispatch: AppDispatch) => {
@@ -79,3 +81,13 @@ export const deleteLabel = (labelId: number) => async (dispatch: AppDispatch) =>
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
   }
 };
+
+export const checkLabel = (payload: number) => ({
+  type: CHECK_LABEL,
+  payload,
+});
+
+export const uncheckLabel = (payload: number) => ({
+  type: UNCHECK_LABEL,
+  payload,
+});
