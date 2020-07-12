@@ -6,11 +6,14 @@ import { mockLabels, mockLabel } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
 import { failedCreateLabel, failedUpdateLabel, failedDeleteLabel } from '../../../utils/text';
+import { CHECK_LABEL, UNCHECK_LABEL } from '../../../store/label/types';
 import {
   fetchAllLabel,
   createLabel,
   updateLabel,
   deleteLabel,
+  checkLabel,
+  uncheckLabel,
 } from '../../../store/label/actions';
 
 describe('label actions', () => {
@@ -124,5 +127,17 @@ describe('label actions', () => {
         expect(dialog.title).toBe(failedDeleteLabel);
         expect(dialog.description).toBe('some error...');
       });
+  });
+
+  test('returns an action with payload and `CHECK_LABEL`', () => {
+    const payload = 1;
+    const action = checkLabel(payload);
+    expect(action).toEqual({ type: CHECK_LABEL, payload });
+  });
+
+  test('returns an action with payload and `UNCHECK_LABEL`', () => {
+    const payload = 1;
+    const action = uncheckLabel(payload);
+    expect(action).toEqual({ type: UNCHECK_LABEL, payload });
   });
 });
