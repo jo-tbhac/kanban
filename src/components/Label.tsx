@@ -25,7 +25,7 @@ type LabelProps = PropsFromRedux & {
   label: LabelTypes
 }
 
-const Label = (props: LabelProps) => {
+export const Label = (props: LabelProps) => {
   const {
     label,
     selectedLabelIds,
