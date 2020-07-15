@@ -6,12 +6,14 @@ import boardReducer from './board/reducers';
 import dialogReducer from './dialog/reducers';
 import labelReducer from './label/reducers';
 import sessionReducer from './session/reducers';
+import searchReducer from './search/reducers';
 
 export const rootReducer = combineReducers({
   board: boardReducer,
   dialog: dialogReducer,
   label: labelReducer,
   session: sessionReducer,
+  search: searchReducer,
 });
 
 const store = createStore(
