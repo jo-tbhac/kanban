@@ -15,7 +15,8 @@ export const searchCard = (params: { title: string, boardId: number }) => (
     const response = await axios.get('/cards/search', { params: snakeCaseParams });
 
     if (response?.status === 200) {
-      dispatch({ type: SEARCH_CARD, payload: camelCaseKeys(response.data.cards) });
+      const camelizedData = camelCaseKeys(response.data);
+      dispatch({ type: SEARCH_CARD, payload: camelizedData.cardIds });
       return;
     }
 

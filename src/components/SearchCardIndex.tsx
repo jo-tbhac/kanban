@@ -8,7 +8,7 @@ import SearchCardInfo from './SearchCardInfo';
 const mapStateToProps = (state: RootState) => {
   const { search } = state;
   return {
-    cards: search.cards,
+    cardIds: search.cardIds,
     keyword: search.keyword,
   };
 };
@@ -18,13 +18,13 @@ const connector = connect(mapStateToProps);
 type PropsFormRedux = ConnectedProps<typeof connector>
 
 const SearchCardIndex = (props: PropsFormRedux) => {
-  const { cards, keyword } = props;
+  const { cardIds, keyword } = props;
 
   return (
     <div className="searchCardIndex">
-      {cards.length === 0 && keyword !== '' && <SearchCardInfo />}
-      {cards.map((card) => (
-        <SearchCard key={card.id} cardId={card.id} />
+      {cardIds.length === 0 && keyword !== '' && <SearchCardInfo />}
+      {cardIds.map((cardId) => (
+        <SearchCard key={cardId} cardId={cardId} />
       ))}
     </div>
   );

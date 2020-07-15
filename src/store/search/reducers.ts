@@ -7,7 +7,7 @@ import {
 } from './types';
 
 const initialState: SearchState = {
-  cards: [],
+  cardIds: [],
   keyword: '',
   isSearching: false,
 };
@@ -17,13 +17,13 @@ const searchReducer = (state = initialState, action: SearchActionTypes) => {
     case SEARCH_CARD:
       return {
         ...state,
-        cards: action.payload,
+        cardIds: action.payload,
         isSearching: false,
       };
     case CLEAR_SEARCH_CARD_POOL:
       return {
         ...state,
-        cards: [],
+        cardIds: [],
         isSearching: false,
       };
     case ON_CHANGE_SEARCH_CARD_KEYWORD:
