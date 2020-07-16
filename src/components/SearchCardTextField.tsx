@@ -26,7 +26,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const SearchCardTextField = (props: PropsFromRedux) => {
+export const SearchCardTextField = (props: PropsFromRedux) => {
   const {
     keyword,
     searchCard,
@@ -58,6 +58,7 @@ const SearchCardTextField = (props: PropsFromRedux) => {
   return (
     <div className="searchCardTextField">
       <input
+        data-testid="searchCardTextField"
         type="text"
         value={keyword}
         onChange={(event) => onChangeSearchCardKeyword(event.target.value)}
@@ -65,9 +66,15 @@ const SearchCardTextField = (props: PropsFromRedux) => {
         className="searchCardTextField__input"
       />
       {keyword === ''
-        ? <FontAwesomeIcon icon={['fas', 'search']} className="searchCardTextField__search" />
-        : (
+        ? (
+          <FontAwesomeIcon
+            data-testid="searchCardSearchIcon"
+            icon={['fas', 'search']}
+            className="searchCardTextField__search"
+          />
+        ) : (
           <div
+            data-testid="searchCardClearButton"
             role="button"
             tabIndex={0}
             onClick={() => onChangeSearchCardKeyword('')}

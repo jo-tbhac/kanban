@@ -13,15 +13,17 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const connector = connect(mapStateToProps);
+const mapDispatchToProps = {};
 
-type PropsFormRedux = ConnectedProps<typeof connector>
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
-const SearchCardIndex = (props: PropsFormRedux) => {
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export const SearchCardIndex = (props: PropsFromRedux) => {
   const { cardIds, keyword } = props;
 
   return (
-    <div className="searchCardIndex">
+    <div data-testid="searchCardIndex" className="searchCardIndex">
       {cardIds.length === 0 && keyword !== '' && <SearchCardInfo />}
       {cardIds.map((cardId) => (
         <SearchCard key={cardId} cardId={cardId} />

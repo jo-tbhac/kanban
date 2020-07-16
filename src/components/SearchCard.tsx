@@ -16,7 +16,9 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const connector = connect(mapStateToProps);
+const mapDispatchToProps = {};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFormRedux = ConnectedProps<typeof connector>
 
@@ -24,7 +26,7 @@ type SearchCardProps = PropsFormRedux & {
   cardId: number
 }
 
-const SearchCard = (props: SearchCardProps) => {
+export const SearchCard = (props: SearchCardProps) => {
   const { lists, cardId } = props;
 
   const [isCardDetailVisible, setCardDetailVisible] = useState(false);
@@ -48,7 +50,7 @@ const SearchCard = (props: SearchCardProps) => {
       <div className="searchCardRow">
         <div className="searchCardRow__label">{list?.name}</div>
         <div
-          data-testid={`card-${searchedCard.id}`}
+          data-testid={`searchCard-${searchedCard.id}`}
           role="button"
           tabIndex={0}
           onClick={() => setCardDetailVisible(true)}

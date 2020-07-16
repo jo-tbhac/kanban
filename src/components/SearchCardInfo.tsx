@@ -12,14 +12,16 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const connector = connect(mapStateToProps);
+const mapDispatchToProps = {};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const SearchCardInfo = (props: PropsFromRedux) => {
+export const SearchCardInfo = (props: PropsFromRedux) => {
   const { isSearching } = props;
   return (
-    <div className="searchCardInfo">
+    <div data-testid="searchCardInfo" className="searchCardInfo">
       {isSearching ? (
         <>
           <FontAwesomeIcon icon="spinner" spin className="searchCardInfo__icon" />
