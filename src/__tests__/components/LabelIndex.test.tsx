@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import { renderWithRouter, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { mockLabels } from '../../utils/mockData';
-import { LabelIndex } from '../../components/LabelIndex';
+import { LabelIndex } from '../../components/label/LabelIndex';
 
 describe('LabelIndex component', () => {
   let store: Store;

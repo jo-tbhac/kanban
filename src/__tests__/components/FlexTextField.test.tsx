@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { render, storeFactory, fireEvent } from '../../testUtils';
 import { Store } from '../../store';
-import FlexTextField from '../../components/FlexTextField';
+import FlexTextField from '../../components/common/FlexTextField';
 
 describe('FlexTextField component', () => {
   let store: Store;

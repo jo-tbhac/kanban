@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import { storeFactory, renderWithRouter, fireEvent } from '../../testUtils';
 import { Store } from '../../store';
-import { SearchCardTextField } from '../../components/SearchCardTextField';
+import { SearchCardTextField } from '../../components/search/SearchCardTextField';
 
 describe('SearchCardTextField component', () => {
   let store: Store;

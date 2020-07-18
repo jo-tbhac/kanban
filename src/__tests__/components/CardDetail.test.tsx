@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import CardDetail from '../../components/CardDetail';
+import CardDetail from '../../components/card/CardDetail';
 
 describe('CardDetail component', () => {
   let store: Store;

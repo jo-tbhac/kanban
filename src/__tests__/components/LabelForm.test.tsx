@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { LabelForm } from '../../components/LabelForm';
+import { LabelForm } from '../../components/label/LabelForm';
 
 describe('LabelForm component', () => {
   let store: Store;

@@ -3,8 +3,8 @@ import React from 'react';
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { mockCard } from '../../utils/mockData';
-import CardDescriptionText from '../../components/CardDescriptionText';
-import { CardContext } from '../../components/CardIndexContainer';
+import CardDescriptionText from '../../components/card/CardDescriptionText';
+import { CardContext } from '../../components/card/CardIndexContainer';
 
 describe('CardDescriptionText component', () => {
   let store: Store;

@@ -3,7 +3,7 @@ import React from 'react';
 import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { mockLabel } from '../../utils/mockData';
-import { LabelEditRow } from '../../components/LabelEditRow';
+import { LabelEditRow } from '../../components/label/LabelEditRow';
 
 describe('LabelEditRow component', () => {
   let store: Store;

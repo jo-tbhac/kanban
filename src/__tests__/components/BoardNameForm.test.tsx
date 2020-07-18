@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { BoardNameForm } from '../../components/BoardNameForm';
+import { BoardNameForm } from '../../components/board/BoardNameForm';
 
 describe('BoardNameForm component', () => {
   let store: Store;

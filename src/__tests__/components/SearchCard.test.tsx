@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storeFactory, render, fireEvent } from '../../testUtils';
 import { Store } from '../../store';
-import { SearchCard } from '../../components/SearchCard';
+import { SearchCard } from '../../components/search/SearchCard';
 import { mockList, mockCard } from '../../utils/mockData';
 
 describe('SearchCard component', () => {

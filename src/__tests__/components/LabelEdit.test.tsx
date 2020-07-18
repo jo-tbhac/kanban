@@ -2,7 +2,7 @@ import React from 'react';
 
 import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import LabelEdit from '../../components/LabelEdit';
+import LabelEdit from '../../components/label/LabelEdit';
 
 describe('LabelEdit component', () => {
   let store: Store;

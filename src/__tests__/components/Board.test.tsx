@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { mockBoard } from '../../utils/mockData';
-import { Board } from '../../components/Board';
+import { Board } from '../../components/board/Board';
 
 describe('Board component', () => {
   let fetchBoard: jest.Mock;

@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 
 import { storeFactory, renderWithRouter } from '../../testUtils';
-import SignUp from '../../components/SignUp';
+import SignUp from '../../components/session/SignUp';
 import { Store } from '../../store';
 
 describe('SignUp component', () => {

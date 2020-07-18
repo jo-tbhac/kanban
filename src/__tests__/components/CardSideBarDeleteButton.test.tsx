@@ -3,8 +3,8 @@ import React from 'react';
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { mockCard } from '../../utils/mockData';
-import { CardSideBarDeleteButton } from '../../components/CardSideBarDeleteButton';
-import { CardContext } from '../../components/CardIndexContainer';
+import { CardSideBarDeleteButton } from '../../components/card/CardSideBarDeleteButton';
+import { CardContext } from '../../components/card/CardIndexContainer';
 
 describe('CardSideBarDeleteButton component', () => {
   let store: Store;

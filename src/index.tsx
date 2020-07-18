@@ -8,7 +8,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 
 import './index.scss';
 import store from './store';
-import App from './components/App';
+import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
 
 library.add(fab, fas, far);

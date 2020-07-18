@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { ListName } from '../../components/ListName';
+import { ListName } from '../../components/list/ListName';
 
 describe('ListName component', () => {
   const listId = 1;

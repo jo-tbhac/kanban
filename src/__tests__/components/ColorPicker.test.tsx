@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import ColorPicker from '../../components/ColorPicker';
+import ColorPicker from '../../components/common/ColorPicker';
 
 describe('ColorPicker component', () => {
   let store: Store;

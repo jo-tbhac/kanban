@@ -2,7 +2,7 @@ import React from 'react';
 
 import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import ToolBar from '../../components/ToolBar';
+import ToolBar from '../../components/common/ToolBar';
 
 describe('ToolBar component', () => {
   let store: Store;

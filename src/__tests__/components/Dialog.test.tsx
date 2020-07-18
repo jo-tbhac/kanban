@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storeFactory, render, fireEvent } from '../../testUtils';
 import { Store } from '../../store';
-import { Dialog } from '../../components/Dialog';
+import { Dialog } from '../../components/common/Dialog';
 import { dialogTypeSuccess, dialogTypeError, dialogTypeAsk } from '../../store/dialog/types';
 
 describe('Dialog component', () => {

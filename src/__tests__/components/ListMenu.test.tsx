@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { ListMenu } from '../../components/ListMenu';
+import { ListMenu } from '../../components/list/ListMenu';
 
 describe('ListMenu component', () => {
   let store: Store;

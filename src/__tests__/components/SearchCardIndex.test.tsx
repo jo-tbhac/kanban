@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { SearchCardIndex } from '../../components/SearchCardIndex';
+import { SearchCardIndex } from '../../components/search/SearchCardIndex';
 
 describe('SearchCardIndex component', () => {
   let store: Store;

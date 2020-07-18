@@ -3,7 +3,7 @@ import React from 'react';
 import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { mockBoards } from '../../utils/mockData';
 import { Store } from '../../store';
-import { BoardForm } from '../../components/BoardForm';
+import { BoardForm } from '../../components/board/BoardForm';
 
 describe('BoardForm component', () => {
   let createBoard: jest.Mock;

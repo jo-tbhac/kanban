@@ -11,7 +11,7 @@ import {
 
 import { Store } from '../../store';
 import { mockList } from '../../utils/mockData';
-import { List } from '../../components/List';
+import { List } from '../../components/list/List';
 
 describe('List component', () => {
   let store: Store;

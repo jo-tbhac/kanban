@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import { renderWithRouter, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { ListForm } from '../../components/ListForm';
+import { ListForm } from '../../components/list/ListForm';
 
 describe('ListForm component', () => {
   let store: Store;

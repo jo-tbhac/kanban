@@ -11,8 +11,8 @@ import {
 
 import { Store } from '../../store';
 import { mockCard } from '../../utils/mockData';
-import { Card } from '../../components/Card';
-import { CardContext } from '../../components/CardIndexContainer';
+import { Card } from '../../components/card/Card';
+import { CardContext } from '../../components/card/CardIndexContainer';
 
 describe('Card component', () => {
   let store: Store;

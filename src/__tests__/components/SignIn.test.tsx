@@ -3,7 +3,7 @@ import { fireEvent } from '@testing-library/react';
 
 import { storeFactory, renderWithRouter } from '../../testUtils';
 import { Store } from '../../store';
-import SignIn from '../../components/SignIn';
+import SignIn from '../../components/session/SignIn';
 
 describe('SignIn component', () => {
   let store: Store;

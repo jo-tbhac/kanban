@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
-import Header from '../../components/Header';
+import Header from '../../components/common/Header';
 import { Store } from '../../store';
 
 describe('Header component', () => {

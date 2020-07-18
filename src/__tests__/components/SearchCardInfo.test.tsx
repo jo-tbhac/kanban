@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { SearchCardInfo } from '../../components/SearchCardInfo';
+import { SearchCardInfo } from '../../components/search/SearchCardInfo';
 import { searchingText, searchCardNotFound } from '../../utils/text';
 
 describe('SearchCardInfo component', () => {

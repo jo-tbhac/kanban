@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { CardForm } from '../../components/CardForm';
+import { CardForm } from '../../components/card/CardForm';
 
 describe('CardForm component', () => {
   let store: Store;

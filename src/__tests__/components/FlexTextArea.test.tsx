@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { render, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import FlexTextArea from '../../components/FlexTextArea';
+import FlexTextArea from '../../components/common/FlexTextArea';
 
 describe('FlexTextArea component', () => {
   let store: Store;

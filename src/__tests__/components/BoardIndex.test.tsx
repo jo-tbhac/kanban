@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { render, fireEvent, storeFactory } from '../../testUtils';
-import { BoardIndex } from '../../components/BoardIndex';
+import { BoardIndex } from '../../components/board/BoardIndex';
 import { mockBoards } from '../../utils/mockData';
 import { Store } from '../../store';
 

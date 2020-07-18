@@ -3,7 +3,7 @@ import React from 'react';
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
 import { mockList } from '../../utils/mockData';
-import ListMenuButton from '../../components/ListMenuButton';
+import ListMenuButton from '../../components/list/ListMenuButton';
 
 describe('ListMenuButton component', () => {
   let store: Store;

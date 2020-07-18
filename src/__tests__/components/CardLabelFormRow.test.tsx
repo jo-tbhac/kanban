@@ -3,8 +3,8 @@ import React from 'react';
 import { mockCard, mockLabels } from '../../utils/mockData';
 import { render, fireEvent, storeFactory } from '../../testUtils';
 import { Store } from '../../store';
-import { CardLabelFormRow } from '../../components/CardLabelFormRow';
-import { CardContext } from '../../components/CardIndexContainer';
+import { CardLabelFormRow } from '../../components/card/CardLabelFormRow';
+import { CardContext } from '../../components/card/CardIndexContainer';
 
 describe('CardLabelFormRow component', () => {
   let store: Store;
