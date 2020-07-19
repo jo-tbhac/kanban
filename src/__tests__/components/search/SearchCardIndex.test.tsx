@@ -18,7 +18,7 @@ describe('SearchCardIndex component', () => {
   test('should renders component of `SearchCardInfo` if props of `cardIds.length` is zero and `keyword` is not blank', () => {
     keyword = 'k,xsejcnoj';
     const { getByTestId } = render(<SearchCardIndex cardIds={cardIds} keyword={keyword} />, store);
-    expect(getByTestId('searchCardInfo')).not.toBeNull();
+    expect(getByTestId('searchInfo')).not.toBeNull();
   });
 
   test('should renders components of `SearchCard` if props of `cardIds.length` is more than zero', () => {
@@ -39,6 +39,6 @@ describe('SearchCardIndex component', () => {
     );
 
     expect(getByTestId('searchCardIndex').children).toHaveLength(cardIds.length);
-    expect(queryByTestId('searchCardInfo')).toBeNull();
+    expect(queryByTestId('searchInfo')).toBeNull();
   });
 });

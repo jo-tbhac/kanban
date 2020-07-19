@@ -1,0 +1,26 @@
+.boardIndexCard {
+  @include board-card();
+}
+
+.boardIndexCardTop {
+  flex: 1;
+  padding-top: 10px;
+  &__title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}
+
+.boardIndexCardBottom {
+  display: flex;
+  font-size: 0.8rem;
+  justify-content: space-between;
+  line-height: 1.4rem;
+  &__label {
+    &::after {
+      content: ':';
+    }
+  }
+}

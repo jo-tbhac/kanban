@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 import { RootState } from '../../store';
 import * as searchAction from '../../store/search/actions';
-import { searchCardFormPlaceholder } from '../../utils/text';
+import { searchBoardFormPlaceholder } from '../../utils/text';
 import SearchTextField from './SearchTextField';
 
 const WAIT_INTERVAL = 1000;
@@ -12,35 +11,33 @@ const WAIT_INTERVAL = 1000;
 const mapStateToProps = (state: RootState) => {
   const { search } = state;
   return {
-    keyword: search.cardKeyword,
+    keyword: search.boardKeyword,
   };
 };
 
 const mapDispatchToProps = {
-  searchCard: searchAction.searchCard,
-  clearSearchCardPool: searchAction.clearSearchCardPool,
-  onChangeSearchCardKeyword: searchAction.onChangeSearchCardKeyword,
+  searchBoard: searchAction.searchBoard,
+  clearSearchBoardPool: searchAction.clearSearchBoardPool,
+  onChangeSearchBoardKeyword: searchAction.onChangeSearchBoardKeyword,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export const SearchCardTextField = (props: PropsFromRedux) => {
+export const SearchBoardTextField = (props: PropsFromRedux) => {
   const {
     keyword,
-    searchCard,
-    clearSearchCardPool,
-    onChangeSearchCardKeyword,
+    searchBoard,
+    clearSearchBoardPool,
+    onChangeSearchBoardKeyword,
   } = props;
-
-  const { boardId } = useParams();
 
   const timer: { current: undefined | NodeJS.Timeout } = useRef();
 
   useEffect(() => (
     () => {
-      onChangeSearchCardKeyword('');
+      onChangeSearchBoardKeyword('');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ), []);
@@ -50,24 +47,22 @@ export const SearchCardTextField = (props: PropsFromRedux) => {
       clearTimeout(timer.current);
     }
     if (keyword === '') {
-      clearSearchCardPool();
+      clearSearchBoardPool();
       return;
     }
-    if (boardId) {
-      timer.current = setTimeout(() => {
-        searchCard({ title: keyword, boardId: Number(boardId) });
-      }, WAIT_INTERVAL);
-    }
+    timer.current = setTimeout(() => {
+      searchBoard(keyword);
+    }, WAIT_INTERVAL);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
 
   return (
     <SearchTextField
       keyword={keyword}
-      onChangeSearchKeyword={onChangeSearchCardKeyword}
-      placeholder={searchCardFormPlaceholder}
+      onChangeSearchKeyword={onChangeSearchBoardKeyword}
+      placeholder={searchBoardFormPlaceholder}
     />
   );
 };
 
-export default connector(SearchCardTextField);
+export default connector(SearchBoardTextField);

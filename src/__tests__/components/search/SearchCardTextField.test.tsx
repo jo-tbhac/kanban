@@ -40,8 +40,8 @@ describe('SearchCardTextField component', () => {
       [`/board/${boardId}`],
     );
 
-    expect(getByTestId('searchCardSearchIcon')).not.toBeNull();
-    expect(queryByTestId('searchCardClearButton')).toBeNull();
+    expect(getByTestId('searchTextFieldSearchIcon')).not.toBeNull();
+    expect(queryByTestId('searchTextFieldClearButton')).toBeNull();
   });
 
   test('should renders a clear button if props of `keyword` is not blank', () => {
@@ -62,8 +62,8 @@ describe('SearchCardTextField component', () => {
       [`/board/${boardId}`],
     );
 
-    expect(getByTestId('searchCardClearButton')).not.toBeNull();
-    expect(queryByTestId('searchCardSearchIcon')).toBeNull();
+    expect(getByTestId('searchTextFieldClearButton')).not.toBeNull();
+    expect(queryByTestId('searchTextFieldSearchIcon')).toBeNull();
   });
 
   test('should call `onChangeSearchCardKeyword` with empty string upon click a clear button', () => {
@@ -84,7 +84,7 @@ describe('SearchCardTextField component', () => {
       [`/board/${boardId}`],
     );
 
-    fireEvent.click(getByTestId('searchCardClearButton'));
+    fireEvent.click(getByTestId('searchTextFieldClearButton'));
     expect(onChangeSearchCardKeyword).toHaveBeenCalledWith('');
   });
 
@@ -106,7 +106,7 @@ describe('SearchCardTextField component', () => {
       [`/board/${boardId}`],
     );
 
-    fireEvent.change(getByTestId('searchCardTextField'), { target: { value: keyword } });
+    fireEvent.change(getByTestId('searchTextField'), { target: { value: keyword } });
     expect(onChangeSearchCardKeyword).toHaveBeenCalledWith(keyword);
   });
 

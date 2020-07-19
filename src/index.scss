@@ -22,6 +22,7 @@ code {
 @import './css/board/Board';
 @import './css/board/BoardForm';
 @import './css/board/BoardIndex';
+@import './css/board/BoardIndexCard';
 
 // card
 @import './css/card/Card';
@@ -66,11 +67,13 @@ code {
 @import './css/list/ListName';
 
 // search
+@import './css/search/SearchBoard';
+@import './css/search/SearchBoardIndex';
 @import './css/search/SearchCard';
-@import './css/search/SearchCardForm';
 @import './css/search/SearchCardIndex';
-@import './css/search/SearchCardInfo';
-@import './css/search/SearchCardTextField';
+@import './css/search/SearchForm';
+@import './css/search/SearchInfo';
+@import './css/search/SearchTextField';
 
 // session
 @import './css/session/SignIn';
