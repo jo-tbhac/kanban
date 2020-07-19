@@ -4,8 +4,10 @@ import { CLEAR_SEARCH_CARD_POOL, ON_CHANGE_SEARCH_CARD_KEYWORD } from '../../../
 describe('search reducer', () => {
   const initialState = {
     cardIds: [],
-    keyword: '',
+    cardKeyword: '',
     isSearching: false,
+    boardKeyword: '',
+    boardIds: [],
   };
 
   test('should returns state `{ cardIds: [], isSearching: false }` upon recieved an action `CLEAR_SEARCH_CARD_POOL`', () => {
@@ -24,6 +26,6 @@ describe('search reducer', () => {
       { type: ON_CHANGE_SEARCH_CARD_KEYWORD, payload: keyword },
     );
     expect(newState.isSearching).toBeTruthy();
-    expect(newState.keyword).toBe(keyword);
+    expect(newState.cardKeyword).toBe(keyword);
   });
 });
