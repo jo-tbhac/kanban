@@ -8,7 +8,7 @@ type BoardIndexCardProps = {
   board: Board
 }
 
-export const BoardIndexCard = (props: BoardIndexCardProps) => {
+const BoardIndexCard = (props: BoardIndexCardProps) => {
   const { board } = props;
 
   return (
