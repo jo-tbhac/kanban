@@ -36,7 +36,7 @@ export const ListMenu = (props: ListMenuProps) => {
   } = props;
 
   const closeListMenu = useCallback(({ target }) => {
-    if (!target.className.includes('listMenu')) {
+    if (typeof target.className === 'string' && !target.className.includes('listMenu')) {
       setListMenuVisible(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
