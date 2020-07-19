@@ -1,4 +1,4 @@
-.searchCardTextField {
+.searchTextField {
   height: 80%;
   margin-left: 5%;
   margin-right: 5%;
@@ -18,14 +18,14 @@
     padding-right: 25px;
     width: 100%;
   }
-  &__search {
+  &__searchIcon {
     color: $font-color;
     position: absolute;
     top: 14%;
     right: 5px;
   }
   &__clear {
-    @extend .searchCardTextField__search;
+    @extend .searchTextField__searchIcon;
     cursor: pointer;
     &:hover {
       color: $pink;

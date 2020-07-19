@@ -2,14 +2,19 @@ import {
   SEARCH_CARD,
   CLEAR_SEARCH_CARD_POOL,
   ON_CHANGE_SEARCH_CARD_KEYWORD,
+  SEARCH_BOARD,
+  CLEAR_SEARCH_BOARD_POOL,
+  ON_CHANGE_SEARCH_BOARD_KEYWORD,
   SearchActionTypes,
   SearchState,
 } from './types';
 
 const initialState: SearchState = {
   cardIds: [],
-  keyword: '',
+  cardKeyword: '',
   isSearching: false,
+  boardIds: [],
+  boardKeyword: '',
 };
 
 const searchReducer = (state = initialState, action: SearchActionTypes) => {
@@ -29,7 +34,24 @@ const searchReducer = (state = initialState, action: SearchActionTypes) => {
     case ON_CHANGE_SEARCH_CARD_KEYWORD:
       return {
         ...state,
-        keyword: action.payload,
+        cardKeyword: action.payload,
+        isSearching: true,
+      };
+    case SEARCH_BOARD:
+      return {
+        ...state,
+        boardIds: action.payload,
+      };
+    case CLEAR_SEARCH_BOARD_POOL:
+      return {
+        ...state,
+        boardIds: [],
+        isSearching: false,
+      };
+    case ON_CHANGE_SEARCH_BOARD_KEYWORD:
+      return {
+        ...state,
+        boardKeyword: action.payload,
         isSearching: true,
       };
     default:

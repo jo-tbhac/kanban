@@ -2,14 +2,15 @@ import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
+import { searchCardNotFound } from '../../utils/text';
 import SearchCard from './SearchCard';
-import SearchCardInfo from './SearchCardInfo';
+import SearchInfo from './SearchInfo';
 
 const mapStateToProps = (state: RootState) => {
   const { search } = state;
   return {
     cardIds: search.cardIds,
-    keyword: search.keyword,
+    keyword: search.cardKeyword,
   };
 };
 
@@ -24,7 +25,9 @@ export const SearchCardIndex = (props: PropsFromRedux) => {
 
   return (
     <div data-testid="searchCardIndex" className="searchCardIndex">
-      {cardIds.length === 0 && keyword !== '' && <SearchCardInfo />}
+      {cardIds.length === 0 && keyword !== '' && (
+        <SearchInfo notFoundText={searchCardNotFound} />
+      )}
       {cardIds.map((cardId) => (
         <SearchCard key={cardId} cardId={cardId} />
       ))}

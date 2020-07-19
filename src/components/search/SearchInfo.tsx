@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { RootState } from '../../store';
-import { searchCardNotFound, searchingText } from '../../utils/text';
+import { searchingText } from '../../utils/text';
 
 const mapStateToProps = (state: RootState) => {
   const { search } = state;
@@ -18,20 +18,25 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export const SearchCardInfo = (props: PropsFromRedux) => {
-  const { isSearching } = props;
+type SearchInfoProps = PropsFromRedux & {
+  notFoundText: string
+}
+
+export const SearchInfo = (props: SearchInfoProps) => {
+  const { isSearching, notFoundText } = props;
+
   return (
-    <div data-testid="searchCardInfo" className="searchCardInfo">
+    <div data-testid="searchInfo" className="searchInfo">
       {isSearching ? (
         <>
-          <FontAwesomeIcon icon="spinner" spin className="searchCardInfo__icon" />
-          <div className="searchCardInfo__searching">{searchingText}</div>
+          <FontAwesomeIcon icon="spinner" spin className="searchInfo__icon" />
+          <div className="searchInfo__searching">{searchingText}</div>
         </>
       ) : (
-        <div className="searchCardInfo__empty">{searchCardNotFound}</div>
+        <div className="searchInfo__empty">{notFoundText}</div>
       )}
     </div>
   );
 };
 
-export default connector(SearchCardInfo);
+export default connector(SearchInfo);
