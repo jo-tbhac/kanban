@@ -62,3 +62,6 @@ export const searchingText = '検索中';
 export const failedSearchBoard = 'ボードの検索に失敗しました';
 export const searchBoardFormPlaceholder = 'ボードのタイトルで検索';
 export const searchBoardNotFound = '条件に一致するボードは見つかりませんでした';
+
+// check list
+export const failedCreateCheckList = 'チェックリストを作成できませんでした';

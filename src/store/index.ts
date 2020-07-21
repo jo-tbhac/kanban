@@ -7,6 +7,7 @@ import dialogReducer from './dialog/reducers';
 import labelReducer from './label/reducers';
 import sessionReducer from './session/reducers';
 import searchReducer from './search/reducers';
+import checkListReducer from './check_list/reducers';
 
 export const rootReducer = combineReducers({
   board: boardReducer,
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
   label: labelReducer,
   session: sessionReducer,
   search: searchReducer,
+  checkList: checkListReducer,
 });
 
 const store = createStore(
