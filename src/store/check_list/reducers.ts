@@ -1,4 +1,5 @@
 import {
+  FETCH_CHECK_LISTS,
   CREATE_CHECK_LIST,
   CheckListState,
   CheckListActionTypes,
@@ -10,6 +11,11 @@ const initialState: CheckListState = {
 
 const checkListReducer = (state = initialState, action: CheckListActionTypes) => {
   switch (action.type) {
+    case FETCH_CHECK_LISTS:
+      return {
+        ...state,
+        checkLists: action.payload,
+      };
     case CREATE_CHECK_LIST:
       return {
         ...state,
