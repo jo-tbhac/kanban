@@ -1,0 +1,11 @@
+.checkListForm {
+  padding: 10px;
+  &__label {
+    font-size: 0.8rem;
+  }
+  &__textField {
+    @include text-field();
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
