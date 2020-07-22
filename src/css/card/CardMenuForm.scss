@@ -1,0 +1,35 @@
+.cardMenuForm {
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  padding: 0 10px;
+  position: absolute;
+  right: calc((100% - #{$card-detail-width} + 20px) / 2);
+  width: 300px;
+  @media (max-width: $card-detail-width) {
+    left: 10px;
+    right: 0;
+    bottom: 20px;
+  }
+  @media (max-height: 430px) {
+    bottom: 20px;
+  }
+}
+
+.cardMenuFormHeader {
+  align-items: center;
+  border-bottom: solid 1px $border-color;
+  display: flex;
+  padding: 10px 0;
+  &__text {
+    flex: 1;
+    text-align: center;
+  }
+  &__close {
+    cursor: pointer;
+    padding: 3px 5px;
+  }
+}
+
+.cardMenuFormFooter {
+  padding: 10px 0;
+}
