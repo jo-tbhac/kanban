@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
 
+import CardSideBarButton from './CardSideBarButton';
 import { CardContext } from './CardIndexContainer';
 import { dialogTypeAsk } from '../../store/dialog/types';
 import * as dialogAction from '../../store/dialog/actions';
@@ -35,17 +35,11 @@ export const CardSideBarDeleteButton = (props: PropsFromRedux) => {
   };
 
   return (
-    <div
-      data-testid="cardSideBarDeleteButton"
-      role="button"
-      tabIndex={0}
+    <CardSideBarButton
+      text={deleteCardButtonText}
+      icon={['fas', 'trash-alt']}
       onClick={onClickDelete}
-      onKeyPress={onClickDelete}
-      className="cardSideBarDeleteButton"
-    >
-      <FontAwesomeIcon icon={['fas', 'trash-alt']} className="cardSideBarDeleteButton__icon" />
-      <div className="cardSideBarDeleteButton__label">{deleteCardButtonText}</div>
-    </div>
+    />
   );
 };
 
