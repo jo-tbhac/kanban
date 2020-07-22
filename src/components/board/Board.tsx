@@ -10,6 +10,7 @@ import List from '../list/List';
 import ListForm from '../list/ListForm';
 import { RootState } from '../../store';
 import * as boardActions from '../../store/board/actions';
+import * as checkListActions from '../../store/check_list/actions';
 import { newListButtonText } from '../../utils/text';
 
 const mapStateToProps = (state: RootState) => {
@@ -21,6 +22,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = {
   fetchBoard: boardActions.fetchBoard,
+  fetchCheckLists: checkListActions.fetchCheckLists,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -28,7 +30,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 export const Board = (props: PropsFromRedux) => {
-  const { selectedBoard, fetchBoard } = props;
+  const { selectedBoard, fetchBoard, fetchCheckLists } = props;
 
   const { boardId } = useParams();
   const [isListFormVisible, setListFormVisible] = useState(false);
@@ -36,6 +38,7 @@ export const Board = (props: PropsFromRedux) => {
   useEffect(() => {
     if (boardId && Number(boardId)) {
       fetchBoard(Number(boardId));
+      fetchCheckLists(Number(boardId));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
