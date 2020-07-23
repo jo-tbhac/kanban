@@ -17,9 +17,9 @@ export const fetchCheckLists = (boardId: number) => async (dispatch: AppDispatch
   }
 };
 
-export const createCheckList = (name: string, cardId: number) => async (dispatch: AppDispatch) => {
+export const createCheckList = (title: string, cardId: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
-  const response = await axios.post(`/card/${cardId}/check_list`, { name });
+  const response = await axios.post(`/card/${cardId}/check_list`, { title });
 
   if (response?.status === 201) {
     const camelizedData = camelCaseKeys(response.data, { deep: true });
