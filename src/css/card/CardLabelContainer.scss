@@ -1,5 +1,5 @@
 .cardLabelContainer {
-  margin-bottom: 15px;
+  @include card-detail-row();
   &__label {
     font-weight: bold;
     margin-bottom: 5px;

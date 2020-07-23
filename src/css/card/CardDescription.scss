@@ -1,5 +1,5 @@
 .cardDescription {
-  margin-bottom: 15px;
+  @include card-detail-row();
 }
 
 .cardDescriptionHeader {
