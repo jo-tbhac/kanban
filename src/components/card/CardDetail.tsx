@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CardTitle from './CardTitle';
 import CardLabelContainer from './CardLabelContainer';
 import CardDescription from './CardDescription';
+import CheckListIndex from '../check_list/CheckListIndex';
 import CardSideBar from './CardSideBar';
 
 type CardDetailProps = {
@@ -54,6 +55,7 @@ const CardDetail = (props: CardDetailProps) => {
           <div className="cardDetailMain">
             <CardLabelContainer />
             <CardDescription />
+            <CheckListIndex />
           </div>
           <CardSideBar />
         </div>
