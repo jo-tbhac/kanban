@@ -21,7 +21,7 @@ type FetchCheckListsAction = {
 
 type CreateCheckListAction = {
   type: typeof CREATE_CHECK_LIST
-  payload: { checkList: CheckList, listId: number }
+  payload: CheckList
 }
 
 export type CheckListActionTypes = FetchCheckListsAction | CreateCheckListAction;
