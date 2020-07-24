@@ -26,7 +26,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const CardSideBarCheckListButton = (props: PropsFromRedux) => {
+export const CardSideBarCheckListButton = (props: PropsFromRedux) => {
   const { createCheckList } = props;
 
   const [formVisible, setFormVisible] = useState(false);
