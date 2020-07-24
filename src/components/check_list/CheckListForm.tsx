@@ -14,6 +14,7 @@ const CheckListForm = (props: CheckListFormProps) => {
     <div className="checkListForm">
       <div className="checkListForm__label">{checkListTitleLabel}</div>
       <input
+        data-testid="checkListFormTextField"
         type="text"
         value={title}
         onChange={onChange}
