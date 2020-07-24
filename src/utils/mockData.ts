@@ -149,3 +149,29 @@ export const mockListsWithCardLabel = [
     index: 2,
   },
 ];
+
+export const mockCheckLists = [
+  {
+    id: 1,
+    title: 'checkLists-1',
+    cardId: 1,
+    items: [],
+  }, {
+    id: 2,
+    title: 'checkLists-2',
+    cardId: 1,
+    items: [],
+  }, {
+    id: 3,
+    title: 'checkLists-3',
+    cardId: 2,
+    items: [],
+  },
+];
+
+export const mockCheckList = {
+  id: 1,
+  title: 'checkLists-1',
+  cardId: 1,
+  items: [],
+};
