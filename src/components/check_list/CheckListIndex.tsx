@@ -18,7 +18,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const CheckListIndex = (props: PropsFromRedux) => {
+export const CheckListIndex = (props: PropsFromRedux) => {
   const { checkLists } = props;
 
   const card = useContext(CardContext);
@@ -32,7 +32,7 @@ const CheckListIndex = (props: PropsFromRedux) => {
   return (
     <>
       {cardCheckLists.map((checkList) => (
-        <CheckList checkList={checkList} />
+        <CheckList key={checkList.id} checkList={checkList} />
       ))}
     </>
   );
