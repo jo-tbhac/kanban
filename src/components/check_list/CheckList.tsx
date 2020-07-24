@@ -12,7 +12,7 @@ const CheckList = (props: CheckListProps) => {
   const { checkList } = props;
 
   return (
-    <div className="checkList">
+    <div data-testid="checkList" className="checkList">
       <div className="checkListHeader">
         <div className="checkListHeader__label">{checkList.title}</div>
         <ButtonNoneBorder buttonText={deleteText} onClick={() => {}} />
