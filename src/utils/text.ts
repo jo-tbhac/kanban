@@ -62,3 +62,15 @@ export const searchingText = '検索中';
 export const failedSearchBoard = 'ボードの検索に失敗しました';
 export const searchBoardFormPlaceholder = 'ボードのタイトルで検索';
 export const searchBoardNotFound = '条件に一致するボードは見つかりませんでした';
+
+// check list
+export const initialCheckListTitle = 'チェックリスト';
+export const checkListTitlePlaceholder = 'チェックリストのタイトルを入力';
+export const checkListButtonText = 'チェックリスト';
+export const newCheckListText = 'チェックリストを作成';
+export const checkListTitleLabel = 'タイトル';
+export const failedCreateCheckList = 'チェックリストを作成できませんでした';
+export const addCheckListItem = 'アイテムを追加';
+
+// common
+export const deleteText = '削除';

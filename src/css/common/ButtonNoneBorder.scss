@@ -1,0 +1,14 @@
+.buttonNoneBorder {
+  background-color: $card-element-background;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: $font-color;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  width: fit-content;
+  &:hover {
+    background-color: $card-element-hover-background;
+  }
+}

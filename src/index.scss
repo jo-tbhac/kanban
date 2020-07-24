@@ -38,12 +38,18 @@ code {
 @import './css/card/CardLabelFormButton';
 @import './css/card/CardLabelFormRow';
 @import './css/card/CardLabelSmall';
+@import './css/card/CardMenuForm';
 @import './css/card/CardSideBar';
-@import './css/card/CardSideBarDeleteButton';
+@import './css/card/CardSideBarButton';
 @import './css/card/CardTitle';
+
+// check list
+@import './css/check_list/CheckList';
+@import './css/check_list/CheckListForm';
 
 // common
 @import './css/common/ButtonCancel';
+@import './css/common/ButtonNoneBorder';
 @import './css/common/ButtonSubmit';
 @import './css/common/ColorPicker';
 @import './css/common/Dialog';

@@ -25,7 +25,7 @@ describe('CardSideBarDeleteButton component', () => {
       store,
     );
 
-    fireEvent.click(getByTestId('cardSideBarDeleteButton'));
+    fireEvent.click(getByTestId('cardSideBarButton'));
     expect(openDialog).toHaveBeenCalled();
   });
 });

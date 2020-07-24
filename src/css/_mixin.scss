@@ -82,3 +82,17 @@
   white-space: nowrap;
   z-index: 10;
 }
+
+@mixin card-detail-row() {
+  margin-bottom: 20px;
+}
+
+@mixin card-detail-header() {
+  align-items: center;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+@mixin card-detail-header-text() {
+  font-weight: bold;
+}

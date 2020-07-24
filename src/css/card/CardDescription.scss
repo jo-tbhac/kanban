@@ -1,13 +1,11 @@
 .cardDescription {
-  margin-bottom: 15px;
+  @include card-detail-row();
 }
 
 .cardDescriptionHeader {
-  align-items: center;
-  display: flex;
-  margin-bottom: 5px;
+  @include card-detail-header();
   &__label {
-    font-weight: bold;
+    @include card-detail-header-text();
     margin-right: 8px;
   }
   &__icon {
