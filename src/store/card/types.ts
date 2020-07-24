@@ -1,5 +1,3 @@
-import { CheckList } from '../check_list/types';
-
 export const CREATE_CARD = 'CREATE_CARD';
 export const UPDATE_CARD = 'UPDATE_CARD';
 export const DELETE_CARD = 'DELETE_CARD';
@@ -16,7 +14,6 @@ export interface Card {
   listId: number
   labels: { id: number }[]
   index: number
-  checkLists: CheckList[]
 }
 
 export interface DndLCard {
