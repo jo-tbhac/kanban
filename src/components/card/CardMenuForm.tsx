@@ -43,10 +43,13 @@ const CardMenuForm = (props: CardMenuFormProps) => {
   }, [closeCardMenu]);
 
   return (
-    <div className="cardMenuForm">
+    <div data-testid="cardMenuForm" className="cardMenuForm">
       <div className="cardMenuFormHeader">
-        <div className="cardMenuFormHeader__text">{headerText}</div>
+        <div data-testid="cardMenuFormHeader" className="cardMenuFormHeader__text">
+          {headerText}
+        </div>
         <div
+          data-testid="cardMenuFormCloseButton"
           role="button"
           tabIndex={0}
           onClick={onClickClose}
