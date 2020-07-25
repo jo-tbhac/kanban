@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ButtonNoneBorder from '../common/ButtonNoneBorder';
+import CheckListTitleForm from './CheckListTitleForm';
 import * as CheckListTypes from '../../store/check_list/types';
 import { addCheckListItem, deleteText } from '../../utils/text';
 
@@ -11,10 +12,29 @@ type CheckListProps = {
 const CheckList = (props: CheckListProps) => {
   const { checkList } = props;
 
+  const [isFormVisible, setFormVisible] = useState(false);
+
   return (
     <div data-testid="checkList" className="checkList">
       <div className="checkListHeader">
-        <div className="checkListHeader__label">{checkList.title}</div>
+        {isFormVisible ? (
+          <CheckListTitleForm
+            setFormVisible={setFormVisible}
+            checkListId={checkList.id}
+            initialTitle={checkList.title}
+          />
+        ) : (
+          <div
+            data-testid="checkListTitle"
+            role="button"
+            tabIndex={0}
+            onClick={() => setFormVisible(true)}
+            onKeyPress={() => setFormVisible(true)}
+            className="checkListHeader__label"
+          >
+            {checkList.title}
+          </div>
+        )}
         <ButtonNoneBorder buttonText={deleteText} onClick={() => {}} />
       </div>
       <ButtonNoneBorder buttonText={addCheckListItem} onClick={() => {}} />

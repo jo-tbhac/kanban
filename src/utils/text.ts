@@ -70,6 +70,7 @@ export const checkListButtonText = 'チェックリスト';
 export const newCheckListText = 'チェックリストを作成';
 export const checkListTitleLabel = 'タイトル';
 export const failedCreateCheckList = 'チェックリストを作成できませんでした';
+export const failedUpdateCheckList = 'チェックリストを更新できませんでした';
 export const addCheckListItem = 'アイテムを追加';
 
 // common
