@@ -5,11 +5,12 @@ import { storeFactory } from '../../../testUtils';
 import { mockCheckLists, mockCheckList } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedCreateCheckList, failedUpdateCheckList } from '../../../utils/text';
+import { failedCreateCheckList, failedUpdateCheckList, failedDeleteCheckList } from '../../../utils/text';
 import {
   fetchCheckLists,
   createCheckList,
   updateCheckList,
+  deleteCheckList,
 } from '../../../store/check_list/actions';
 
 describe('check list actions', () => {
@@ -91,6 +92,34 @@ describe('check list actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedUpdateCheckList);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state `checkLists` that deleted one record when an action of `deleteCheckList` was successful', () => {
+    store = storeFactory({ checkList: { checkLists: [mockCheckList] } });
+    const previousState = store.getState().checkList;
+
+    mock.onDelete(`/check_list/${mockCheckList.id}`).reply(200);
+
+    return store.dispatch(deleteCheckList(mockCheckList.id) as any)
+      .then(() => {
+        const { checkList } = store.getState();
+        expect(checkList.checkLists).toHaveLength(previousState.checkLists.length - 1);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `deleteCheckList` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+
+    mock.onDelete(`/check_list/${mockCheckList.id}`).reply(400, responseData);
+
+    return store.dispatch(deleteCheckList(mockCheckList.id) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedDeleteCheckList);
         expect(dialog.description).toBe('some error...');
       });
   });

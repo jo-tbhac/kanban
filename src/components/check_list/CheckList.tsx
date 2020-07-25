@@ -22,7 +22,7 @@ type CheckListProps = PropsFromRedux & {
   checkList: CheckListTypes.CheckList
 }
 
-const CheckList = (props: CheckListProps) => {
+export const CheckList = (props: CheckListProps) => {
   const { checkList, openDialog, deleteCheckList } = props;
 
   const [isFormVisible, setFormVisible] = useState(false);
