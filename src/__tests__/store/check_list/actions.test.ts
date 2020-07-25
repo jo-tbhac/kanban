@@ -5,8 +5,12 @@ import { storeFactory } from '../../../testUtils';
 import { mockCheckLists, mockCheckList } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedCreateCheckList } from '../../../utils/text';
-import { fetchCheckLists, createCheckList } from '../../../store/check_list/actions';
+import { failedCreateCheckList, failedUpdateCheckList } from '../../../utils/text';
+import {
+  fetchCheckLists,
+  createCheckList,
+  updateCheckList,
+} from '../../../store/check_list/actions';
 
 describe('check list actions', () => {
   let store: Store;
@@ -57,6 +61,36 @@ describe('check list actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedCreateCheckList);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state `checkLists` that updated one record when an action of `updateCheckList` was successful', () => {
+    store = storeFactory({ checkList: { checkLists: [mockCheckList] } });
+    const title = 'vmwtnavo';
+
+    mock.onPatch(`/check_list/${mockCheckList.id}`).reply(200);
+
+    return store.dispatch(updateCheckList(mockCheckList.id, title) as any)
+      .then(() => {
+        const { checkList } = store.getState();
+        const updatedCheckList = checkList.checkLists.find((c) => c.id === mockCheckList.id);
+        expect(updatedCheckList?.title).toBe(title);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `updateCheckList` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    const title = 'jcie;aof';
+
+    mock.onPatch(`/check_list/${mockCheckList.id}`).reply(400, responseData);
+
+    return store.dispatch(updateCheckList(mockCheckList.id, title) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedUpdateCheckList);
         expect(dialog.description).toBe('some error...');
       });
   });
