@@ -17,7 +17,7 @@ type CheckListTitleFormProps = PropsFromRedux & {
   setFormVisible: Dispatch<SetStateAction<boolean>>
 }
 
-const CheckListTitleForm = (props: CheckListTitleFormProps) => {
+export const CheckListTitleForm = (props: CheckListTitleFormProps) => {
   const {
     initialTitle,
     checkListId,
@@ -40,6 +40,7 @@ const CheckListTitleForm = (props: CheckListTitleFormProps) => {
     <input
       // eslint-disable-next-line jsx-a11y/no-autofocus
       autoFocus
+      data-testid="checkListTitleForm"
       type="text"
       value={title}
       onChange={(event) => setTitle(event.target.value)}
