@@ -3,6 +3,7 @@ import { CheckListItem } from '../check_list_item/types';
 export const FETCH_CHECK_LISTS = 'FETCH_CHECK_LISTS';
 export const CREATE_CHECK_LIST = 'CREATE_CHECK_LIST';
 export const UPDATE_CHECK_LIST = 'UPDATE_CHECK_LIST';
+export const DELETE_CHECK_LIST = 'DELETE_CHECK_LIST';
 
 export interface CheckList {
   id: number
@@ -30,7 +31,13 @@ type UpdateCheckListAction = {
   payload: { checkListId: number, title: string }
 }
 
+type DeleteCheckListAction = {
+  type: typeof DELETE_CHECK_LIST
+  payload: number
+}
+
 export type CheckListActionTypes =
   FetchCheckListsAction
   | CreateCheckListAction
-  | UpdateCheckListAction;
+  | UpdateCheckListAction
+  | DeleteCheckListAction;

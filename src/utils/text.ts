@@ -71,7 +71,9 @@ export const newCheckListText = 'チェックリストを作成';
 export const checkListTitleLabel = 'タイトル';
 export const failedCreateCheckList = 'チェックリストを作成できませんでした';
 export const failedUpdateCheckList = 'チェックリストを更新できませんでした';
+export const failedDeleteCheckList = 'チェックリストを削除できませんでした';
 export const addCheckListItem = 'アイテムを追加';
+export const askCheckListDeleteDialog = 'このチェックリストを削除してよろしいですか？';
 
 // common
 export const deleteText = '削除';
