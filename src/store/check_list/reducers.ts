@@ -2,6 +2,7 @@ import {
   FETCH_CHECK_LISTS,
   CREATE_CHECK_LIST,
   UPDATE_CHECK_LIST,
+  DELETE_CHECK_LIST,
   CheckListState,
   CheckListActionTypes,
 } from './types';
@@ -31,6 +32,11 @@ const checkListReducer = (state = initialState, action: CheckListActionTypes) =>
         )),
       };
     }
+    case DELETE_CHECK_LIST:
+      return {
+        ...state,
+        checkLists: state.checkLists.filter((checkList) => checkList.id !== action.payload),
+      };
     default:
       return state;
   }

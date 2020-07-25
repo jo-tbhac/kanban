@@ -4,8 +4,13 @@ import { newAxios } from '../../configureAxios';
 import { joinErrors } from '../../utils/utils';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { AppDispatch } from '..';
-import { failedCreateCheckList, failedUpdateCheckList } from '../../utils/text';
-import { FETCH_CHECK_LISTS, CREATE_CHECK_LIST, UPDATE_CHECK_LIST } from './types';
+import { failedCreateCheckList, failedUpdateCheckList, failedDeleteCheckList } from '../../utils/text';
+import {
+  FETCH_CHECK_LISTS,
+  CREATE_CHECK_LIST,
+  UPDATE_CHECK_LIST,
+  DELETE_CHECK_LIST,
+} from './types';
 
 export const fetchCheckLists = (boardId: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
@@ -57,3 +62,22 @@ export const updateCheckList = (checkListId: number, title: string) => (
     }
   }
 );
+
+export const deleteCheckList = (checkListId: number) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.delete(`/check_list/${checkListId}`);
+
+  if (response?.status === 200) {
+    dispatch({ type: DELETE_CHECK_LIST, payload: checkListId });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedDeleteCheckList,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+  }
+};
