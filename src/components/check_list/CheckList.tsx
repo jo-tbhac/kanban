@@ -25,6 +25,7 @@ const CheckList = (props: CheckListProps) => {
           />
         ) : (
           <div
+            data-testid="checkListTitle"
             role="button"
             tabIndex={0}
             onClick={() => setFormVisible(true)}
