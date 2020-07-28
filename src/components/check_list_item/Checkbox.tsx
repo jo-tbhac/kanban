@@ -18,7 +18,7 @@ type CheckboxProps = PropsFromRedux & {
   checkListId: number
 }
 
-const Checkbox = (props: CheckboxProps) => {
+export const Checkbox = (props: CheckboxProps) => {
   const {
     check,
     itemId,
@@ -30,13 +30,20 @@ const Checkbox = (props: CheckboxProps) => {
 
   return (
     <div
+      data-testid="checkbox"
       role="button"
       tabIndex={0}
       onClick={() => toggleCheck(!check, itemId, checkListId)}
       onKeyPress={() => toggleCheck(!check, itemId, checkListId)}
       className={`checkbox${modifire}`}
     >
-      {check && <FontAwesomeIcon icon={['fas', 'check']} className={`checkbox__icon${modifire}`} />}
+      {check && (
+        <FontAwesomeIcon
+          data-testid="checkboxIcon"
+          icon={['fas', 'check']}
+          className="checkbox__icon"
+        />
+      )}
     </div>
   );
 };
