@@ -66,7 +66,7 @@ export const CheckList = (props: CheckListProps) => {
         <ButtonNoneBorder buttonText={deleteText} onClick={onClickDelete} />
       </div>
 
-      <div className="checkListItemContainer">
+      <div data-testid="checkListItemContainer" className="checkListItemContainer">
         {checkList.items.map((item) => <CheckListItem key={item.id} item={item} />)}
       </div>
 
