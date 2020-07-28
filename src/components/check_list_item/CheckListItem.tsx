@@ -11,10 +11,12 @@ type CheckListItemProps = {
 const CheckListItem = (props: CheckListItemProps) => {
   const { item } = props;
 
+  const modifire = item.check ? '--checked' : '';
+
   return (
     <div className="checkListItem">
-      <Checkbox check={item.check} />
-      <div className="checkListItem__name">{item.name}</div>
+      <Checkbox check={item.check} itemId={item.id} checkListId={item.checkListId} />
+      <div className={`checkListItem__name${modifire}`}>{item.name}</div>
       <div className="checkListItem__delete">
         <FontAwesomeIcon icon={['fas', 'trash-alt']} />
       </div>
