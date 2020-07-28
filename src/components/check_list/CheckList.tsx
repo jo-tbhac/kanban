@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import ButtonNoneBorder from '../common/ButtonNoneBorder';
 import CheckListTitleForm from './CheckListTitleForm';
 import CheckListItemForm from '../check_list_item/CheckListItemForm';
+import CheckListItem from '../check_list_item/CheckListItem';
 import * as CheckListTypes from '../../store/check_list/types';
 import { dialogTypeAsk } from '../../store/dialog/types';
 import * as checkListActions from '../../store/check_list/actions';
@@ -64,6 +65,11 @@ export const CheckList = (props: CheckListProps) => {
         )}
         <ButtonNoneBorder buttonText={deleteText} onClick={onClickDelete} />
       </div>
+
+      <div className="checkListItemContainer">
+        {checkList.items.map((item) => <CheckListItem key={item.id} item={item} />)}
+      </div>
+
       {isItemFormVisible ? (
         <CheckListItemForm checkListId={checkList.id} closeItemForm={closeItemForm} />
       ) : (
