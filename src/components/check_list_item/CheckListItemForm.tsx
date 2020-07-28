@@ -20,7 +20,7 @@ type CheckListItemFormProps = PropsFromRedux & {
   checkListId: number
 }
 
-const CheckListItemForm = (props: CheckListItemFormProps) => {
+export const CheckListItemForm = (props: CheckListItemFormProps) => {
   const { createCheckListItem, closeItemForm, checkListId } = props;
 
   const [name, setName] = useState('');
@@ -31,7 +31,7 @@ const CheckListItemForm = (props: CheckListItemFormProps) => {
   };
 
   return (
-    <div className="checkListItemForm">
+    <div data-testid="checkListItemForm" className="checkListItemForm">
       <FlexTextArea
         value={name}
         onChange={(event) => setName(event.target.value)}
