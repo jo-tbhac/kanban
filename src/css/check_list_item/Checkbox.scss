@@ -1,4 +1,21 @@
 .checkbox {
   border: solid 2px $font-color;
+  border-radius: 3px;
+  height: 18px;
   margin-right: 10px;
+  outline: none;
+  text-align: center;
+  width: 18px;
+  &:hover {
+    opacity: 0.6;
+  }
+  &--checked {
+    @extend .checkbox;
+    background-color: $pink;
+    border: none;
+    padding: 2px;
+  }
+  &__icon {
+    color: white;
+  }
 }

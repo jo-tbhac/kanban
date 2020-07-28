@@ -1,26 +1,51 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { connect, ConnectedProps } from 'react-redux';
 
-type CheckboxProps = {
+import * as checkListItemAction from '../../store/check_list_item/actions';
+
+const mapDispatchToProps = {
+  toggleCheck: checkListItemAction.toggleCheck,
+};
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type CheckboxProps = PropsFromRedux & {
   check: boolean
+  itemId: number
+  checkListId: number
 }
 
-const Checkbox = (props: CheckboxProps) => {
-  const { check } = props;
+export const Checkbox = (props: CheckboxProps) => {
+  const {
+    check,
+    itemId,
+    checkListId,
+    toggleCheck,
+  } = props;
 
-  const [isCheck, setCheck] = useState(check);
+  const modifire = check ? '--checked' : '';
 
   return (
     <div
+      data-testid="checkbox"
       role="button"
       tabIndex={0}
-      onClick={() => setCheck(!isCheck)}
-      onKeyPress={() => setCheck(!isCheck)}
-      className="checkbox"
+      onClick={() => toggleCheck(!check, itemId, checkListId)}
+      onKeyPress={() => toggleCheck(!check, itemId, checkListId)}
+      className={`checkbox${modifire}`}
     >
-      <FontAwesomeIcon icon={['fas', 'check']} className="checkbox__icon" />
+      {check && (
+        <FontAwesomeIcon
+          data-testid="checkboxIcon"
+          icon={['fas', 'check']}
+          className="checkbox__icon"
+        />
+      )}
     </div>
   );
 };
 
-export default Checkbox;
+export default connector(Checkbox);
