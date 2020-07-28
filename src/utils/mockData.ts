@@ -175,3 +175,10 @@ export const mockCheckList = {
   cardId: 1,
   items: [],
 };
+
+export const mockCheckListItem = {
+  id: 1,
+  name: 'check list item 1',
+  check: false,
+  checkListId: 1,
+};
