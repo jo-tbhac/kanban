@@ -49,7 +49,7 @@ describe('check list actions', () => {
       });
   });
 
-  test('returns state of dialogProps upon dispatch an action `fetchCheckLists` and recieved status 400 from server', () => {
+  test('returns state of dialogProps upon dispatch an action `createCheckList` and recieved status 400 from server', () => {
     const responseData = { errors: [{ text: 'some error...' }] };
     const cardId = 1;
     const title = 'jcie;aof';

@@ -1,0 +1,20 @@
+.checkListItem {
+  align-items: flex-start;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  padding: 10px 5px;
+  white-space: pre-wrap;
+  &__name {
+    flex: 1;
+  }
+  &__delete {
+    padding: 3px;
+    &:hover {
+      color: $pink;
+    }
+  }
+  &:hover {
+    background-color: $card-element-hover-background;
+  }
+}

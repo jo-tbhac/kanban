@@ -1,0 +1,13 @@
+.checkListItemForm {
+  margin-bottom: 20px;
+  &__textField {
+    @include text-field();
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+.checkListItemFormButton {
+  display: flex;
+  justify-content: flex-end;
+}
