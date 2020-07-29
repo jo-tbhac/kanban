@@ -5,8 +5,13 @@ import { storeFactory } from '../../../testUtils';
 import { mockCheckListItem, mockCheckList } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedCreateCheckListItem, failedUpdateCheckListItem } from '../../../utils/text';
-import { createCheckListItem, toggleCheck, updateCheckListItem } from '../../../store/check_list_item/actions';
+import { failedCreateCheckListItem, failedUpdateCheckListItem, failedDeleteCheckListItem } from '../../../utils/text';
+import {
+  createCheckListItem,
+  toggleCheck,
+  updateCheckListItem,
+  deleteCheckListItem,
+} from '../../../store/check_list_item/actions';
 
 describe('check list item actions', () => {
   let store: Store;
@@ -109,10 +114,6 @@ describe('check list item actions', () => {
   });
 
   test('returns state of dialogProps upon dispatch an action `updateCheckListItem` and recieved status 400 from server', () => {
-    store = storeFactory({
-      checkList: { checkLists: [{ ...mockCheckList, items: [mockCheckListItem] }] },
-    });
-
     const responseData = { errors: [{ text: 'some error...' }] };
     const name = 'xoein;fwecw';
 
@@ -126,6 +127,43 @@ describe('check list item actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedUpdateCheckListItem);
+        expect(dialog.description).toBe('some error...');
+      })
+    );
+  });
+
+  test('returns state of `checkList.items` that deleted one record when an action `deleteCheckListItem` was successful', () => {
+    store = storeFactory({
+      checkList: { checkLists: [{ ...mockCheckList, items: [mockCheckListItem] }] },
+    });
+
+    const previousItems = store.getState().checkList.checkLists[0].items;
+
+    mock.onDelete(`/check_list_item/${mockCheckListItem.id}`).reply(200);
+
+    return (
+      store.dispatch(
+        deleteCheckListItem(mockCheckListItem.id, mockCheckListItem.checkListId) as any,
+      ).then(() => {
+        const { checkList } = store.getState();
+        expect(checkList.checkLists[0].items).toHaveLength(previousItems.length - 1);
+      })
+    );
+  });
+
+  test('returns state of dialogProps upon dispatch an action `updateCheckListItem` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+
+    mock.onDelete(`/check_list_item/${mockCheckListItem.id}`).reply(400, responseData);
+
+    return (
+      store.dispatch(
+        deleteCheckListItem(mockCheckListItem.id, mockCheckListItem.checkListId) as any,
+      ).then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedDeleteCheckListItem);
         expect(dialog.description).toBe('some error...');
       })
     );

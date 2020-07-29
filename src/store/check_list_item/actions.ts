@@ -2,10 +2,15 @@ import camelCaseKeys from 'camelcase-keys';
 
 import { newAxios } from '../../configureAxios';
 import { joinErrors } from '../../utils/utils';
-import { failedCreateCheckListItem, failedUpdateCheckListItem } from '../../utils/text';
+import { failedCreateCheckListItem, failedUpdateCheckListItem, failedDeleteCheckListItem } from '../../utils/text';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { AppDispatch } from '..';
-import { CREATE_CHECK_LIST_ITEM, TOGGLE_CHECK, UPDATE_CHECK_LIST_ITEM } from './types';
+import {
+  CREATE_CHECK_LIST_ITEM,
+  TOGGLE_CHECK,
+  UPDATE_CHECK_LIST_ITEM,
+  DELETE_CHECK_LIST_ITEM,
+} from './types';
 
 export const createCheckListItem = (name: string, checkListId: number) => (
   async (dispatch: AppDispatch) => {
@@ -65,6 +70,27 @@ export const updateCheckListItem = (name: string, itemId: number, checkListId: n
       const dialogProps = {
         type: dialogTypeError as DialogTypes,
         title: failedUpdateCheckListItem,
+        description: joinErrors(response.data.errors),
+      };
+      dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+    }
+  }
+);
+
+export const deleteCheckListItem = (itemId: number, checkListId: number) => (
+  async (dispatch: AppDispatch) => {
+    const axios = newAxios();
+    const response = await axios.delete(`/check_list_item/${itemId}`);
+
+    if (response?.status === 200) {
+      dispatch({ type: DELETE_CHECK_LIST_ITEM, payload: { checkListId, itemId } });
+      return;
+    }
+
+    if (response?.status === 400) {
+      const dialogProps = {
+        type: dialogTypeError as DialogTypes,
+        title: failedDeleteCheckListItem,
         description: joinErrors(response.data.errors),
       };
       dispatch({ type: OPEN_DIALOG, payload: dialogProps });

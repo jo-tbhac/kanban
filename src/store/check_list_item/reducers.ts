@@ -2,6 +2,7 @@ import {
   CREATE_CHECK_LIST_ITEM,
   TOGGLE_CHECK,
   UPDATE_CHECK_LIST_ITEM,
+  DELETE_CHECK_LIST_ITEM,
   CheckListItemActionTypes,
   CheckListItem,
 } from './types';
@@ -22,6 +23,12 @@ const checkListItemReducer = (items: CheckListItem[], action: CheckListItemActio
       const { name, itemId } = action.payload;
       return {
         items: items.map((item) => (item.id === itemId ? { ...item, name } : item)),
+      };
+    }
+    case DELETE_CHECK_LIST_ITEM: {
+      const { itemId } = action.payload;
+      return {
+        items: items.filter((item) => item.id !== itemId),
       };
     }
     default:
