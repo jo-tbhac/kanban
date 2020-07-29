@@ -18,7 +18,7 @@ type CheckListItemNameProps = PropsFromRedux & {
   item: CheckListItem
 }
 
-const CheckListItemName = (props: CheckListItemNameProps) => {
+export const CheckListItemName = (props: CheckListItemNameProps) => {
   const { item, updateCheckListItem } = props;
 
   const [isFormVisible, setFormVisible] = useState(false);
@@ -52,6 +52,7 @@ const CheckListItemName = (props: CheckListItemNameProps) => {
         />
       ) : (
         <div
+          data-testid="checkListItemName"
           role="button"
           tabIndex={0}
           onClick={openForm}
