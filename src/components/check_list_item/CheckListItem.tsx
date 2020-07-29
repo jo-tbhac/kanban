@@ -23,7 +23,7 @@ type CheckListItemProps = PropsFromRedux & {
   item: checkListItemTypes.CheckListItem
 }
 
-const CheckListItem = (props: CheckListItemProps) => {
+export const CheckListItem = (props: CheckListItemProps) => {
   const { item, deleteCheckListItem, openDialog } = props;
 
   const onClickDelete = () => {
@@ -39,6 +39,7 @@ const CheckListItem = (props: CheckListItemProps) => {
       <Checkbox check={item.check} itemId={item.id} checkListId={item.checkListId} />
       <CheckListItemName item={item} />
       <div
+        data-testid="checkListItemDelete"
         role="button"
         tabIndex={0}
         onClick={onClickDelete}
