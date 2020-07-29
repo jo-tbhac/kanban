@@ -5,14 +5,6 @@
   display: flex;
   padding: 10px 5px;
   white-space: pre-wrap;
-  &__name {
-    flex: 1;
-    &--checked {
-      @extend .checkListItem__name;
-      color: #999;
-      text-decoration: line-through;
-    }
-  }
   &__delete {
     padding: 3px;
     &:hover {

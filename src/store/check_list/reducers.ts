@@ -11,6 +11,7 @@ import checkListItemReducer from '../check_list_item/reducers';
 import {
   CREATE_CHECK_LIST_ITEM,
   TOGGLE_CHECK,
+  UPDATE_CHECK_LIST_ITEM,
   CheckListItemActionTypes,
 } from '../check_list_item/types';
 
@@ -48,7 +49,8 @@ const checkListReducer = (
         checkLists: state.checkLists.filter((checkList) => checkList.id !== action.payload),
       };
     case CREATE_CHECK_LIST_ITEM:
-    case TOGGLE_CHECK: {
+    case TOGGLE_CHECK:
+    case UPDATE_CHECK_LIST_ITEM: {
       const { checkListId } = action.payload;
       const targetCheckList = state.checkLists.find((checkList) => checkList.id === checkListId);
 

@@ -1,0 +1,13 @@
+.checkListItemName {
+  align-self: stretch;
+  flex: 1;
+  &__text {
+    font-size: 0.9rem;
+    height: 100%;
+    &--checked {
+      @extend .checkListItemName__text;
+      color: #999;
+      text-decoration: line-through;
+    }
+  }
+}
