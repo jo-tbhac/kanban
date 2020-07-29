@@ -1,6 +1,7 @@
 import {
   CREATE_CHECK_LIST_ITEM,
   TOGGLE_CHECK,
+  UPDATE_CHECK_LIST_ITEM,
   CheckListItemActionTypes,
   CheckListItem,
 } from './types';
@@ -15,6 +16,12 @@ const checkListItemReducer = (items: CheckListItem[], action: CheckListItemActio
       const { check, itemId } = action.payload;
       return {
         items: items.map((item) => (item.id === itemId ? { ...item, check } : item)),
+      };
+    }
+    case UPDATE_CHECK_LIST_ITEM: {
+      const { name, itemId } = action.payload;
+      return {
+        items: items.map((item) => (item.id === itemId ? { ...item, name } : item)),
       };
     }
     default:

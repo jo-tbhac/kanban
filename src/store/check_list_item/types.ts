@@ -1,5 +1,6 @@
 export const CREATE_CHECK_LIST_ITEM = 'CREATE_CHECK_LIST_ITEM';
 export const TOGGLE_CHECK = 'TOGGLE_CHECK';
+export const UPDATE_CHECK_LIST_ITEM = 'UPDATE_CHECK_LIST_ITEM';
 
 export interface CheckListItem {
   id: number
@@ -14,6 +15,12 @@ export interface ToggleCheckActionParams {
   itemId: number
 }
 
+export interface UpdateCheckListItemActionParams {
+  name: string
+  checkListId: number
+  itemId: number
+}
+
 type CreateCheckListItemAction = {
   type: typeof CREATE_CHECK_LIST_ITEM
   payload: CheckListItem
@@ -24,4 +31,12 @@ type ToggleCheckAction = {
   payload: ToggleCheckActionParams
 }
 
-export type CheckListItemActionTypes = CreateCheckListItemAction | ToggleCheckAction;
+type UpdateCheckListItemAction = {
+  type: typeof UPDATE_CHECK_LIST_ITEM
+  payload: UpdateCheckListItemActionParams
+}
+
+export type CheckListItemActionTypes =
+  CreateCheckListItemAction
+  | ToggleCheckAction
+  | UpdateCheckListItemAction;
