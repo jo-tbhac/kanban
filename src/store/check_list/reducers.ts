@@ -12,6 +12,7 @@ import {
   CREATE_CHECK_LIST_ITEM,
   TOGGLE_CHECK,
   UPDATE_CHECK_LIST_ITEM,
+  DELETE_CHECK_LIST_ITEM,
   CheckListItemActionTypes,
 } from '../check_list_item/types';
 
@@ -32,7 +33,7 @@ const checkListReducer = (
     case CREATE_CHECK_LIST:
       return {
         ...state,
-        checkLists: [...state.checkLists, action.payload],
+        checkLists: [...state.checkLists, { ...action.payload, items: [] }],
       };
     case UPDATE_CHECK_LIST: {
       const { checkListId, title } = action.payload;
@@ -50,7 +51,8 @@ const checkListReducer = (
       };
     case CREATE_CHECK_LIST_ITEM:
     case TOGGLE_CHECK:
-    case UPDATE_CHECK_LIST_ITEM: {
+    case UPDATE_CHECK_LIST_ITEM:
+    case DELETE_CHECK_LIST_ITEM: {
       const { checkListId } = action.payload;
       const targetCheckList = state.checkLists.find((checkList) => checkList.id === checkListId);
 
