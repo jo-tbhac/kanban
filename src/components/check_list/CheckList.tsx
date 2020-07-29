@@ -67,7 +67,7 @@ export const CheckList = (props: CheckListProps) => {
       </div>
 
       <div data-testid="checkListItemContainer" className="checkListItemContainer">
-        {checkList.items.map((item) => <CheckListItem key={item.id} item={item} />)}
+        {checkList.items?.map((item) => <CheckListItem key={item.id} item={item} />)}
       </div>
 
       {isItemFormVisible ? (
