@@ -5,6 +5,8 @@ type FlexTextAreaProps = {
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
   minHeight?: number
   placeholderText?: string
+  autoFocus?: boolean
+  onBlur?: () => void
 }
 
 const FlexTextArea = (props: FlexTextAreaProps) => {
@@ -13,6 +15,8 @@ const FlexTextArea = (props: FlexTextAreaProps) => {
     onChange,
     minHeight,
     placeholderText,
+    autoFocus,
+    onBlur,
   } = props;
 
   return (
@@ -25,6 +29,9 @@ const FlexTextArea = (props: FlexTextAreaProps) => {
         onChange={onChange}
         placeholder={placeholderText}
         className="flexTextArea__textarea"
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus={autoFocus}
+        onBlur={onBlur}
       />
     </div>
   );
