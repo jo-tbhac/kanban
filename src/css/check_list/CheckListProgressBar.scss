@@ -1,0 +1,35 @@
+.checkListProgressBarContainer {
+  align-items: center;
+  display: flex;
+  padding: 10px 5px;
+}
+
+.checkListProgressBarPercentage {
+  font-size: 0.8rem;
+  font-weight: 500;
+  width: 45px;
+  &::after {
+    content: '%';
+    margin-right: 10px;
+  }
+}
+
+.checkListProgressBar {
+  background-color: #ccc;
+  border-radius: 8px;
+  flex: 1;
+  height: 8px;
+  &__fill {
+    background-color: $pink;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    height: 100%;
+    opacity: 0.6;
+    transition: width 200ms, background-color 200ms;
+    &--complete {
+      @extend .checkListProgressBar__fill;
+      background-color: $teal;
+      border-radius: 8px;
+    }
+  }
+}
