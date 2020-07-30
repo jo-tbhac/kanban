@@ -23,14 +23,3 @@
 .searchCardLabelWrapper {
   @extend .cardLabelWrapper;
 }
-
-.searchCardStatusContainer {
-  @extend .cardStatusContainer;
-}
-
-.searchCardStatus {
-  @extend .cardStatus;
-  &__icon {
-    @extend .cardStatus__icon;
-  }
-}

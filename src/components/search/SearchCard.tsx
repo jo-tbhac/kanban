@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
@@ -7,6 +6,7 @@ import { Card } from '../../store/card/types';
 import { List } from '../../store/list/types';
 import CardDetail from '../card/CardDetail';
 import CardLabelSmall from '../card/CardLabelSmall';
+import CardStatusIndex from '../card/CardStatusIndex';
 import { CardContext } from '../card/CardIndexContainer';
 
 const mapStateToProps = (state: RootState) => {
@@ -65,12 +65,8 @@ export const SearchCard = (props: SearchCardProps) => {
 
           <div className="searchCard__title">{searchedCard.title}</div>
 
-          <div className="searchCardStatusContainer">
-            <div className="searchCardStatus">
-              <FontAwesomeIcon icon={['fas', 'paperclip']} className="searchCardStatus__icon" />
-              <div className="searchCardStatus__count">1</div>
-            </div>
-          </div>
+          <CardStatusIndex />
+
         </div>
         {isCardDetailVisible
           && <CardDetail setCardDetailVisible={setCardDetailVisible} />}
