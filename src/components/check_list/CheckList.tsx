@@ -3,6 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import ButtonNoneBorder from '../common/ButtonNoneBorder';
 import CheckListTitleForm from './CheckListTitleForm';
+import CheckListProgressBar from './CheckListProgressBar';
 import CheckListItemForm from '../check_list_item/CheckListItemForm';
 import CheckListItem from '../check_list_item/CheckListItem';
 import * as CheckListTypes from '../../store/check_list/types';
@@ -65,6 +66,8 @@ export const CheckList = (props: CheckListProps) => {
         )}
         <ButtonNoneBorder buttonText={deleteText} onClick={onClickDelete} />
       </div>
+
+      <CheckListProgressBar items={checkList.items} />
 
       <div data-testid="checkListItemContainer" className="checkListItemContainer">
         {checkList.items?.map((item) => <CheckListItem key={item.id} item={item} />)}
