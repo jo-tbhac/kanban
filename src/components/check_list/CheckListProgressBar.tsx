@@ -23,6 +23,7 @@ const CheckListProgressBar = (props: CheckListProgressBarProps) => {
       </div>
       <div className="checkListProgressBar">
         <div
+          data-testid="checkListProgressBar"
           style={{ width: `${percentage}%` }}
           className={`checkListProgressBar__fill${modifire}`}
         />
