@@ -1,6 +1,4 @@
 import React, { useState, useContext, useRef } from 'react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -8,6 +6,7 @@ import { DndLCard } from '../../store/card/types';
 import { RootState } from '../../store';
 import * as cardActions from '../../store/card/actions';
 import { CardContext } from './CardIndexContainer';
+import CardStatusIndex from './CardStatusIndex';
 import CardDetail from './CardDetail';
 import CardLabelSmall from './CardLabelSmall';
 import { dndItemType } from '../../utils/utils';
@@ -142,12 +141,7 @@ export const Card = (props: PropsFromRedux) => {
 
         <div className="card__title">{card?.title}</div>
 
-        <div className="cardStatusContainer">
-          <div className="cardStatus">
-            <FontAwesomeIcon icon={['fas', 'paperclip']} className="cardStatus__icon" />
-            <div className="cardStatus__count">1</div>
-          </div>
-        </div>
+        <CardStatusIndex />
       </div>
       {isCardDetailVisible
         && <CardDetail setCardDetailVisible={setCardDetailVisible} />}

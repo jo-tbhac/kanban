@@ -1,0 +1,17 @@
+.cardStatus {
+  align-items: center;
+  border-radius: 3px;
+  display: flex;
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+  margin-right: 5px;
+  padding: 2px 5px;
+  &--complete {
+    @extend .cardStatus;
+    background-color: $teal;
+    color: white;
+  }
+  &__count {
+    margin-left: 2px;
+  }
+}

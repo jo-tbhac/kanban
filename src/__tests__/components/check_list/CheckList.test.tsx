@@ -108,4 +108,37 @@ describe('CheckList component', () => {
 
     expect(getByTestId('checkListItemContainer').children).toHaveLength(checkList.items.length);
   });
+
+  test('should render a component if `checkList.items.length` is more than zero', () => {
+    const checkList = {
+      ...mockCheckList,
+      items: [
+        { ...mockCheckListItem, id: 1 },
+        { ...mockCheckListItem, id: 2 },
+        { ...mockCheckListItem, id: 3 },
+      ],
+    };
+
+    const { getByTestId } = render(
+      <CheckList
+        openDialog={openDialog}
+        deleteCheckList={deleteCheckList}
+        checkList={checkList}
+      />,
+      store,
+    );
+    expect(getByTestId('checkListProgressBar')).not.toBeNull();
+  });
+
+  test('should not render a component if `checkList.items.length` is zero', () => {
+    const { queryByTestId } = render(
+      <CheckList
+        openDialog={openDialog}
+        deleteCheckList={deleteCheckList}
+        checkList={mockCheckList}
+      />,
+      store,
+    );
+    expect(queryByTestId('checkListProgressBar')).toBeNull();
+  });
 });
