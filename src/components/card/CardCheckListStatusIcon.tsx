@@ -18,7 +18,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const CardCheckListStatusIcon = (props: PropsFromRedux) => {
+export const CardCheckListStatusIcon = (props: PropsFromRedux) => {
   const { checkLists } = props;
 
   const card = useContext(CardContext);

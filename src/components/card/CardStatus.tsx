@@ -12,9 +12,9 @@ const CardStatus = (props: CardStatusProps) => {
   const { className, icon, count } = props;
 
   return (
-    <div className={className || 'cardStatus'}>
-      <FontAwesomeIcon icon={icon} className="cardStatus__icon" />
-      {count && <div className="cardStatus__count">{count}</div>}
+    <div data-testid="cardStatus" className={className || 'cardStatus'}>
+      <FontAwesomeIcon data-testid="cardStatusIcon" icon={icon} className="cardStatus__icon" />
+      {count && <div data-testid="cardStatusCount" className="cardStatus__count">{count}</div>}
     </div>
   );
 };
