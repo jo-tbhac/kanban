@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios';
 
 import { renderWithRouter, fireEvent, storeFactory } from '../../../testUtils';
 import { Store } from '../../../store';
@@ -7,6 +9,7 @@ import { mockBoard } from '../../../utils/mockData';
 import { Board } from '../../../components/board/Board';
 
 describe('Board component', () => {
+  let mock: MockAdapter;
   let fetchBoard: jest.Mock;
   let fetchCheckLists: jest.Mock;
   let store: Store;
@@ -15,6 +18,9 @@ describe('Board component', () => {
     fetchBoard = jest.fn();
     fetchCheckLists = jest.fn();
     store = storeFactory();
+
+    mock = new MockAdapter(axios);
+    mock.onGet('/board/1/labels').reply(200, { labels: [] });
   });
 
   test('should show `ListForm` when state of `isListsFormVisible` is true', () => {
