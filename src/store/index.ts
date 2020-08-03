@@ -8,6 +8,7 @@ import labelReducer from './label/reducers';
 import sessionReducer from './session/reducers';
 import searchReducer from './search/reducers';
 import checkListReducer from './check_list/reducers';
+import fileReducer from './file/reducers';
 
 export const rootReducer = combineReducers({
   board: boardReducer,
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
   session: sessionReducer,
   search: searchReducer,
   checkList: checkListReducer,
+  file: fileReducer,
 });
 
 const store = createStore(
