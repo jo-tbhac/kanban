@@ -1,10 +1,10 @@
 import camelCaseKeys from 'camelcase-keys';
 
 import { newAxios } from '../../configureAxios';
-import { joinErrors } from '../../utils/utils';
+import { joinErrors, maxUploadFileSize } from '../../utils/utils';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { AppDispatch } from '..';
-import { failedUploadFile } from '../../utils/text';
+import { failedUploadFile, shouldLessThanMaxFileSize } from '../../utils/text';
 import { FETCH_FILES, UPLOAD_FILE } from './types';
 
 export const fetchFiles = (boardId: number) => async (dispatch: AppDispatch) => {
@@ -17,9 +17,23 @@ export const fetchFiles = (boardId: number) => async (dispatch: AppDispatch) => 
   }
 };
 
-export const createFile = (cardId: number) => async (dispatch: AppDispatch) => {
+export const uploadFile = (file: File, cardId: number) => async (dispatch: AppDispatch) => {
+  if (file.size > maxUploadFileSize) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedUploadFile,
+      description: shouldLessThanMaxFileSize,
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file);
+
   const axios = newAxios();
-  const response = await axios.post(`/card/${cardId}/file`);
+  const requestConfig = { headers: { 'Content-Type': 'multipart/form-data' } };
+  const response = await axios.post(`/card/${cardId}/file`, formData, requestConfig);
 
   if (response?.status === 201) {
     const camelizedData = camelCaseKeys(response.data.file);

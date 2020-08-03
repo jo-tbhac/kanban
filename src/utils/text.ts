@@ -90,4 +90,6 @@ export const addText = '追加';
 export const fileHeaderLabel = '添付ファイル';
 export const fileCreateCover = 'カバーを作成';
 export const deleteFileText = '添付ファイルを削除';
+export const addFileButtonText = '添付ファイルを追加';
+export const shouldLessThanMaxFileSize = '8MB以上のファイルはアップロードできません';
 export const failedUploadFile = 'ファイルをアップロードできませんでした';

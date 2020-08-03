@@ -12,3 +12,5 @@ export const dndItemType = {
   LIST: 'List',
   CARD: 'Card',
 };
+
+export const maxUploadFileSize = 8388608;
