@@ -20,7 +20,7 @@ const connector = connect(mapStateToPrpos, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const FileIndex = (props: PropsFromRedux) => {
+export const FileIndex = (props: PropsFromRedux) => {
   const { files } = props;
 
   const card = useContext(CardContext);
@@ -38,7 +38,7 @@ const FileIndex = (props: PropsFromRedux) => {
           <div className="fileIndexHeader">
             <div className="fileIndexHeader__label">{fileHeaderLabel}</div>
           </div>
-          <div className="fileIndexContainer">
+          <div data-testid="fileIndex" className="fileIndexContainer">
             {cardFiles.map((file) => <File file={file} key={file.id} />)}
           </div>
           <AddFileButton />
