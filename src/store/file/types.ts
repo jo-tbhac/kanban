@@ -1,4 +1,5 @@
 export const FETCH_FILES = 'FETCH_FILES';
+export const UPLOAD_FILE = 'UPLOAD_FILE';
 
 export interface File {
   id: number
@@ -17,4 +18,9 @@ type FetchFilesAction = {
   payload: File[]
 }
 
-export type FileActoinTypes = FetchFilesAction;
+type UploadFileAction = {
+  type: typeof UPLOAD_FILE
+  payload: File
+}
+
+export type FileActoinTypes = FetchFilesAction | UploadFileAction;
