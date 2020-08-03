@@ -1,0 +1,11 @@
+.fileIndex {
+  @include card-detail-row();
+}
+
+.fileIndexHeader {
+  @include card-detail-header();
+  justify-content: space-between;
+  &__label {
+    @include card-detail-header-text();
+  }
+}

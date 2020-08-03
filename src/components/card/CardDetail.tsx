@@ -11,6 +11,7 @@ import CardTitle from './CardTitle';
 import CardLabelContainer from './CardLabelContainer';
 import CardDescription from './CardDescription';
 import CheckListIndex from '../check_list/CheckListIndex';
+import FileIndex from '../file/FileIndex';
 import CardSideBar from './CardSideBar';
 
 type CardDetailProps = {
@@ -56,6 +57,7 @@ const CardDetail = (props: CardDetailProps) => {
             <CardLabelContainer />
             <CardDescription />
             <CheckListIndex />
+            <FileIndex />
           </div>
           <CardSideBar />
         </div>
