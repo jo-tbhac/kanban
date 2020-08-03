@@ -1,4 +1,5 @@
 .cardSideBar {
+  align-self: flex-start;
   width: 180px;
   @media (max-width: $card-detail-width) {
     display: grid;

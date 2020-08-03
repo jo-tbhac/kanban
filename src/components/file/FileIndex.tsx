@@ -5,6 +5,7 @@ import { RootState } from '../../store';
 import { CardContext } from '../card/CardIndexContainer';
 import { fileHeaderLabel } from '../../utils/text';
 import File from './File';
+import AddFileButton from './AddFileButton';
 
 const mapStateToPrpos = (state: RootState) => {
   const { file } = state;
@@ -31,14 +32,19 @@ const FileIndex = (props: PropsFromRedux) => {
   const cardFiles = files.filter((file) => file.cardId === card.id);
 
   return (
-    <div className="fileIndex">
-      <div className="fileIndexHeader">
-        <div className="fileIndexHeader__label">{fileHeaderLabel}</div>
-      </div>
-      <div className="fileIndexContainer">
-        {cardFiles.map((file) => <File file={file} key={file.id} />)}
-      </div>
-    </div>
+    <>
+      {cardFiles.length > 0 && (
+        <div className="fileIndex">
+          <div className="fileIndexHeader">
+            <div className="fileIndexHeader__label">{fileHeaderLabel}</div>
+          </div>
+          <div className="fileIndexContainer">
+            {cardFiles.map((file) => <File file={file} key={file.id} />)}
+          </div>
+          <AddFileButton />
+        </div>
+      )}
+    </>
   );
 };
 
