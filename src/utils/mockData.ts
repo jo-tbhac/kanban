@@ -182,3 +182,11 @@ export const mockCheckListItem = {
   check: false,
   checkListId: 1,
 };
+
+export const mockFile = {
+  id: 1,
+  displayName: 'file-1',
+  url: 'https://file-1',
+  contentType: 'image/png',
+  cardId: 1,
+};

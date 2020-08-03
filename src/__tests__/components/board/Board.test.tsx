@@ -12,11 +12,13 @@ describe('Board component', () => {
   let mock: MockAdapter;
   let fetchBoard: jest.Mock;
   let fetchCheckLists: jest.Mock;
+  let fetchFiles: jest.Mock;
   let store: Store;
 
   beforeEach(() => {
     fetchBoard = jest.fn();
     fetchCheckLists = jest.fn();
+    fetchFiles = jest.fn();
     store = storeFactory();
 
     mock = new MockAdapter(axios);
@@ -25,7 +27,12 @@ describe('Board component', () => {
 
   test('should show `ListForm` when state of `isListsFormVisible` is true', () => {
     const { queryByTestId, getByTestId } = renderWithRouter(
-      <Board selectedBoard={mockBoard} fetchBoard={fetchBoard} fetchCheckLists={fetchCheckLists} />,
+      <Board
+        selectedBoard={mockBoard}
+        fetchBoard={fetchBoard}
+        fetchCheckLists={fetchCheckLists}
+        fetchFiles={fetchFiles}
+      />,
       store,
     );
     fireEvent.click(getByTestId('addListButton'));
@@ -36,7 +43,12 @@ describe('Board component', () => {
 
   test('should hide `ListForm` when state of `isListFormVisible` is false', () => {
     const { queryByTestId, getByTestId } = renderWithRouter(
-      <Board selectedBoard={mockBoard} fetchBoard={fetchBoard} fetchCheckLists={fetchCheckLists} />,
+      <Board
+        selectedBoard={mockBoard}
+        fetchBoard={fetchBoard}
+        fetchCheckLists={fetchCheckLists}
+        fetchFiles={fetchFiles}
+      />,
       store,
     );
 
@@ -51,6 +63,7 @@ describe('Board component', () => {
           selectedBoard={mockBoard}
           fetchBoard={fetchBoard}
           fetchCheckLists={fetchCheckLists}
+          fetchFiles={fetchFiles}
         />
       </Route>,
       store,
@@ -66,6 +79,7 @@ describe('Board component', () => {
           selectedBoard={mockBoard}
           fetchBoard={fetchBoard}
           fetchCheckLists={fetchCheckLists}
+          fetchFiles={fetchFiles}
         />
       </Route>,
       store,
@@ -81,6 +95,7 @@ describe('Board component', () => {
           selectedBoard={mockBoard}
           fetchBoard={fetchBoard}
           fetchCheckLists={fetchCheckLists}
+          fetchFiles={fetchFiles}
         />
       </Route>,
       store,
@@ -96,6 +111,7 @@ describe('Board component', () => {
           selectedBoard={mockBoard}
           fetchBoard={fetchBoard}
           fetchCheckLists={fetchCheckLists}
+          fetchFiles={fetchFiles}
         />
       </Route>,
       store,
