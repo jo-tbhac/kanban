@@ -5,7 +5,10 @@ import snakeCaseKeys from 'snakecase-keys';
 import { storeFactory } from '../../../testUtils';
 import { mockFile } from '../../../utils/mockData';
 import { Store } from '../../../store';
-import { fetchFiles } from '../../../store/file/actions';
+import { dialogTypeError } from '../../../store/dialog/types';
+import { maxUploadFileSize } from '../../../utils/utils';
+import { failedUploadFile, shouldLessThanMaxFileSize } from '../../../utils/text';
+import { fetchFiles, uploadFile } from '../../../store/file/actions';
 
 describe('file actions', () => {
   let store: Store;
@@ -27,6 +30,50 @@ describe('file actions', () => {
         const { file } = store.getState();
         expect(file.files).toHaveLength(responseData.files.length);
         expect(file.files[0]).toEqual(mockFile);
+      });
+  });
+
+  test('returns state `files` that added one record when an action of `uploadFile` was successful', () => {
+    const responseData = { file: snakeCaseKeys(mockFile) };
+    const previousState = store.getState().file;
+
+    mock.onPost(`/card/${mockFile.cardId}/file`).reply(201, responseData);
+
+    const fileData = new File([new ArrayBuffer(maxUploadFileSize)], 'file');
+
+    return store.dispatch(uploadFile(fileData, mockFile.cardId) as any)
+      .then(() => {
+        const { file } = store.getState();
+        expect(file.files).toHaveLength(previousState.files.length + 1);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `uploadFile` that have args of a file that size over `maxUploadFileSize`', () => {
+    const fileData = new File([new ArrayBuffer(maxUploadFileSize), 'a'], 'file');
+
+    return store.dispatch(uploadFile(fileData, mockFile.cardId) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedUploadFile);
+        expect(dialog.description).toBe(shouldLessThanMaxFileSize);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `uploadFile` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    const fileData = new File(['a'], 'file');
+
+    mock.onPost(`/card/${mockFile.cardId}/file`).reply(400, responseData);
+
+    return store.dispatch(uploadFile(fileData, mockFile.cardId) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedUploadFile);
+        expect(dialog.description).toBe('some error...');
       });
   });
 });
