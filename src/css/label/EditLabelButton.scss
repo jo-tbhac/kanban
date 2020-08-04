@@ -1,0 +1,23 @@
+.editLabelButton {
+  align-items: center;
+  color: $font-color;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.8rem;
+  margin: 3px 0;
+  min-width: fit-content;
+  text-decoration: underline;
+  &:hover {
+    color: $pink;
+  }
+  @media (max-width: 590px) {
+    font-size: 1rem;
+    margin-right: 20px;
+  }
+  &__text {
+    margin-left: 3px;
+    @media (max-width: 590px) {
+      display: none;
+    }
+  }
+}
