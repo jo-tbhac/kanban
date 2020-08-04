@@ -4,12 +4,19 @@ import { newAxios } from '../../configureAxios';
 import { AppDispatch } from '..';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { joinErrors } from '../../utils/utils';
-import { failedFetchBoardData, failedCreateBoard, failedUpdateBoard } from '../../utils/text';
+import {
+  failedFetchBoardData,
+  failedCreateBoard,
+  failedUpdateBoard,
+  failedDeleteBoard,
+} from '../../utils/text';
+
 import {
   FETCH_ALL_BOARDS,
   FETCH_BOARD,
   CREATE_BOARD,
   UPDATE_BOARD,
+  DELETE_BOARD,
 } from './types';
 
 export const fetchBoard = (boardId: number) => async (dispatch: AppDispatch) => {
@@ -82,3 +89,22 @@ export const updateBoard = (params: { name: string }, boardId: number) => (
     }
   }
 );
+
+export const deleteBoard = (boardId: number) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.delete(`/board/${boardId}`);
+
+  if (response?.status === 200) {
+    dispatch({ type: DELETE_BOARD, payload: boardId });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedDeleteBoard,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+  }
+};
