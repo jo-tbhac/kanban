@@ -4,8 +4,8 @@ import { newAxios } from '../../configureAxios';
 import { joinErrors, maxUploadFileSize } from '../../utils/utils';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { AppDispatch } from '..';
-import { failedUploadFile, shouldLessThanMaxFileSize } from '../../utils/text';
-import { FETCH_FILES, UPLOAD_FILE } from './types';
+import { failedUploadFile, shouldLessThanMaxFileSize, failedDeleteFile } from '../../utils/text';
+import { FETCH_FILES, UPLOAD_FILE, DELETE_FILE } from './types';
 
 export const fetchFiles = (boardId: number) => async (dispatch: AppDispatch) => {
   const axios = newAxios();
@@ -45,6 +45,25 @@ export const uploadFile = (file: File, cardId: number) => async (dispatch: AppDi
     const dialogProps = {
       type: dialogTypeError as DialogTypes,
       title: failedUploadFile,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+  }
+};
+
+export const deleteFile = (fileId: number) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.delete(`/file/${fileId}`);
+
+  if (response?.status === 200) {
+    dispatch({ type: DELETE_FILE, payload: fileId });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedDeleteFile,
       description: joinErrors(response.data.errors),
     };
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });

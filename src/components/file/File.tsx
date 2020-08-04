@@ -1,7 +1,8 @@
 import React from 'react';
 
 import * as fileTypes from '../../store/file/types';
-import { fileCreateCover, deleteFileText } from '../../utils/text';
+import { fileCreateCover } from '../../utils/text';
+import FileDeleteButton from './FileDeleteButton';
 
 type FileProps = {
   file: fileTypes.File
@@ -31,7 +32,7 @@ const File = (props: FileProps) => {
         <div className="fileInfo__name">{file.displayName}</div>
         <div className="fileManage">
           {isImage && <div className="fileManage__cover">{fileCreateCover}</div>}
-          <div className="fileManage__delete">{deleteFileText}</div>
+          <FileDeleteButton fileId={file.id} />
         </div>
       </div>
     </div>

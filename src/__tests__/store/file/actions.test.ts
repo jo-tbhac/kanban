@@ -7,8 +7,8 @@ import { mockFile } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
 import { maxUploadFileSize } from '../../../utils/utils';
-import { failedUploadFile, shouldLessThanMaxFileSize } from '../../../utils/text';
-import { fetchFiles, uploadFile } from '../../../store/file/actions';
+import { failedUploadFile, shouldLessThanMaxFileSize, failedDeleteFile } from '../../../utils/text';
+import { fetchFiles, uploadFile, deleteFile } from '../../../store/file/actions';
 
 describe('file actions', () => {
   let store: Store;
@@ -73,6 +73,45 @@ describe('file actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedUploadFile);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state `files` that deleted one record when an action of `deleteFile` was successful', () => {
+    store = storeFactory({
+      file: {
+        files: [
+          { ...mockFile, id: 1 },
+          { ...mockFile, id: 2 },
+          { ...mockFile, id: 3 },
+        ],
+      },
+    });
+
+    const fileId = 1;
+    const previousState = store.getState().file;
+
+    mock.onDelete(`/file/${fileId}`).reply(200);
+
+    return store.dispatch(deleteFile(fileId) as any)
+      .then(() => {
+        const { file } = store.getState();
+        expect(file.files).toHaveLength(previousState.files.length - 1);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `deleteFile` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    const fileId = 1;
+
+    mock.onDelete(`/file/${fileId}`).reply(400, responseData);
+
+    return store.dispatch(deleteFile(fileId) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedDeleteFile);
         expect(dialog.description).toBe('some error...');
       });
   });
