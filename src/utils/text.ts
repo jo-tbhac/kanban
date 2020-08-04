@@ -93,3 +93,5 @@ export const deleteFileText = '添付ファイルを削除';
 export const addFileButtonText = '添付ファイルを追加';
 export const shouldLessThanMaxFileSize = '8MB以上のファイルはアップロードできません';
 export const failedUploadFile = 'ファイルをアップロードできませんでした';
+export const failedDeleteFile = 'ファイルを削除できませんでした';
+export const askFileDeleteDialog = 'このファイルを削除してよろしいですか？';
