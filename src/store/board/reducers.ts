@@ -3,6 +3,7 @@ import {
   FETCH_BOARD,
   CREATE_BOARD,
   UPDATE_BOARD,
+  DELETE_BOARD,
   BoardState,
   BoardActionTypes,
 } from './types';
@@ -70,6 +71,11 @@ const boardReducer = (
         selectedBoard: newSelectedBoard,
       };
     }
+    case DELETE_BOARD:
+      return {
+        ...state,
+        boards: state.boards.filter((board) => board.id !== action.payload),
+      };
     case CREATE_LIST:
     case UPDATE_LIST:
     case DELETE_LIST:

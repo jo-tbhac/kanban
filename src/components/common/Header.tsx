@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 import SearchCardForm from '../search/SearchForm';
+import DeleteBoardButton from '../board/DeleteBoardButton';
 import LabelEdit from '../label/LabelEdit';
 import { editLabelButtonText } from '../../utils/text';
 
@@ -18,6 +19,8 @@ const Header = () => {
       </div>
 
       <SearchCardForm />
+
+      <DeleteBoardButton />
 
       <div
         data-testid="openLabelEditButton"

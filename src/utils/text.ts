@@ -16,8 +16,11 @@ export const failedSignInTitle = 'サインインに失敗しました';
 export const failedFetchBoardData = 'ボードの情報を取得できませんでした';
 export const failedCreateBoard = 'ボードを作成できませんでした';
 export const failedUpdateBoard = 'ボードを更新できませんでした';
+export const failedDeleteBoard = 'ボードを削除できませんでした';
 export const newBoardFormTitle = 'ボードを新規作成';
 export const boardNameFormPlaceholder = 'ボードのタイトルを入力';
+export const askBoardDeleteDialog = 'このボードを削除してよろしいですか？';
+export const deleteBoardText = 'ボードを削除';
 
 // label
 export const editLabelButtonText = 'ラベルを編集する';
