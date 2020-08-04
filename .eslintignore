@@ -2,3 +2,4 @@ src/serviceWorker.ts
 src/react-app-env.d.ts
 src/css/*
 src/index.scss
+src/images/*
