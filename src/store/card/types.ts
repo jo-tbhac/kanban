@@ -48,42 +48,42 @@ export interface MoveCardToEmptyListPayload {
   dragListId: number
 }
 
-type CreateCardAction = {
+interface CreateCardAction {
   type: typeof CREATE_CARD
   payload: Card
 }
 
-type UpdateCardAction = {
+interface UpdateCardAction {
   type: typeof UPDATE_CARD
   payload: Card
 }
 
-type DeleteCardAction = {
+interface DeleteCardAction {
   type: typeof DELETE_CARD
   payload: { cardId: number, listId: number }
 }
 
-type MoveCardAction = {
+interface MoveCardAction {
   type: typeof MOVE_CARD
   payload: MoveCardPayload
 }
 
-type MoveCardAcrossListAction = {
+interface MoveCardAcrossListAction {
   type: typeof MOVE_CARD_ACROSS_LIST
   payload: MoveCardAcrossListPayload
 }
 
-type MoveCardToEmptyListAction = {
+interface MoveCardToEmptyListAction {
   type: typeof MOVE_CARD_TO_EMPTY_LIST
   payload: MoveCardToEmptyListPayload
 }
 
-type AttachLabelAction = {
+interface AttachLabelAction {
   type: typeof ATTACH_LABEL
   payload: CardLabelPayload
 }
 
-type DetachLabelAction = {
+interface DetachLabelAction {
   type: typeof DETACH_LABEL
   payload: CardLabelPayload
 }

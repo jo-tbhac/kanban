@@ -22,22 +22,22 @@ export interface UpdateCheckListItemActionParams {
   itemId: number
 }
 
-type CreateCheckListItemAction = {
+interface CreateCheckListItemAction {
   type: typeof CREATE_CHECK_LIST_ITEM
   payload: CheckListItem
 }
 
-type ToggleCheckAction = {
+interface ToggleCheckAction {
   type: typeof TOGGLE_CHECK
   payload: ToggleCheckActionParams
 }
 
-type UpdateCheckListItemAction = {
+interface UpdateCheckListItemAction {
   type: typeof UPDATE_CHECK_LIST_ITEM
   payload: UpdateCheckListItemActionParams
 }
 
-type DeleteCheckListItemAction = {
+interface DeleteCheckListItemAction {
   type: typeof DELETE_CHECK_LIST_ITEM
   payload: { itemId: number, checkListId: number }
 }

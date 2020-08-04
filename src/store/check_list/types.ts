@@ -16,22 +16,22 @@ export interface CheckListState {
   checkLists: CheckList[]
 }
 
-type FetchCheckListsAction = {
+interface FetchCheckListsAction {
   type: typeof FETCH_CHECK_LISTS
   payload: CheckList[]
 }
 
-type CreateCheckListAction = {
+interface CreateCheckListAction {
   type: typeof CREATE_CHECK_LIST
   payload: CheckList
 }
 
-type UpdateCheckListAction = {
+interface UpdateCheckListAction {
   type: typeof UPDATE_CHECK_LIST
   payload: { checkListId: number, title: string }
 }
 
-type DeleteCheckListAction = {
+interface DeleteCheckListAction {
   type: typeof DELETE_CHECK_LIST
   payload: number
 }

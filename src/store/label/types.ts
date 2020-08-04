@@ -16,32 +16,32 @@ export interface LabelState {
   selectedLabelIds: number[]
 }
 
-type FetchAllLabelAction = {
+interface FetchAllLabelAction {
   type: typeof FETCH_ALL_LABEL
   payload: Label[]
 }
 
-type CreateLabelAction = {
+interface CreateLabelAction {
   type: typeof CREATE_LABEL
   payload: Label
 }
 
-type UpdateLabelAction = {
+interface UpdateLabelAction {
   type: typeof UPDATE_LABEL
   payload: Label
 }
 
-type DeleteLabelAction = {
+interface DeleteLabelAction {
   type: typeof DELETE_LABEL
   payload: number
 }
 
-type CheckLabelAction = {
+interface CheckLabelAction {
   type: typeof CHECK_LABEL
   payload: number
 }
 
-type UncheckLabelAction = {
+interface UncheckLabelAction {
   type: typeof UNCHECK_LABEL
   payload: number
 }
