@@ -1,19 +1,27 @@
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 
+import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
 import { storeFactory } from '../../../testUtils';
 import { mockBoards, mockBoard } from '../../../utils/mockData';
-import { failedFetchBoardData, failedCreateBoard, failedUpdateBoard } from '../../../utils/text';
+import {
+  failedFetchBoardData,
+  failedCreateBoard,
+  failedUpdateBoard,
+  failedDeleteBoard,
+} from '../../../utils/text';
+
 import {
   fetchBoard,
   fetchAllBoards,
   createBoard,
   updateBoard,
+  deleteBoard,
 } from '../../../store/board/actions';
 
 describe('board actions', () => {
-  let store: any;
+  let store: Store;
   let mock: MockAdapter;
 
   beforeEach(() => {
@@ -26,7 +34,7 @@ describe('board actions', () => {
     const boardId = 1;
     mock.onGet(`/board/${boardId}`).reply(200, responseData);
 
-    return store.dispatch(fetchBoard(boardId))
+    return store.dispatch(fetchBoard(boardId) as any)
       .then(() => {
         const { board } = store.getState();
         expect(board.selectedBoard).toEqual(mockBoard);
@@ -38,7 +46,7 @@ describe('board actions', () => {
     const boardId = 1;
     mock.onGet(`/board/${boardId}`).reply(400, responseData);
 
-    return store.dispatch(fetchBoard(boardId))
+    return store.dispatch(fetchBoard(boardId) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();
@@ -52,7 +60,7 @@ describe('board actions', () => {
     const responseData = { boards: mockBoards };
     mock.onGet('/boards').reply(200, responseData);
 
-    return store.dispatch(fetchAllBoards())
+    return store.dispatch(fetchAllBoards() as any)
       .then(() => {
         const { board } = store.getState();
         expect(board.boards).toEqual(mockBoards);
@@ -66,7 +74,7 @@ describe('board actions', () => {
 
     const previousState = store.getState().board;
 
-    return store.dispatch(createBoard(params))
+    return store.dispatch(createBoard(params) as any)
       .then(() => {
         const { board } = store.getState();
         expect(board.boards.length).toBe(previousState.boards.length + 1);
@@ -79,7 +87,7 @@ describe('board actions', () => {
     const responseData = { errors: [{ text: 'some error...' }] };
     mock.onPost('/board').reply(400, responseData);
 
-    return store.dispatch(createBoard(params))
+    return store.dispatch(createBoard(params) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();
@@ -94,7 +102,7 @@ describe('board actions', () => {
     const responseData = { board: params };
     mock.onPatch(`/board/${mockBoard.id}`).reply(200, responseData);
 
-    return store.dispatch(updateBoard(params, mockBoard.id))
+    return store.dispatch(updateBoard(params, mockBoard.id) as any)
       .then(() => {
         const { board } = store.getState();
         expect(board.selectedBoard.name).toBe(params.name);
@@ -106,12 +114,50 @@ describe('board actions', () => {
     const responseData = { errors: [{ text: 'some error...' }] };
     mock.onPatch(`/board/${mockBoard.id}`).reply(400, responseData);
 
-    return store.dispatch(updateBoard(params, mockBoard.id))
+    return store.dispatch(updateBoard(params, mockBoard.id) as any)
       .then(() => {
         const { dialog } = store.getState();
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedUpdateBoard);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state `boards` that deleted one record upon dispatch an action `deleteBoard` is successful', () => {
+    store = storeFactory({
+      board: {
+        boards: [
+          { ...mockBoard, id: 1 },
+          { ...mockBoard, id: 2 },
+          { ...mockBoard, id: 3 },
+        ],
+      },
+    });
+
+    const previousState = store.getState().board;
+    const boardId = 1;
+    mock.onDelete(`/board/${boardId}`).reply(200);
+
+    return store.dispatch(deleteBoard(boardId) as any)
+      .then(() => {
+        const { board } = store.getState();
+        expect(board.boards).toHaveLength(previousState.boards.length - 1);
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `deleteBoard` and recieved status 400 from server', () => {
+    const boardId = 1;
+    const responseData = { errors: [{ text: 'some error...' }] };
+
+    mock.onDelete(`/board/${boardId}`).reply(400, responseData);
+
+    return store.dispatch(deleteBoard(boardId) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedDeleteBoard);
         expect(dialog.description).toBe('some error...');
       });
   });
