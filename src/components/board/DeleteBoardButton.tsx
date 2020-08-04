@@ -26,7 +26,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const DeleteBoardButton = (props: PropsFromRedux) => {
+export const DeleteBoardButton = (props: PropsFromRedux) => {
   const { boards, openDialog, deleteBoard } = props;
 
   const match = useRouteMatch<{ boardId: string }>('/board/:boardId');
