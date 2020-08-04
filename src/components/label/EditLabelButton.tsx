@@ -18,7 +18,6 @@ const EditLabelButton = () => {
   return (
     <>
       <div
-        data-testid="openLabelEditButton"
         role="button"
         tabIndex={0}
         onClick={() => setLabelEditVisible(true)}

@@ -35,16 +35,4 @@ describe('Header component', () => {
 
     expect(mockLocation.pathname).toBe('/');
   });
-
-  test('should show `LabelEdit` if state of `isLabelEditVisible` is true', () => {
-    const { getByTestId } = renderWithRouter(<Header />);
-    fireEvent.click(getByTestId('openLabelEditButton'));
-
-    expect(getByTestId('labelEdit')).toBeVisible();
-  });
-
-  test('should hide `LabelEdit` if state of `isLabelEditVisible` is false', () => {
-    const { queryByTestId } = renderWithRouter(<Header />);
-    expect(queryByTestId('labelEdit')).toBeNull();
-  });
 });
