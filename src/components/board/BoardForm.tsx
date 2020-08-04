@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect, ConnectedProps } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import usePreviousCount from '../../hooks/usePreviousCount';
 import { RootState } from '../../store';
 import ButtonSubmit from '../common/ButtonSubmit';
 import ButtonCancel from '../common/ButtonCancel';
@@ -24,17 +25,9 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const usePreviousBoardCount = (count: number) => {
-  const ref: {current: number | undefined} = useRef();
-  useEffect(() => {
-    ref.current = count;
-  });
-  return ref.current;
-};
-
 export const BoardForm = (props: PropsFromRedux) => {
   const { createBoard, boards } = props;
-  const prevBoardsCount = usePreviousBoardCount(boards.length);
+  const prevBoardsCount = usePreviousCount(boards.length);
 
   const [boardName, setBoardName] = useState('');
   const [isFormVisible, setFormVisible] = useState(false);
