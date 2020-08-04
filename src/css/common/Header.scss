@@ -30,20 +30,3 @@
     }
   }
 }
-
-.openLabelEditButton {
-  align-items: center;
-  color: $font-color;
-  cursor: pointer;
-  display: flex;
-  font-size: 0.8rem;
-  margin: 3px 0;
-  min-width: fit-content;
-  text-decoration: underline;
-  &:hover {
-    color: $pink;
-  }
-  &__text {
-    margin-left: 3px;
-  }
-}

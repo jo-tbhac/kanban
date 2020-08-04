@@ -25,4 +25,13 @@ describe('DeleteBoardButton component', () => {
     fireEvent.click(getByRole('button'));
     expect(openDialog).toHaveBeenCalled();
   });
+
+  test('should not render a component if current location is not `/board/:boardId`', () => {
+    const { queryByRole } = renderWithRouter(
+      <DeleteBoardButton boards={[]} openDialog={openDialog} deleteBoard={deleteBoard} />,
+      store,
+      ['/'],
+    );
+    expect(queryByRole('button')).toBeNull();
+  });
 });
