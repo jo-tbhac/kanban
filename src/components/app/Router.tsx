@@ -6,6 +6,7 @@ import SignUp from '../session/SignUp';
 import Header from '../common/Header';
 import BoardIndex from '../board/BoardIndex';
 import Board from '../board/Board';
+import NotFound from '../common/404';
 
 const Router = React.memo(() => (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -24,6 +25,7 @@ const Router = React.memo(() => (
           <BoardIndex />
         </div>
       </Route>
+      <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
 ));
