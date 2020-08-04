@@ -85,6 +85,8 @@ export const askCheckListItemDeleteDialog = 'このアイテムを削除して�
 // common
 export const deleteText = '削除';
 export const addText = '追加';
+export const pageNotFoundTitle = 'ページが見つかりませんでした';
+export const moveToHomeText = 'ホームへ戻る';
 
 // file
 export const fileHeaderLabel = '添付ファイル';
