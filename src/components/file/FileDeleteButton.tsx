@@ -19,7 +19,7 @@ type FileDeleteButton = PropsFromRedux & {
   fileId: number
 }
 
-const FileDeleteButton = (props: FileDeleteButton) => {
+export const FileDeleteButton = (props: FileDeleteButton) => {
   const { fileId, deleteFile, openDialog } = props;
 
   const onClick = () => {
