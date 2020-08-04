@@ -13,30 +13,30 @@ export interface SearchState {
   boardKeyword: string
 }
 
-type SearchCardAction = {
+interface SearchCardAction {
   type: typeof SEARCH_CARD
   payload: number[]
 }
 
-type ClearSearchCardPoolAction = {
+interface ClearSearchCardPoolAction {
   type: typeof CLEAR_SEARCH_CARD_POOL
 }
 
-type OnChangeSearchCardKeywordAction = {
+interface OnChangeSearchCardKeywordAction {
   type: typeof ON_CHANGE_SEARCH_CARD_KEYWORD
   payload: string
 }
 
-type SearchBoardAction = {
+interface SearchBoardAction {
   type: typeof SEARCH_BOARD
   payload: number[]
 }
 
-type ClearSearchBoardPoolAction = {
+interface ClearSearchBoardPoolAction {
   type: typeof CLEAR_SEARCH_BOARD_POOL
 }
 
-type OnChangeSearchBoardKeywordAction = {
+interface OnChangeSearchBoardKeywordAction {
   type: typeof ON_CHANGE_SEARCH_BOARD_KEYWORD
   payload: string
 }

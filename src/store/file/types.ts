@@ -14,17 +14,17 @@ export interface FileState {
   files: File[]
 }
 
-type FetchFilesAction = {
+interface FetchFilesAction {
   type: typeof FETCH_FILES
   payload: File[]
 }
 
-type UploadFileAction = {
+interface UploadFileAction {
   type: typeof UPLOAD_FILE
   payload: File
 }
 
-type DeleteFileAction = {
+interface DeleteFileAction {
   type: typeof DELETE_FILE
   payload: number
 }

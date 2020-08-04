@@ -13,22 +13,22 @@ export interface List {
   index: number
 }
 
-type CreateListAction = {
+interface CreateListAction {
   type: typeof CREATE_LIST
   payload: List
 }
 
-type UpdateListAction = {
+interface UpdateListAction {
   type: typeof UPDATE_LIST
   payload: List
 }
 
-type DeleteListAction = {
+interface DeleteListAction {
   type: typeof DELETE_LIST
   payload: number
 }
 
-type MoveListAction = {
+interface MoveListAction {
   type: typeof MOVE_LIST
   payload: { dragId: number, dropId: number }
 }
