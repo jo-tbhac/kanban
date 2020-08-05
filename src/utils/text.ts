@@ -90,6 +90,9 @@ export const deleteText = '削除';
 export const addText = '追加';
 export const pageNotFoundTitle = 'ページが見つかりませんでした';
 export const moveToHomeText = 'ホームへ戻る';
+export const lightboxOpenNewTab = '新しいタブで開く';
+export const lightboxNoPreview = 'このファイルはプレビューを表示できません';
+export const downloadText = 'ダウンロード';
 
 // file
 export const fileHeaderLabel = '添付ファイル';
