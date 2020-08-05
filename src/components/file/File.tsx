@@ -27,6 +27,7 @@ const File = (props: FileProps) => {
   return (
     <>
       <div
+        data-testid="file"
         role="button"
         tabIndex={0}
         onClick={() => setLightboxVisible(true)}

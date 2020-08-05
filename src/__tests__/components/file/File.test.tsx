@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, storeFactory } from '../../../testUtils';
+import { render, storeFactory, fireEvent } from '../../../testUtils';
 import { mockFile } from '../../../utils/mockData';
 import { fileCreateCover } from '../../../utils/text';
 import { Store } from '../../../store';
@@ -72,5 +72,16 @@ describe('File component', () => {
       const { queryByText } = render(<File file={file} />, store);
       expect(queryByText(fileCreateCover)).toBeNull();
     });
+  });
+
+  test('should show `Lightbox` upon press a component', () => {
+    const { getByTestId } = render(<File file={mockFile} />, store);
+    fireEvent.click(getByTestId('file'));
+    expect(getByTestId('lightboxOverlay')).not.toBeNull();
+  });
+
+  test('should not render `Lightbox` if state of `isLightboxVisible` is false', () => {
+    const { queryByTestId } = render(<File file={mockFile} />, store);
+    expect(queryByTestId('lightboxOverlay')).toBeNull();
   });
 });

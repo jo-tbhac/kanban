@@ -35,8 +35,9 @@ const Lightbox = (props: LightboxProps) => {
 
   return (
     <CSSTransition in classNames="lightboxOverlay" appear timeout={200}>
-      <div className="lightboxOverlay">
+      <div data-testid="lightboxOverlay" className="lightboxOverlay">
         <div
+          data-testid="lightboxCloseButton"
           role="button"
           tabIndex={0}
           onClick={close}
