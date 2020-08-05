@@ -18,7 +18,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const CardFileStatusIcon = (props: PropsFromRedux) => {
+export const CardFileStatusIcon = (props: PropsFromRedux) => {
   const { files } = props;
 
   const card = useContext(CardContext);
