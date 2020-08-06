@@ -18,7 +18,9 @@ const cardReducer = (cards: Card[], action: CardActionTypes) => {
     case UPDATE_CARD:
       return {
         cards: cards.map((card) => (
-          card.id === action.payload.id ? { ...action.payload, labels: card.labels } : card
+          card.id === action.payload.id
+            ? { ...action.payload, labels: card.labels, cover: card.cover }
+            : card
         )),
       };
     case DELETE_CARD:
