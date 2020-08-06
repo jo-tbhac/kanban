@@ -16,7 +16,7 @@ export interface Card {
   listId: number
   labels: { id: number }[]
   index: number
-  cover: Cover
+  cover: Cover | null
 }
 
 export interface DndLCard {
