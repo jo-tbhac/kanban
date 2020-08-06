@@ -1,7 +1,11 @@
 .cardTitle__text {
+  align-items: center;
+  display: flex;
   flex: 1;
   font-size: 1.2rem;
   font-weight: bold;
+  min-height: 32px;
+  padding-left: 3px;
   word-wrap: break-word;
   width: 0;
 }

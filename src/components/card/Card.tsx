@@ -9,6 +9,7 @@ import { CardContext } from './CardIndexContainer';
 import CardStatusIndex from './CardStatusIndex';
 import CardDetail from './CardDetail';
 import CardLabelSmall from './CardLabelSmall';
+import Cover from '../cover/Cover';
 import { dndItemType } from '../../utils/utils';
 
 const mapStateToProps = (state: RootState) => {
@@ -133,6 +134,8 @@ export const Card = (props: PropsFromRedux) => {
         style={{ opacity }}
         className="card"
       >
+        {card?.cover && <Cover />}
+
         <div className="cardLabelWrapper">
           {card?.labels?.map((label) => (
             <CardLabelSmall key={`${card.id}-${label.id}`} label={label} />

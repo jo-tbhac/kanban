@@ -31,7 +31,9 @@ type CardLabelFormProps = PropsFromRedux & {
 export const CardLabelForm = (props: CardLabelFormProps) => {
   const { labels, closeCardLabelForm, position } = props;
 
-  const [elementHeight, setElementHeight] = useState({});
+  const [elementHeight, setElementHeight] = useState({
+    maxHeight: window.innerHeight - position.top,
+  });
 
   const ref = useRef<HTMLDivElement>(null);
 

@@ -16,7 +16,10 @@ const CardLabelFormButton = () => {
 
   const onClickButton = (event: React.MouseEvent) => {
     const { top, left } = event.currentTarget.getBoundingClientRect();
-    const clientRect = { top: top + CARD_LABEL_FORM_BUTTON_HEIGHT, left };
+    const clientRect = {
+      top: top + CARD_LABEL_FORM_BUTTON_HEIGHT,
+      left,
+    };
     const overflowElementX = window.innerWidth - (left + CARD_LABEL_FORM_WIDTH);
 
     if (overflowElementX < 0) {

@@ -7,6 +7,7 @@ import { List } from '../../store/list/types';
 import CardDetail from '../card/CardDetail';
 import CardLabelSmall from '../card/CardLabelSmall';
 import CardStatusIndex from '../card/CardStatusIndex';
+import Cover from '../cover/Cover';
 import { CardContext } from '../card/CardIndexContainer';
 
 const mapStateToProps = (state: RootState) => {
@@ -57,6 +58,8 @@ export const SearchCard = (props: SearchCardProps) => {
           onKeyPress={() => setCardDetailVisible(true)}
           className="searchCard"
         >
+          {searchedCard.cover && <Cover />}
+
           <div className="searchCardLabelWrapper">
             {searchedCard.labels?.map((label) => (
               <CardLabelSmall key={`${searchedCard.id}-${label.id}`} label={label} />
