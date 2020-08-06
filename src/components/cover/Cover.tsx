@@ -22,14 +22,14 @@ const Cover = (props: PropsFromRedux) => {
 
   const card = useContext(CardContext);
 
-  const cover = files.find((file) => file.id === card?.cover.fileId);
+  const cover = files.find((file) => file.id === card?.cover?.fileId);
 
   if (!cover) {
     return null;
   }
 
   return (
-    <div className="coverContainer">
+    <div data-testid="cover" className="coverContainer">
       <img src={cover.url} alt={cover.displayName} className="cover" />
     </div>
   );

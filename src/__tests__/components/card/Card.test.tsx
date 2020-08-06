@@ -10,7 +10,7 @@ import {
 } from '../../../testUtils';
 
 import { Store } from '../../../store';
-import { mockCard } from '../../../utils/mockData';
+import { mockCard, mockFile } from '../../../utils/mockData';
 import { Card } from '../../../components/card/Card';
 import { CardContext } from '../../../components/card/CardIndexContainer';
 
@@ -202,5 +202,49 @@ describe('Card component', () => {
     );
 
     expect(getByTestId(`card-${targetCard.id}`)).toHaveStyle('opacity: 0.4');
+  });
+
+  test('should render a cover', () => {
+    store = storeFactory({
+      file: {
+        files: [{ ...mockFile, id: mockCard.cover.fileId, cardId: mockCard.id }],
+      },
+    });
+
+    const { getByTestId } = render(
+      <DndProvider backend={HTML5Backend}>
+        <CardContext.Provider value={mockCard}>
+          <Card
+            selectedLabelIds={selectedLabelIds}
+            moveCard={moveCard}
+            moveCardAcrossList={moveCardAcrossList}
+            updateCardIndex={updateCardIndex}
+          />
+        </CardContext.Provider>
+      </DndProvider>,
+      store,
+    );
+
+    expect(getByTestId('cover')).not.toBeNull();
+  });
+
+  test('should not render a cover if `card` does not contain `cover`', () => {
+    const card = { ...mockCard, cover: null };
+
+    const { queryByTestId } = render(
+      <DndProvider backend={HTML5Backend}>
+        <CardContext.Provider value={card}>
+          <Card
+            selectedLabelIds={selectedLabelIds}
+            moveCard={moveCard}
+            moveCardAcrossList={moveCardAcrossList}
+            updateCardIndex={updateCardIndex}
+          />
+        </CardContext.Provider>
+      </DndProvider>,
+      store,
+    );
+
+    expect(queryByTestId('cover')).toBeNull();
   });
 });
