@@ -7,6 +7,7 @@ import { fileCreateCover } from '../../utils/text';
 
 const mapDispatchToProps = {
   createCover: coverActions.createCover,
+  updateCover: coverActions.updateCover,
 };
 
 const connector = connect(null, mapDispatchToProps);
@@ -18,15 +19,20 @@ type CreateCoverButtonProps = PropsFromRedux & {
 }
 
 export const CreateCoverButton = (props: CreateCoverButtonProps) => {
-  const { createCover, fileId } = props;
+  const { createCover, updateCover, fileId } = props;
 
   const card = useContext(CardContext);
 
   const onClick = (event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    if (card) {
-      createCover(card.listId, card.id, fileId);
+    if (!card) {
+      return;
     }
+    if (card.cover) {
+      updateCover(card.listId, card.id, fileId);
+      return;
+    }
+    createCover(card.listId, card.id, fileId);
   };
 
   return (
