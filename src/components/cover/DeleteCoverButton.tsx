@@ -14,7 +14,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const DeleteCoverButton = (props: PropsFromRedux) => {
+export const DeleteCoverButton = (props: PropsFromRedux) => {
   const { deleteCover } = props;
 
   const card = useContext(CardContext);

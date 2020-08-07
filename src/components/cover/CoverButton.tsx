@@ -13,13 +13,9 @@ const CoverButton = (props: CoverButtonProps) => {
 
   const card = useContext(CardContext);
 
-  if (!card) {
-    return null;
-  }
-
   return (
     <>
-      {card.cover?.fileId === fileId
+      {card?.cover?.fileId === fileId
         ? <DeleteCoverButton />
         : <CreateCoverButton fileId={fileId} />}
     </>
