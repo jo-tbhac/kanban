@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { MouseEvent, KeyboardEvent } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { dialogTypeAsk } from '../../store/dialog/types';
 import * as dialogActions from '../../store/dialog/actions';
 import * as fileActions from '../../store/file/actions';
 import { deleteFileText, askFileDeleteDialog } from '../../utils/text';
+import ButtonLight from '../common/ButtonLight';
 
 const mapDispatchToProps = {
   deleteFile: fileActions.deleteFile,
@@ -22,7 +23,8 @@ type FileDeleteButton = PropsFromRedux & {
 export const FileDeleteButton = (props: FileDeleteButton) => {
   const { fileId, deleteFile, openDialog } = props;
 
-  const onClick = () => {
+  const onClick = (event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => {
+    event.stopPropagation();
     openDialog({
       type: dialogTypeAsk,
       title: askFileDeleteDialog,
@@ -31,15 +33,7 @@ export const FileDeleteButton = (props: FileDeleteButton) => {
   };
 
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={onClick}
-      onKeyPress={onClick}
-      className="fileDeleteButton"
-    >
-      {deleteFileText}
-    </div>
+    <ButtonLight text={deleteFileText} onClick={onClick} />
   );
 };
 
