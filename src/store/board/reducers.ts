@@ -28,7 +28,11 @@ import {
   CardActionTypes,
 } from '../card/types';
 
-import { CREATE_COVER, CoverActionTypes } from '../cover/types';
+import {
+  CREATE_COVER,
+  UPDATE_COVER,
+  CoverActionTypes,
+} from '../cover/types';
 
 import listReducer from '../list/reducers';
 
@@ -89,7 +93,8 @@ const boardReducer = (
     case MOVE_CARD_TO_EMPTY_LIST:
     case ATTACH_LABEL:
     case DETACH_LABEL:
-    case CREATE_COVER: {
+    case CREATE_COVER:
+    case UPDATE_COVER: {
       const { lists } = listReducer(state.selectedBoard.lists, action);
       return {
         ...state,

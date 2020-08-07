@@ -106,3 +106,4 @@ export const askFileDeleteDialog = 'このファイルを削除してよろし�
 
 // cover
 export const failedCreateCover = 'カバー画像を設定できませんでした';
+export const failedUpdateCover = 'カバー画像を更新できませんでした';
