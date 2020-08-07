@@ -28,6 +28,8 @@ import {
   CardActionTypes,
 } from '../card/types';
 
+import { CREATE_COVER, CoverActionTypes } from '../cover/types';
+
 import listReducer from '../list/reducers';
 
 const initialBoardProps = {
@@ -44,7 +46,7 @@ const initialState: BoardState = {
 
 const boardReducer = (
   state = initialState,
-  action: BoardActionTypes | ListActionTypes | CardActionTypes,
+  action: BoardActionTypes | ListActionTypes | CardActionTypes | CoverActionTypes,
 ): BoardState => {
   switch (action.type) {
     case FETCH_ALL_BOARDS:
@@ -86,7 +88,8 @@ const boardReducer = (
     case MOVE_CARD_ACROSS_LIST:
     case MOVE_CARD_TO_EMPTY_LIST:
     case ATTACH_LABEL:
-    case DETACH_LABEL: {
+    case DETACH_LABEL:
+    case CREATE_COVER: {
       const { lists } = listReducer(state.selectedBoard.lists, action);
       return {
         ...state,

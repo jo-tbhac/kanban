@@ -19,9 +19,14 @@ import {
   CardActionTypes,
 } from '../card/types';
 
+import { CREATE_COVER, CoverActionTypes } from '../cover/types';
+
 import cardReducer from '../card/reducers';
 
-const listReducer = (lists: List[] = [], action: ListActionTypes | CardActionTypes) => {
+const listReducer = (
+  lists: List[] = [],
+  action: ListActionTypes | CardActionTypes | CoverActionTypes,
+) => {
   switch (action.type) {
     case CREATE_LIST:
       return {
@@ -70,7 +75,8 @@ const listReducer = (lists: List[] = [], action: ListActionTypes | CardActionTyp
     case DELETE_CARD:
     case MOVE_CARD:
     case ATTACH_LABEL:
-    case DETACH_LABEL: {
+    case DETACH_LABEL:
+    case CREATE_COVER: {
       const targetList = lists.find((list) => list.id === action.payload.listId);
       if (targetList === undefined) {
         return { lists };

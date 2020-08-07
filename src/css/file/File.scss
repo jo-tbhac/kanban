@@ -46,12 +46,4 @@
   display: flex;
   font-size: 0.7rem;
   margin-top: 5px;
-  &__cover {
-    margin-right: 10px;
-    text-decoration: underline;
-    &:hover {
-      color: $pink;
-      text-decoration-color: $pink;
-    }
-  }
 }
