@@ -5,8 +5,8 @@ import { newAxios } from '../../configureAxios';
 import { joinErrors } from '../../utils/utils';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { AppDispatch } from '..';
-import { failedCreateCover, failedUpdateCover } from '../../utils/text';
-import { CREATE_COVER, UPDATE_COVER } from './types';
+import { failedCreateCover, failedUpdateCover, failedDeleteCover } from '../../utils/text';
+import { CREATE_COVER, UPDATE_COVER, DELETE_COVER } from './types';
 
 export const createCover = (listId: number, cardId: number, fileId: number) => (
   async (dispatch: AppDispatch) => {
@@ -52,3 +52,22 @@ export const updateCover = (listId: number, cardId: number, fileId: number) => (
     }
   }
 );
+
+export const deleteCover = (listId: number, cardId: number) => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.delete(`/card/${cardId}/cover`);
+
+  if (response?.status === 200) {
+    dispatch({ type: DELETE_COVER, payload: { cardId, listId } });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedDeleteCover,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+  }
+};

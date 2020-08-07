@@ -6,8 +6,8 @@ import { storeFactory } from '../../../testUtils';
 import { mockList, mockCard } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedCreateCover, failedUpdateCover } from '../../../utils/text';
-import { createCover, updateCover } from '../../../store/cover/actions';
+import { failedCreateCover, failedUpdateCover, failedDeleteCover } from '../../../utils/text';
+import { createCover, updateCover, deleteCover } from '../../../store/cover/actions';
 
 describe('cover actions', () => {
   let store: Store;
@@ -102,6 +102,47 @@ describe('cover actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedUpdateCover);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state `cards` that deleted a `cover` when an action of `deleteCover` was successful', () => {
+    const cover = { cardId: mockCard.id, fileId: 1 };
+    store = storeFactory({
+      board: {
+        selectedBoard: {
+          lists: [
+            {
+              ...mockList,
+              cards: [{ ...mockCard, listId: mockList.id, cover }],
+            },
+          ],
+        },
+      },
+    });
+
+    mock.onDelete(`/card/${cover.cardId}/cover`).reply(200);
+
+    return store.dispatch(deleteCover(mockList.id, mockCard.id) as any)
+      .then(() => {
+        const { board } = store.getState();
+        expect(board.selectedBoard.lists[0].cards[0].cover).toBeNull();
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `deleteCover` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    const cardId = 2;
+    const listId = 3;
+
+    mock.onDelete(`/card/${cardId}/cover`).reply(400, responseData);
+
+    return store.dispatch(deleteCover(listId, cardId) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedDeleteCover);
         expect(dialog.description).toBe('some error...');
       });
   });

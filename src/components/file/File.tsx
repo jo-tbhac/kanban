@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import * as fileTypes from '../../store/file/types';
 import FileDeleteButton from './FileDeleteButton';
 import Lightbox from '../common/Lightbox';
-import CreateCoverButton from '../cover/CreateCoverButton';
+import CoverButton from '../cover/CoverButton';
 
 type FileProps = {
   file: fileTypes.File
@@ -42,7 +42,7 @@ const File = (props: FileProps) => {
         <div className="fileInfo">
           <div className="fileInfo__name">{file.displayName}</div>
           <div className="fileManage">
-            {isImage && <CreateCoverButton fileId={file.id} />}
+            {isImage && <CoverButton fileId={file.id} />}
             <FileDeleteButton fileId={file.id} />
           </div>
         </div>

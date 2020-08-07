@@ -22,6 +22,7 @@ import {
 import {
   CREATE_COVER,
   UPDATE_COVER,
+  DELETE_COVER,
   CoverActionTypes,
 } from '../cover/types';
 
@@ -81,7 +82,8 @@ const listReducer = (
     case ATTACH_LABEL:
     case DETACH_LABEL:
     case CREATE_COVER:
-    case UPDATE_COVER: {
+    case UPDATE_COVER:
+    case DELETE_COVER: {
       const targetList = lists.find((list) => list.id === action.payload.listId);
       if (targetList === undefined) {
         return { lists };

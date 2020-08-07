@@ -61,6 +61,7 @@ code {
 // common
 @import './css/common/404';
 @import './css/common/ButtonCancel';
+@import './css/common/ButtonLight';
 @import './css/common/ButtonNoneBorder';
 @import './css/common/ButtonSubmit';
 @import './css/common/ColorPicker';
@@ -73,11 +74,9 @@ code {
 
 // cover
 @import './css/cover/Cover';
-@import './css/cover/CreateCoverButton';
 
 // file
 @import './css/file/File';
-@import './css/file/FileDeleteButton';
 @import './css/file/FileIndex';
 
 // label

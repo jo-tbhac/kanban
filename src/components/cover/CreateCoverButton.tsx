@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { CardContext } from '../card/CardIndexContainer';
 import * as coverActions from '../../store/cover/actions';
 import { fileCreateCover } from '../../utils/text';
+import ButtonLight from '../common/ButtonLight';
 
 const mapDispatchToProps = {
   createCover: coverActions.createCover,
@@ -36,15 +37,7 @@ export const CreateCoverButton = (props: CreateCoverButtonProps) => {
   };
 
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={onClick}
-      onKeyPress={onClick}
-      className="createCoverButton"
-    >
-      {fileCreateCover}
-    </div>
+    <ButtonLight text={fileCreateCover} onClick={onClick} />
   );
 };
 
