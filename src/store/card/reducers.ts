@@ -12,6 +12,7 @@ import {
 import {
   CREATE_COVER,
   UPDATE_COVER,
+  DELETE_COVER,
   CoverActionTypes,
 } from '../cover/types';
 
@@ -93,6 +94,16 @@ const cardReducer = (cards: Card[], action: CardActionTypes | CoverActionTypes) 
         return { cards };
       }
       const newCard = { ...targetCard, cover: action.payload.cover };
+      return {
+        cards: cards.map((card) => (card.id === newCard.id ? newCard : card)),
+      };
+    }
+    case DELETE_COVER: {
+      const targetCard = cards.find((card) => card.id === action.payload.cardId);
+      if (targetCard === undefined) {
+        return { cards };
+      }
+      const newCard = { ...targetCard, cover: null };
       return {
         cards: cards.map((card) => (card.id === newCard.id ? newCard : card)),
       };

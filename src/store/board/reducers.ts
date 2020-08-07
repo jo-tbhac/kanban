@@ -31,6 +31,7 @@ import {
 import {
   CREATE_COVER,
   UPDATE_COVER,
+  DELETE_COVER,
   CoverActionTypes,
 } from '../cover/types';
 
@@ -94,7 +95,8 @@ const boardReducer = (
     case ATTACH_LABEL:
     case DETACH_LABEL:
     case CREATE_COVER:
-    case UPDATE_COVER: {
+    case UPDATE_COVER:
+    case DELETE_COVER: {
       const { lists } = listReducer(state.selectedBoard.lists, action);
       return {
         ...state,
