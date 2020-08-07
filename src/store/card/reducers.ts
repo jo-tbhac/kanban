@@ -9,7 +9,9 @@ import {
   CardActionTypes,
 } from './types';
 
-const cardReducer = (cards: Card[], action: CardActionTypes) => {
+import { CREATE_COVER, CoverActionTypes } from '../cover/types';
+
+const cardReducer = (cards: Card[], action: CardActionTypes | CoverActionTypes) => {
   switch (action.type) {
     case CREATE_CARD:
       return {
@@ -76,6 +78,16 @@ const cardReducer = (cards: Card[], action: CardActionTypes) => {
         labels: targetCard.labels.filter((label) => label.id !== action.payload.labelId),
       };
 
+      return {
+        cards: cards.map((card) => (card.id === newCard.id ? newCard : card)),
+      };
+    }
+    case CREATE_COVER: {
+      const targetCard = cards.find((card) => card.id === action.payload.cover.cardId);
+      if (targetCard === undefined) {
+        return { cards };
+      }
+      const newCard = { ...targetCard, cover: action.payload.cover };
       return {
         cards: cards.map((card) => (card.id === newCard.id ? newCard : card)),
       };

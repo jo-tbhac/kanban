@@ -103,3 +103,6 @@ export const shouldLessThanMaxFileSize = '8MB以上のファイルはアップ�
 export const failedUploadFile = 'ファイルをアップロードできませんでした';
 export const failedDeleteFile = 'ファイルを削除できませんでした';
 export const askFileDeleteDialog = 'このファイルを削除してよろしいですか？';
+
+// cover
+export const failedCreateCover = 'カバー画像を設定できませんでした';
