@@ -1,0 +1,8 @@
+.createCoverButton {
+  margin-right: 10px;
+  text-decoration: underline;
+  &:hover {
+    color: $pink;
+    text-decoration-color: $pink;
+  }
+}
