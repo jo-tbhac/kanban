@@ -17,18 +17,16 @@ type CreateCoverButtonProps = PropsFromRedux & {
   fileId: number
 }
 
-const CreateCoverButton = (props: CreateCoverButtonProps) => {
+export const CreateCoverButton = (props: CreateCoverButtonProps) => {
   const { createCover, fileId } = props;
 
   const card = useContext(CardContext);
 
-  if (!card) {
-    return null;
-  }
-
   const onClick = (event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    createCover(card.listId, card.id, fileId);
+    if (card) {
+      createCover(card.listId, card.id, fileId);
+    }
   };
 
   return (
