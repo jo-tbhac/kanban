@@ -1,6 +1,11 @@
 import React, { useState, useContext, useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { useDrag, useDrop } from 'react-dnd';
+import {
+  useDrag,
+  useDrop,
+  XYCoord,
+  DropTargetMonitor,
+} from 'react-dnd';
 
 import { DndLCard } from '../../store/card/types';
 import { RootState } from '../../store';
@@ -47,7 +52,7 @@ export const Card = (props: PropsFromRedux) => {
     accept: dndItemType.CARD,
     collect: (monitor) => monitor.getItem(),
     canDrop: () => false,
-    hover: (item: DndLCard) => {
+    hover: (item: DndLCard, monitor: DropTargetMonitor) => {
       if (!ref.current || !card) {
         return;
       }
@@ -57,6 +62,19 @@ export const Card = (props: PropsFromRedux) => {
       const dropListId = card.listId;
 
       if (dragIndex === dropIndex && dragListId === dropListId) {
+        return;
+      }
+
+      const hoverBoundingRect = ref.current.getBoundingClientRect();
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+
+      if (dragIndex < dropIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+
+      if (dragIndex > dropIndex && hoverClientY > hoverMiddleY) {
         return;
       }
 
