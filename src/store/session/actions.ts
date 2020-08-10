@@ -13,7 +13,10 @@ export const signUp = (params: SignUpParams) => async (dispatch: AppDispatch) =>
   const response = await axios.post('/user', snakeCaseParams).catch((error) => error.response);
 
   if (response?.status === 201) {
-    sessionStorage.setItem('token', response.data.token);
+    const camelizedData = camelCaseKeys(response.data);
+    localStorage.setItem('token', camelizedData.accessToken);
+    localStorage.setItem('refresh_token', camelizedData.refreshToken);
+
     dispatch({ type: SIGN_IN });
     return;
   }
@@ -33,7 +36,10 @@ export const signIn = (params: SignInParams) => async (dispatch: AppDispatch) =>
   const response = await axios.post('/session', params).catch((error) => error.response);
 
   if (response?.status === 200) {
-    sessionStorage.setItem('token', response.data.token);
+    const camelizedData = camelCaseKeys(response.data);
+    localStorage.setItem('token', camelizedData.accessToken);
+    localStorage.setItem('refresh_token', camelizedData.refreshToken);
+
     dispatch({ type: SIGN_IN });
     return;
   }

@@ -18,7 +18,7 @@ export const newAxios = () => {
   instance.defaults.headers.post['Content-Type'] = 'application/json';
   instance.defaults.headers.patch['Content-Type'] = 'application/json';
   // eslint-disable-next-line dot-notation
-  instance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
+  instance.defaults.headers.common['X-Auth-Token'] = localStorage.getItem('token');
 
   instance.interceptors.response.use((response) => {
     if (response.config.method === 'delete') {
