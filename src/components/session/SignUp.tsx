@@ -39,54 +39,55 @@ const SignUp = (props: PropsFromRedux) => {
     signUp(params);
   };
 
-  return (
-    <>
-      {isSignIn && <Redirect to="/" />}
-      <div className="signUpContainer">
-        <div className="signUpLogo">
-          kanban
-        </div>
-        <div className="signUp">
-          <input
-            data-testid="userNameTextField"
-            type="text"
-            placeholder="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            className="signUp__usernameTextField"
-          />
-          <input
-            data-testid="emailTextField"
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            className="signUp__emailTextField"
-          />
-          <input
-            data-testid="passwordTextField"
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            className="signUp__passwordTextField"
-          />
-          <input
-            data-testid="passwordConfirmationTextField"
-            type="password"
-            placeholder="password confirmation"
-            value={passwordConfirmation}
-            onChange={(event) => setPasswordConfirmation(event.target.value)}
-            className="signUp__passwordConfirmationTextField"
-          />
-          <button type="button" onClick={onClickSignUp} className="signUp__button">
-            Sign up
-          </button>
+  if (isSignIn) {
+    return <Redirect to="/" />;
+  }
 
-          <Link to="/signin" className="signUp__linkToSignIn">Move to sign in</Link>
-        </div>
+  return (
+    <div className="signUpContainer">
+      <div className="signUpLogo">
+        kanban
       </div>
-    </>
+      <div className="signUp">
+        <input
+          data-testid="userNameTextField"
+          type="text"
+          placeholder="username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+          className="signUp__usernameTextField"
+        />
+        <input
+          data-testid="emailTextField"
+          type="text"
+          placeholder="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          className="signUp__emailTextField"
+        />
+        <input
+          data-testid="passwordTextField"
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          className="signUp__passwordTextField"
+        />
+        <input
+          data-testid="passwordConfirmationTextField"
+          type="password"
+          placeholder="password confirmation"
+          value={passwordConfirmation}
+          onChange={(event) => setPasswordConfirmation(event.target.value)}
+          className="signUp__passwordConfirmationTextField"
+        />
+        <button type="button" onClick={onClickSignUp} className="signUp__button">
+          Sign up
+        </button>
+
+        <Link to="/signin" className="signUp__linkToSignIn">Move to sign in</Link>
+      </div>
+    </div>
   );
 };
 

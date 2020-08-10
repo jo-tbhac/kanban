@@ -31,38 +31,39 @@ const SignIn = (props: PropsFromRedux) => {
     signIn(params);
   };
 
-  return (
-    <>
-      {isSignIn && <Redirect to="/" />}
-      <div className="signInContainer">
-        <div className="signInLogo">
-          kanban
-        </div>
-        <div className="signIn">
-          <input
-            data-testid="emailTextField"
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            className="signIn__emailTextField"
-          />
-          <input
-            data-testid="passwordTextField"
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            className="signIn__passwordTextField"
-          />
-          <button type="button" onClick={onClickSignIn} className="signIn__button">
-            Sign in
-          </button>
+  if (isSignIn) {
+    return <Redirect to="/" />;
+  }
 
-          <Link to="/signup" className="signIn__linkToSignUp">Create account</Link>
-        </div>
+  return (
+    <div className="signInContainer">
+      <div className="signInLogo">
+        kanban
       </div>
-    </>
+      <div className="signIn">
+        <input
+          data-testid="emailTextField"
+          type="text"
+          placeholder="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          className="signIn__emailTextField"
+        />
+        <input
+          data-testid="passwordTextField"
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          className="signIn__passwordTextField"
+        />
+        <button type="button" onClick={onClickSignIn} className="signIn__button">
+          Sign in
+        </button>
+
+        <Link to="/signup" className="signIn__linkToSignUp">Create account</Link>
+      </div>
+    </div>
   );
 };
 
