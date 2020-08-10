@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import store from './store';
+import { SIGN_OUT } from './store/session/types';
 import {
   OPEN_DIALOG,
   CLOSE_DIALOG,
@@ -18,7 +19,7 @@ export const newAxios = () => {
   instance.defaults.headers.post['Content-Type'] = 'application/json';
   instance.defaults.headers.patch['Content-Type'] = 'application/json';
   // eslint-disable-next-line dot-notation
-  instance.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
+  instance.defaults.headers.common['X-Auth-Token'] = localStorage.getItem('token');
 
   instance.interceptors.response.use((response) => {
     if (response.config.method === 'delete') {
@@ -32,6 +33,12 @@ export const newAxios = () => {
     }
 
     if (error.response.status === 401) {
+      if (error.response.data?.reason === 'expired') {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refresh_token');
+        store.dispatch({ type: SIGN_OUT });
+      }
+
       store.dispatch({ type: OPEN_DIALOG, payload: dialogUnAuthorization });
       return error.response;
     }

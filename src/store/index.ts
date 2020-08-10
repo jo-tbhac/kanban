@@ -9,6 +9,7 @@ import sessionReducer from './session/reducers';
 import searchReducer from './search/reducers';
 import checkListReducer from './check_list/reducers';
 import fileReducer from './file/reducers';
+import loadingReducer from './loading/reducers';
 
 export const rootReducer = combineReducers({
   board: boardReducer,
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
   search: searchReducer,
   checkList: checkListReducer,
   file: fileReducer,
+  loading: loadingReducer,
 });
 
 const store = createStore(

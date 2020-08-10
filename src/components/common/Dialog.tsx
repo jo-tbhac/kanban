@@ -68,7 +68,7 @@ export const Dialog = (props: PropsFromRedux) => {
 
   return (
     <CSSTransition in classNames="dialogOverlay" appear timeout={200}>
-      <div className="dialogOverlay">
+      <div data-testid="dialog" className="dialogOverlay">
         <div className="dialogContainer">
           <div className="dialogRow">
             <FontAwesomeIcon

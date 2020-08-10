@@ -16,7 +16,7 @@ code {
 @import './css/mixin';
 
 // app
-@import './css/app/App';
+@import './css/app/ProtectedPage';
 
 // board
 @import './css/board/Board';
@@ -70,6 +70,7 @@ code {
 @import './css/common/FlexTextField';
 @import './css/common/Header';
 @import './css/common/Lightbox';
+@import './css/common/Loading';
 @import './css/common/ToolBar';
 
 // cover

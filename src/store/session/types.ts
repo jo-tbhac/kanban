@@ -1,4 +1,5 @@
 export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
 
 export interface SessionState {
   isSignIn: boolean
@@ -20,4 +21,8 @@ interface SignInAction {
   type: typeof SIGN_IN
 }
 
-export type SessionActionTypes = SignInAction;
+interface SignOutAction {
+  type: typeof SIGN_OUT
+}
+
+export type SessionActionTypes = SignInAction | SignOutAction;
