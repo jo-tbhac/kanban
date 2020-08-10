@@ -1,14 +1,16 @@
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
+import snakeCaseKeys from 'snakecase-keys';
 
 import { storeFactory } from '../../../testUtils';
-import { signUp, signIn } from '../../../store/session/actions';
+import { fetchAuthState, signIn, signUp } from '../../../store/session/actions';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedSignUpTitle, failedSignInTitle } from '../../../utils/text';
+import { failedSignUpTitle, failedSignInTitle, unAuthorizationTitle } from '../../../utils/text';
 
 describe('session actions with thunk', () => {
   let store: any;
   let mock: MockAdapter;
+
   const signUpParams = {
     name: 'sample',
     email: 'sample@sample.com',
@@ -28,6 +30,7 @@ describe('session actions with thunk', () => {
 
   test('returns state `isSignIn: true` upon dispatch an action `signUp` and recieved status 201 from server', () => {
     mock.onPost('/user').reply(201, { token: 'sjmifhsngbiouncf' });
+    mock.onPatch('/session').reply(200);
 
     return store.dispatch(signUp(signUpParams))
       .then(() => {
@@ -53,6 +56,7 @@ describe('session actions with thunk', () => {
 
   test('returns state `isSignIn: true` upon dispatch an action `signIn` and recieved status 200 from server', () => {
     mock.onPost('/session').reply(200, { token: 'sjmifhsngbiouncf' });
+    mock.onPatch('/session').reply(200);
 
     return store.dispatch(signIn(signInParams))
       .then(() => {
@@ -73,6 +77,55 @@ describe('session actions with thunk', () => {
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedSignInTitle);
         expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state `isSignIn: true` if returns `ok: true` as response data upon dispatch an action `fetchAuthState`', () => {
+    const responseData = {
+      ok: true,
+      token: 'jfmsoeoif',
+      refreshToken: 'siejosie;me',
+      expiresIn: 12000, // 2 min
+    };
+
+    const snakeCaseData = snakeCaseKeys(responseData);
+
+    mock.onPatch('/session').reply(200, snakeCaseData);
+
+    return store.dispatch(fetchAuthState() as any)
+      .then(() => {
+        const { session, loading } = store.getState();
+        expect(session.isSignIn).toBeTruthy();
+        expect(loading.isLoading).toBeFalsy();
+      });
+  });
+
+  test('returns state `isSignIn: false` if returns `ok: false` as response data upon dispatch an action `fetchAuthState`', () => {
+    const responseData = { ok: false };
+
+    mock.onPatch('/session').reply(200, responseData);
+
+    return store.dispatch(fetchAuthState() as any)
+      .then(() => {
+        const { session, loading } = store.getState();
+        expect(session.isSignIn).toBeFalsy();
+        expect(loading.isLoading).toBeFalsy();
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `fetchAuthState` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onPatch('/session').reply(400, responseData);
+
+    return store.dispatch(fetchAuthState() as any)
+      .then(() => {
+        const { session, dialog, loading } = store.getState();
+        expect(session.isSignIn).toBeFalsy();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(unAuthorizationTitle);
+        expect(dialog.description).toBe('some error...');
+        expect(loading.isLoading).toBeFalsy();
       });
   });
 });
