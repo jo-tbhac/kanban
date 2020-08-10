@@ -13,6 +13,27 @@ import {
   SIGN_IN,
 } from './types';
 
+const onRefreshToken = (expiresIn: number) => {
+  // it call function for 1 min before token will get expired.
+  const timer = expiresIn - (60 * 1000);
+
+  setTimeout(async () => {
+    const axios = newAxios();
+    const refreshToken = localStorage.getItem('refresh_token');
+    const snakeCaseParams = snakeCaseKeys({ refreshToken });
+    const response = await axios.patch('/session', snakeCaseParams);
+
+    if (response?.status === 200) {
+      if (response.data.ok) {
+        const camelizedData = camelCaseKeys(response.data);
+        localStorage.setItem('token', camelizedData.accessToken);
+        localStorage.setItem('refresh_token', camelizedData.refreshToken);
+        onRefreshToken(camelizedData.expiresIn);
+      }
+    }
+  }, timer);
+};
+
 export const signUp = (params: SignUpParams) => async (dispatch: AppDispatch) => {
   const snakeCaseParams = snakeCaseKeys(params);
   const axios = newAxios();
@@ -23,6 +44,7 @@ export const signUp = (params: SignUpParams) => async (dispatch: AppDispatch) =>
     localStorage.setItem('token', camelizedData.accessToken);
     localStorage.setItem('refresh_token', camelizedData.refreshToken);
 
+    onRefreshToken(camelizedData.expiresIn);
     dispatch({ type: SIGN_IN });
     return;
   }
@@ -46,6 +68,7 @@ export const signIn = (params: SignInParams) => async (dispatch: AppDispatch) =>
     localStorage.setItem('token', camelizedData.accessToken);
     localStorage.setItem('refresh_token', camelizedData.refreshToken);
 
+    onRefreshToken(camelizedData.expiresIn);
     dispatch({ type: SIGN_IN });
     return;
   }
@@ -67,7 +90,6 @@ export const fetchAuthState = () => async (dispatch: AppDispatch) => {
 
   const response = await axios.patch('/session', snakeCaseParams);
 
-
   if (response?.status === 200) {
     if (!response.data.ok) {
       dispatch({ type: LOAD_END });
@@ -78,6 +100,7 @@ export const fetchAuthState = () => async (dispatch: AppDispatch) => {
     localStorage.setItem('token', camelizedData.accessToken);
     localStorage.setItem('refresh_token', camelizedData.refreshToken);
 
+    onRefreshToken(camelizedData.expiresIn);
     dispatch({ type: LOAD_END });
     dispatch({ type: SIGN_IN });
     return;
