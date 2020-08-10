@@ -30,7 +30,7 @@ describe('session actions with thunk', () => {
 
   test('returns state `isSignIn: true` upon dispatch an action `signUp` and recieved status 201 from server', () => {
     mock.onPost('/user').reply(201, { token: 'sjmifhsngbiouncf' });
-    mock.onPatch('/session').reply(200);
+    mock.onPatch('/session').reply(200, { ok: true });
 
     return store.dispatch(signUp(signUpParams))
       .then(() => {
@@ -56,7 +56,7 @@ describe('session actions with thunk', () => {
 
   test('returns state `isSignIn: true` upon dispatch an action `signIn` and recieved status 200 from server', () => {
     mock.onPost('/session').reply(200, { token: 'sjmifhsngbiouncf' });
-    mock.onPatch('/session').reply(200);
+    mock.onPatch('/session').reply(200, { ok: true });
 
     return store.dispatch(signIn(signInParams))
       .then(() => {
