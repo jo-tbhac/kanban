@@ -1,5 +1,6 @@
 import {
   SIGN_IN,
+  SIGN_OUT,
   SessionState,
   SessionActionTypes,
 } from './types';
@@ -14,6 +15,11 @@ const sessionReducer = (state = initialState, action: SessionActionTypes) => {
       return {
         ...state,
         isSignIn: true,
+      };
+    case SIGN_OUT:
+      return {
+        ...state,
+        isSignIn: false,
       };
     default:
       return state;

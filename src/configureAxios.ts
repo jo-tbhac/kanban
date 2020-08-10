@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import store from './store';
+import { SIGN_OUT } from './store/session/types';
 import {
   OPEN_DIALOG,
   CLOSE_DIALOG,
@@ -32,6 +33,12 @@ export const newAxios = () => {
     }
 
     if (error.response.status === 401) {
+      if (error.response.data?.reason === 'expired') {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refresh_token');
+        store.dispatch({ type: SIGN_OUT });
+      }
+
       store.dispatch({ type: OPEN_DIALOG, payload: dialogUnAuthorization });
       return error.response;
     }

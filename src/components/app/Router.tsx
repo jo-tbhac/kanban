@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import ProtectedPage from './ProtectedPage';
 import SignIn from '../session/SignIn';
 import SignUp from '../session/SignUp';
 import Header from '../common/Header';
@@ -14,16 +15,20 @@ const Router = React.memo(() => (
       <Route path="/signin"><SignIn /></Route>
       <Route path="/signup"><SignUp /></Route>
       <Route path="/board/:boardId">
-        <div className="mainContainer">
-          <Header />
-          <Board />
-        </div>
+        <ProtectedPage>
+          <>
+            <Header />
+            <Board />
+          </>
+        </ProtectedPage>
       </Route>
       <Route exact path="/">
-        <div className="mainContainer">
-          <Header />
-          <BoardIndex />
-        </div>
+        <ProtectedPage>
+          <>
+            <Header />
+            <BoardIndex />
+          </>
+        </ProtectedPage>
       </Route>
       <Route component={NotFound} />
     </Switch>
