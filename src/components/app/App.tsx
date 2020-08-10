@@ -23,7 +23,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const App = (props: PropsFromRedux) => {
+export const App = (props: PropsFromRedux) => {
   const { isDialogVisible, isLoading, fetchAuthState } = props;
 
   useEffect(() => {

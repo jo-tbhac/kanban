@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Loading = () => (
-  <div className="loading">
+  <div data-testid="loading" className="loading">
     <FontAwesomeIcon icon={['fas', 'spinner']} spin size="2x" className="loading__icon" />
   </div>
 );
