@@ -21,7 +21,7 @@ type ProtectedPageProps = PropsFromRedux & {
   children: React.ReactElement
 }
 
-const ProtectedPage = (props: ProtectedPageProps) => {
+export const ProtectedPage = (props: ProtectedPageProps) => {
   const { isSignIn, children } = props;
 
   if (!isSignIn) {
