@@ -31,10 +31,11 @@ const UserProfileContainer = (props: UserProfileContainerProps) => {
   }, [onClickCallback]);
 
   return (
-    <div className="userProfileContainer">
+    <div data-testid="userProfileContainer" className="userProfileContainer">
       <div className="userProfileHeader">
         <div className="userProfileHeader__title">{accountTitle}</div>
         <div
+          data-testid="userProfileCloseButton"
           role="button"
           tabIndex={0}
           onClick={closeProfile}

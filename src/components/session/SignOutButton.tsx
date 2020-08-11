@@ -13,7 +13,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const SignOutButton = (props: PropsFromRedux) => {
+export const SignOutButton = (props: PropsFromRedux) => {
   const { signOut } = props;
 
   return (
