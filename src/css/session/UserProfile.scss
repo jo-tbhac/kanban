@@ -1,0 +1,14 @@
+.userProfile {
+  border-bottom: solid 1px $border-color;
+  margin: 5px 0;
+  padding: 5px;
+  padding-bottom: 10px;
+  &__name {
+    color: $font-color;
+    margin-bottom: 2px;
+  }
+  &__email {
+    color: #888;
+    font-size: 0.8rem;
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
+import UserProfileButton from '../session/UserProfileButton';
 import SearchCardForm from '../search/SearchForm';
 import DeleteBoardButton from '../board/DeleteBoardButton';
 import EditLabelButton from '../label/EditLabelButton';
@@ -13,6 +14,7 @@ const Header = () => (
         <FontAwesomeIcon icon={['fas', 'home']} data-testid="homeIcon" />
       </Link>
     </div>
+    <UserProfileButton />
 
     <SearchCardForm />
     <DeleteBoardButton />

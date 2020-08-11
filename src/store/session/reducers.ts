@@ -7,6 +7,8 @@ import {
 
 const initialState: SessionState = {
   isSignIn: false,
+  email: '',
+  name: '',
 };
 
 const sessionReducer = (state = initialState, action: SessionActionTypes) => {
@@ -15,11 +17,15 @@ const sessionReducer = (state = initialState, action: SessionActionTypes) => {
       return {
         ...state,
         isSignIn: true,
+        email: action.payload.email,
+        name: action.payload.name,
       };
     case SIGN_OUT:
       return {
         ...state,
         isSignIn: false,
+        email: '',
+        name: '',
       };
     default:
       return state;
