@@ -24,10 +24,16 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type CardFormProps = PropsFromRedux&{
   listId: number
   setCardFormVisible: Dispatch<SetStateAction<boolean>>
+  scrollToBottom: () => void
 }
 
 export const CardForm = (props: CardFormProps) => {
-  const { listId, setCardFormVisible, createCard } = props;
+  const {
+    listId,
+    setCardFormVisible,
+    scrollToBottom,
+    createCard,
+  } = props;
 
   const [isComposition, setComposition] = useState(false);
   const [cardTitle, setCardTitle] = useState('');
@@ -45,6 +51,11 @@ export const CardForm = (props: CardFormProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardTitle]);
+
+  useEffect(() => {
+    scrollToBottom();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     window.addEventListener('keypress', keyPressEvent);
