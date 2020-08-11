@@ -3,9 +3,20 @@ import axios from 'axios';
 import snakeCaseKeys from 'snakecase-keys';
 
 import { storeFactory } from '../../../testUtils';
-import { fetchAuthState, signIn, signUp } from '../../../store/session/actions';
 import { dialogTypeError } from '../../../store/dialog/types';
-import { failedSignUpTitle, failedSignInTitle, unAuthorizationTitle } from '../../../utils/text';
+import {
+  fetchAuthState,
+  signIn,
+  signUp,
+  signOut,
+} from '../../../store/session/actions';
+
+import {
+  failedSignUpTitle,
+  failedSignInTitle,
+  unAuthorizationTitle,
+  failedSignOutTitle,
+} from '../../../utils/text';
 
 describe('session actions with thunk', () => {
   let store: any;
@@ -152,6 +163,32 @@ describe('session actions with thunk', () => {
         expect(dialog.title).toBe(unAuthorizationTitle);
         expect(dialog.description).toBe('some error...');
         expect(loading.isLoading).toBeFalsy();
+      });
+  });
+
+  test('returns state of `isSignIn: false` upon dispatch an action `signOut`', () => {
+    mock.onDelete('/session').reply(200);
+
+    return store.dispatch(signOut() as any)
+      .then(() => {
+        const { session } = store.getState();
+        expect(session.isSignIn).toBeFalsy();
+        expect(session.email).toBe('');
+        expect(session.name).toBe('');
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `signOut` and recieved status 400 from server', () => {
+    const responseData = { errors: [{ text: 'some error...' }] };
+    mock.onDelete('/session').reply(400, responseData);
+
+    return store.dispatch(signOut() as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedSignOutTitle);
+        expect(dialog.description).toBe('some error...');
       });
   });
 });
