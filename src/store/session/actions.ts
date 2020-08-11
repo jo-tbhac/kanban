@@ -41,11 +41,18 @@ export const signUp = (params: SignUpParams) => async (dispatch: AppDispatch) =>
 
   if (response?.status === 201) {
     const camelizedData = camelCaseKeys(response.data);
-    localStorage.setItem('token', camelizedData.accessToken);
-    localStorage.setItem('refresh_token', camelizedData.refreshToken);
+    const {
+      accessToken,
+      refreshToken,
+      name,
+      email,
+    } = camelizedData;
+
+    localStorage.setItem('token', accessToken);
+    localStorage.setItem('refresh_token', refreshToken);
 
     onRefreshToken(camelizedData.expiresIn);
-    dispatch({ type: SIGN_IN });
+    dispatch({ type: SIGN_IN, payload: { email, name } });
     return;
   }
 
@@ -65,11 +72,18 @@ export const signIn = (params: SignInParams) => async (dispatch: AppDispatch) =>
 
   if (response?.status === 200) {
     const camelizedData = camelCaseKeys(response.data);
-    localStorage.setItem('token', camelizedData.accessToken);
-    localStorage.setItem('refresh_token', camelizedData.refreshToken);
+    const {
+      accessToken,
+      refreshToken,
+      name,
+      email,
+    } = camelizedData;
+
+    localStorage.setItem('token', accessToken);
+    localStorage.setItem('refresh_token', refreshToken);
 
     onRefreshToken(camelizedData.expiresIn);
-    dispatch({ type: SIGN_IN });
+    dispatch({ type: SIGN_IN, payload: { email, name } });
     return;
   }
 
@@ -85,8 +99,8 @@ export const signIn = (params: SignInParams) => async (dispatch: AppDispatch) =>
 
 export const fetchAuthState = () => async (dispatch: AppDispatch) => {
   const axios = newAxios();
-  const refreshToken = localStorage.getItem('refresh_token');
-  const snakeCaseParams = snakeCaseKeys({ refreshToken });
+  const previousRefreshToken = localStorage.getItem('refresh_token');
+  const snakeCaseParams = snakeCaseKeys({ refreshToken: previousRefreshToken });
 
   const response = await axios.patch('/session', snakeCaseParams);
 
@@ -97,12 +111,19 @@ export const fetchAuthState = () => async (dispatch: AppDispatch) => {
     }
 
     const camelizedData = camelCaseKeys(response.data);
-    localStorage.setItem('token', camelizedData.accessToken);
-    localStorage.setItem('refresh_token', camelizedData.refreshToken);
+    const {
+      accessToken,
+      refreshToken,
+      name,
+      email,
+    } = camelizedData;
+
+    localStorage.setItem('token', accessToken);
+    localStorage.setItem('refresh_token', refreshToken);
 
     onRefreshToken(camelizedData.expiresIn);
     dispatch({ type: LOAD_END });
-    dispatch({ type: SIGN_IN });
+    dispatch({ type: SIGN_IN, payload: { email, name } });
     return;
   }
 

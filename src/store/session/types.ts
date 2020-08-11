@@ -3,6 +3,8 @@ export const SIGN_OUT = 'SIGN_OUT';
 
 export interface SessionState {
   isSignIn: boolean
+  email: string
+  name: string
 }
 
 export interface SignUpParams {
@@ -19,6 +21,7 @@ export interface SignInParams {
 
 interface SignInAction {
   type: typeof SIGN_IN
+  payload: { name: string, email: string }
 }
 
 interface SignOutAction {
