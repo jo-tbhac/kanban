@@ -11,6 +11,8 @@ export const saveButtonText = '保存';
 // Session
 export const failedSignUpTitle = 'サインアップに失敗しました';
 export const failedSignInTitle = 'サインインに失敗しました';
+export const accountTitle = 'アカウント';
+export const signOutText = 'サインアウト';
 
 // board
 export const failedFetchBoardData = 'ボードの情報を取得できませんでした';
