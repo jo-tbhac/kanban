@@ -5,19 +5,28 @@ import { newAxios } from '../../configureAxios';
 import { joinErrors } from '../../utils/utils';
 import { AppDispatch } from '..';
 import { DialogTypes, OPEN_DIALOG, dialogTypeError } from '../dialog/types';
-import { failedSignUpTitle, failedSignInTitle, unAuthorizationTitle } from '../../utils/text';
+import {
+  failedSignUpTitle,
+  failedSignInTitle,
+  unAuthorizationTitle,
+  failedSignOutTitle,
+} from '../../utils/text';
+
 import { LOAD_END } from '../loading/types';
 import {
   SignUpParams,
   SignInParams,
   SIGN_IN,
+  SIGN_OUT,
 } from './types';
+
+let timerId: NodeJS.Timeout;
 
 const onRefreshToken = (expiresIn: number) => {
   // it call function for 1 min before token will get expired.
-  const timer = expiresIn - (60 * 1000);
+  const timer = expiresIn - (100 * 1000);
 
-  setTimeout(async () => {
+  timerId = setTimeout(async () => {
     const axios = newAxios();
     const refreshToken = localStorage.getItem('refresh_token');
     const snakeCaseParams = snakeCaseKeys({ refreshToken });
@@ -135,5 +144,28 @@ export const fetchAuthState = () => async (dispatch: AppDispatch) => {
     };
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
     dispatch({ type: LOAD_END });
+  }
+};
+
+export const signOut = () => async (dispatch: AppDispatch) => {
+  const axios = newAxios();
+  const response = await axios.delete('/session');
+
+  if (response?.status === 200) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refresh_token');
+
+    clearTimeout(timerId);
+    dispatch({ type: SIGN_OUT });
+    return;
+  }
+
+  if (response?.status === 400) {
+    const dialogProps = {
+      type: dialogTypeError as DialogTypes,
+      title: failedSignOutTitle,
+      description: joinErrors(response.data.errors),
+    };
+    dispatch({ type: OPEN_DIALOG, payload: dialogProps });
   }
 };
