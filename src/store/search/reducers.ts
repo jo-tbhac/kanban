@@ -41,6 +41,7 @@ const searchReducer = (state = initialState, action: SearchActionTypes) => {
       return {
         ...state,
         boardIds: action.payload,
+        isSearching: false,
       };
     case CLEAR_SEARCH_BOARD_POOL:
       return {
