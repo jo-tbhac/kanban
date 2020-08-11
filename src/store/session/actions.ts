@@ -24,7 +24,7 @@ let timerId: NodeJS.Timeout;
 
 const onRefreshToken = (expiresIn: number) => {
   // it call function for 1 min before token will get expired.
-  const timer = expiresIn - (100 * 1000);
+  const timer = expiresIn - (60 * 1000);
 
   timerId = setTimeout(async () => {
     const axios = newAxios();
