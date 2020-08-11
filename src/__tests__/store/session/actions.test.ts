@@ -29,13 +29,24 @@ describe('session actions with thunk', () => {
   });
 
   test('returns state `isSignIn: true` upon dispatch an action `signUp` and recieved status 201 from server', () => {
-    mock.onPost('/user').reply(201, { token: 'sjmifhsngbiouncf' });
+    const responseData = {
+      token: 'sjmifhsngbiouncf',
+      refreshToken: 'oeijrnsoe-wer9m4aoe',
+      email: signUpParams.email,
+      name: signUpParams.name,
+    };
+
+    const snakeCaseParams = snakeCaseKeys(responseData);
+
+    mock.onPost('/user').reply(201, snakeCaseParams);
     mock.onPatch('/session').reply(200, { ok: true });
 
     return store.dispatch(signUp(signUpParams))
       .then(() => {
         const { session } = store.getState();
         expect(session.isSignIn).toBeTruthy();
+        expect(session.email).toBe(responseData.email);
+        expect(session.name).toBe(responseData.name);
       });
   });
 
@@ -55,13 +66,24 @@ describe('session actions with thunk', () => {
   });
 
   test('returns state `isSignIn: true` upon dispatch an action `signIn` and recieved status 200 from server', () => {
-    mock.onPost('/session').reply(200, { token: 'sjmifhsngbiouncf' });
+    const responseData = {
+      token: 'sjmifhsngbiouncf',
+      refreshToken: 'oeijrnsoe-wer9m4aoe',
+      email: 'sample@sample.com',
+      name: 'tester',
+    };
+
+    const snakeCaseParams = snakeCaseKeys(responseData);
+
+    mock.onPost('/session').reply(200, snakeCaseParams);
     mock.onPatch('/session').reply(200, { ok: true });
 
     return store.dispatch(signIn(signInParams))
       .then(() => {
         const { session } = store.getState();
         expect(session.isSignIn).toBeTruthy();
+        expect(session.email).toBe(responseData.email);
+        expect(session.name).toBe(responseData.name);
       });
   });
 
@@ -83,6 +105,8 @@ describe('session actions with thunk', () => {
   test('returns state `isSignIn: true` if returns `ok: true` as response data upon dispatch an action `fetchAuthState`', () => {
     const responseData = {
       ok: true,
+      email: 'sample@sample.com',
+      name: 'tester',
       token: 'jfmsoeoif',
       refreshToken: 'siejosie;me',
       expiresIn: 12000, // 2 min
@@ -97,6 +121,8 @@ describe('session actions with thunk', () => {
         const { session, loading } = store.getState();
         expect(session.isSignIn).toBeTruthy();
         expect(loading.isLoading).toBeFalsy();
+        expect(session.email).toBe(responseData.email);
+        expect(session.name).toBe(responseData.name);
       });
   });
 
