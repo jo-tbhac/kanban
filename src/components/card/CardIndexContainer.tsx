@@ -53,6 +53,14 @@ const CardIndexContainer = (props: CardIndexContainerProps) => {
     },
   });
 
+  const scrollToBottom = () => {
+    if (!ref || !ref.current) {
+      return;
+    }
+    const { scrollHeight } = ref.current;
+    ref.current.scrollTo(0, scrollHeight);
+  };
+
   drop(ref);
 
   return (
@@ -62,7 +70,13 @@ const CardIndexContainer = (props: CardIndexContainerProps) => {
           <Card />
         </CardContext.Provider>
       ))}
-      {isCardFormVisible && <CardForm listId={listId} setCardFormVisible={setCardFormVisible} />}
+      {isCardFormVisible && (
+        <CardForm
+          listId={listId}
+          setCardFormVisible={setCardFormVisible}
+          scrollToBottom={scrollToBottom}
+        />
+      )}
     </div>
   );
 };
