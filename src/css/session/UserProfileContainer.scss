@@ -1,0 +1,29 @@
+.userProfileContainer {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  padding: 0 10px;
+  position: absolute;
+  top: $header-height;
+  width: 250px;
+}
+
+.userProfileHeader {
+  align-items: center;
+  border-bottom: solid 1px $border-color;
+  color: $font-color;
+  display: flex;
+  padding: 5px 0;
+  &__title {
+    flex: 1;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  &__close {
+    cursor: pointer;
+    padding: 3px 5px;
+    &:hover {
+      color: $pink;
+    }
+  }
+}

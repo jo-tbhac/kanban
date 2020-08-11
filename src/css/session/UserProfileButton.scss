@@ -1,0 +1,21 @@
+.userProfileButton {
+  color: $font-color;
+  cursor: pointer;
+  font-size: 1.2rem;
+  height: 100%;
+  line-height: $header-height;
+  margin-left: 10px;
+  padding: 0 3px;
+  position: relative;
+  width: fit-content;
+  &:hover {
+    color: $pink;
+    &::after {
+      @include hover-text();
+      content: 'アカウント';
+      position: absolute;
+      top: 30px;
+      left: 0;
+    }
+  }
+}

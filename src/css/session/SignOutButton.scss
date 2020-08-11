@@ -1,0 +1,14 @@
+.signOutButton {
+  border-radius: 3px;
+  color: $font-color;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  padding: 5px;
+  &:hover {
+    background-color: #eee;
+  }
+  &__icon {
+    margin-right: 5px;
+  }
+}
