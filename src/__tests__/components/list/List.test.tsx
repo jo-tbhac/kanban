@@ -17,11 +17,14 @@ describe('List component', () => {
   let store: Store;
   let moveList: jest.Mock;
   let updateListIndex: jest.Mock;
+  let scrollTo: jest.Mock;
 
   beforeEach(() => {
     store = storeFactory();
     moveList = jest.fn();
     updateListIndex = jest.fn();
+    scrollTo = jest.fn();
+    (global as any).HTMLDivElement.prototype.scrollTo = scrollTo;
   });
 
   test('should show `CardForm` if state of `isCardFormVisible` is true', () => {
@@ -33,6 +36,7 @@ describe('List component', () => {
     );
     fireEvent.click(getByTestId('addCardButton'));
     expect(getByTestId('cardForm')).toBeVisible();
+    expect(scrollTo).toHaveBeenCalled();
   });
 
   test('should hide `CardForm` if state of `isCardFormVisible` is false', () => {
