@@ -13,13 +13,18 @@ describe('Board component', () => {
   let fetchBoard: jest.Mock;
   let fetchCheckLists: jest.Mock;
   let fetchFiles: jest.Mock;
+  let scrollTo: jest.Mock;
   let store: Store;
+
 
   beforeEach(() => {
     fetchBoard = jest.fn();
     fetchCheckLists = jest.fn();
     fetchFiles = jest.fn();
+    scrollTo = jest.fn();
     store = storeFactory();
+
+    (global as any).HTMLDivElement.prototype.scrollTo = scrollTo;
 
     mock = new MockAdapter(axios);
     mock.onGet('/board/1/labels').reply(200, { labels: [] });
@@ -39,6 +44,7 @@ describe('Board component', () => {
 
     expect(getByTestId('listForm')).toBeVisible();
     expect(queryByTestId('addListButton')).toBeNull();
+    expect(scrollTo).toHaveBeenCalled();
   });
 
   test('should hide `ListForm` when state of `isListFormVisible` is false', () => {
