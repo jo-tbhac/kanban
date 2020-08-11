@@ -131,8 +131,8 @@ export const fetchAuthState = () => async (dispatch: AppDispatch) => {
     localStorage.setItem('refresh_token', refreshToken);
 
     onRefreshToken(camelizedData.expiresIn);
-    dispatch({ type: LOAD_END });
     dispatch({ type: SIGN_IN, payload: { email, name } });
+    dispatch({ type: LOAD_END });
     return;
   }
 
