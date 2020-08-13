@@ -42,6 +42,7 @@ const initialBoardProps = {
   name: '',
   updatedAt: '',
   lists: [],
+  backgroundImage: null,
 };
 
 const initialState: BoardState = {
