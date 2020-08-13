@@ -43,7 +43,7 @@ export const fetchAllBoards = () => async (dispatch: AppDispatch) => {
   const response = await axios.get('/boards');
 
   if (response?.status === 200) {
-    const camelizedData = camelCaseKeys(response.data.boards);
+    const camelizedData = camelCaseKeys(response.data.boards, { deep: true });
     dispatch({ type: FETCH_ALL_BOARDS, payload: camelizedData });
   }
 };
