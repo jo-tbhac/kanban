@@ -1,11 +1,18 @@
 .searchCardIndex {
   background-color: rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  max-height: calc(100vh - #{$header-height});
+  overflow-y: scroll;
   padding: 10px 0;
   position: absolute;
   top: $header-height;
   left: 5%;
   z-index: 5;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
