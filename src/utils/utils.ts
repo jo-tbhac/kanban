@@ -14,3 +14,6 @@ export const dndItemType = {
 };
 
 export const maxUploadFileSize = 8388608;
+
+export const fontColorLight = '#666';
+export const fontColorDark = '#fff';

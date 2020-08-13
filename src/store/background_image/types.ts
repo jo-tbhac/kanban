@@ -3,6 +3,7 @@ export const FETCH_BACKGROUND_IMAGES = 'FETCH_BACKGROUND_IMAGES';
 export interface BackgroundImage {
   id: number
   url: string
+  theme: string
 }
 
 export interface BoardBackgroundImage {
