@@ -1,0 +1,10 @@
+.newBackgroundImageIcon {
+  height: 35px;
+  margin: 0 2px;
+  &__image {
+    background-size: cover;
+    border-radius: 3px;
+    height: 100%;
+    width: 100%;
+  }
+}

@@ -1,6 +1,11 @@
+.boardFormWrapper {
+  height: $board-card-height;
+}
+
 .boardFormCard {
   @include board-card();
   cursor: default;
+  height: calc(#{$board-card-height} - 40px);
 }
 
 .boardFormCardInput {

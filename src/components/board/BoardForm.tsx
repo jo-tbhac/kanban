@@ -15,6 +15,7 @@ import { boardNameFormPlaceholder, createButtonText } from '../../utils/text';
 import ButtonSubmit from '../common/ButtonSubmit';
 import ButtonCancel from '../common/ButtonCancel';
 import NewBoardCard from './NewBoardCard';
+import NewBackgroundImageIndex from '../background_image/NewBackgroundImageIndex';
 
 const mapStateToProps = (state: RootState) => {
   const { board } = state;
@@ -75,25 +76,28 @@ export const BoardForm = (props: PropsFromRedux) => {
   return (
     <>
       {isFormVisible ? (
-        <div data-testid="newBoardForm" className="boardFormCard">
-          <div className="boardFormCardInput">
-            <input
-              data-testid="boardNameTextField"
-              type="text"
-              value={boardName}
-              onChange={(event) => setBoardName(event.target.value)}
-              className="boardFormCardInput__title"
-              placeholder={boardNameFormPlaceholder}
-            />
+        <div className="boardFormWrapper">
+          <div data-testid="newBoardForm" className="boardFormCard">
+            <div className="boardFormCardInput">
+              <input
+                data-testid="boardNameTextField"
+                type="text"
+                value={boardName}
+                onChange={(event) => setBoardName(event.target.value)}
+                className="boardFormCardInput__title"
+                placeholder={boardNameFormPlaceholder}
+              />
+            </div>
+            <div className="boardFormCardButton">
+              <ButtonCancel onClick={onCancel} />
+              <ButtonSubmit
+                onClick={onClickSubmit}
+                disabled={boardName === ''}
+                buttonText={createButtonText}
+              />
+            </div>
           </div>
-          <div className="boardFormCardButton">
-            <ButtonCancel onClick={onCancel} />
-            <ButtonSubmit
-              onClick={onClickSubmit}
-              disabled={boardName === ''}
-              buttonText={createButtonText}
-            />
-          </div>
+          <NewBackgroundImageIndex />
         </div>
       ) : (
         <NewBoardCard showForm={showForm} />
