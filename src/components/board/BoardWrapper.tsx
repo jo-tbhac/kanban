@@ -23,7 +23,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const BoardWrapper = (props: PropsFromRedux) => {
+export const BoardWrapper = (props: PropsFromRedux) => {
   const { selectedBoard, backgroundImages } = props;
 
   const backgroundImage = backgroundImages.find((image) => (
@@ -37,7 +37,7 @@ const BoardWrapper = (props: PropsFromRedux) => {
 
   return (
     <ThemeContext.Provider value={backgroundImage?.theme}>
-      <div style={style} className="boardWrapper">
+      <div data-testid="boardWrapper" style={style} className="boardWrapper">
         <Header />
         <Board />
       </div>
