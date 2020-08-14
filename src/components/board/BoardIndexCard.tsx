@@ -23,7 +23,7 @@ type BoardIndexCardProps = PropsFromRedux & {
   board: Board
 }
 
-const BoardIndexCard = (props: BoardIndexCardProps) => {
+export const BoardIndexCard = (props: BoardIndexCardProps) => {
   const { board, backgroundImages } = props;
 
   const [isHover, setHover] = useState(false);
@@ -46,7 +46,7 @@ const BoardIndexCard = (props: BoardIndexCardProps) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {isHover && <div className="boardIndexCardOverlay" />}
+      {isHover && <div data-testid="boardIndexCardOverlay" className="boardIndexCardOverlay" />}
       <div className="boardIndexCard__title">{board.name}</div>
     </Link>
   );
