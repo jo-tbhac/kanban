@@ -1,4 +1,5 @@
 import { List } from '../list/types';
+import { BoardBackgroundImage } from '../background_image/types';
 
 export const FETCH_ALL_BOARDS = 'FETCH_ALL_BOARDS';
 export const FETCH_BOARD = 'FETCH_BOARD';
@@ -16,6 +17,7 @@ export interface Board {
   name: string
   updatedAt: string
   lists: List[]
+  backgroundImage: BoardBackgroundImage | null
 }
 
 interface FetchAllBoardsAction {

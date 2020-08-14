@@ -40,19 +40,18 @@
 
 @mixin board-card() {
   background-color: white;
+  background-size: cover;
   border-radius: 3px;
   box-shadow: $box-shadow;
   box-sizing: border-box;
-  color: $font-color;
+  color: white;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   height: 120px;
   padding: 10px 20px;
+  position: relative;
   text-decoration: none;
-  &:hover {
-    color: $pink;
-  }
 }
 
 @mixin card-sidebar-row() {

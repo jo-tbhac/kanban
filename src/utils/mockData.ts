@@ -4,16 +4,19 @@ export const mockBoards = [
     name: 'board1',
     updatedAt: '2020-10-10T00:00:00',
     lists: [],
+    backgroundImage: null,
   }, {
     id: 2,
     name: 'board2',
     updatedAt: '2020-10-10T00:00:00',
     lists: [],
+    backgroundImage: null,
   }, {
     id: 3,
     name: 'board3',
     updatedAt: '2020-10-10T00:00:00',
     lists: [],
+    backgroundImage: null,
   },
 ];
 
@@ -22,6 +25,7 @@ export const mockBoard = {
   name: 'Most commonly',
   updatedAt: '2020-10-10T00:00:00',
   lists: [],
+  backgroundImage: null,
 };
 
 export const mockLabels = [
@@ -199,4 +203,10 @@ export const mockFile = {
   url: 'https://file-1',
   contentType: 'image/png',
   cardId: 1,
+};
+
+export const mockBackgroundImage = {
+  id: 1,
+  url: 'http://localhost/images',
+  theme: 'dark',
 };

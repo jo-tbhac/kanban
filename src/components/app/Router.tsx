@@ -6,7 +6,7 @@ import SignIn from '../session/SignIn';
 import SignUp from '../session/SignUp';
 import Header from '../common/Header';
 import BoardIndex from '../board/BoardIndex';
-import Board from '../board/Board';
+import BoardWrapper from '../board/BoardWrapper';
 import NotFound from '../common/404';
 
 const Router = React.memo(() => (
@@ -16,10 +16,7 @@ const Router = React.memo(() => (
       <Route path="/signup"><SignUp /></Route>
       <Route path="/board/:boardId">
         <ProtectedPage>
-          <>
-            <Header />
-            <Board />
-          </>
+          <BoardWrapper />
         </ProtectedPage>
       </Route>
       <Route exact path="/">

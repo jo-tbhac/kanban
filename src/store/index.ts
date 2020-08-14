@@ -10,6 +10,7 @@ import searchReducer from './search/reducers';
 import checkListReducer from './check_list/reducers';
 import fileReducer from './file/reducers';
 import loadingReducer from './loading/reducers';
+import backgroundImageReducer from './background_image/reducers';
 
 export const rootReducer = combineReducers({
   board: boardReducer,
@@ -20,6 +21,7 @@ export const rootReducer = combineReducers({
   checkList: checkListReducer,
   file: fileReducer,
   loading: loadingReducer,
+  backgroundImage: backgroundImageReducer,
 });
 
 const store = createStore(
