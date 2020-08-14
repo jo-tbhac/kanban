@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from 'react';
+
 import { connect, ConnectedProps } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import usePreviousCount from '../../hooks/usePreviousCount';
 import { RootState } from '../../store';
+import * as boardActions from '../../store/board/actions';
+import { boardNameFormPlaceholder, createButtonText } from '../../utils/text';
 import ButtonSubmit from '../common/ButtonSubmit';
 import ButtonCancel from '../common/ButtonCancel';
-import * as boardActions from '../../store/board/actions';
-import { newBoardFormTitle, boardNameFormPlaceholder, createButtonText } from '../../utils/text';
+import NewBoardCard from './NewBoardCard';
 
 const mapStateToProps = (state: RootState) => {
   const { board } = state;
@@ -62,41 +68,37 @@ export const BoardForm = (props: PropsFromRedux) => {
     setFormVisible(false);
   };
 
+  const showForm = useCallback(() => {
+    setFormVisible(true);
+  }, []);
+
   return (
-    isFormVisible ? (
-      <div data-testid="newBoardForm" className="boardFormCard">
-        <div className="boardFormCardInput">
-          <input
-            data-testid="boardNameTextField"
-            type="text"
-            value={boardName}
-            onChange={(event) => setBoardName(event.target.value)}
-            className="boardFormCardInput__title"
-            placeholder={boardNameFormPlaceholder}
-          />
+    <>
+      {isFormVisible ? (
+        <div data-testid="newBoardForm" className="boardFormCard">
+          <div className="boardFormCardInput">
+            <input
+              data-testid="boardNameTextField"
+              type="text"
+              value={boardName}
+              onChange={(event) => setBoardName(event.target.value)}
+              className="boardFormCardInput__title"
+              placeholder={boardNameFormPlaceholder}
+            />
+          </div>
+          <div className="boardFormCardButton">
+            <ButtonCancel onClick={onCancel} />
+            <ButtonSubmit
+              onClick={onClickSubmit}
+              disabled={boardName === ''}
+              buttonText={createButtonText}
+            />
+          </div>
         </div>
-        <div className="boardFormCardButton">
-          <ButtonCancel onClick={onCancel} />
-          <ButtonSubmit
-            onClick={onClickSubmit}
-            disabled={boardName === ''}
-            buttonText={createButtonText}
-          />
-        </div>
-      </div>
-    ) : (
-      <div
-        data-testid="newBoardCard"
-        role="button"
-        tabIndex={0}
-        onClick={() => setFormVisible(true)}
-        onKeyPress={() => setFormVisible(true)}
-        className="boardFormNew"
-      >
-        <div className="boardFormNew__label">{newBoardFormTitle}</div>
-        <FontAwesomeIcon icon={['fas', 'plus']} />
-      </div>
-    )
+      ) : (
+        <NewBoardCard showForm={showForm} />
+      )}
+    </>
   );
 };
 
