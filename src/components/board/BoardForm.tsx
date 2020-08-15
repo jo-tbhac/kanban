@@ -39,7 +39,7 @@ export const BoardForm = (props: PropsFromRedux) => {
   const prevBoardsCount = usePreviousCount(boards.length);
 
   const [boardName, setBoardName] = useState('');
-  const [selectedImageId, selectImage] = useState(0);
+  const [selectedImageId, selectImage] = useState(1);
   const [isFormVisible, setFormVisible] = useState(false);
 
   const history = useHistory();
