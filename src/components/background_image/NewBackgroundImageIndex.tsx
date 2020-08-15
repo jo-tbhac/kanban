@@ -11,7 +11,7 @@ import { RootState } from '../../store';
 import NewBackgroundImageIcon from './NewBackgroundImageIcon';
 import AngleButton from '../common/AngleButton';
 
-const pagePer = 4;
+export const pagePer = 4;
 
 const mapStateToProps = (state: RootState) => {
   const { backgroundImage } = state;
@@ -31,7 +31,7 @@ type NewBackgroundImageIndexProps = PropsFromRedux & {
   selectedImageId: number
 }
 
-const NewBackgroundImageIndex = (props: NewBackgroundImageIndexProps) => {
+export const NewBackgroundImageIndex = (props: NewBackgroundImageIndexProps) => {
   const { backgroundImages, selectImage, selectedImageId } = props;
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +47,7 @@ const NewBackgroundImageIndex = (props: NewBackgroundImageIndexProps) => {
         onClick={() => setCurrentPage(currentPage - 1)}
         disabled={currentPage <= 1}
       />
-      <div className="newBackgroundImageIndex">
+      <div data-testid="newBackgroundImageIndex" className="newBackgroundImageIndex">
         {backgroundImages.map((image, index) => (
           index >= ((currentPage - 1) * pagePer) && index < (pagePer * currentPage)
             ? (

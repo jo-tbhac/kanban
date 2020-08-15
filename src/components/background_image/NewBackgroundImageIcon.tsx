@@ -26,7 +26,7 @@ const NewBackgroundImageIcon = (props: NewBackgroundImageIconProps) => {
         className="newBackgroundImageIcon__image"
       />
       {selectedImageId === image.id && (
-        <div className="newBackgroundImageIconOverlay">
+        <div data-testid="newBackgroundImageIconOverlay" className="newBackgroundImageIconOverlay">
           <FontAwesomeIcon icon={['fas', 'check']} />
         </div>
       )}

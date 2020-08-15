@@ -13,6 +13,7 @@ const AngleButton = (props: AngleButtonProps) => {
 
   return (
     <button
+      data-testid={(icon as string[])[1]}
       type="button"
       onClick={onClick}
       disabled={disabled}
