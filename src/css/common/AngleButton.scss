@@ -1,0 +1,12 @@
+.angleButton {
+  background-color: transparent;
+  border: none;
+  color: $font-color;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 2px 4px;
+  &:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+}

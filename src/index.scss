@@ -18,6 +18,10 @@ code {
 // app
 @import './css/app/ProtectedPage';
 
+// background image
+@import './css/background-image/NewBackgroundImageIcon';
+@import './css/background-image/NewBackgroundImageIndex';
+
 // board
 @import './css/board/Board';
 @import './css/board/BoardForm';
@@ -25,6 +29,7 @@ code {
 @import './css/board/BoardIndexCard';
 @import './css/board/BoardWrapper';
 @import './css/board/DeleteBoardButton';
+@import './css/board/NewBoardCard';
 
 // card
 @import './css/card/Card';
@@ -61,6 +66,7 @@ code {
 
 // common
 @import './css/common/404';
+@import './css/common/AngleButton';
 @import './css/common/ButtonCancel';
 @import './css/common/ButtonLight';
 @import './css/common/ButtonNoneBorder';

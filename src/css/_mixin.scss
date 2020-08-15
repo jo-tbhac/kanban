@@ -40,6 +40,7 @@
 
 @mixin board-card() {
   background-color: white;
+  background-position: center;
   background-size: cover;
   border-radius: 3px;
   box-shadow: $box-shadow;
@@ -48,7 +49,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: $board-card-height;
   padding: 10px 20px;
   position: relative;
   text-decoration: none;

@@ -1,0 +1,15 @@
+.newBoardCard {
+  @include board-card();
+  align-items: center;
+  background-color: $overlay;
+  box-shadow: none;
+  color: white;
+  flex-direction: row;
+  justify-content: center;
+  &:hover {
+    color: $pink;
+  }
+  &__label {
+    margin-right: 5px;
+  }
+}
