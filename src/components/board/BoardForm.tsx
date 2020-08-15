@@ -18,9 +18,10 @@ import NewBoardCard from './NewBoardCard';
 import NewBackgroundImageIndex from '../background_image/NewBackgroundImageIndex';
 
 const mapStateToProps = (state: RootState) => {
-  const { board } = state;
+  const { board, backgroundImage } = state;
   return {
     boards: board.boards,
+    backgroundImages: backgroundImage.backgroundImages,
   };
 };
 
@@ -33,12 +34,16 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 export const BoardForm = (props: PropsFromRedux) => {
-  const { createBoard, boards } = props;
+  const { createBoard, boards, backgroundImages } = props;
+
   const prevBoardsCount = usePreviousCount(boards.length);
 
   const [boardName, setBoardName] = useState('');
+  const [selectedImageId, selectImage] = useState(0);
   const [isFormVisible, setFormVisible] = useState(false);
+
   const history = useHistory();
+
   const isCompleteFetchBoards = useRef(true);
 
   useEffect(() => {
@@ -60,7 +65,7 @@ export const BoardForm = (props: PropsFromRedux) => {
   }, [boards]);
 
   const onClickSubmit = () => {
-    const params = { name: boardName };
+    const params = { name: boardName, backgroundImageId: selectedImageId };
     createBoard(params);
   };
 
@@ -73,11 +78,14 @@ export const BoardForm = (props: PropsFromRedux) => {
     setFormVisible(true);
   }, []);
 
+  const selectedImage = backgroundImages.find((image) => image.id === selectedImageId);
+  const style = { backgroundImage: `url(${selectedImage?.url})` };
+
   return (
     <>
       {isFormVisible ? (
         <div className="boardFormWrapper">
-          <div data-testid="newBoardForm" className="boardFormCard">
+          <div data-testid="newBoardForm" style={style} className="boardFormCard">
             <div className="boardFormCardInput">
               <input
                 data-testid="boardNameTextField"
@@ -97,7 +105,7 @@ export const BoardForm = (props: PropsFromRedux) => {
               />
             </div>
           </div>
-          <NewBackgroundImageIndex />
+          <NewBackgroundImageIndex selectImage={selectImage} selectedImageId={selectedImageId} />
         </div>
       ) : (
         <NewBoardCard showForm={showForm} />

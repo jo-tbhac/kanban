@@ -4,6 +4,8 @@
 
 .boardFormCard {
   @include board-card();
+  background-size: cover;
+  background-position: center;
   cursor: default;
   height: calc(#{$board-card-height} - 40px);
 }
@@ -19,7 +21,7 @@
     color: $font-color;
     margin-top: 10px;
     outline: none;
-    padding: 5px 0;
+    padding: 5px 3px;
     width: 100%;
     &:focus {
       border-color: $pink;

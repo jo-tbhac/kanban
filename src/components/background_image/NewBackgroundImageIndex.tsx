@@ -1,4 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, {
+  useState,
+  useMemo,
+  SetStateAction,
+  Dispatch,
+} from 'react';
+
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
@@ -20,8 +26,13 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const NewBackgroundImageIndex = (props: PropsFromRedux) => {
-  const { backgroundImages } = props;
+type NewBackgroundImageIndexProps = PropsFromRedux & {
+  selectImage: Dispatch<SetStateAction<number>>
+  selectedImageId: number
+}
+
+const NewBackgroundImageIndex = (props: NewBackgroundImageIndexProps) => {
+  const { backgroundImages, selectImage, selectedImageId } = props;
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -39,8 +50,14 @@ const NewBackgroundImageIndex = (props: PropsFromRedux) => {
       <div className="newBackgroundImageIndex">
         {backgroundImages.map((image, index) => (
           index >= ((currentPage - 1) * pagePer) && index < (pagePer * currentPage)
-            ? <NewBackgroundImageIcon key={image.id} image={image} />
-            : null
+            ? (
+              <NewBackgroundImageIcon
+                key={image.id}
+                image={image}
+                selectImage={selectImage}
+                selectedImageId={selectedImageId}
+              />
+            ) : null
         ))}
       </div>
       <AngleButton
