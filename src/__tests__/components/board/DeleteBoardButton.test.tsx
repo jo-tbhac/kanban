@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 
 import { renderWithRouter, fireEvent, storeFactory } from '../../../testUtils';
 import { Store } from '../../../store';
@@ -17,7 +18,9 @@ describe('DeleteBoardButton component', () => {
 
   test('should call `openDialog` upon press a component', () => {
     const { getByRole } = renderWithRouter(
-      <DeleteBoardButton boards={[]} openDialog={openDialog} deleteBoard={deleteBoard} />,
+      <Route path="/board/:boardId">
+        <DeleteBoardButton boards={[]} openDialog={openDialog} deleteBoard={deleteBoard} />
+      </Route>,
       store,
       ['/board/1'],
     );
@@ -28,7 +31,9 @@ describe('DeleteBoardButton component', () => {
 
   test('should not render a component if current location is not `/board/:boardId`', () => {
     const { queryByRole } = renderWithRouter(
-      <DeleteBoardButton boards={[]} openDialog={openDialog} deleteBoard={deleteBoard} />,
+      <Route path="/board/:boardId">
+        <DeleteBoardButton boards={[]} openDialog={openDialog} deleteBoard={deleteBoard} />
+      </Route>,
       store,
       ['/'],
     );

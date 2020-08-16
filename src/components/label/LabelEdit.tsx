@@ -48,7 +48,7 @@ const LabelEdit = (props: LabelEditProps) => {
   return (
     <SlideInMenu headerText={editLabelHeaderText} closeMenu={() => setLabelEditVisible(false)}>
       <>
-        <div className="labelEditIndexContainer">
+        <div data-testid="labelEdit" className="labelEditIndexContainer">
           {labels.map((label) => <LabelEditRow key={label.id} label={label} />)}
         </div>
         {isLabelFormVisible ? <LabelForm setLabelFormVisible={setLabelFormVisible} /> : (
