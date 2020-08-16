@@ -25,7 +25,7 @@ type EditBackgroundImageIconProps = PropsFromRedux & {
   image: BackgroundImage
 }
 
-const EditBackgroundImageIcon = (props: EditBackgroundImageIconProps) => {
+export const EditBackgroundImageIcon = (props: EditBackgroundImageIconProps) => {
   const { image, selectedBoard, updateBackgroundImage } = props;
 
   return (
@@ -42,7 +42,7 @@ const EditBackgroundImageIcon = (props: EditBackgroundImageIconProps) => {
         className="editBackgroundImageIcon__image"
       />
       {image.id === selectedBoard.backgroundImage?.backgroundImageId && (
-        <div className="editBackgroundImageIconOverlay">
+        <div data-testid="editBackgroundImageOverlay" className="editBackgroundImageIconOverlay">
           <FontAwesomeIcon icon={['fas', 'check']} />
         </div>
       )}

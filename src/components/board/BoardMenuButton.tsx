@@ -17,6 +17,7 @@ const BoardMenuButton = () => {
   return (
     <>
       <div
+        data-testid="boardMenuButton"
         role="button"
         tabIndex={0}
         onClick={() => setMenuVisible(true)}

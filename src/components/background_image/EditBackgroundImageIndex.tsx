@@ -23,12 +23,13 @@ type EditBackgroundImageIndexProps = PropsFromRedux & {
   goBackToMenu: () => void
 }
 
-const EditBackgroundImageIndex = (props: EditBackgroundImageIndexProps) => {
+export const EditBackgroundImageIndex = (props: EditBackgroundImageIndexProps) => {
   const { backgroundImages, goBackToMenu } = props;
 
   return (
     <>
       <div
+        data-testid="editBackgroundImageCloseButton"
         role="button"
         tabIndex={0}
         onClick={goBackToMenu}
@@ -38,7 +39,7 @@ const EditBackgroundImageIndex = (props: EditBackgroundImageIndexProps) => {
         <FontAwesomeIcon icon={['fas', 'angle-left']} />
         <div className="editBackgroundImageCloseButton__text">{goBackBoardMenuText}</div>
       </div>
-      <div className="editBackgroundImageIndex">
+      <div data-testid="editBackgroundImageIndex" className="editBackgroundImageIndex">
         {backgroundImages.map((image) => <EditBackgroundImageIcon key={image.id} image={image} />)}
       </div>
     </>

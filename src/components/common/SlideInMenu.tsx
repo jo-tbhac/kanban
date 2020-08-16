@@ -21,7 +21,7 @@ const SlideInMenu = (props: SlideInMenuProps) => {
       onExited={closeMenu}
       classNames="slideInMenu"
     >
-      <div className="slideInMenu">
+      <div data-testid="slideInMenu" className="slideInMenu">
         <div className="slideInMenuHeader">
           <div
             role="button"
