@@ -10,6 +10,7 @@ import {
   failedCreateBoard,
   failedUpdateBoard,
   failedDeleteBoard,
+  failedUpdateBackgroundImage,
 } from '../../../utils/text';
 
 import {
@@ -18,6 +19,7 @@ import {
   createBoard,
   updateBoard,
   deleteBoard,
+  updateBackgroundImage,
 } from '../../../store/board/actions';
 
 describe('board actions', () => {
@@ -68,7 +70,7 @@ describe('board actions', () => {
   });
 
   test('returns state `boards` that added one record upon dispatch an action `createBoard` is successful', () => {
-    const params = { name: 'sample board' };
+    const params = { name: 'sample board', backgroundImageId: 1 };
     const responseData = { board: mockBoard };
     mock.onPost('/board').reply(201, responseData);
 
@@ -83,7 +85,7 @@ describe('board actions', () => {
   });
 
   test('returns state of dialogProps upon dispatch an action `createBoard` and recieved status 400 from server', () => {
-    const params = { name: 'sample board' };
+    const params = { name: 'sample board', backgroundImageId: 1 };
     const responseData = { errors: [{ text: 'some error...' }] };
     mock.onPost('/board').reply(400, responseData);
 
@@ -158,6 +160,56 @@ describe('board actions', () => {
         expect(dialog.isDialogVisible).toBeTruthy();
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedDeleteBoard);
+        expect(dialog.description).toBe('some error...');
+      });
+  });
+
+  test('returns state of `selectedBoard` that updated `backgroundImage` upon dispatch an action `updateBackgroundImage`', () => {
+    const boardId = 1;
+    const backgroundImageId = 2;
+
+    store = storeFactory({
+      board: {
+        selectedBoard: {
+          ...mockBoard,
+          id: boardId,
+          backgroundImage: { boardId, backgroundImageId: 3 },
+        },
+      },
+    });
+
+    mock.onPatch(`/board/${boardId}/background_image/${backgroundImageId}`).reply(200);
+
+    return store.dispatch(updateBackgroundImage(boardId, backgroundImageId) as any)
+      .then(() => {
+        const { board } = store.getState();
+        expect(board.selectedBoard.backgroundImage).toEqual({ boardId, backgroundImageId });
+      });
+  });
+
+  test('returns state of dialogProps upon dispatch an action `updateBackgroundImage` and recieved status 400 from server', () => {
+    const boardId = 1;
+    const backgroundImageId = 2;
+    const responseData = { errors: [{ text: 'some error...' }] };
+
+    store = storeFactory({
+      board: {
+        selectedBoard: {
+          ...mockBoard,
+          id: boardId,
+          backgroundImage: { boardId, backgroundImageId: 3 },
+        },
+      },
+    });
+
+    mock.onPatch(`/board/${boardId}/background_image/${backgroundImageId}`).reply(400, responseData);
+
+    return store.dispatch(updateBackgroundImage(boardId, backgroundImageId) as any)
+      .then(() => {
+        const { dialog } = store.getState();
+        expect(dialog.isDialogVisible).toBeTruthy();
+        expect(dialog.type).toBe(dialogTypeError);
+        expect(dialog.title).toBe(failedUpdateBackgroundImage);
         expect(dialog.description).toBe('some error...');
       });
   });

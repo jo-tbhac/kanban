@@ -20,7 +20,7 @@ export interface BackgroundImageState {
   backgroundImages: BackgroundImage[]
 }
 
-type FetchBackgroundImagesAction = {
+interface FetchBackgroundImagesAction {
   type: typeof FETCH_BACKGROUND_IMAGES
   payload: BackgroundImage[]
 }

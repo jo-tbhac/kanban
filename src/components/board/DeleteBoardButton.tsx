@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import usePreviousCount from '../../hooks/usePreviousCount';
 import { RootState } from '../../store';
@@ -9,6 +8,7 @@ import { dialogTypeAsk } from '../../store/dialog/types';
 import * as dialogActions from '../../store/dialog/actions';
 import * as boardActions from '../../store/board/actions';
 import { askBoardDeleteDialog, deleteBoardText } from '../../utils/text';
+import BoardMenuRow from './BoardMenuRow';
 
 const mapStateToProps = (state: RootState) => {
   const { board } = state;
@@ -29,7 +29,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export const DeleteBoardButton = (props: PropsFromRedux) => {
   const { boards, openDialog, deleteBoard } = props;
 
-  const match = useRouteMatch<{ boardId: string }>('/board/:boardId');
+  const { boardId } = useParams();
   const history = useHistory();
   const prevBoardsCount = usePreviousCount(boards.length);
 
@@ -44,12 +44,8 @@ export const DeleteBoardButton = (props: PropsFromRedux) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [boards]);
 
-  if (!match) {
-    return null;
-  }
-
   const onClick = () => {
-    const castedBoardId = Number(match.params.boardId);
+    const castedBoardId = Number(boardId);
     if (!castedBoardId) {
       return;
     }
@@ -61,18 +57,7 @@ export const DeleteBoardButton = (props: PropsFromRedux) => {
     });
   };
 
-  return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={onClick}
-      onKeyPress={onClick}
-      className="deleteBoardButton"
-    >
-      <FontAwesomeIcon icon={['fas', 'trash-alt']} />
-      <div className="deleteBoardButton__text">{deleteBoardText}</div>
-    </div>
-  );
+  return <BoardMenuRow icon={['fas', 'trash-alt']} text={deleteBoardText} onClick={onClick} />;
 };
 
 export default connector(DeleteBoardButton);

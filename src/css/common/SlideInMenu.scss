@@ -1,0 +1,55 @@
+.slideInMenu {
+  background-color: white;
+  box-sizing: border-box;
+  box-shadow: $box-shadow;
+  color: $font-color;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  z-index: 10;
+  &-appear {
+    right: -400px;
+    &-active {
+      right: 0;
+      transition: all 300ms;
+    }
+  }
+  &-exit {
+    right: 0;
+    &-active {
+      right: -400px;
+      transition: all 300ms;
+    }
+  }
+}
+
+.slideInMenuHeader {
+  display: flex;
+  margin-bottom: 20px;
+  &__title {
+    box-sizing: border-box;
+    color: $font-color;
+    flex: 1;
+    margin: 0;
+    padding-right: 30px;
+    text-align: center;
+  }
+}
+
+.slideInMenuCloseButton {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  padding: 0 8px;
+  &__icon {
+    font-size: 1.2rem;
+  }
+  &:hover {
+    color: $pink;
+  }
+}

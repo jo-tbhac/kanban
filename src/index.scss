@@ -19,6 +19,8 @@ code {
 @import './css/app/ProtectedPage';
 
 // background image
+@import './css/background-image/EditBackgroundImageIcon';
+@import './css/background-image/EditBackgroundImageIndex';
 @import './css/background-image/NewBackgroundImageIcon';
 @import './css/background-image/NewBackgroundImageIndex';
 
@@ -27,6 +29,8 @@ code {
 @import './css/board/BoardForm';
 @import './css/board/BoardIndex';
 @import './css/board/BoardIndexCard';
+@import './css/board/BoardMenuButton';
+@import './css/board/BoardMenuRow';
 @import './css/board/BoardWrapper';
 @import './css/board/DeleteBoardButton';
 @import './css/board/NewBoardCard';
@@ -78,6 +82,7 @@ code {
 @import './css/common/Header';
 @import './css/common/Lightbox';
 @import './css/common/Loading';
+@import './css/common/SlideInMenu';
 @import './css/common/ToolBar';
 
 // cover
