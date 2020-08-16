@@ -10,6 +10,7 @@ import {
   failedCreateBoard,
   failedUpdateBoard,
   failedDeleteBoard,
+  failedUpdateBackgroundImage,
 } from '../../utils/text';
 
 import {
@@ -18,6 +19,7 @@ import {
   CREATE_BOARD,
   UPDATE_BOARD,
   DELETE_BOARD,
+  UPDATE_BACKGROUND_IMAGE,
 } from './types';
 
 export const fetchBoard = (boardId: number) => async (dispatch: AppDispatch) => {
@@ -112,3 +114,24 @@ export const deleteBoard = (boardId: number) => async (dispatch: AppDispatch) =>
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
   }
 };
+
+export const updateBackgroundImage = (boardId: number, backgroundImageId: number) => (
+  async (dispatch: AppDispatch) => {
+    const axios = newAxios();
+    const response = await axios.patch(`/board/${boardId}/background_image/${backgroundImageId}`);
+
+    if (response?.status === 200) {
+      dispatch({ type: UPDATE_BACKGROUND_IMAGE, payload: backgroundImageId });
+      return;
+    }
+
+    if (response?.status === 400) {
+      const dialogProps = {
+        type: dialogTypeError as DialogTypes,
+        title: failedUpdateBackgroundImage,
+        description: joinErrors(response.data.errors),
+      };
+      dispatch({ type: OPEN_DIALOG, payload: dialogProps });
+    }
+  }
+);

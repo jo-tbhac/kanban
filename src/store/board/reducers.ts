@@ -4,6 +4,7 @@ import {
   CREATE_BOARD,
   UPDATE_BOARD,
   DELETE_BOARD,
+  UPDATE_BACKGROUND_IMAGE,
   BoardState,
   BoardActionTypes,
 } from './types';
@@ -83,6 +84,17 @@ const boardReducer = (
       return {
         ...state,
         boards: state.boards.filter((board) => board.id !== action.payload),
+      };
+    case UPDATE_BACKGROUND_IMAGE:
+      return {
+        ...state,
+        selectedBoard: {
+          ...state.selectedBoard,
+          backgroundImage: {
+            boardId: state.selectedBoard.id,
+            backgroundImageId: action.payload,
+          },
+        },
       };
     case CREATE_LIST:
     case UPDATE_LIST:

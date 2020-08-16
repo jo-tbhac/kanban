@@ -6,6 +6,7 @@ export const FETCH_BOARD = 'FETCH_BOARD';
 export const CREATE_BOARD = 'CREATE_BOARD';
 export const UPDATE_BOARD = 'UPDATE_BOARD';
 export const DELETE_BOARD = 'DELETE_BOARD';
+export const UPDATE_BACKGROUND_IMAGE = 'UPDATE_BACKGROUND_IMAGE';
 
 export interface BoardState {
   boards: Board[]
@@ -45,9 +46,15 @@ interface DeleteBoardAction {
   payload: number
 }
 
+interface UpdateBackgroundImage {
+  type: typeof UPDATE_BACKGROUND_IMAGE
+  payload: number
+}
+
 export type BoardActionTypes =
   FetchAllBoardsAction
   | FetchBoardAction
   | CreateBoardAction
   | UpdateBoardAction
-  | DeleteBoardAction;
+  | DeleteBoardAction
+  | UpdateBackgroundImage;
