@@ -36,7 +36,7 @@ const LabelEdit = (props: LabelEditProps) => {
   const prevLabelCount = usePreviousCount(labels.length);
 
   useEffect(() => {
-    if (!prevLabelCount) {
+    if (prevLabelCount === undefined) {
       return;
     }
     if (labels.length > prevLabelCount) {
