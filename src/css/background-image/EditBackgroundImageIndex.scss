@@ -1,0 +1,25 @@
+.editBackgroundImageCloseButton {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 10px;
+  width: fit-content;
+  &:hover {
+    color: $pink;
+  }
+  &__text {
+    font-size: 0.9rem;
+    margin-left: 10px;
+  }
+}
+
+.editBackgroundImageIndex {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

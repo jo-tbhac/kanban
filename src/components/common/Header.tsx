@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import UserProfileButton from '../session/UserProfileButton';
 import SearchCardForm from '../search/SearchForm';
-import DeleteBoardButton from '../board/DeleteBoardButton';
+import BoardMenuButton from '../board/BoardMenuButton';
 import EditLabelButton from '../label/EditLabelButton';
 
 const Header = () => (
@@ -17,7 +17,7 @@ const Header = () => (
     <UserProfileButton />
 
     <SearchCardForm />
-    <DeleteBoardButton />
+    <BoardMenuButton />
     <EditLabelButton />
   </div>
 );

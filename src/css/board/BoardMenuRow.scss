@@ -1,0 +1,13 @@
+.boardMenuRow {
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  padding: 13px 5px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &__text {
+    margin-left: 10px;
+  }
+}
