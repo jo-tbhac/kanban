@@ -24,6 +24,8 @@ export const newBoardFormTitle = 'ボードを新規作成';
 export const boardNameFormPlaceholder = 'ボードのタイトルを入力';
 export const askBoardDeleteDialog = 'このボードを削除してよろしいですか？';
 export const deleteBoardText = 'ボードを削除';
+export const boardMenuTitle = 'ボードメニュー';
+export const goBackBoardMenuText = 'ボードメニューへ戻る';
 
 // label
 export const editLabelButtonText = 'ラベルを編集する';
@@ -112,3 +114,7 @@ export const failedCreateCover = 'カバー画像を設定できませんでし�
 export const failedUpdateCover = 'カバー画像を更新できませんでした';
 export const failedDeleteCover = 'カバー画像を削除できませんでした';
 export const deleteCoverButtonText = 'カバーを削除';
+
+// background image
+export const editBackgroundImageText = '背景画像を変更';
+export const failedUpdateBackgroundImage = '背景画像を変更できませんでした';
