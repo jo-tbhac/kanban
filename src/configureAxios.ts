@@ -9,7 +9,9 @@ import {
   dialogUnAuthorization,
 } from './store/dialog/types';
 
-export const baseURL = 'http://localhost:8080';
+export const baseURL = process.env.NODE_ENV === 'production'
+  ? 'https://api.k4nban.com'
+  : 'http://localhost:8080';
 
 export const newAxios = () => {
   const instance = axios.create({
