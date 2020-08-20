@@ -10,7 +10,7 @@ import BoardWrapper from '../board/BoardWrapper';
 import NotFound from '../common/404';
 
 const Router = React.memo(() => (
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter>
     <Switch>
       <Route path="/signin"><SignIn /></Route>
       <Route path="/signup"><SignUp /></Route>

@@ -24,10 +24,11 @@ export const rootReducer = combineReducers({
   backgroundImage: backgroundImageReducer,
 });
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk)),
-);
+const enhancer = process.env.NODE_ENV === 'production'
+  ? applyMiddleware(thunk)
+  : composeWithDevTools(applyMiddleware(thunk));
+
+const store = createStore(rootReducer, enhancer);
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppDispatch = typeof store.dispatch
