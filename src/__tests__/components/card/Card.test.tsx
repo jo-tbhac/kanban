@@ -10,9 +10,8 @@ import {
 } from '../../../testUtils';
 
 import { Store } from '../../../store';
-import { mockCard, mockFile } from '../../../utils/mockData';
+import { mockCard, mockFile, mockList } from '../../../utils/mockData';
 import { Card } from '../../../components/card/Card';
-import CardContext from '../../../context/CardContext';
 
 describe('Card component', () => {
   let store: Store;
@@ -20,6 +19,7 @@ describe('Card component', () => {
   let moveCard: jest.Mock;
   let moveCardAcrossList: jest.Mock;
   let updateCardIndex: jest.Mock;
+  let openCardDetail: jest.Mock;
 
   beforeEach(() => {
     store = storeFactory();
@@ -27,64 +27,48 @@ describe('Card component', () => {
     moveCard = jest.fn();
     moveCardAcrossList = jest.fn();
     updateCardIndex = jest.fn();
+    openCardDetail = jest.fn();
   });
 
-  test('should show `CardDetail` if state of `isCardDetailVisible` is true', () => {
+  test('should call `openCardDetail` with cardId and listId upon click a component', () => {
     const { getByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={mockCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={mockCard}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );
+
     fireEvent.click(getByTestId(`card-${mockCard.id}`));
-
-    expect(getByTestId('cardDetail')).toBeVisible();
-  });
-
-  test('should hide `CardDetail` if state of `isCardDetailVisible` is false', () => {
-    const { queryByTestId } = render(
-      <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={mockCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
-      </DndProvider>,
-      store,
-    );
-    expect(queryByTestId('cardDetail')).toBeNull();
+    expect(openCardDetail).toHaveBeenCalledWith({ cardId: mockCard.id, listId: mockCard.listId });
   });
 
   test('should call `moveCard` when drag item was entered', async () => {
     const mockCard2 = { ...mockCard, id: 2, index: 1 };
     const { getByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={mockCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
-        <CardContext.Provider value={mockCard2}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={mockCard}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
+        <Card
+          card={mockCard2}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );
@@ -104,14 +88,14 @@ describe('Card component', () => {
   test('should call `updateCardIndex` when drag was end', () => {
     const { getByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={mockCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={mockCard}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );
@@ -124,14 +108,14 @@ describe('Card component', () => {
   test('should have a style of `opacity: 0.2` when card is dragging', async () => {
     const { getByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={mockCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={mockCard}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );
@@ -146,14 +130,14 @@ describe('Card component', () => {
   test('should have a style of `opacity: 1` if props of `selectedLabelIds.length` is zero', () => {
     const { getByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={mockCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={mockCard}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );
@@ -168,14 +152,14 @@ describe('Card component', () => {
 
     const { getByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={targetCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={targetCard}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );
@@ -189,14 +173,14 @@ describe('Card component', () => {
 
     const { getByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={targetCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={targetCard}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );
@@ -213,14 +197,14 @@ describe('Card component', () => {
 
     const { getByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={mockCard}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={mockCard}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );
@@ -233,14 +217,14 @@ describe('Card component', () => {
 
     const { queryByTestId } = render(
       <DndProvider backend={HTML5Backend}>
-        <CardContext.Provider value={card}>
-          <Card
-            selectedLabelIds={selectedLabelIds}
-            moveCard={moveCard}
-            moveCardAcrossList={moveCardAcrossList}
-            updateCardIndex={updateCardIndex}
-          />
-        </CardContext.Provider>
+        <Card
+          card={card}
+          selectedLabelIds={selectedLabelIds}
+          moveCard={moveCard}
+          moveCardAcrossList={moveCardAcrossList}
+          updateCardIndex={updateCardIndex}
+          openCardDetail={openCardDetail}
+        />
       </DndProvider>,
       store,
     );

@@ -5,7 +5,6 @@ import { mockCard, mockFile } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { File } from '../../../store/file/types';
 import { CardFileStatusIcon } from '../../../components/card/CardFileStatusIcon';
-import CardContext from '../../../context/CardContext';
 
 describe('CardFileStatusIcon component', () => {
   let store: Store;
@@ -17,12 +16,7 @@ describe('CardFileStatusIcon component', () => {
   });
 
   test('should not render a component if props of `files.length` is zero', () => {
-    const { queryByTestId } = render(
-      <CardContext.Provider value={mockCard}>
-        <CardFileStatusIcon files={files} />
-      </CardContext.Provider>,
-      store,
-    );
+    const { queryByTestId } = render(<CardFileStatusIcon files={files} card={mockCard} />, store);
     expect(queryByTestId('cardStatus')).toBeNull();
   });
 
@@ -33,12 +27,7 @@ describe('CardFileStatusIcon component', () => {
       { ...mockFile, id: 3, cardId: 100 },
     ];
 
-    const { getByTestId } = render(
-      <CardContext.Provider value={mockCard}>
-        <CardFileStatusIcon files={files} />
-      </CardContext.Provider>,
-      store,
-    );
+    const { getByTestId } = render(<CardFileStatusIcon files={files} card={mockCard} />, store);
 
     expect(getByTestId('cardStatus')).not.toBeNull();
     expect(getByTestId('cardStatusCount')).toHaveTextContent('2');

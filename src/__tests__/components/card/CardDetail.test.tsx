@@ -4,35 +4,35 @@ import { render, fireEvent, storeFactory } from '../../../testUtils';
 import { mockCard, mockFile } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import CardContext from '../../../context/CardContext';
-import CardDetail from '../../../components/card/CardDetail';
+import { CardDetail } from '../../../components/card/CardDetail';
 
 describe('CardDetail component', () => {
   let store: Store;
-  let setCardDetailVisible: jest.Mock;
+  let closeCardDetail: jest.Mock;
 
   beforeEach(() => {
     store = storeFactory();
-    setCardDetailVisible = jest.fn();
+    closeCardDetail = jest.fn();
   });
 
-  test('should call `setCardDetailVisible` with `false` when clicked a close button', () => {
+  test('should call `closeCardDetail` when clicked a close button', () => {
     const { getByTestId } = render(
-      <CardDetail setCardDetailVisible={setCardDetailVisible} />,
+      <CardDetail closeCardDetail={closeCardDetail} />,
       store,
     );
 
     fireEvent.click(getByTestId('cardDetailCloseButton'));
-    expect(setCardDetailVisible).toHaveBeenCalledWith(false);
+    expect(closeCardDetail).toHaveBeenCalled();
   });
 
-  test('should call `setCardDetailVisible` with `false` when clicked overlay', () => {
+  test('should call `closeCardDetail` when clicked overlay', () => {
     const { getByTestId } = render(
-      <CardDetail setCardDetailVisible={setCardDetailVisible} />,
+      <CardDetail closeCardDetail={closeCardDetail} />,
       store,
     );
 
     fireEvent.click(getByTestId('cardDetail'));
-    expect(setCardDetailVisible).toHaveBeenCalledWith(false);
+    expect(closeCardDetail).toHaveBeenCalled();
   });
 
   test('should render a cover', () => {
@@ -44,7 +44,7 @@ describe('CardDetail component', () => {
 
     const { getByTestId } = render(
       <CardContext.Provider value={mockCard}>
-        <CardDetail setCardDetailVisible={setCardDetailVisible} />
+        <CardDetail closeCardDetail={closeCardDetail} />
       </CardContext.Provider>,
       store,
     );
@@ -57,7 +57,7 @@ describe('CardDetail component', () => {
 
     const { queryByTestId } = render(
       <CardContext.Provider value={card}>
-        <CardDetail setCardDetailVisible={setCardDetailVisible} />
+        <CardDetail closeCardDetail={closeCardDetail} />
       </CardContext.Provider>,
       store,
     );
