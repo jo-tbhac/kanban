@@ -52,7 +52,9 @@ const CardIndexContainer = (props: CardIndexContainerProps) => {
   });
 
   const scrollToBottom = () => {
-    if (!ref || !ref.current) {
+    const agent = window.navigator.userAgent;
+    const isEdge = agent.includes('Edge');
+    if (!ref || !ref.current || isEdge) {
       return;
     }
     const { scrollHeight } = ref.current;
