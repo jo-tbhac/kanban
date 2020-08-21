@@ -20,7 +20,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const CardDetailProvider = (props: PropsFromRedux) => {
+export const CardDetailProvider = (props: PropsFromRedux) => {
   const { lists, target, isDetailVisible } = props;
 
   const targetList = lists.find((list) => list.id === target.listId);
