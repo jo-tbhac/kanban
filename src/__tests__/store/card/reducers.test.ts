@@ -10,6 +10,7 @@ describe('card reducer', () => {
       listId: 1,
       labels: [],
       index: 0,
+      cover: null,
     }, {
       id: 2,
       title: 'card-2',
@@ -17,6 +18,7 @@ describe('card reducer', () => {
       listId: 1,
       labels: [],
       index: 1,
+      cover: null,
     }, {
       id: 3,
       title: 'card-3',
@@ -24,6 +26,7 @@ describe('card reducer', () => {
       listId: 1,
       labels: [],
       index: 2,
+      cover: null,
     },
   ];
 
