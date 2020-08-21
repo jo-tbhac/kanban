@@ -28,6 +28,7 @@
 .labelEditNameContainer {
   flex: 1;
   outline: none;
+  word-wrap: break-all;
   &__name {
     cursor: pointer;
     margin: 0;
