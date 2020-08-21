@@ -10,7 +10,7 @@ import {
 } from '../../../testUtils';
 
 import { Store } from '../../../store';
-import { mockCard, mockFile, mockList } from '../../../utils/mockData';
+import { mockCard, mockFile } from '../../../utils/mockData';
 import { Card } from '../../../components/card/Card';
 
 describe('Card component', () => {
