@@ -2,11 +2,13 @@
   align-items: center;
   display: flex;
   padding: 5px 0;
+  position: relative;
   &__icon {
     border-radius: 50%;
     cursor: pointer;
     height: 30px;
     margin-right: 10px;
+    outline: none;
     position: relative;
     width: 30px;
   }
@@ -18,6 +20,7 @@
   &__delete {
     cursor: pointer;
     font-size: 1.2rem;
+    outline: none;
     padding: 0 5px;
     &:hover {
       color: $pink;
@@ -28,10 +31,13 @@
 .labelEditNameContainer {
   flex: 1;
   outline: none;
+  max-width: 80%;
+  word-break: break-word;
   &__name {
     cursor: pointer;
     margin: 0;
     width: fit-content;
+    word-wrap: break-word;
     &:hover {
       color: $pink;
     }

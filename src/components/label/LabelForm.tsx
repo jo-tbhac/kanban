@@ -41,21 +41,21 @@ export const LabelForm = (props: LabelFormProps) => {
       <div className="labelForm">
         <div
           data-testid="labelFormColorIcon"
+          aria-label="label-icon"
           role="button"
           tabIndex={0}
           onClick={() => setColorPickerVisible(true)}
           onKeyPress={() => setColorPickerVisible(true)}
           style={{ backgroundColor: selectedColor }}
           className="labelForm__icon"
-        >
-          {isColorPickerVisible && (
-            <ColorPicker
-              selectedColor={selectedColor}
-              setColor={setColor}
-              setColorPickerVisible={setColorPickerVisible}
-            />
-          )}
-        </div>
+        />
+        {isColorPickerVisible && (
+          <ColorPicker
+            selectedColor={selectedColor}
+            setColor={setColor}
+            setColorPickerVisible={setColorPickerVisible}
+          />
+        )}
         <input
           data-testid="labelNameTextField"
           type="text"

@@ -5,9 +5,10 @@
   box-sizing: border-box;
   color: $font-color;
   cursor: pointer;
+  flex-shrink: 0;
   font-size: 0.9rem;
+  min-width: fit-content;
   padding: 5px 10px;
-  width: fit-content;
   &:hover {
     background-color: $card-element-hover-background;
   }
