@@ -1,14 +1,9 @@
-import React, {
-  useEffect,
-  useCallback,
-  useContext,
-  Dispatch,
-  SetStateAction,
-} from 'react';
-
+import React, { useEffect, useCallback, useContext } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { CardContext } from './CardIndexContainer';
+import * as cardDetailActions from '../../store/card_detail/actions';
+import CardContext from '../../context/CardContext';
 import CardTitle from './CardTitle';
 import CardLabelContainer from './CardLabelContainer';
 import CardDescription from './CardDescription';
@@ -17,19 +12,23 @@ import FileIndex from '../file/FileIndex';
 import CardSideBar from './CardSideBar';
 import Cover from '../cover/Cover';
 
-type CardDetailProps = {
-  setCardDetailVisible: Dispatch<SetStateAction<boolean>>
-}
+const mapDispatchToProps = {
+  closeCardDetail: cardDetailActions.closeCardDetail,
+};
 
-const CardDetail = (props: CardDetailProps) => {
-  const { setCardDetailVisible } = props;
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export const CardDetail = (props: PropsFromRedux) => {
+  const { closeCardDetail } = props;
 
   const card = useContext(CardContext);
 
   const onClickOverlayEvent = useCallback((event: MouseEvent) => {
     const element = event.target as HTMLElement;
     if (element.className === 'cardDetailOverlay') {
-      setCardDetailVisible(false);
+      closeCardDetail();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -44,14 +43,14 @@ const CardDetail = (props: CardDetailProps) => {
   return (
     <div data-testid="cardDetail" className="cardDetailOverlay">
       <div className="cardDetailContainer">
-        {card?.cover && <Cover />}
+        {card?.cover && <Cover card={card} />}
 
         <div
           data-testid="cardDetailCloseButton"
           role="button"
           tabIndex={0}
-          onClick={() => setCardDetailVisible(false)}
-          onKeyPress={() => setCardDetailVisible(false)}
+          onClick={closeCardDetail}
+          onKeyPress={closeCardDetail}
           className="cardDetailCloseButton"
         >
           <FontAwesomeIcon icon={['fas', 'times']} />
@@ -74,4 +73,4 @@ const CardDetail = (props: CardDetailProps) => {
   );
 };
 
-export default CardDetail;
+export default connector(CardDetail);

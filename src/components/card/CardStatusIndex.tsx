@@ -1,22 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { CardContext } from './CardIndexContainer';
+import { Card } from '../../store/card/types';
 import CardStatus from './CardStatus';
 import CardCheckListStatusIcon from './CardCheckListStatusIcon';
 import CardFileStatusIcon from './CardFileStatusIcon';
 
-const CardStatusIndex = () => {
-  const card = useContext(CardContext);
+type CardStatusIndexProps = {
+  card: Card
+}
 
-  if (!card) {
-    return null;
-  }
+const CardStatusIndex = (props: CardStatusIndexProps) => {
+  const { card } = props;
 
   return (
     <div className="cardStatusIndex">
       {card.description !== '' && <CardStatus icon={['fas', 'align-left']} />}
-      <CardCheckListStatusIcon />
-      <CardFileStatusIcon />
+      <CardCheckListStatusIcon card={card} />
+      <CardFileStatusIcon card={card} />
     </div>
   );
 };

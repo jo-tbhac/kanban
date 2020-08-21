@@ -8,6 +8,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import ToolBar from '../common/ToolBar';
 import List from '../list/List';
 import ListForm from '../list/ListForm';
+import CardDetailProvider from '../card/CardDetailProvider';
 import { RootState } from '../../store';
 import * as boardActions from '../../store/board/actions';
 import * as checkListActions from '../../store/check_list/actions';
@@ -88,6 +89,7 @@ export const Board = (props: PropsFromRedux) => {
           )}
         </div>
       </div>
+      <CardDetailProvider />
     </DndProvider>
   );
 };

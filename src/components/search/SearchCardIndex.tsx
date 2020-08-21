@@ -25,12 +25,8 @@ export const SearchCardIndex = (props: PropsFromRedux) => {
 
   return (
     <div data-testid="searchCardIndex" className="searchCardIndex">
-      {cardIds.length === 0 && keyword !== '' && (
-        <SearchInfo notFoundText={searchCardNotFound} />
-      )}
-      {cardIds.map((cardId) => (
-        <SearchCard key={cardId} cardId={cardId} />
-      ))}
+      {cardIds.length === 0 && keyword !== '' && <SearchInfo notFoundText={searchCardNotFound} />}
+      {cardIds.map((cardId) => <SearchCard key={cardId} cardId={cardId} />)}
     </div>
   );
 };

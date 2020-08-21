@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import {
   useDrag,
@@ -9,10 +9,10 @@ import {
 
 import { DndCard } from '../../store/card/types';
 import { RootState } from '../../store';
+import * as cardTypes from '../../store/card/types';
 import * as cardActions from '../../store/card/actions';
-import { CardContext } from './CardIndexContainer';
+import * as cardDetailActions from '../../store/card_detail/actions';
 import CardStatusIndex from './CardStatusIndex';
-import CardDetail from './CardDetail';
 import CardLabelSmall from './CardLabelSmall';
 import Cover from '../cover/Cover';
 import { dndItemType } from '../../utils/utils';
@@ -28,23 +28,26 @@ const mapDisaptchToProps = {
   moveCard: cardActions.moveCard,
   moveCardAcrossList: cardActions.moveCardAcrossList,
   updateCardIndex: cardActions.updateCardIndex,
+  openCardDetail: cardDetailActions.openCardDetail,
 };
 
 const connector = connect(mapStateToProps, mapDisaptchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export const Card = (props: PropsFromRedux) => {
+type CardProps = PropsFromRedux & {
+  card: cardTypes.Card
+}
+
+export const Card = (props: CardProps) => {
   const {
+    card,
     selectedLabelIds,
     moveCard,
     moveCardAcrossList,
     updateCardIndex,
+    openCardDetail,
   } = props;
-
-  const card = useContext(CardContext);
-
-  const [isCardDetailVisible, setCardDetailVisible] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,7 +56,7 @@ export const Card = (props: PropsFromRedux) => {
     collect: (monitor) => monitor.getItem(),
     canDrop: () => false,
     hover: (item: DndCard, monitor: DropTargetMonitor) => {
-      if (!ref.current || !card) {
+      if (!ref.current) {
         return;
       }
       const dragIndex = item.index;
@@ -105,13 +108,13 @@ export const Card = (props: PropsFromRedux) => {
   const [, drag] = useDrag({
     item: {
       type: dndItemType.CARD,
-      index: card?.index,
-      id: card?.id,
-      listId: card?.listId,
+      index: card.index,
+      id: card.id,
+      listId: card.listId,
     },
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
     end: (item) => {
-      const dragListId = card?.listId;
+      const dragListId = card.listId;
       const dropListId = item?.listId;
       if (!dragListId || !dropListId) {
         return;
@@ -125,7 +128,7 @@ export const Card = (props: PropsFromRedux) => {
   drop(ref);
 
   const opacity = (() => {
-    if (card?.id === dndItem?.id && dndItem.type === dndItemType.CARD) {
+    if (card.id === dndItem?.id && dndItem.type === dndItemType.CARD) {
       return 0.2;
     }
 
@@ -133,7 +136,7 @@ export const Card = (props: PropsFromRedux) => {
       return 1;
     }
 
-    const targetLabel = card?.labels.find((label) => selectedLabelIds.includes(label.id));
+    const targetLabel = card.labels.find((label) => selectedLabelIds.includes(label.id));
     if (targetLabel) {
       return 1;
     }
@@ -141,32 +144,28 @@ export const Card = (props: PropsFromRedux) => {
   })();
 
   return (
-    <>
-      <div
-        data-testid={`card-${card?.id}`}
-        ref={ref}
-        role="button"
-        tabIndex={0}
-        onClick={() => setCardDetailVisible(true)}
-        onKeyPress={() => setCardDetailVisible(true)}
-        style={{ opacity }}
-        className="card"
-      >
-        {card?.cover && <Cover />}
+    <div
+      data-testid={`card-${card.id}`}
+      ref={ref}
+      role="button"
+      tabIndex={0}
+      onClick={() => openCardDetail({ cardId: card.id, listId: card.listId })}
+      onKeyPress={() => openCardDetail({ cardId: card.id, listId: card.listId })}
+      style={{ opacity }}
+      className="card"
+    >
+      {card.cover && <Cover card={card} />}
 
-        <div className="cardLabelWrapper">
-          {card?.labels?.map((label) => (
-            <CardLabelSmall key={`${card.id}-${label.id}`} label={label} />
-          ))}
-        </div>
-
-        <div className="card__title">{card?.title}</div>
-
-        <CardStatusIndex />
+      <div className="cardLabelWrapper">
+        {card.labels?.map((label) => (
+          <CardLabelSmall key={`${card.id}-${label.id}`} label={label} />
+        ))}
       </div>
-      {isCardDetailVisible
-        && <CardDetail setCardDetailVisible={setCardDetailVisible} />}
-    </>
+
+      <div className="card__title">{card?.title}</div>
+
+      <CardStatusIndex card={card} />
+    </div>
   );
 };
 
