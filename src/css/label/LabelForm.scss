@@ -19,6 +19,7 @@
   &__textField {
     @include text-field();
     flex: 1;
+    margin-right: 5px;
   }
 }
 
