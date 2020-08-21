@@ -56,9 +56,17 @@ export const Board = (props: PropsFromRedux) => {
   }, []);
 
   const onClickAddListButton = () => {
+    const agent = window.navigator.userAgent;
+    const isEdge = agent.includes('Edge');
+    if (isEdge) {
+      setListFormVisible(true);
+      return;
+    }
+
     if (!listContainerRef || !listContainerRef.current) {
       return;
     }
+
     const { scrollWidth } = listContainerRef.current;
     listContainerRef.current.scrollTo(scrollWidth, 0);
     setListFormVisible(true);
