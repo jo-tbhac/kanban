@@ -5,14 +5,17 @@
 }
 
 .labelForm {
+  align-items: center;
   display: flex;
   margin-bottom: 10px;
+  position: relative;
   &__icon {
     background-color: red;
     border-radius: 50%;
     cursor: pointer;
     height: 30px;
     margin-right: 10px;
+    outline: none;
     position: relative;
     width: 30px;
   }

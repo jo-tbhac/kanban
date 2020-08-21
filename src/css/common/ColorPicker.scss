@@ -1,13 +1,15 @@
 .colorPicker {
+  align-items: center;
   background-color: white;
   border-radius: 3px;
   box-sizing: border-box;
   cursor: default;
   display: flex;
+  height: 100%;
   overflow-x: scroll;
   padding: 5px;
   position: absolute;
-  top: -5px;
+  top: 0;
   left: -5px;
   width: 360px;
   z-index: 10;

@@ -74,21 +74,21 @@ export const LabelEditRow = (props: LabelEditRowProps) => {
     <div className="labelEditRow">
       <div
         data-testid="labelEditRowIcon"
+        aria-label="label-icon"
         role="button"
         tabIndex={0}
         onClick={() => setColorPickerVisible(true)}
         onKeyPress={() => setColorPickerVisible(true)}
         className="labelEditRow__icon"
         style={{ backgroundColor: label.color }}
-      >
-        {isColorPickerVisible && (
-          <ColorPicker
-            selectedColor={selectedColor}
-            setColor={setColor}
-            setColorPickerVisible={setColorPickerVisible}
-          />
-        )}
-      </div>
+      />
+      {isColorPickerVisible && (
+        <ColorPicker
+          selectedColor={selectedColor}
+          setColor={setColor}
+          setColorPickerVisible={setColorPickerVisible}
+        />
+      )}
       {isEditFormVisible ? (
         <input
           // eslint-disable-next-line jsx-a11y/no-autofocus
