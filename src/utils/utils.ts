@@ -13,6 +13,14 @@ export const dndItemType = {
   CARD: 'Card',
 };
 
+export const isMobile = (agent: string): boolean => (
+  agent.search(/Android|Mobile|iPod|iPhone/) !== -1
+);
+
+export const isTablet = (agent: string): boolean => (
+  agent.search(/Android|iPad/) !== -1
+);
+
 export const maxUploadFileSize = 8388608;
 
 export const fontColorLight = '#333';
