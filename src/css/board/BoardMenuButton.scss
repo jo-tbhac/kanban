@@ -17,6 +17,7 @@
   }
   &__text {
     margin-left: 3px;
+    white-space: nowrap;
     @media (max-width: 590px) {
       display: none;
     }
