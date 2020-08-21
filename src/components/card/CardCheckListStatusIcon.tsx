@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { CardContext } from './CardIndexContainer';
 import { RootState } from '../../store';
+import { Card } from '../../store/card/types';
 import CardStatus from './CardStatus';
 
 const mapStateToProps = (state: RootState) => {
@@ -18,14 +18,12 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export const CardCheckListStatusIcon = (props: PropsFromRedux) => {
-  const { checkLists } = props;
+type CardCheckListStatusIconProps = PropsFromRedux & {
+  card: Card
+}
 
-  const card = useContext(CardContext);
-
-  if (!card) {
-    return null;
-  }
+export const CardCheckListStatusIcon = (props: CardCheckListStatusIconProps) => {
+  const { checkLists, card } = props;
 
   const cardCheckLists = checkLists.filter((c) => c.cardId === card.id);
 

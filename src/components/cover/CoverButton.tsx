@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { CardContext } from '../card/CardIndexContainer';
+import CardContext from '../../context/CardContext';
 import CreateCoverButton from './CreateCoverButton';
 import DeleteCoverButton from './DeleteCoverButton';
 

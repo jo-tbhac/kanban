@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import * as fileActions from '../../store/file/actions';
-import { CardContext } from '../card/CardIndexContainer';
+import CardContext from '../../context/CardContext';
 
 const mapDispatchToProps = {
   uploadFile: fileActions.uploadFile,

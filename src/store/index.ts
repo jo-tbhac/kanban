@@ -11,6 +11,7 @@ import checkListReducer from './check_list/reducers';
 import fileReducer from './file/reducers';
 import loadingReducer from './loading/reducers';
 import backgroundImageReducer from './background_image/reducers';
+import cardDetailReducer from './card_detail/reducers';
 
 export const rootReducer = combineReducers({
   board: boardReducer,
@@ -22,6 +23,7 @@ export const rootReducer = combineReducers({
   file: fileReducer,
   loading: loadingReducer,
   backgroundImage: backgroundImageReducer,
+  cardDetail: cardDetailReducer,
 });
 
 const enhancer = process.env.NODE_ENV === 'production'

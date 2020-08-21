@@ -7,26 +7,24 @@ import { mockList, mockCard, mockFile } from '../../../utils/mockData';
 
 describe('SearchCard component', () => {
   let store: Store;
+  let openCardDetail: jest.Mock;
 
   beforeEach(() => {
     store = storeFactory();
+    openCardDetail = jest.fn();
   });
 
-  test('should show a `CardDetail` component upon click a `SearchCard` component', () => {
+  test('should call `openCardDetail` with cardId and listId upon click a `SearchCard` component', () => {
     const cardId = 3;
-    const lists = [{ ...mockList, id: 1, cards: [{ ...mockCard, id: cardId, listId: 1 }] }];
-    const { getByTestId } = render(<SearchCard lists={lists} cardId={cardId} />, store);
+    const listId = 1;
+    const lists = [{ ...mockList, id: 1, cards: [{ ...mockCard, id: cardId, listId }] }];
+    const { getByTestId } = render(
+      <SearchCard lists={lists} cardId={cardId} openCardDetail={openCardDetail} />,
+      store,
+    );
 
     fireEvent.click(getByTestId(`searchCard-${cardId}`));
-    expect(getByTestId('cardDetail')).toBeVisible();
-  });
-
-  test('should hide a `CardDetail` component if state of `isCardDetailVisible` is false', () => {
-    const cardId = 3;
-    const lists = [{ ...mockList, id: 1, cards: [{ ...mockCard, id: cardId, listId: 1 }] }];
-    const { queryByTestId } = render(<SearchCard lists={lists} cardId={cardId} />, store);
-
-    expect(queryByTestId('cardDetail')).toBeNull();
+    expect(openCardDetail).toHaveBeenCalledWith({ cardId, listId });
   });
 
   test('should render a cover', () => {
@@ -39,7 +37,10 @@ describe('SearchCard component', () => {
       },
     });
 
-    const { getByTestId } = render(<SearchCard lists={lists} cardId={cardId} />, store);
+    const { getByTestId } = render(
+      <SearchCard lists={lists} cardId={cardId} openCardDetail={openCardDetail} />,
+      store,
+    );
     expect(getByTestId('cover')).not.toBeNull();
   });
 
@@ -62,7 +63,10 @@ describe('SearchCard component', () => {
       },
     });
 
-    const { queryByTestId } = render(<SearchCard lists={lists} cardId={cardId} />, store);
+    const { queryByTestId } = render(
+      <SearchCard lists={lists} cardId={cardId} openCardDetail={openCardDetail} />,
+      store,
+    );
     expect(queryByTestId('cover')).toBeNull();
   });
 });

@@ -4,7 +4,7 @@ import { render, storeFactory } from '../../../testUtils';
 import { mockCard } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { deleteCoverButtonText, fileCreateCover } from '../../../utils/text';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 import CoverButton from '../../../components/cover/CoverButton';
 
 describe('CoverButton component', () => {

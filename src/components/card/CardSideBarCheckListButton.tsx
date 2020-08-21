@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { CardContext } from './CardIndexContainer';
+import CardContext from '../../context/CardContext';
 import CardSideBarButton from './CardSideBarButton';
 import CardMenuForm from './CardMenuForm';
 import CheckListForm from '../check_list/CheckListForm';

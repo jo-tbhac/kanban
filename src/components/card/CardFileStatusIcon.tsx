@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
-import { CardContext } from './CardIndexContainer';
+import { Card } from '../../store/card/types';
 import CardStatus from './CardStatus';
 
 const mapStateToProps = (state: RootState) => {
@@ -18,14 +18,12 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export const CardFileStatusIcon = (props: PropsFromRedux) => {
-  const { files } = props;
+type CardFileStatusIconProps = PropsFromRedux & {
+  card: Card
+}
 
-  const card = useContext(CardContext);
-
-  if (!card) {
-    return null;
-  }
+export const CardFileStatusIcon = (props: CardFileStatusIconProps) => {
+  const { files, card } = props;
 
   const attachedFiles = files.filter((file) => file.cardId === card.id);
 

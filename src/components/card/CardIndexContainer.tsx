@@ -8,8 +8,6 @@ import * as cardActions from '../../store/card/actions';
 import * as cardTypes from '../../store/card/types';
 import { dndItemType } from '../../utils/utils';
 
-export const CardContext = React.createContext<cardTypes.Card | null>(null);
-
 const mapDispatchToProps = {
   moveCardToEmptyList: cardActions.moveCardToEmptyList,
 };
@@ -38,7 +36,7 @@ const CardIndexContainer = (props: CardIndexContainerProps) => {
 
   const [, drop] = useDrop({
     accept: dndItemType.CARD,
-    hover: (item: cardTypes.DndLCard) => {
+    hover: (item: cardTypes.DndCard) => {
       if (cards.length === 0) {
         moveCardToEmptyList({
           dragId: item.id,
@@ -65,11 +63,7 @@ const CardIndexContainer = (props: CardIndexContainerProps) => {
 
   return (
     <div ref={ref} className="cardIndexContainer">
-      {cards.map((card) => (
-        <CardContext.Provider key={String(card.id)} value={card}>
-          <Card />
-        </CardContext.Provider>
-      ))}
+      {cards.map((card) => <Card key={card.id} card={card} />)}
       {isCardFormVisible && (
         <CardForm
           listId={listId}

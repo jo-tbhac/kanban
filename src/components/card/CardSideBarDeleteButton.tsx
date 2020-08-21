@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import CardSideBarButton from './CardSideBarButton';
-import { CardContext } from './CardIndexContainer';
+import CardContext from '../../context/CardContext';
 import { dialogTypeAsk } from '../../store/dialog/types';
 import * as dialogAction from '../../store/dialog/actions';
 import * as cardAction from '../../store/card/actions';

@@ -19,7 +19,7 @@ export interface Card {
   cover: Cover | null
 }
 
-export interface DndLCard {
+export interface DndCard {
   type: string
   id: number
   index: number

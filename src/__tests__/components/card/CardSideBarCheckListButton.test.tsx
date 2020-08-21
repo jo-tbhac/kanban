@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { mockCard } from '../../../utils/mockData';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 import { render, fireEvent, storeFactory } from '../../../testUtils';
 import { Store } from '../../../store';
 import { CardSideBarCheckListButton } from '../../../components/card/CardSideBarCheckListButton';

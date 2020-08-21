@@ -4,7 +4,7 @@ import { mockCard, mockLabels } from '../../../utils/mockData';
 import { render, fireEvent, storeFactory } from '../../../testUtils';
 import { Store } from '../../../store';
 import { CardLabelFormRow } from '../../../components/card/CardLabelFormRow';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 
 describe('CardLabelFormRow component', () => {
   let store: Store;
