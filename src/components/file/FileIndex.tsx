@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
-import { CardContext } from '../card/CardIndexContainer';
+import CardContext from '../../context/CardContext';
 import { fileHeaderLabel } from '../../utils/text';
 import File from './File';
 import AddFileButton from './AddFileButton';

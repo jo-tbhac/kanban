@@ -3,7 +3,7 @@ import React from 'react';
 import { render, storeFactory, fireEvent } from '../../../testUtils';
 import { mockCard } from '../../../utils/mockData';
 import { Store } from '../../../store';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 import { CreateCoverButton } from '../../../components/cover/CreateCoverButton';
 
 describe('CreateCoverButton component', () => {

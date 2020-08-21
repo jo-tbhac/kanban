@@ -2,7 +2,7 @@ import React, { useContext, MouseEvent, KeyboardEvent } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import * as coverActions from '../../store/cover/actions';
-import { CardContext } from '../card/CardIndexContainer';
+import CardContext from '../../context/CardContext';
 import { deleteCoverButtonText } from '../../utils/text';
 import ButtonLight from '../common/ButtonLight';
 

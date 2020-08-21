@@ -3,7 +3,7 @@ import React from 'react';
 import { render, storeFactory } from '../../../testUtils';
 import { Store } from '../../../store';
 import { mockCard, mockCheckList } from '../../../utils/mockData';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 import { CheckListIndex } from '../../../components/check_list/CheckListIndex';
 
 describe('CheckListIndex component', () => {

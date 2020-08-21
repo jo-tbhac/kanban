@@ -5,7 +5,7 @@ import { mockCard, mockCheckList, mockCheckListItem } from '../../../utils/mockD
 import { Store } from '../../../store';
 import { CheckList } from '../../../store/check_list/types';
 import { CardCheckListStatusIcon } from '../../../components/card/CardCheckListStatusIcon';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 
 describe('CardCheckListStatusIcon component', () => {
   let store: Store;

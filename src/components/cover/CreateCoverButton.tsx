@@ -1,7 +1,7 @@
 import React, { useContext, MouseEvent, KeyboardEvent } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { CardContext } from '../card/CardIndexContainer';
+import CardContext from '../../context/CardContext';
 import * as coverActions from '../../store/cover/actions';
 import { fileCreateCover } from '../../utils/text';
 import ButtonLight from '../common/ButtonLight';

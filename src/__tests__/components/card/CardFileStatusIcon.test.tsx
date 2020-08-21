@@ -5,7 +5,7 @@ import { mockCard, mockFile } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import { File } from '../../../store/file/types';
 import { CardFileStatusIcon } from '../../../components/card/CardFileStatusIcon';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 
 describe('CardFileStatusIcon component', () => {
   let store: Store;

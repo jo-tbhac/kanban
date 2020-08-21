@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
 import * as cardActions from '../../store/card/actions';
-import { CardContext } from './CardIndexContainer';
+import CardContext from '../../context/CardContext';
 
 const mapStateToProps = (state: RootState) => {
   const { label } = state;

@@ -8,7 +8,7 @@ import CardDetail from '../card/CardDetail';
 import CardLabelSmall from '../card/CardLabelSmall';
 import CardStatusIndex from '../card/CardStatusIndex';
 import Cover from '../cover/Cover';
-import { CardContext } from '../card/CardIndexContainer';
+import CardContext from '../../context/CardContext';
 
 const mapStateToProps = (state: RootState) => {
   const { board } = state;

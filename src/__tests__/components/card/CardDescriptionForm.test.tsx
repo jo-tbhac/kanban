@@ -4,7 +4,7 @@ import { render, fireEvent, storeFactory } from '../../../testUtils';
 import { Store } from '../../../store';
 import { mockCard } from '../../../utils/mockData';
 import { CardDescriptionForm } from '../../../components/card/CardDescriptionForm';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 
 describe('CardDescriptionForm component', () => {
   let store: Store;

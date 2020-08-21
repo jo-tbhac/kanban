@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import { CardContext } from './CardIndexContainer';
+import CardContext from '../../context/CardContext';
 import { RootState } from '../../store';
 import CardStatus from './CardStatus';
 

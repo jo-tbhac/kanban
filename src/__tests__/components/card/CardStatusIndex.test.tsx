@@ -4,7 +4,7 @@ import { render, storeFactory } from '../../../testUtils';
 import { mockCard } from '../../../utils/mockData';
 import { Store } from '../../../store';
 import CardStatusIndex from '../../../components/card/CardStatusIndex';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 
 describe('CardStatusIndex component', () => {
   let store: Store;

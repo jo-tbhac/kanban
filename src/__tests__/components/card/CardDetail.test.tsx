@@ -3,7 +3,7 @@ import React from 'react';
 import { render, fireEvent, storeFactory } from '../../../testUtils';
 import { mockCard, mockFile } from '../../../utils/mockData';
 import { Store } from '../../../store';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 import CardDetail from '../../../components/card/CardDetail';
 
 describe('CardDetail component', () => {

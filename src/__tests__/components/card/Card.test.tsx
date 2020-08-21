@@ -12,7 +12,7 @@ import {
 import { Store } from '../../../store';
 import { mockCard, mockFile } from '../../../utils/mockData';
 import { Card } from '../../../components/card/Card';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 
 describe('Card component', () => {
   let store: Store;

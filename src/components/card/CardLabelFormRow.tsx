@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import * as cardActions from '../../store/card/actions';
 import { Label } from '../../store/label/types';
-import { CardContext } from './CardIndexContainer';
+import CardContext from '../../context/CardContext';
 
 const mapDispatchToProps = {
   attachLabel: cardActions.attachLabel,

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
-import { CardContext } from './CardIndexContainer';
+import CardContext from '../../context/CardContext';
 import CardStatus from './CardStatus';
 
 const mapStateToProps = (state: RootState) => {

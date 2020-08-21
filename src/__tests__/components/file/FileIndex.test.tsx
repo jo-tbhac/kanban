@@ -3,7 +3,7 @@ import React from 'react';
 import { render, storeFactory } from '../../../testUtils';
 import { mockFile, mockCard } from '../../../utils/mockData';
 import { Store } from '../../../store';
-import { CardContext } from '../../../components/card/CardIndexContainer';
+import CardContext from '../../../context/CardContext';
 import { FileIndex } from '../../../components/file/FileIndex';
 
 describe('FileIndex component', () => {
