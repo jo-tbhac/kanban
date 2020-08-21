@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 import ToolBar from '../common/ToolBar';
 import List from '../list/List';
@@ -14,6 +15,12 @@ import * as boardActions from '../../store/board/actions';
 import * as checkListActions from '../../store/check_list/actions';
 import * as fileActions from '../../store/file/actions';
 import { newListButtonText } from '../../utils/text';
+import { isMobile, isTablet } from '../../utils/utils';
+
+const dndBackend = (() => {
+  const agent = window.navigator.userAgent;
+  return isMobile(agent) || isTablet(agent) ? TouchBackend : HTML5Backend;
+})();
 
 const mapStateToProps = (state: RootState) => {
   const { board } = state;
@@ -73,7 +80,7 @@ export const Board = (props: PropsFromRedux) => {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider backend={dndBackend}>
       <div className="boardContainer" data-testid="boardComponent">
         <ToolBar boardName={selectedBoard.name} />
 
