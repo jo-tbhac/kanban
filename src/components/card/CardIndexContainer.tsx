@@ -38,7 +38,7 @@ const CardIndexContainer = (props: CardIndexContainerProps) => {
 
   const [, drop] = useDrop({
     accept: dndItemType.CARD,
-    hover: (item: cardTypes.DndLCard) => {
+    hover: (item: cardTypes.DndCard) => {
       if (cards.length === 0) {
         moveCardToEmptyList({
           dragId: item.id,

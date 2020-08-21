@@ -7,7 +7,7 @@ import {
   DropTargetMonitor,
 } from 'react-dnd';
 
-import { DndLCard } from '../../store/card/types';
+import { DndCard } from '../../store/card/types';
 import { RootState } from '../../store';
 import * as cardActions from '../../store/card/actions';
 import { CardContext } from './CardIndexContainer';
@@ -52,7 +52,7 @@ export const Card = (props: PropsFromRedux) => {
     accept: dndItemType.CARD,
     collect: (monitor) => monitor.getItem(),
     canDrop: () => false,
-    hover: (item: DndLCard, monitor: DropTargetMonitor) => {
+    hover: (item: DndCard, monitor: DropTargetMonitor) => {
       if (!ref.current || !card) {
         return;
       }
