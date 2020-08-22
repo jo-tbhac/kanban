@@ -12,7 +12,7 @@ import {
   failedSignOutTitle,
 } from '../../utils/text';
 
-import { LOAD_END } from '../loading/types';
+import { READY } from '../loading/types';
 import {
   SignUpParams,
   SignInParams,
@@ -115,7 +115,7 @@ export const fetchAuthState = () => async (dispatch: AppDispatch) => {
 
   if (response?.status === 200) {
     if (!response.data.ok) {
-      dispatch({ type: LOAD_END });
+      dispatch({ type: READY });
       return;
     }
 
@@ -132,7 +132,7 @@ export const fetchAuthState = () => async (dispatch: AppDispatch) => {
 
     onRefreshToken(camelizedData.expiresIn);
     dispatch({ type: SIGN_IN, payload: { email, name } });
-    dispatch({ type: LOAD_END });
+    dispatch({ type: READY });
     return;
   }
 
@@ -143,7 +143,7 @@ export const fetchAuthState = () => async (dispatch: AppDispatch) => {
       description: joinErrors(response.data.errors),
     };
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
-    dispatch({ type: LOAD_END });
+    dispatch({ type: READY });
   }
 };
 

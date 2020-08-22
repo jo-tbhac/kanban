@@ -11,7 +11,7 @@ const mapStateToProps = (state: RootState) => {
   const { dialog, loading } = state;
   return {
     isDialogVisible: dialog.isDialogVisible,
-    isLoading: loading.isLoading,
+    ready: loading.ready,
   };
 };
 
@@ -24,14 +24,14 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 export const App = (props: PropsFromRedux) => {
-  const { isDialogVisible, isLoading, fetchAuthState } = props;
+  const { isDialogVisible, ready, fetchAuthState } = props;
 
   useEffect(() => {
     fetchAuthState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) {
+  if (!ready) {
     return <Loading />;
   }
 
