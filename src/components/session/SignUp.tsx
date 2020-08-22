@@ -22,7 +22,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const SignUp = (props: PropsFromRedux) => {
+export const SignUp = (props: PropsFromRedux) => {
   const { isSignIn, signUp, loadStart } = props;
 
   const [username, setUsername] = useState('');
