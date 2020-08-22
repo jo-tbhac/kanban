@@ -1,5 +1,6 @@
 import {
   READY,
+  LOAD_START,
   LOAD_END,
   LoadingState,
   LoadingActionTypes,
@@ -7,7 +8,7 @@ import {
 
 const initialState: LoadingState = {
   ready: false,
-  isLoading: true,
+  isLoading: false,
 };
 
 const loadingReducer = (state = initialState, action: LoadingActionTypes) => {
@@ -16,6 +17,11 @@ const loadingReducer = (state = initialState, action: LoadingActionTypes) => {
       return {
         ...state,
         ready: true,
+      };
+    case LOAD_START:
+      return {
+        ...state,
+        isLoading: true,
       };
     case LOAD_END:
       return {
