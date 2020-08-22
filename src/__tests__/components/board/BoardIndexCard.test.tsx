@@ -44,9 +44,24 @@ describe('BoardIndex component', () => {
       />,
       store,
     );
-    fireEvent.click(getByTestId('boardIndexCard'));
 
+    fireEvent.click(getByTestId('boardIndexCard'));
     expect(mockLocation.pathname).toBe(`/board/${mockBoard.id}`);
+  });
+
+  test('should call `loadStart` when click a board index card', () => {
+    const backgroundImages = [mockBackgroundImage] as BackgroundImage[];
+    const { getByTestId } = renderWithRouter(
+      <BoardIndexCard
+        board={mockBoard}
+        backgroundImages={backgroundImages}
+        loadStart={loadStart}
+      />,
+      store,
+    );
+
+    fireEvent.click(getByTestId('boardIndexCard'));
+    expect(loadStart).toHaveBeenCalled();
   });
 
   test('should has a style `{ backgroundImage: ..., color: fontColorDark }` if props `backgroundImage` has `{ theme: dark }`', () => {

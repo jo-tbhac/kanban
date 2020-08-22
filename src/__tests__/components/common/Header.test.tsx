@@ -2,14 +2,17 @@ import React, { ReactElement } from 'react';
 import { MemoryRouter, Route } from 'react-router-dom';
 
 import { render, fireEvent, storeFactory } from '../../../testUtils';
-import Header from '../../../components/common/Header';
+import { Header } from '../../../components/common/Header';
 import { Store } from '../../../store';
 
 describe('Header component', () => {
   let mockLocation: {pathname: string};
   let store: Store;
+  let loadStart: jest.Mock;
+
   beforeEach(() => {
     store = storeFactory();
+    loadStart = jest.fn();
   });
 
   const renderWithRouter = (component: ReactElement) => (
@@ -29,10 +32,14 @@ describe('Header component', () => {
   );
 
   test('navigate to `/` when click a home icon', () => {
-    const { getByTestId } = renderWithRouter(<Header />);
-
+    const { getByTestId } = renderWithRouter(<Header loadStart={loadStart} />);
     fireEvent.click(getByTestId('homeIcon'));
-
     expect(mockLocation.pathname).toBe('/');
+  });
+
+  test('should call `loadStart` upon click a home icon', () => {
+    const { getByTestId } = renderWithRouter(<Header loadStart={loadStart} />);
+    fireEvent.click(getByTestId('homeIcon'));
+    expect(loadStart).toHaveBeenCalled();
   });
 });

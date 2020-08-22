@@ -17,7 +17,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Header = (props: PropsFromRedux) => {
+export const Header = (props: PropsFromRedux) => {
   const { loadStart } = props;
 
   const history = useHistory();
