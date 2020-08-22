@@ -11,6 +11,7 @@ import { BoardIndexCard } from '../../../components/board/BoardIndexCard';
 describe('BoardIndex component', () => {
   let store: Store;
   let mockLocation: {pathname: string};
+  let loadStart: jest.Mock;
 
   const renderWithRouter = (component: ReactElement, _store: Store) => (
     render(
@@ -30,17 +31,37 @@ describe('BoardIndex component', () => {
 
   beforeEach(() => {
     store = storeFactory();
+    loadStart = jest.fn();
   });
 
   test('navigate to `/board/:boardId` when click a board index card', () => {
     const backgroundImages = [mockBackgroundImage] as BackgroundImage[];
     const { getByTestId } = renderWithRouter(
-      <BoardIndexCard board={mockBoard} backgroundImages={backgroundImages} />,
+      <BoardIndexCard
+        board={mockBoard}
+        backgroundImages={backgroundImages}
+        loadStart={loadStart}
+      />,
       store,
     );
-    fireEvent.click(getByTestId('boardIndexCard'));
 
+    fireEvent.click(getByTestId('boardIndexCard'));
     expect(mockLocation.pathname).toBe(`/board/${mockBoard.id}`);
+  });
+
+  test('should call `loadStart` when click a board index card', () => {
+    const backgroundImages = [mockBackgroundImage] as BackgroundImage[];
+    const { getByTestId } = renderWithRouter(
+      <BoardIndexCard
+        board={mockBoard}
+        backgroundImages={backgroundImages}
+        loadStart={loadStart}
+      />,
+      store,
+    );
+
+    fireEvent.click(getByTestId('boardIndexCard'));
+    expect(loadStart).toHaveBeenCalled();
   });
 
   test('should has a style `{ backgroundImage: ..., color: fontColorDark }` if props `backgroundImage` has `{ theme: dark }`', () => {
@@ -49,7 +70,7 @@ describe('BoardIndex component', () => {
     const backgroundImages = [{ id: 2, theme: darkTheme, url }] as BackgroundImage[];
 
     const { getByTestId } = renderWithRouter(
-      <BoardIndexCard board={board} backgroundImages={backgroundImages} />,
+      <BoardIndexCard board={board} backgroundImages={backgroundImages} loadStart={loadStart} />,
       store,
     );
 
@@ -63,7 +84,7 @@ describe('BoardIndex component', () => {
     const backgroundImages = [{ id: 2, theme: lightTheme, url }] as BackgroundImage[];
 
     const { getByTestId } = renderWithRouter(
-      <BoardIndexCard board={board} backgroundImages={backgroundImages} />,
+      <BoardIndexCard board={board} backgroundImages={backgroundImages} loadStart={loadStart} />,
       store,
     );
 
@@ -74,7 +95,11 @@ describe('BoardIndex component', () => {
   test('should render a overlay component if a cursor enter the component', () => {
     const backgroundImages = [mockBackgroundImage] as BackgroundImage[];
     const { getByTestId } = renderWithRouter(
-      <BoardIndexCard board={mockBoard} backgroundImages={backgroundImages} />,
+      <BoardIndexCard
+        board={mockBoard}
+        backgroundImages={backgroundImages}
+        loadStart={loadStart}
+      />,
       store,
     );
 
@@ -85,7 +110,11 @@ describe('BoardIndex component', () => {
   test('should not render a overlay component if a cursor leave from the component', () => {
     const backgroundImages = [mockBackgroundImage] as BackgroundImage[];
     const { queryByTestId, getByTestId } = renderWithRouter(
-      <BoardIndexCard board={mockBoard} backgroundImages={backgroundImages} />,
+      <BoardIndexCard
+        board={mockBoard}
+        backgroundImages={backgroundImages}
+        loadStart={loadStart}
+      />,
       store,
     );
 

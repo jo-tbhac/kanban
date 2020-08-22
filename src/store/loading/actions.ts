@@ -1,6 +1,9 @@
-import { LOAD_END } from './types';
+import { LOAD_START, LOAD_END } from './types';
 
-// eslint-disable-next-line import/prefer-default-export
+export const loadStart = () => ({
+  type: LOAD_START,
+});
+
 export const loadEnd = () => ({
   type: LOAD_END,
 });

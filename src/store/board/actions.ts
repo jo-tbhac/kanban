@@ -3,6 +3,7 @@ import snakeCaseKeys from 'snakecase-keys';
 
 import { newAxios } from '../../configureAxios';
 import { AppDispatch } from '..';
+import { LOAD_END } from '../loading/types';
 import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
 import { joinErrors } from '../../utils/utils';
 import {
@@ -29,6 +30,7 @@ export const fetchBoard = (boardId: number) => async (dispatch: AppDispatch) => 
   if (response?.status === 200) {
     const camelizedData = camelCaseKeys(response.data.board, { deep: true });
     dispatch({ type: FETCH_BOARD, payload: camelizedData });
+    dispatch({ type: LOAD_END });
   }
 
   if (response?.status === 400) {
@@ -48,6 +50,7 @@ export const fetchAllBoards = () => async (dispatch: AppDispatch) => {
   if (response?.status === 200) {
     const camelizedData = camelCaseKeys(response.data.boards, { deep: true });
     dispatch({ type: FETCH_ALL_BOARDS, payload: camelizedData });
+    dispatch({ type: LOAD_END });
   }
 };
 

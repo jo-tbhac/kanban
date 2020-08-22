@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
 import * as sessionActions from '../../store/session/actions';
+import * as loadingActions from '../../store/loading/actions';
 
 const mapStateToProps = (state: RootState) => {
   const { session } = state;
@@ -14,14 +15,15 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = {
   signUp: sessionActions.signUp,
+  loadStart: loadingActions.loadStart,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const SignUp = (props: PropsFromRedux) => {
-  const { isSignIn, signUp } = props;
+export const SignUp = (props: PropsFromRedux) => {
+  const { isSignIn, signUp, loadStart } = props;
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -36,6 +38,7 @@ const SignUp = (props: PropsFromRedux) => {
       passwordConfirmation,
     };
 
+    loadStart();
     signUp(params);
   };
 

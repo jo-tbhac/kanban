@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import store from './store';
 import { SIGN_OUT } from './store/session/types';
+import { LOAD_END } from './store/loading/types';
 import {
   OPEN_DIALOG,
   CLOSE_DIALOG,
@@ -29,6 +30,8 @@ export const newAxios = () => {
     }
     return response;
   }, (error) => {
+    store.dispatch({ type: LOAD_END });
+
     if (error.response === undefined) {
       store.dispatch({ type: OPEN_DIALOG, payload: dialogInternalServerError });
       return error;
