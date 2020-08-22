@@ -12,6 +12,7 @@ const mapStateToProps = (state: RootState) => {
   return {
     isDialogVisible: dialog.isDialogVisible,
     ready: loading.ready,
+    isLoading: loading.isLoading,
   };
 };
 
@@ -24,7 +25,12 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 export const App = (props: PropsFromRedux) => {
-  const { isDialogVisible, ready, fetchAuthState } = props;
+  const {
+    isDialogVisible,
+    ready,
+    isLoading,
+    fetchAuthState,
+  } = props;
 
   useEffect(() => {
     fetchAuthState();
@@ -39,6 +45,7 @@ export const App = (props: PropsFromRedux) => {
     <>
       <Router />
       {isDialogVisible && <Dialog />}
+      {isLoading && <Loading />}
     </>
   );
 };
