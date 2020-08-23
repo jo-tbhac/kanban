@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 
 import * as loadingActions from '../../store/loading/actions';
@@ -21,8 +21,12 @@ export const Header = (props: PropsFromRedux) => {
   const { loadStart } = props;
 
   const history = useHistory();
+  const location = useLocation();
 
   const onClick = () => {
+    if (location.pathname === '/') {
+      return;
+    }
     loadStart();
     history.push('/');
   };
