@@ -2,6 +2,8 @@
   align-self: stretch;
   flex: 1;
   &__text {
+    align-items: center;
+    display: flex;
     font-size: 0.9rem;
     height: 100%;
     &--checked {
