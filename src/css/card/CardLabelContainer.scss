@@ -2,6 +2,7 @@
   @include card-detail-row();
   &__label {
     @include card-detail-header-text();
+    margin-bottom: 5px;
   }
 }
 
