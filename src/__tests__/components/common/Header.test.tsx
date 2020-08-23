@@ -15,9 +15,9 @@ describe('Header component', () => {
     loadStart = jest.fn();
   });
 
-  const renderWithRouter = (component: ReactElement) => (
+  const renderWithRouter = (component: ReactElement, entries: string[]) => (
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={entries}>
         {component}
         <Route
           path="*"
@@ -32,14 +32,23 @@ describe('Header component', () => {
   );
 
   test('navigate to `/` when click a home icon', () => {
-    const { getByTestId } = renderWithRouter(<Header loadStart={loadStart} />);
+    const entries = ['/board/1'];
+    const { getByTestId } = renderWithRouter(<Header loadStart={loadStart} />, entries);
     fireEvent.click(getByTestId('homeIcon'));
     expect(mockLocation.pathname).toBe('/');
   });
 
   test('should call `loadStart` upon click a home icon', () => {
-    const { getByTestId } = renderWithRouter(<Header loadStart={loadStart} />);
+    const entries = ['/board/1'];
+    const { getByTestId } = renderWithRouter(<Header loadStart={loadStart} />, entries);
     fireEvent.click(getByTestId('homeIcon'));
     expect(loadStart).toHaveBeenCalled();
+  });
+
+  test('should not call `loadStart` if current location is `/` upon click a home icon', () => {
+    const entries = ['/'];
+    const { getByTestId } = renderWithRouter(<Header loadStart={loadStart} />, entries);
+    fireEvent.click(getByTestId('homeIcon'));
+    expect(loadStart).not.toHaveBeenCalled();
   });
 });
