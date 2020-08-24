@@ -28,7 +28,9 @@ export const ProtectedPage = (props: ProtectedPageProps) => {
   const { isSignIn, fetchBackgroundImages, children } = props;
 
   useEffect(() => {
-    fetchBackgroundImages();
+    if (isSignIn) {
+      fetchBackgroundImages();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
