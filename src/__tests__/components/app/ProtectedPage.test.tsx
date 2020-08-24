@@ -63,4 +63,13 @@ describe('ProtectedPage component', () => {
     );
     expect(fetchBackgroundImages).toHaveBeenCalled();
   });
+
+  test('should not call `fetchBackgroundImages` if `isSignIn` is false upon the component did mount', () => {
+    renderWithRouter(
+      <ProtectedPage isSignIn={false} fetchBackgroundImages={fetchBackgroundImages}>
+        <div />
+      </ProtectedPage>,
+    );
+    expect(fetchBackgroundImages).not.toHaveBeenCalled();
+  });
 });
