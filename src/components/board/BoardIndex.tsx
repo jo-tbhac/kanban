@@ -5,6 +5,7 @@ import BoardForm from './BoardForm';
 import BoardIndexCard from './BoardIndexCard';
 import { RootState } from '../../store';
 import * as boardActions from '../../store/board/actions';
+import * as routeActions from '../../store/route/actions';
 
 const mapStateToProps = (state: RootState) => {
   const { board } = state;
@@ -15,6 +16,7 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = {
   fetchAllBoards: boardActions.fetchAllBoards,
+  initRedirectToBoardIndex: routeActions.initRedirectToBoardIndex,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -22,9 +24,10 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 export const BoardIndex = (props: PropsFromRedux) => {
-  const { boards, fetchAllBoards } = props;
+  const { boards, fetchAllBoards, initRedirectToBoardIndex } = props;
 
   useEffect(() => {
+    initRedirectToBoardIndex();
     fetchAllBoards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

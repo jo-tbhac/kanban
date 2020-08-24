@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -14,6 +14,7 @@ import { RootState } from '../../store';
 import * as boardActions from '../../store/board/actions';
 import * as checkListActions from '../../store/check_list/actions';
 import * as fileActions from '../../store/file/actions';
+import * as routeActions from '../../store/route/actions';
 import { newListButtonText } from '../../utils/text';
 import { isMobile, isTablet } from '../../utils/utils';
 
@@ -23,9 +24,10 @@ const dndBackend = (() => {
 })();
 
 const mapStateToProps = (state: RootState) => {
-  const { board } = state;
+  const { board, route } = state;
   return {
     selectedBoard: board.selectedBoard,
+    isRedirectToBoardIndex: route.isRedirectToBoardIndex,
   };
 };
 
@@ -33,6 +35,7 @@ const mapDispatchToProps = {
   fetchBoard: boardActions.fetchBoard,
   fetchCheckLists: checkListActions.fetchCheckLists,
   fetchFiles: fileActions.fetchFiles,
+  redirectToBoardIndex: routeActions.redirectToBoardIndex,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -42,9 +45,11 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export const Board = (props: PropsFromRedux) => {
   const {
     selectedBoard,
+    isRedirectToBoardIndex,
     fetchBoard,
     fetchCheckLists,
     fetchFiles,
+    redirectToBoardIndex,
   } = props;
 
   const { boardId } = useParams();
@@ -58,7 +63,9 @@ export const Board = (props: PropsFromRedux) => {
       fetchBoard(castedBoardId);
       fetchCheckLists(castedBoardId);
       fetchFiles(castedBoardId);
+      return;
     }
+    redirectToBoardIndex();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -78,6 +85,10 @@ export const Board = (props: PropsFromRedux) => {
     listContainerRef.current.scrollTo(scrollWidth, 0);
     setListFormVisible(true);
   };
+
+  if (isRedirectToBoardIndex) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <DndProvider backend={dndBackend}>
