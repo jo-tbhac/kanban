@@ -9,16 +9,22 @@ import { Store } from '../../../store';
 describe('BoardIndex component', () => {
   let store: Store;
   let fetchAllBoards: jest.Mock;
+  let initRedirectToBoardIndex: jest.Mock;
 
   beforeEach(() => {
     store = storeFactory();
     fetchAllBoards = jest.fn();
+    initRedirectToBoardIndex = jest.fn();
   });
 
   test('should call `fetchAllBoards` when component did mount', () => {
     render(
       <MemoryRouter>
-        <BoardIndex boards={mockBoards} fetchAllBoards={fetchAllBoards} />
+        <BoardIndex
+          boards={mockBoards}
+          fetchAllBoards={fetchAllBoards}
+          initRedirectToBoardIndex={initRedirectToBoardIndex}
+        />
       </MemoryRouter>,
       store,
     );
