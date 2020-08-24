@@ -31,4 +31,19 @@ describe('BoardIndex component', () => {
 
     expect(fetchAllBoards).toHaveBeenCalled();
   });
+
+  test('should call `initRedirectToBoardIndex` when component did mount', () => {
+    render(
+      <MemoryRouter>
+        <BoardIndex
+          boards={mockBoards}
+          fetchAllBoards={fetchAllBoards}
+          initRedirectToBoardIndex={initRedirectToBoardIndex}
+        />
+      </MemoryRouter>,
+      store,
+    );
+
+    expect(initRedirectToBoardIndex).toHaveBeenCalled();
+  });
 });

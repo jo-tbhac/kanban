@@ -138,4 +138,45 @@ describe('Board component', () => {
     );
     expect(fetchCheckLists).not.toHaveBeenCalled();
   });
+
+  test('should call `redirectToBoardIndex` if url params `boardId` is not a number when component did mount', () => {
+    renderWithRouter(
+      <Route path="/board/:boardId">
+        <Board
+          isRedirectToBoardIndex={false}
+          selectedBoard={mockBoard}
+          fetchBoard={fetchBoard}
+          fetchCheckLists={fetchCheckLists}
+          fetchFiles={fetchFiles}
+          redirectToBoardIndex={redirectToBoardIndex}
+        />
+      </Route>,
+      store,
+      ['/board/test'],
+    );
+    expect(redirectToBoardIndex).toHaveBeenCalled();
+  });
+
+  test('should redirect to `/` if props of `isRedirectToBoardIndex` is true', () => {
+    const { getByTestId } = renderWithRouter(
+      <>
+        <Route path="/board/:boardId">
+          <Board
+            isRedirectToBoardIndex
+            selectedBoard={mockBoard}
+            fetchBoard={fetchBoard}
+            fetchCheckLists={fetchCheckLists}
+            fetchFiles={fetchFiles}
+            redirectToBoardIndex={redirectToBoardIndex}
+          />
+        </Route>
+        <Route exact path="/">
+          <div data-testid="boardIndex" />
+        </Route>
+      </>,
+      store,
+      ['/board/1'],
+    );
+    expect(getByTestId('boardIndex')).not.toBeNull();
+  });
 });
