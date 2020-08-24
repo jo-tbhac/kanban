@@ -3,8 +3,15 @@ import snakeCaseKeys from 'snakecase-keys';
 
 import { newAxios } from '../../configureAxios';
 import { AppDispatch } from '..';
+import { REDIRECT_TO_BOARD_INDEX } from '../route/types';
 import { LOAD_END } from '../loading/types';
-import { dialogTypeError, DialogTypes, OPEN_DIALOG } from '../dialog/types';
+import {
+  dialogTypeError,
+  DialogTypes,
+  OPEN_DIALOG,
+  CLOSE_DIALOG,
+} from '../dialog/types';
+
 import { joinErrors } from '../../utils/utils';
 import {
   failedFetchBoardData,
@@ -31,6 +38,7 @@ export const fetchBoard = (boardId: number) => async (dispatch: AppDispatch) => 
     const camelizedData = camelCaseKeys(response.data.board, { deep: true });
     dispatch({ type: FETCH_BOARD, payload: camelizedData });
     dispatch({ type: LOAD_END });
+    return;
   }
 
   if (response?.status === 400) {
@@ -38,6 +46,10 @@ export const fetchBoard = (boardId: number) => async (dispatch: AppDispatch) => 
       type: dialogTypeError as DialogTypes,
       title: failedFetchBoardData,
       description: joinErrors(response.data.errors),
+      onConfirm: () => {
+        dispatch({ type: REDIRECT_TO_BOARD_INDEX });
+        dispatch({ type: CLOSE_DIALOG });
+      },
     };
     dispatch({ type: OPEN_DIALOG, payload: dialogProps });
   }

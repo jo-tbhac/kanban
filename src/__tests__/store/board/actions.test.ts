@@ -55,6 +55,7 @@ describe('board actions', () => {
         expect(dialog.type).toBe(dialogTypeError);
         expect(dialog.title).toBe(failedFetchBoardData);
         expect(dialog.description).toBe('some error...');
+        expect(dialog.onConfirm).not.toBeNull();
       });
   });
 

@@ -14,14 +14,15 @@ describe('Board component', () => {
   let fetchCheckLists: jest.Mock;
   let fetchFiles: jest.Mock;
   let scrollTo: jest.Mock;
+  let redirectToBoardIndex: jest.Mock;
   let store: Store;
-
 
   beforeEach(() => {
     fetchBoard = jest.fn();
     fetchCheckLists = jest.fn();
     fetchFiles = jest.fn();
     scrollTo = jest.fn();
+    redirectToBoardIndex = jest.fn();
     store = storeFactory();
 
     (global as any).HTMLDivElement.prototype.scrollTo = scrollTo;
@@ -33,10 +34,12 @@ describe('Board component', () => {
   test('should show `ListForm` when state of `isListsFormVisible` is true', () => {
     const { queryByTestId, getByTestId } = renderWithRouter(
       <Board
+        isRedirectToBoardIndex={false}
         selectedBoard={mockBoard}
         fetchBoard={fetchBoard}
         fetchCheckLists={fetchCheckLists}
         fetchFiles={fetchFiles}
+        redirectToBoardIndex={redirectToBoardIndex}
       />,
       store,
     );
@@ -50,10 +53,12 @@ describe('Board component', () => {
   test('should hide `ListForm` when state of `isListFormVisible` is false', () => {
     const { queryByTestId, getByTestId } = renderWithRouter(
       <Board
+        isRedirectToBoardIndex={false}
         selectedBoard={mockBoard}
         fetchBoard={fetchBoard}
         fetchCheckLists={fetchCheckLists}
         fetchFiles={fetchFiles}
+        redirectToBoardIndex={redirectToBoardIndex}
       />,
       store,
     );
@@ -66,10 +71,12 @@ describe('Board component', () => {
     renderWithRouter(
       <Route path="/board/:boardId">
         <Board
+          isRedirectToBoardIndex={false}
           selectedBoard={mockBoard}
           fetchBoard={fetchBoard}
           fetchCheckLists={fetchCheckLists}
           fetchFiles={fetchFiles}
+          redirectToBoardIndex={redirectToBoardIndex}
         />
       </Route>,
       store,
@@ -82,10 +89,12 @@ describe('Board component', () => {
     renderWithRouter(
       <Route path="/board/:boardId">
         <Board
+          isRedirectToBoardIndex={false}
           selectedBoard={mockBoard}
           fetchBoard={fetchBoard}
           fetchCheckLists={fetchCheckLists}
           fetchFiles={fetchFiles}
+          redirectToBoardIndex={redirectToBoardIndex}
         />
       </Route>,
       store,
@@ -98,10 +107,12 @@ describe('Board component', () => {
     renderWithRouter(
       <Route path="/board/:boardId">
         <Board
+          isRedirectToBoardIndex={false}
           selectedBoard={mockBoard}
           fetchBoard={fetchBoard}
           fetchCheckLists={fetchCheckLists}
           fetchFiles={fetchFiles}
+          redirectToBoardIndex={redirectToBoardIndex}
         />
       </Route>,
       store,
@@ -114,15 +125,58 @@ describe('Board component', () => {
     renderWithRouter(
       <Route path="/board/:boardId">
         <Board
+          isRedirectToBoardIndex={false}
           selectedBoard={mockBoard}
           fetchBoard={fetchBoard}
           fetchCheckLists={fetchCheckLists}
           fetchFiles={fetchFiles}
+          redirectToBoardIndex={redirectToBoardIndex}
         />
       </Route>,
       store,
       ['/board/test'],
     );
     expect(fetchCheckLists).not.toHaveBeenCalled();
+  });
+
+  test('should call `redirectToBoardIndex` if url params `boardId` is not a number when component did mount', () => {
+    renderWithRouter(
+      <Route path="/board/:boardId">
+        <Board
+          isRedirectToBoardIndex={false}
+          selectedBoard={mockBoard}
+          fetchBoard={fetchBoard}
+          fetchCheckLists={fetchCheckLists}
+          fetchFiles={fetchFiles}
+          redirectToBoardIndex={redirectToBoardIndex}
+        />
+      </Route>,
+      store,
+      ['/board/test'],
+    );
+    expect(redirectToBoardIndex).toHaveBeenCalled();
+  });
+
+  test('should redirect to `/` if props of `isRedirectToBoardIndex` is true', () => {
+    const { getByTestId } = renderWithRouter(
+      <>
+        <Route path="/board/:boardId">
+          <Board
+            isRedirectToBoardIndex
+            selectedBoard={mockBoard}
+            fetchBoard={fetchBoard}
+            fetchCheckLists={fetchCheckLists}
+            fetchFiles={fetchFiles}
+            redirectToBoardIndex={redirectToBoardIndex}
+          />
+        </Route>
+        <Route exact path="/">
+          <div data-testid="boardIndex" />
+        </Route>
+      </>,
+      store,
+      ['/board/1'],
+    );
+    expect(getByTestId('boardIndex')).not.toBeNull();
   });
 });
