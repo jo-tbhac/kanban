@@ -21,6 +21,8 @@ export const userNamePlaceholder = 'ユーザー名';
 export const emailPlaceholder = 'メールアドレス';
 export const passwordPlaceholder = 'パスワード';
 export const passwordConfirmationPlaceholder = 'パスワード（確認用）';
+export const testerSignInText = 'このユーザーでサインイン';
+export const usingTesterText = 'このユーザーは使用中です';
 
 // board
 export const failedFetchBoardData = 'ボードの情報を取得できませんでした';

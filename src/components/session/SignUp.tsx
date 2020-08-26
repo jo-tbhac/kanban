@@ -98,7 +98,7 @@ export const SignUp = (props: PropsFromRedux) => {
         </button>
         <div className="signUpLinkContainer">
           <TextLink path="/signin" text={moveToSignInText} />
-          <TextLink path="/signup" text={moveToTesterText} />
+          <TextLink path="/tester" text={moveToTesterText} />
         </div>
       </div>
     </div>

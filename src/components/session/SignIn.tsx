@@ -73,7 +73,7 @@ export const SignIn = (props: PropsFromRedux) => {
 
         <div className="signInLinkContainer">
           <TextLink path="/signup" text={createAccountText} />
-          <TextLink path="/signup" text={moveToTesterText} />
+          <TextLink path="/tester" text={moveToTesterText} />
         </div>
       </div>
     </div>

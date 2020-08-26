@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProtectedPage from './ProtectedPage';
 import SignIn from '../session/SignIn';
 import SignUp from '../session/SignUp';
+import TesterSignIn from '../session/TesterSignIn';
 import Header from '../common/Header';
 import BoardIndex from '../board/BoardIndex';
 import BoardWrapper from '../board/BoardWrapper';
@@ -14,6 +15,7 @@ const Router = React.memo(() => (
     <Switch>
       <Route path="/signin"><SignIn /></Route>
       <Route path="/signup"><SignUp /></Route>
+      <Route path="/tester"><TesterSignIn /></Route>
       <Route path="/board/:boardId">
         <ProtectedPage>
           <BoardWrapper />
