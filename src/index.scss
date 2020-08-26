@@ -88,7 +88,9 @@ input::-ms-clear {
 @import './css/common/Header';
 @import './css/common/Lightbox';
 @import './css/common/Loading';
+@import './css/common/Logo';
 @import './css/common/SlideInMenu';
+@import './css/common/TextLink';
 @import './css/common/ToolBar';
 
 // cover
@@ -126,6 +128,8 @@ input::-ms-clear {
 @import './css/session/SignIn';
 @import './css/session/SignOutButton';
 @import './css/session/SignUp';
+@import './css/session/TesterRow';
+@import './css/session/TesterSignIn';
 @import './css/session/UserProfile';
 @import './css/session/UserProfileButton';
 @import './css/session/UserProfileContainer';

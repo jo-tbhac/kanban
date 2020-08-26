@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
 import * as sessionActions from '../../store/session/actions';
 import * as loadingActions from '../../store/loading/actions';
+import Logo from '../common/Logo';
+import TextLink from '../common/TextLink';
+import {
+  moveToSignInText,
+  moveToTesterText,
+  userNamePlaceholder,
+  emailPlaceholder,
+  passwordPlaceholder,
+  passwordConfirmationPlaceholder,
+} from '../../utils/text';
 
 const mapStateToProps = (state: RootState) => {
   const { session } = state;
@@ -48,14 +58,13 @@ export const SignUp = (props: PropsFromRedux) => {
 
   return (
     <div className="signUpContainer">
-      <div className="signUpLogo">
-        kanban
-      </div>
+      <Logo />
+
       <div className="signUp">
         <input
           data-testid="userNameTextField"
           type="text"
-          placeholder="username"
+          placeholder={userNamePlaceholder}
           value={username}
           onChange={(event) => setUsername(event.target.value)}
           className="signUp__usernameTextField"
@@ -63,7 +72,7 @@ export const SignUp = (props: PropsFromRedux) => {
         <input
           data-testid="emailTextField"
           type="text"
-          placeholder="email"
+          placeholder={emailPlaceholder}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           className="signUp__emailTextField"
@@ -71,7 +80,7 @@ export const SignUp = (props: PropsFromRedux) => {
         <input
           data-testid="passwordTextField"
           type="password"
-          placeholder="password"
+          placeholder={passwordPlaceholder}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           className="signUp__passwordTextField"
@@ -79,7 +88,7 @@ export const SignUp = (props: PropsFromRedux) => {
         <input
           data-testid="passwordConfirmationTextField"
           type="password"
-          placeholder="password confirmation"
+          placeholder={passwordConfirmationPlaceholder}
           value={passwordConfirmation}
           onChange={(event) => setPasswordConfirmation(event.target.value)}
           className="signUp__passwordConfirmationTextField"
@@ -87,8 +96,10 @@ export const SignUp = (props: PropsFromRedux) => {
         <button type="button" onClick={onClickSignUp} className="signUp__button">
           Sign up
         </button>
-
-        <Link to="/signin" className="signUp__linkToSignIn">Move to sign in</Link>
+        <div className="signUpLinkContainer">
+          <TextLink path="/signin" text={moveToSignInText} />
+          <TextLink path="/tester" text={moveToTesterText} />
+        </div>
       </div>
     </div>
   );

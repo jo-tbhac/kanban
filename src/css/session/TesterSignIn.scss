@@ -1,0 +1,16 @@
+.testerSignInContainer {
+  @include session-screen();
+}
+
+.testerSignIn {
+  @include session-container();
+}
+
+.testerSignInLinkContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 3rem;
+  justify-content: space-between;
+  margin-top: 30px;
+}

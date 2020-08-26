@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { RootState } from '../../store';
 import * as sessionActions from '../../store/session/actions';
 import * as loadingActions from '../../store/loading/actions';
+import Logo from '../common/Logo';
+import TextLink from '../common/TextLink';
+import {
+  createAccountText,
+  moveToTesterText,
+  emailPlaceholder,
+  passwordPlaceholder,
+} from '../../utils/text';
 
 const mapStateToProps = (state: RootState) => {
   const { session } = state;
@@ -40,14 +48,13 @@ export const SignIn = (props: PropsFromRedux) => {
 
   return (
     <div className="signInContainer">
-      <div className="signInLogo">
-        kanban
-      </div>
+      <Logo />
+
       <div className="signIn">
         <input
           data-testid="emailTextField"
           type="text"
-          placeholder="email"
+          placeholder={emailPlaceholder}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           className="signIn__emailTextField"
@@ -55,7 +62,7 @@ export const SignIn = (props: PropsFromRedux) => {
         <input
           data-testid="passwordTextField"
           type="password"
-          placeholder="password"
+          placeholder={passwordPlaceholder}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           className="signIn__passwordTextField"
@@ -64,7 +71,10 @@ export const SignIn = (props: PropsFromRedux) => {
           Sign in
         </button>
 
-        <Link to="/signup" className="signIn__linkToSignUp">Create account</Link>
+        <div className="signInLinkContainer">
+          <TextLink path="/signup" text={createAccountText} />
+          <TextLink path="/tester" text={moveToTesterText} />
+        </div>
       </div>
     </div>
   );

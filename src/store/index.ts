@@ -13,6 +13,7 @@ import loadingReducer from './loading/reducers';
 import backgroundImageReducer from './background_image/reducers';
 import cardDetailReducer from './card_detail/reducers';
 import routeReducer from './route/reducers';
+import testerReducer from './tester/reducers';
 
 export const rootReducer = combineReducers({
   board: boardReducer,
@@ -26,6 +27,7 @@ export const rootReducer = combineReducers({
   backgroundImage: backgroundImageReducer,
   cardDetail: cardDetailReducer,
   route: routeReducer,
+  tester: testerReducer,
 });
 
 const enhancer = process.env.NODE_ENV === 'production'
