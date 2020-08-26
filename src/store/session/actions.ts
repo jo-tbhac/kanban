@@ -75,9 +75,10 @@ export const signUp = (params: SignUpParams) => async (dispatch: AppDispatch) =>
   }
 };
 
-export const signIn = (params: SignInParams) => async (dispatch: AppDispatch) => {
+export const signIn = (params: SignInParams, tester?: boolean) => async (dispatch: AppDispatch) => {
+  const url = tester ? '/tester' : '/session';
   const axios = newAxios();
-  const response = await axios.post('/session', params).catch((error) => error.response);
+  const response = await axios.post(url, params).catch((error) => error.response);
 
   if (response?.status === 200) {
     const camelizedData = camelCaseKeys(response.data);
