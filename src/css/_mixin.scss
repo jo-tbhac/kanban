@@ -97,3 +97,29 @@
 @mixin card-detail-header-text() {
   font-weight: bold;
 }
+
+@mixin session-screen() {
+  align-items: center;
+  background-color: $background;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  overflow-y: scroll;
+  width: 100%;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin session-container() {
+  background-color: #fff;
+  box-shadow: $box-shadow;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: fit-content;
+  padding: 30px 50px;
+  width: 350px;
+}

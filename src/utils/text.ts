@@ -14,6 +14,13 @@ export const failedSignInTitle = 'サインインに失敗しました';
 export const failedSignOutTitle = 'サインアウトに失敗しました';
 export const accountTitle = 'アカウント';
 export const signOutText = 'サインアウト';
+export const createAccountText = 'アカウントを作成する';
+export const moveToSignInText = '既にアカウントをお持ちの方';
+export const moveToTesterText = 'テストアカウントを使用する';
+export const userNamePlaceholder = 'ユーザー名';
+export const emailPlaceholder = 'メールアドレス';
+export const passwordPlaceholder = 'パスワード';
+export const passwordConfirmationPlaceholder = 'パスワード（確認用）';
 
 // board
 export const failedFetchBoardData = 'ボードの情報を取得できませんでした';
