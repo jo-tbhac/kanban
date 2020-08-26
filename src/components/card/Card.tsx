@@ -136,7 +136,7 @@ export const Card = (props: CardProps) => {
       return 1;
     }
 
-    const targetLabel = card.labels.find((label) => selectedLabelIds.includes(label.id));
+    const targetLabel = card.labels?.find((label) => selectedLabelIds.includes(label.id));
     if (targetLabel) {
       return 1;
     }
