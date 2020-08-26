@@ -23,7 +23,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 export const CardDetailProvider = (props: PropsFromRedux) => {
   const { lists, target, isDetailVisible } = props;
 
-  const targetList = lists.find((list) => list.id === target.listId);
+  const targetList = lists?.find((list) => list.id === target.listId);
   const targetCard = targetList?.cards.find((card) => card.id === target.cardId);
 
   if (!targetCard || !isDetailVisible) {
