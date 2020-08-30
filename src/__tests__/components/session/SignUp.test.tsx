@@ -1,6 +1,8 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 
 import { storeFactory, renderWithRouter, fireEvent } from '../../../testUtils';
+import { moveToSignInText, moveToTesterText } from '../../../utils/text';
 import { SignUp } from '../../../components/session/SignUp';
 import { Store } from '../../../store';
 
@@ -108,5 +110,58 @@ describe('SignUp component', () => {
     );
     fireEvent.click(getByText('Sign up'));
     expect(loadStart).toHaveBeenCalled();
+  });
+
+  test('should navigate to `/` if props of `isSignIn` is true', () => {
+    const { getByTestId } = renderWithRouter(
+      <>
+        <Route exact path="/">
+          <div data-testid="navigateTest" />
+        </Route>
+        <Route>
+          <SignUp isSignIn signUp={signUp} loadStart={loadStart} />
+        </Route>
+      </>,
+      store,
+      ['/signup'],
+    );
+
+    expect(getByTestId('navigateTest')).not.toBeNull();
+  });
+
+  test('should navigate to `/signin` upon click a text `既にアカウントをお持ちの方`', () => {
+    const { getByTestId, getByText } = renderWithRouter(
+      <>
+        <Route path="/signin">
+          <div data-testid="navigateTest" />
+        </Route>
+        <Route>
+          <SignUp isSignIn={false} signUp={signUp} loadStart={loadStart} />
+        </Route>
+      </>,
+      store,
+      ['/signup'],
+    );
+
+    fireEvent.click(getByText(moveToSignInText));
+    expect(getByTestId('navigateTest')).not.toBeNull();
+  });
+
+  test('should navigate to `/tester` upon click a text `テストアカウントを使用する`', () => {
+    const { getByTestId, getByText } = renderWithRouter(
+      <>
+        <Route path="/tester">
+          <div data-testid="navigateTest" />
+        </Route>
+        <Route>
+          <SignUp isSignIn={false} signUp={signUp} loadStart={loadStart} />
+        </Route>
+      </>,
+      store,
+      ['/signup'],
+    );
+
+    fireEvent.click(getByText(moveToTesterText));
+    expect(getByTestId('navigateTest')).not.toBeNull();
   });
 });

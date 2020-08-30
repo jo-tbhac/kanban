@@ -20,7 +20,7 @@ type TesterRowProps = PropsFromRedux & {
   tester: Tester
 }
 
-const TesterRow = (props: TesterRowProps) => {
+export const TesterRow = (props: TesterRowProps) => {
   const { tester, signIn, loadStart } = props;
 
   const isActive = tester.expiresIn > 0;
@@ -40,6 +40,7 @@ const TesterRow = (props: TesterRowProps) => {
 
   return (
     <div
+      data-testid="testerRow"
       role="button"
       tabIndex={0}
       onClick={onClick}

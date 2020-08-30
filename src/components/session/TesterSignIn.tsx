@@ -25,7 +25,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const TesterSignIn = (props: PropsFromRedux) => {
+export const TesterSignIn = (props: PropsFromRedux) => {
   const { testers, isSignIn, fetchTesters } = props;
 
   useEffect(() => {
