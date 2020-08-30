@@ -1,6 +1,8 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 
 import { storeFactory, renderWithRouter, fireEvent } from '../../../testUtils';
+import { createAccountText, moveToTesterText } from '../../../utils/text';
 import { Store } from '../../../store';
 import { SignIn } from '../../../components/session/SignIn';
 
@@ -66,5 +68,58 @@ describe('SignIn component', () => {
     );
     fireEvent.click(getByText('Sign in'));
     expect(loadStart).toHaveBeenCalled();
+  });
+
+  test('should navigate to `/` if props of `isSignIn` is true', () => {
+    const { getByTestId } = renderWithRouter(
+      <>
+        <Route exact path="/">
+          <div data-testid="navigateTest" />
+        </Route>
+        <Route>
+          <SignIn isSignIn signIn={signIn} loadStart={loadStart} />
+        </Route>
+      </>,
+      store,
+      ['/signin'],
+    );
+
+    expect(getByTestId('navigateTest')).not.toBeNull();
+  });
+
+  test('should navigate to `/signup` upon click a text `アカウントを作成する`', () => {
+    const { getByTestId, getByText } = renderWithRouter(
+      <>
+        <Route path="/signup">
+          <div data-testid="navigateTest" />
+        </Route>
+        <Route>
+          <SignIn isSignIn={false} signIn={signIn} loadStart={loadStart} />
+        </Route>
+      </>,
+      store,
+      ['/signin'],
+    );
+
+    fireEvent.click(getByText(createAccountText));
+    expect(getByTestId('navigateTest')).not.toBeNull();
+  });
+
+  test('should navigate to `/tester` upon click a text `テストアカウントを使用する`', () => {
+    const { getByTestId, getByText } = renderWithRouter(
+      <>
+        <Route path="/tester">
+          <div data-testid="navigateTest" />
+        </Route>
+        <Route>
+          <SignIn isSignIn={false} signIn={signIn} loadStart={loadStart} />
+        </Route>
+      </>,
+      store,
+      ['/signin'],
+    );
+
+    fireEvent.click(getByText(moveToTesterText));
+    expect(getByTestId('navigateTest')).not.toBeNull();
   });
 });
